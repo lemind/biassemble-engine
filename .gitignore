@@ -149,8 +149,13 @@ activemq-data/
 
 # Environments
 .env
+.env.*
+!.env.example
 .envrc
 .venv
+
+# biassemble-engine: indexing intermediates (debug artifacts only)
+artifacts/
 env/
 venv/
 ENV/
