@@ -1,4 +1,4 @@
-# biassemble-rag — Service Specification v1.2
+# biassemble-rag — Service Specification v1.3
 
 ## Purpose
 
@@ -46,29 +46,29 @@ No LangChain. No LlamaIndex. No SQLAlchemy. Raw primitives only.
 
 Three distinct concepts — do not collapse them into one class.
 
-### `ChunkType` enum
+### `ChunkType` constants
 
-`chunk_type` is produced by our own code — not user input, not external systems. Use an enum for exhaustiveness checks and typo safety.
+`chunk_type` for taxonomy chunks uses string constants — not an enum. An enum would require extending for every new chunk type from future sources (`BookSource`, `PaperSource`) which defeats extensibility. Each `KnowledgeSource` validates its own chunk types.
 
 ```python
-from enum import StrEnum
-
-class ChunkType(StrEnum):
-    SEMANTIC_DEFINITION    = "semantic_definition"
-    SEMANTIC_EXAMPLE       = "semantic_example"
-    SEMANTIC_INDICATOR     = "semantic_indicator"
-    SEMANTIC_FALSE_POSITIVE = "semantic_false_positive"
-    SEMANTIC_RELATED       = "semantic_related"
+# src/schemas/internal.py
+CHUNK_TYPE_DEFINITION     = "semantic_definition"
+CHUNK_TYPE_EXAMPLE        = "semantic_example"
+CHUNK_TYPE_INDICATOR      = "semantic_indicator"
+CHUNK_TYPE_FALSE_POSITIVE = "semantic_false_positive"
+CHUNK_TYPE_RELATED        = "semantic_related"
 ```
 
-`source_section` remains free text — it is derived from authored Markdown headings, not our code.
+`TaxonomySource` uses these constants. `BookSource` can introduce `"case_study"`, `"clinical_scenario"` etc. without touching this file. Validation happens at the source level, not globally.
+
+`source_section` remains free text — derived from authored Markdown headings, not our code.
 
 ### `CandidateChunk` (searcher output)
 ```python
 @dataclass
 class CandidateChunk:
     bias_id: str
-    chunk_type: ChunkType   # semantic type — enum value
+    chunk_type: str         # string constant — e.g. CHUNK_TYPE_DEFINITION
     source_section: str     # original markdown heading: "Definition", "Examples", etc.
     chunk_text: str
     full_document: dict
@@ -80,9 +80,9 @@ class CandidateChunk:
 @dataclass
 class RetrievedBias:
     bias_id: str
-    score: float                    # max chunk score
-    matched_chunk_type: ChunkType   # which chunk type drove the match
-    matched_text: str               # the chunk text that scored highest
+    score: float            # max chunk score
+    matched_chunk_type: str # which chunk type drove the match
+    matched_text: str       # the chunk text that scored highest
     definition: str
     examples: str
     indicators: str
@@ -270,11 +270,19 @@ CREATE INDEX IF NOT EXISTS bias_embeddings_taxonomy_version_idx
 -- Prevents duplicate inserts during re-index runs
 CREATE UNIQUE INDEX IF NOT EXISTS bias_embeddings_dedup_idx
   ON bias_embeddings (taxonomy_version, bias_id, chunk_type, chunk_hash);
+
+-- Enables domain filtering: WHERE metadata->>'domain' = 'finance'
+CREATE INDEX IF NOT EXISTS bias_embeddings_metadata_idx
+  ON bias_embeddings USING gin (metadata);
 ```
 
 **Key design decision:** `full_document JSONB` stores all chunk types for the bias on every row. This means retrieval is **one query** — find the matching chunk, return the full document immediately. No second lookup needed.
 
 **Denormalization is intentional.** Storage overhead is negligible (<1 MB for 30 biases × 5 chunks). Retrieval simplicity is prioritized over storage efficiency at this scale.
+
+**`taxonomy_version` is immutable.** Never re-index into an existing version — bump it on every re-index run (`v1` → `v2`). If you edit a knowledge file and re-run indexing with the same version, you get two rows for the same `(bias_id, chunk_type)` — the old text and the new text. Both get returned by the searcher. Always treat `taxonomy_version` as a content snapshot identifier, not a mutable label.
+
+**EmbeddingProvider swap requires schema migration.** The `dimension` property on `EmbeddingProvider` must be validated against the DB column on startup. Switching from `all-MiniLM-L6-v2` (384 dims) to `text-embedding-3-small` (1536 dims) requires `ALTER COLUMN embedding TYPE vector(1536)` or a new table. Document this in the migration when it happens.
 
 **`taxonomy_version` + `embedding_model`:** required on every row. When you reindex with a new model or updated taxonomy, old rows remain intact. Delete by version when ready to clean up.
 
@@ -307,13 +315,15 @@ Intermediate JSON artifacts are written to `artifacts/` (gitignored). They exist
 
 ### `normalizer.py`
 
-Sits between `TaxonomySource` and `chunk_builder`. Responsibilities:
+Taxonomy-specific. Sits between `TaxonomySource` and `chunk_builder`. Responsibilities:
 - Strip excess whitespace and markdown artifacts
-- Validate mandatory headings (error if `false_positives` missing)
+- Validate mandatory headings — **error** if `false_positives` missing
 - Normalize heading aliases (`False Positive` → `False Positives`)
 - Remove duplicate documents (same `bias_id` from two sources)
 
 Does not touch embedding or chunking logic. Keeps `chunk_builder` pure.
+
+**Scope:** this normalizer is for `TaxonomySource` only. Future sources (`BookSource`, `PaperSource`) own their own validation — they will not have `false_positives` headings and will have different structural rules. Do not generalize this normalizer.
 
 ### `chunk_builder.py`
 
@@ -345,6 +355,8 @@ For each bias, build `full_document` dict:
 ```
 
 Each row gets this full dict in `full_document`. The `chunk_text` is the text for that specific chunk type. The bias name must be prepended to `chunk_text` for retrieval signal.
+
+**`full_document` consistency rule:** build the complete `full_document` dict for each `bias_id` first, then attach the same object to all chunks for that bias. Never build `full_document` per-chunk — this guarantees all rows for a bias return identical document content regardless of which chunk the searcher matches.
 
 `chunk_type` is the **semantic type** (`semantic_definition`, `semantic_example`, `semantic_false_positive`, etc.).
 `source_section` is the **original markdown heading** (`Definition`, `Examples`, `False Positives`).
@@ -423,9 +435,19 @@ class QueryStrategy(ABC):
     def build(self, story: str, analysis: StoryAnalysis | None) -> str: ...
 
 class RepeatedStoryStrategy(QueryStrategy):
-    """Default. Repeats story to up-weight it over analysis fields."""
+    """Default. Truncates story to 100 words, repeats it, then appends analysis fields.
+
+    Token limit: all-MiniLM-L6-v2 truncates input at 256 tokens (~200 words).
+    A full story repeated twice would exceed this silently — themes/beliefs/claims
+    would be cut off entirely. Truncating the story to 100 words before repeating
+    leaves ~100 tokens for analysis fields within the 256-token budget.
+    """
+    MAX_STORY_WORDS = 100
+
     def build(self, story: str, analysis: StoryAnalysis | None) -> str:
-        parts = [story, story]
+        words = story.split()
+        truncated = " ".join(words[:self.MAX_STORY_WORDS])
+        parts = [truncated, truncated]
         if analysis:
             if analysis.themes:
                 parts.append("Themes: " + ", ".join(analysis.themes))
@@ -460,6 +482,7 @@ Single SQL query. Returns `bias_id`, `chunk_type`, `chunk_text`, `full_document`
 SELECT
   bias_id,
   chunk_type,
+  source_section,
   chunk_text,
   full_document,
   1 - (embedding <=> $1::vector) AS score
@@ -526,6 +549,21 @@ completed           { retrieval_id, total_latency_ms, returned_biases }
 Each event includes `retrieval_id`. Full `RetrievalMetadata` is emitted on `completed`. Log `matched_chunk_type` and `matched_text` on `reranked` — not in API response, but critical for debugging retrieval regressions.
 
 `RetrievalMetadata` is **not** returned in the API response. It is written to structured logs only. Later this data can feed dashboards: embedding latency p95, threshold rejection rate, average returned biases per request.
+
+---
+
+## Graceful Degradation
+
+| Failure | Behavior |
+|---------|---------|
+| DB down at startup | Log error, service starts, `/health` returns `database_connected: false` |
+| DB down at request time | Return `503 {"error": "database_unavailable"}` — never return `biases: []` (indistinguishable from "no biases found") |
+| Model fails to load | Startup crash — Railway restarts the container. Do not serve requests without a loaded model. |
+| Model dimension mismatch | Startup crash — validate `provider.dimension` against `EMBEDDING_DIMENSION` config on startup. A corrupted model download can produce wrong-dimension vectors that insert silently and return garbage scores. Fail fast. |
+| `taxonomy_version` not in DB | Return `503 {"error": "index_not_found", "taxonomy_version": "v1"}` — empty results here is a configuration bug, not a valid retrieval result |
+| No chunks survive threshold | Return `200 {"biases": [], ...}` — this is the valid "no relevant biases" signal |
+
+`biases: []` must only mean "retrieval ran successfully and found nothing above threshold." All other empty states must return 5xx.
 
 ---
 
@@ -607,12 +645,13 @@ class Settings(BaseSettings):
     database_url: str
     rag_api_key: str
     embedding_model: str = "all-MiniLM-L6-v2"
+    embedding_dimension: int = 384          # must match provider.dimension — validated on startup
     taxonomy_version: str = "v1"
     search_top_k: int = 20
     return_top_k: int = 5
     similarity_threshold: float = 0.45
     query_strategy: str = "repeated_story"   # pluggable query builder
-    rerank_strategy: str = "max"             # "max" = max-score collapse
+    rerank_strategy: str = "max"             # "max" = max-score collapse. Placeholder — only "max" exists in v1. Add "mean" or cross-encoder variants here when evaluation justifies it.
     index_batch_size: int = 32               # embedding batch size
     log_level: str = "INFO"
 
@@ -651,6 +690,18 @@ All retrieval tuning parameters are in config, not hardcoded. `SEARCH_TOP_K`, `R
 
 Seed from your existing `biassemble-core` golden dataset. The Marcus/NovaTech story and its known biases are already available.
 
+**No-bias stories** use `expected_bias_ids: []`. Port at least 5 from `biassemble-core` no-bias dataset. These are required for threshold calibration — without them you cannot measure false retrieval rate and cannot tune `SIMILARITY_THRESHOLD`.
+
+```json
+{
+  "scenario_id": "pizza_dinner",
+  "story": "I had pizza for dinner and it was good.",
+  "expected_bias_ids": []
+}
+```
+
+Evaluate golden and no-bias stories separately. `empty_rate` on golden should be 0%. `empty_rate` on no-bias should be ~100%.
+
 ### Evaluation script (`src/evaluation/evaluate.py`)
 
 Metrics per scenario:
@@ -659,7 +710,7 @@ Metrics per scenario:
 - **Precision@K** — fraction of retrieved biases that were expected. `precision = len(expected ∩ retrieved) / len(retrieved)`
 - **MRR** — Mean Reciprocal Rank. `1 / rank` of the first correct hit. Measures how early the right answer appears.
 - **Empty Retrieval Rate** — fraction of scenarios returning `biases: []`. Should be 0% on golden stories, ~100% on no-bias stories. Track separately per dataset type.
-- **Coverage** — count of distinct `bias_id`s ever retrieved across all scenarios. If only 14 of 30 biases are ever surfaced, the taxonomy is imbalanced or some biases are embedded too poorly to match anything.
+- **Coverage** — count of distinct `bias_id`s ever retrieved across all scenarios. Meaningful only after 20+ diverse scenarios — at 5 stories only ~10 biases can be expected, so 10/30 is not a quality signal. Flag as post-launch metric; track it but don't gate launch on it.
 
 Aggregate across all scenarios: mean Recall@K, mean Precision@K, mean MRR, empty retrieval rate, coverage count.
 
@@ -824,14 +875,14 @@ restartPolicyType = "on_failure"
 7. Implement `embedder.py`
 8. Implement `indexer.py` + `scripts/run_indexing.py`
 9. Run indexing — verify 150+ rows in Supabase, inspect `artifacts/chunks.json` and `artifacts/embeddings.json`
-10. Seed `evaluations/golden/retrieval/` with Marcus/NovaTech and at least 2 other stories from `biassemble-core` golden dataset
-11. Implement `evaluate.py` + `scripts/run_evaluation.py` (Recall@K, Precision@K, MRR, Empty Retrieval Rate)
-12. Run evaluation — establish baseline before touching retrieval logic
+10. Seed `evaluations/golden/retrieval/` — at least 3 golden stories (with expected biases) + at least 5 no-bias stories (`expected_bias_ids: []`) ported from `biassemble-core`
+11. Implement `evaluate.py` + `scripts/run_evaluation.py` — **uses raw SQL against `bias_embeddings` directly, not the retrieval pipeline**. This isolates embedding quality from retrieval code. Pass query vector in, get ranked results back, compute Recall@K, Precision@K, MRR, Empty Retrieval Rate.
+12. Run evaluation — establish embedding baseline (Recall@5, empty_rate) before writing any retrieval code
 13. Implement `query_builder.py` with `QueryStrategy` base + `RepeatedStoryStrategy` — write tests
 14. Implement `searcher.py` → returns `CandidateChunk[]`
 15. Implement `reranker.py` → returns `RetrievedBias[]` — write tests
 16. Implement `retriever.py` — orchestrates pipeline, emits `RetrievalMetadata` structured logs
-17. Run evaluation again — confirm metrics equal or better than baseline
+17. Update `evaluate.py` to use the retrieval pipeline instead of raw SQL — run evaluation again, confirm metrics equal or better than step 12 baseline
 18. Implement FastAPI app + `/retrieve-biases` + `/health` — write endpoint tests
 19. Dockerfile + railway.toml
 20. Deploy to Railway, verify `/health` response
@@ -841,7 +892,7 @@ restartPolicyType = "on_failure"
 
 ## Success Criteria
 
-- `run_indexing.py` produces 150+ rows in `bias_embeddings` (30 biases × 5+ chunk types)
+- `run_indexing.py` produces at least 150 rows in `bias_embeddings` (30 biases × minimum 5 chunks each — this is the floor, not the target)
 - `POST /retrieve-biases` responds in under 300ms (embedding + vector search)
 - Marcus/NovaTech story returns Confirmation Bias, Anchoring Bias, Sunk Cost Fallacy in top 5
 - Aggregate Recall@5 ≥ 0.85 across golden dataset
@@ -849,6 +900,22 @@ restartPolicyType = "on_failure"
 - All tests pass
 - `/health` returns `database_connected: true`, correct `rows_indexed`
 - Service deployed and reachable from `biassemble-core`
+
+---
+
+## biassemble-core Integration Contract
+
+When `biassemble-core` calls this service (step 21), the following must be defined:
+
+| Concern | Decision |
+|---------|---------|
+| Where in pipeline | Before building assessment prompt — retrieved biases replace static taxonomy injection |
+| Timeout | 500ms. If exceeded, fall back to static taxonomy (do not fail the assessment) |
+| Failure fallback | Any 4xx/5xx or timeout → use full static bias catalog as context. Log the failure. Never surface RAG errors to the user. |
+| Auth | `Authorization: Bearer {RAG_API_KEY}` — shared secret via env var in both services |
+| Call site | `assessment.service.ts` before prompt construction |
+
+The fallback to static taxonomy ensures biassemble-core degrades gracefully if biassemble-engine is down, slow, or returning errors.
 
 ---
 
