@@ -108,8 +108,9 @@ biassemble-engine/
 │   │   └── ...
 │   ├── edge/                          # ambiguous cases for threshold calibration
 │   ├── adversarial/                   # robustness benchmark (satire, manipulation, hallucinations)
+│   ├── regression/                    # permanent bug record — grows forever, never shrinks
 │   ├── baselines/                     # promoted reference snapshots
-│   │   └── baseline_v1.json
+│   │   └── baseline_2026-06-27.json
 │   └── runs/                          # every evaluation run output (auto-named by date)
 ├── migrations/
 │   └── 001_create_bias_embeddings.sql

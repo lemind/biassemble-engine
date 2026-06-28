@@ -18,7 +18,7 @@ No authentication required. Returns a detailed snapshot of what is currently dep
 
 ```json
 {
-  "taxonomy_version": "v1",
+  "taxonomy_version": "2026-06-27",
   "embedding_model": "all-MiniLM-L6-v2",
   "embedding_dimension": 384,
   "indexed_rows": 150,
@@ -28,6 +28,10 @@ No authentication required. Returns a detailed snapshot of what is currently dep
     "semantic_indicator": 30,
     "semantic_false_positive": 30,
     "semantic_related": 30
+  },
+  "rows_per_taxonomy_version": {
+    "2026-06-27": 150,
+    "2026-06-15": 145
   },
   "sources": {
     "taxonomy": 150
@@ -48,6 +52,7 @@ No authentication required. Returns a detailed snapshot of what is currently dep
 | `embedding_dimension` | provider | Actual dimension from loaded model |
 | `indexed_rows` | DB count | Total rows for current taxonomy_version |
 | `chunk_count_by_type` | DB group-by | Rows per `chunk_type` — uneven distribution indicates missing sections |
+| `rows_per_taxonomy_version` | DB group-by | Rows per `taxonomy_version` — shows all versions in DB, not just active one. Useful during migrations: old version rows visible until explicitly deleted. |
 | `sources` | DB group-by | Rows per `source` value — shows contribution per knowledge source |
 | `built_at` | DB max | `MAX(indexed_at)` for current taxonomy_version |
 | `git_sha` | env var `GIT_SHA` | Commit SHA of deployed code. Set at build time. `null` if not provided. |
