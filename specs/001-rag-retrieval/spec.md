@@ -143,10 +143,11 @@ Every change to the following must be followed by an evaluation run before the c
 - Index parameters (threshold, result count)
 - Representation model
 
-The evaluation dataset is organized into three groups:
+The evaluation dataset is organized into four groups:
 - **Positive scenarios** (`evaluations/positive/`): stories with known expected biases. Used to measure recall, MRR, and nDCG.
 - **Negative scenarios** (`evaluations/negative/`): stories with no cognitive bias content. Used to measure false retrieval rate — the fraction of neutral stories that incorrectly return bias suggestions.
 - **Edge scenarios** (`evaluations/edge/`): ambiguous stories used for threshold calibration. Not counted in primary metrics.
+- **Adversarial scenarios** (`evaluations/adversarial/`): stories designed to stress the retrieval boundary — political rhetoric, satire, emotionally manipulative narratives, AI-generated hallucinations, deliberately contradictory evidence. Expected bias IDs are empty or minimal. Used as a robustness benchmark: good retrieval should not fire on these. Not counted in primary recall/MRR metrics but `empty_rate` is reported separately for this group.
 
 Evaluation results must clearly distinguish between these groups and report metrics separately.
 

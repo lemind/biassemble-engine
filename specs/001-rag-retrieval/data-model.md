@@ -32,7 +32,7 @@ Primary storage for indexed bias knowledge. One row per chunk per bias per taxon
 | `chunk_type` | TEXT | No | Semantic constant: `semantic_definition`, `semantic_example`, `semantic_indicator`, `semantic_false_positive`, `semantic_related` |
 | `source_section` | TEXT | No | Original markdown heading, e.g. `Definition`, `False Positives` |
 | `chunk_text` | TEXT | No | The text that was embedded. Prefixed with bias name, e.g. `"Confirmation Bias — Definition: ..."` |
-| `chunk_hash` | TEXT | No | `SHA256(bias_id + chunk_type + chunk_text + taxonomy_version)` — changes when content or version changes |
+| `chunk_hash` | TEXT | No | `SHA256(bias_id + "|" + chunk_type + "|" + chunk_text + "|" + taxonomy_version)` — pipe-delimited to prevent concatenation collisions; changes when content or version changes |
 | `full_document` | JSONB | No | All fields for this bias. See structure below. Same object on every row for the same `(bias_id, taxonomy_version)`. |
 | `embedding` | vector(384) | No | all-MiniLM-L6-v2 output |
 | `source` | TEXT | No | `"taxonomy"` (v1 only) |
@@ -93,7 +93,7 @@ Each `KnowledgeSource` populates `metadata` with source-specific fields. v1 has 
 This enables citation rendering and source filtering (`WHERE metadata->>'license' = 'CC BY-SA'`) without schema migrations.
 
 **Indexes**:
-- `bias_embeddings_embedding_idx` — IVFFlat cosine, lists=10 (retune at sqrt(rows) when > 1000 rows)
+- `bias_embeddings_embedding_idx` — **exact scan at v1** (no IVFFlat index). pgvector defaults to exact cosine scan, which is accurate and fast at ≤300 rows. Add IVFFlat (`lists = round(sqrt(rows))`) only when rows exceed 300 — IVFFlat requires at least `lists × 30` rows for good recall, so `lists=10` on 150 rows would silently degrade retrieval below exact search.
 - `bias_embeddings_bias_id_idx` — btree on `bias_id`
 - `bias_embeddings_source_idx` — btree on `source`
 - `bias_embeddings_taxonomy_version_idx` — btree on `taxonomy_version`
