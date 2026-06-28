@@ -148,6 +148,7 @@ The evaluation dataset is organized into four groups:
 - **Negative scenarios** (`evaluations/negative/`): stories with no cognitive bias content. Used to measure false retrieval rate — the fraction of neutral stories that incorrectly return bias suggestions.
 - **Edge scenarios** (`evaluations/edge/`): ambiguous stories used for threshold calibration. Not counted in primary metrics.
 - **Adversarial scenarios** (`evaluations/adversarial/`): stories designed to stress the retrieval boundary — political rhetoric, satire, emotionally manipulative narratives, AI-generated hallucinations, deliberately contradictory evidence. Expected bias IDs are empty or minimal. Used as a robustness benchmark: good retrieval should not fire on these. Not counted in primary recall/MRR metrics but `empty_rate` is reported separately for this group.
+- **Regression scenarios** (`evaluations/regression/`): permanent record of bugs that were once found and fixed. Every time a retrieval failure is discovered in production or testing, a story is added here and never removed. This group grows over time and is always re-run. Examples: a story that once returned the wrong bias, a neutral story that once incorrectly fired, an edge case that caused a 500 error.
 
 Evaluation results must clearly distinguish between these groups and report metrics separately.
 
