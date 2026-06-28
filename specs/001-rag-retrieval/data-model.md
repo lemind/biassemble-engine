@@ -109,6 +109,24 @@ This enables citation rendering and source filtering (`WHERE metadata->>'license
 
 ## Internal Schemas (Python)
 
+### `KnowledgeSource` ABC
+
+```python
+class KnowledgeSource(ABC):
+    @property
+    @abstractmethod
+    def name(self) -> str: ...        # "taxonomy", "wikipedia", "book" — appears in DB source column
+
+    @property
+    @abstractmethod
+    def version(self) -> str: ...     # source-specific snapshot ID, e.g. "2026-06-27", "en-20260101"
+
+    @abstractmethod
+    def load(self) -> list[RawDocument]: ...
+```
+
+`name` populates the DB `source` column. `version` surfaces in `/stats` per-source breakdown, enabling per-source freshness tracking when multiple sources are indexed.
+
 ### `RawDocument` (source output)
 
 Output of `TaxonomySource.load()`. One per markdown section per bias file.
@@ -166,7 +184,7 @@ class RetrievedBias:
 ```python
 @dataclass
 class RetrievalMetadata:
-    retrieval_id: str          # UUID — correlates all log events for one request
+    request_id: str            # UUID — from caller if provided, generated if absent; correlates all log events
     embedding_model: str
     taxonomy_version: str
     query_strategy: str
@@ -223,7 +241,7 @@ class RetrieveResponse(BaseModel):
     retrieved_chunks: int      # count before threshold filtering
     taxonomy_version: str
     embedding_model: str
-    request_id: str            # echoed from request if provided, otherwise == retrieval_id
+    request_id: str            # echoed from request if provided, otherwise a generated UUID — always present
 ```
 
 ---
@@ -236,13 +254,14 @@ class Settings(BaseSettings):
     rag_api_key: str
     embedding_model: str = "all-MiniLM-L6-v2"
     embedding_dimension: int = 384        # validated against provider.dimension at startup
-    taxonomy_version: str = "v1"
+    taxonomy_version: str = "2026-06-27"  # date format — unambiguous in evaluation baselines
     search_top_k: int = 20
     return_top_k: int = 5
     similarity_threshold: float = 0.45
     query_strategy: str = "repeated_story"
     rerank_strategy: str = "max"
     index_batch_size: int = 32
+    request_timeout_ms: int = 450         # internal timeout — less than biassemble-core's 500ms
     log_level: str = "INFO"
 
     class Config:
