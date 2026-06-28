@@ -28,7 +28,7 @@ Tests are written with their implementation, not in a separate phase. Each task 
 
 **Purpose**: A live service returning empty biases so biassemble-core can be wired up and exercise the fallback path from day one. Real retrieval replaces the stubs in Phase 4.
 
-- [ ] T003 Write `src/providers/base.py` (EmbeddingProvider ABC: `embed_texts()`, `embed_query()`, `model_name`, `dimension`) and `src/providers/sentence_transformer.py` (SentenceTransformerProvider — load once at construction, dimension property returns 384)
+- [x] T003 Write `src/providers/base.py` (EmbeddingProvider ABC: `embed_texts()`, `embed_query()`, `model_name`, `dimension`) and `src/providers/sentence_transformer.py` (SentenceTransformerProvider — load once at construction, dimension property returns 384)
 - [ ] T004 Write stub FastAPI app: `src/api/app.py` (lifespan: load EmbeddingProvider, validate `provider.dimension == settings.embedding_dimension` — crash if mismatch, create asyncpg pool); `src/api/routes/retrieve.py` with stub `POST /retrieve-biases` (Bearer auth check, return `{"biases": [], "retrieved_chunks": 0, taxonomy_version, embedding_model, request_id}`), stub `GET /health` (static response), stub `GET /stats` (static response). Empty biases → biassemble-core falls back to static taxonomy, which is correct.
 - [ ] T005 Write `Dockerfile` (python:3.11-slim, uv install, non-root user, `CMD uvicorn src.api.app:app`) and `railway.toml` (`healthcheckPath = "/health"`, `healthcheckTimeout = 300`)
 - [ ] T006 Deploy to Railway. Verify `GET /health` responds with `model_loaded: true`.
