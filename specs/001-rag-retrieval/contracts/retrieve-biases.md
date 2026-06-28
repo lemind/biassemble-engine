@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 ```
 
-`story_analysis` is optional. `request_id` is optional — if provided by biassemble-core, it is echoed in the response and included in all structured log events for this request, enabling end-to-end tracing across services. If absent, the service generates its own `retrieval_id`.
+`story_analysis` is optional. `request_id` is optional — if provided by biassemble-core, it is echoed verbatim in `response.request_id` and included in all structured log events for this request, enabling end-to-end tracing across services. If absent, the service generates a UUID internally and returns it as `response.request_id` — callers who omit `request_id` will always receive one back and can use it to correlate logs for that specific request.
 
 ---
 
