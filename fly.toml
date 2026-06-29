@@ -1,5 +1,4 @@
-[app]
-name = "biassemble-engine"
+app = "biassemble-engine"
 primary_region = "fra"
 
 [build]
