@@ -17,13 +17,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
             f"Embedding dimension mismatch: "
             f"model={provider.dimension}, config={settings.embedding_dimension}"
         )
-    pool = await asyncpg.create_pool(settings.database_url)
-    if pool is None:
-        raise RuntimeError("Failed to create database connection pool")
+    try:
+        pool: asyncpg.Pool | None = await asyncpg.create_pool(settings.database_url)
+    except Exception:
+        pool = None
     app.state.provider = provider
     app.state.pool = pool
     yield
-    await pool.close()
+    if pool is not None:
+        await pool.close()
 
 
 app = FastAPI(lifespan=lifespan)
