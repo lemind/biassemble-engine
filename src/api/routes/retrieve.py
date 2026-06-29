@@ -1,6 +1,7 @@
 from typing import Any
 from uuid import uuid4
 
+import asyncpg
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
@@ -39,6 +40,7 @@ async def retrieve_biases(
 @router.get("/health")
 async def health(request: Request) -> dict[str, Any]:
     provider: EmbeddingProvider = request.app.state.provider
+    pool: asyncpg.Pool | None = request.app.state.pool
     return {
         "status": "ok",
         "model_loaded": True,
@@ -48,7 +50,7 @@ async def health(request: Request) -> dict[str, Any]:
         "taxonomy_version": settings.taxonomy_version,
         "rows_indexed": 0,
         "last_indexed_at": None,
-        "database_connected": True,
+        "database_connected": pool is not None,
     }
 
 
