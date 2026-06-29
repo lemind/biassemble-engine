@@ -1,3 +1,14 @@
+---
+title: Biassemble Engine
+emoji: 🧠
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_port: 7860
+short_description: Semantic bias retrieval microservice
+pinned: false
+---
+
 # biassemble-engine
 
 Standalone Python microservice providing semantic bias retrieval for [Biassemble](https://frontend-topaz-eight-10.vercel.app).
