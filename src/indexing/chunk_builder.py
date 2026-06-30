@@ -22,6 +22,12 @@ _CHUNK_TYPE_MAP: dict[str, tuple[str, str]] = {
     "related_biases":  (CHUNK_TYPE_RELATED,        "Related Biases"),
 }
 
+# Canonical section order — chunk_index is derived from this, not from the order
+# sections appear in the markdown file, so ordering is consistent across all biases.
+_CANONICAL_ORDER: list[str] = [
+    "definition", "examples", "indicators", "false_positives", "related_biases"
+]
+
 
 @dataclass
 class BiasChunk:
@@ -52,7 +58,7 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
     chunks: list[BiasChunk] = []
     for bias_id, docs in by_bias.items():
         full_doc = _build_full_document(bias_id, docs)
-        for index, doc in enumerate(docs):
+        for doc in docs:
             mapping = _CHUNK_TYPE_MAP.get(doc.chunk_type)
             if mapping is None:
                 continue
@@ -68,7 +74,7 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
                     full_document=full_doc,
                     source=doc.source,
                     metadata=doc.metadata,
-                    chunk_index=index,
+                    chunk_index=_CANONICAL_ORDER.index(doc.chunk_type),
                 )
             )
 

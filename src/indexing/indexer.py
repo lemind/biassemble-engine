@@ -39,7 +39,7 @@ async def run_indexing(
     _write_embeddings_artifact(embedded)
 
     rows_inserted = await _upsert(embedded, pool, taxonomy_version, provider.model_name)
-    skipped = len(chunks) - rows_inserted
+    skipped = len(embedded) - rows_inserted
     print(f"indexer: {rows_inserted} inserted, {skipped} skipped (already indexed)")
     return rows_inserted
 
