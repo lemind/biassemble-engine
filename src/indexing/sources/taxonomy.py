@@ -42,6 +42,10 @@ class TaxonomySource(KnowledgeSource):
         bias_id = path.stem
         lines = path.read_text(encoding="utf-8").splitlines()
 
+        # Capture display name from the first # heading line.
+        name_line = next((l for l in lines if l.startswith("# ")), "")
+        display_name = name_line[2:].strip() or bias_id.replace("_", " ").title()
+
         sections: dict[str, list[str]] = {}
         current: str | None = None
 
@@ -65,7 +69,7 @@ class TaxonomySource(KnowledgeSource):
                 chunk_type=chunk_type,
                 text=text,
                 source=self.name,
-                metadata={"source_file": path.name},
+                metadata={"source_file": path.name, "display_name": display_name},
             ))
 
         return docs
