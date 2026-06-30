@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 CHUNK_TYPE_DEFINITION = "semantic_definition"
 CHUNK_TYPE_EXAMPLE = "semantic_example"
@@ -45,7 +45,7 @@ class RetrievedBias:
 
 @dataclass
 class RetrievalMetadata:
-    request_id: str
+    retrieval_id: str
     embedding_model: str
     taxonomy_version: str
     query_strategy: str
