@@ -15,3 +15,8 @@ Supporting artifacts:
 - specs/001-rag-retrieval/python-patterns.md — Python patterns reference (mapped to tasks)
 - biassemble-rag-spec-v1.md — full technical design spec (authoritative)
 <!-- SPECKIT END -->
+
+## Conventions
+
+**Commit messages**: `feat|fix|chore(T0XX): <short description>`. Omit the task ref when there is no associated task.
+
