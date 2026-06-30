@@ -101,3 +101,29 @@ def test_source_section_is_human_readable():
     chunks = build_chunks(_make_docs("confirmation_bias"), TAXONOMY_VERSION)
     sections = {c.source_section for c in chunks}
     assert sections == {"Definition", "Examples", "Indicators", "False Positives", "Related Biases"}
+
+
+def test_chunk_index_is_canonical_regardless_of_file_order():
+    """chunk_index must reflect canonical section order, not markdown file order."""
+    sections = ["related_biases", "false_positives", "indicators", "examples", "definition"]
+    docs = [
+        RawDocument("b", s, f"text {s}", "taxonomy", {"source_file": "b.md", "display_name": "B"})
+        for s in sections
+    ]
+    chunks = build_chunks(docs, TAXONOMY_VERSION)
+    index_by_section = {c.source_section: c.chunk_index for c in chunks}
+    assert index_by_section["Definition"] == 0
+    assert index_by_section["Examples"] == 1
+    assert index_by_section["Indicators"] == 2
+    assert index_by_section["False Positives"] == 3
+    assert index_by_section["Related Biases"] == 4
+
+
+def test_derive_name_fallback_when_no_display_name_in_metadata():
+    """Chunks built from docs without display_name in metadata use the derived name."""
+    docs = [
+        RawDocument("sunk_cost_fallacy", s, f"text {s}", "taxonomy", {"source_file": "sunk_cost_fallacy.md"})
+        for s in ["definition", "examples", "indicators", "false_positives", "related_biases"]
+    ]
+    chunks = build_chunks(docs, TAXONOMY_VERSION)
+    assert chunks[0].full_document.name == "Sunk Cost Fallacy"

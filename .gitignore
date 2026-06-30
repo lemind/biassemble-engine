@@ -151,6 +151,9 @@ activemq-data/
 .env
 .env.*
 !.env.example
+
+# Supabase CLI scaffolding — migrations live in migrations/ instead
+supabase/
 .envrc
 .venv
 
