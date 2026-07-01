@@ -5,7 +5,7 @@ from pathlib import Path
 import asyncpg
 
 from src.config import settings
-from src.db.queries import UPSERT_CHUNK
+from src.db.queries import UPSERT_CHUNK, fmt_vector
 from src.indexing.chunk_builder import BiasChunk, build_chunks
 from src.indexing.embedder import EmbeddedChunk, embed_chunks
 from src.indexing.normalizer import normalize
@@ -63,7 +63,7 @@ async def _upsert(
                 c.chunk_text,
                 c.chunk_hash,
                 json.dumps(asdict(c.full_document)),  # JSONB
-                _fmt_vector(ec.embedding),             # pgvector string format
+                fmt_vector(ec.embedding),              # pgvector string format
                 c.source,
                 json.dumps(c.metadata),               # JSONB
                 taxonomy_version,
@@ -74,11 +74,6 @@ async def _upsert(
             if result.endswith(" 1"):
                 rows_inserted += 1
     return rows_inserted
-
-
-def _fmt_vector(embedding: list[float]) -> str:
-    """Serialize a float list to pgvector wire format: '[0.1,0.2,...]'."""
-    return "[" + ",".join(str(x) for x in embedding) + "]"
 
 
 def _write_chunks_artifact(chunks: list[BiasChunk]) -> None:
