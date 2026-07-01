@@ -11,9 +11,7 @@ pinned: false
 
 # biassemble-engine
 
-Standalone Python microservice providing semantic bias retrieval for [Biassemble](https://frontend-topaz-eight-10.vercel.app).
-
-Given a story, returns the most semantically relevant cognitive biases from a structured knowledge base — used as context for the LLM assessment in `biassemble-core`.
+Semantic RAG microservice. Receives a story and structured analysis from biassemble-core, embeds the query, searches a pgvector index of bias knowledge chunks, and returns the top matching biases with retrieval scores.
 
 **Pure retriever. No LLM calls. No business logic.**
 
@@ -26,18 +24,94 @@ Given a story, returns the most semantically relevant cognitive biases from a st
 - uv
 - Railway (Docker)
 
-## Endpoints
-
-- `POST /retrieve-biases` — returns top-K biases for a given story
-- `GET /health` — service + DB + model status
-
 ## Setup
 
 ```bash
+# Install dependencies
 uv sync
+
+# Copy and fill in DATABASE_URL and RAG_API_KEY
 cp .env.example .env
-# fill DATABASE_URL and RAG_API_KEY
-python scripts/run_indexing.py
+
+# Seed the database (first time or after knowledge changes)
+ALL_PROXY="" all_proxy="" HF_HUB_OFFLINE=1 uv run python scripts/generate_seed_sql.py
+supabase link --project-ref <project-ref>
+supabase db query --linked --file artifacts/seed_embeddings.sql
+
+# Run locally
+uv run uvicorn src.api.app:app --reload
+```
+
+## Endpoints
+
+| Method | Path | Auth | Purpose |
+|--------|------|------|---------|
+| `POST` | `/retrieve-biases` | Bearer token | Retrieve top biases for a story |
+| `GET` | `/health` | None | Liveness + DB connectivity check |
+| `GET` | `/stats` | None | Index snapshot (counts, versions, sources) |
+
+### POST /retrieve-biases
+
+```json
+{
+  "story": "Marcus bought NovaTech at $142...",
+  "story_analysis": {
+    "themes": ["investing", "loss aversion"],
+    "beliefs": ["stock will recover"],
+    "claims": ["sunk cost is recoverable"]
+  }
+}
+```
+
+Returns biases array with `retrieval_score`, `definition`, `examples`, `indicators`, `false_positives`, `related_biases`.
+
+## Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DATABASE_URL` | — | Supabase PostgreSQL connection string |
+| `RAG_API_KEY` | — | Shared Bearer secret with biassemble-core |
+| `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | Sentence-transformer model name |
+| `EMBEDDING_DIMENSION` | `384` | Must match model output dimension |
+| `TAXONOMY_VERSION` | `2026-06-28` | Active knowledge version; must match seeded rows |
+| `SEARCH_TOP_K` | `20` | Candidate chunks retrieved from vector index |
+| `RETURN_TOP_K` | `5` | Max biases returned after reranking |
+| `SIMILARITY_THRESHOLD` | `0.45` | Minimum cosine similarity to pass reranking |
+| `QUERY_STRATEGY` | `repeated_story` | Query construction strategy |
+| `RERANK_STRATEGY` | `max` | Score collapse strategy per bias |
+| `INDEX_BATCH_SIZE` | `32` | Embedding batch size during indexing |
+| `REQUEST_TIMEOUT_MS` | `450` | Per-request timeout (must be < caller's 500ms deadline) |
+| `LOG_LEVEL` | `INFO` | structlog minimum level |
+| `GIT_SHA` | — | Set at build time; surfaced in `/stats` |
+
+## Evaluation
+
+```bash
+# Run against seeded DB
+ALL_PROXY="" all_proxy="" HF_HUB_OFFLINE=1 uv run python scripts/run_evaluation.py
+
+# Promote result as new baseline
+ALL_PROXY="" all_proxy="" HF_HUB_OFFLINE=1 uv run python scripts/run_evaluation.py --promote
+```
+
+Targets: Recall@5 ≥ 0.85 on positive stories; empty_rate ≥ 90% on negative stories.
+
+## Deploy (Railway)
+
+1. Set all env vars in the Railway dashboard
+2. Add `GIT_SHA=$RAILWAY_GIT_COMMIT_SHA` as a build-time variable
+3. `railway.toml` configures health check path `/health`, timeout 300s
+4. After deploy: `GET /health` should show `database_connected: true`, `rows_indexed: 190`
+
+## Re-indexing after knowledge changes
+
+```bash
+# Edit knowledge/*.md files, then:
+ALL_PROXY="" all_proxy="" HF_HUB_OFFLINE=1 uv run python scripts/generate_seed_sql.py
+supabase db query --linked --file artifacts/seed_embeddings.sql
+
+# Verify
+uv run python scripts/run_evaluation.py --promote
 ```
 
 ## Spec

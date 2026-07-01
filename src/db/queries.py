@@ -38,6 +38,28 @@ SEARCH_CHUNKS = f"""
     LIMIT $3
 """
 
-# T020: health row count + stats GROUP BY — added when /health and /stats are wired
-# COUNT_BY_VERSION = ...
-# STATS_BY_CHUNK_TYPE = ...
+HEALTH_STATS = f"""
+    SELECT COUNT(*)::int AS rows_indexed, MAX(indexed_at) AS last_indexed_at
+    FROM {TABLE}
+    WHERE taxonomy_version = $1
+"""
+
+STATS_BY_CHUNK_TYPE = f"""
+    SELECT chunk_type, COUNT(*)::int AS cnt
+    FROM {TABLE}
+    WHERE taxonomy_version = $1
+    GROUP BY chunk_type
+"""
+
+STATS_BY_SOURCE = f"""
+    SELECT source, COUNT(*)::int AS cnt
+    FROM {TABLE}
+    WHERE taxonomy_version = $1
+    GROUP BY source
+"""
+
+STATS_BY_VERSION = f"""
+    SELECT taxonomy_version, COUNT(*)::int AS cnt
+    FROM {TABLE}
+    GROUP BY taxonomy_version
+"""
