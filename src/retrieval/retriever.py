@@ -39,6 +39,9 @@ async def retrieve(
     Raises IndexNotFoundError if no chunks are indexed for the active taxonomy_version.
     """
     request_id = request.request_id or str(uuid4())
+    # clear_contextvars first — asyncio can reuse task contexts under some middleware,
+    # causing a previous request's request_id to bleed into bind_contextvars.
+    structlog.contextvars.clear_contextvars()
     structlog.contextvars.bind_contextvars(**{KEY_REQUEST_ID: request_id})
     log.info(EVT_RETRIEVAL_STARTED)
 
@@ -47,6 +50,11 @@ async def retrieve(
     strategy = get_query_strategy(settings.query_strategy)
     query_text = strategy.build(request.story, request.story_analysis)
 
+    # NOTE: embed_query is synchronous (SentenceTransformer runs in-process).
+    # asyncio.wait_for at the route level cannot interrupt it — the timeout only
+    # kicks in at the next await point (search_chunks). If you swap in a remote
+    # embedding provider, wrap embed_query in loop.run_in_executor() to make it
+    # cancellable.
     with TimingContext() as embed_t:
         embedding = provider.embed_query(query_text)
     log.info(EVT_QUERY_EMBEDDED, latency_ms=embed_t.elapsed_ms, query_length=len(query_text))

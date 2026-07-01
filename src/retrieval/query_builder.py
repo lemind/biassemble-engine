@@ -2,7 +2,10 @@ from abc import ABC, abstractmethod
 
 from src.schemas.request import StoryAnalysis
 
-# Word limit before repeating — keeps total query within all-MiniLM-L6-v2's 256-token limit.
+# Word limit for the story before repeating. Two repetitions ≈ 200 words ≈ 250 tokens,
+# which fits all-MiniLM-L6-v2's 256-token window when story_analysis is None. Analysis
+# fields are appended after the repetitions and may push past the limit on long stories —
+# the model silently truncates, so themes/beliefs/claims lose signal in those cases.
 _WORD_LIMIT = 100
 
 

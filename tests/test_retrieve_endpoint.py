@@ -91,7 +91,24 @@ def test_503_index_not_found(client, monkeypatch):
     monkeypatch.setattr("src.retrieval.retriever.search_chunks", empty_search)
     resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
     assert resp.status_code == 503
-    assert resp.json()["detail"]["error"] == "index_not_found"
+    detail = resp.json()["detail"]
+    assert detail["error"] == "index_not_found"
+    assert "taxonomy_version" in detail
+
+
+def test_503_request_timeout(client, monkeypatch):
+    import asyncio
+
+    async def slow_search(*_a, **_kw):
+        await asyncio.sleep(10)
+        return []
+
+    monkeypatch.setattr("src.retrieval.retriever.search_chunks", slow_search)
+    # Drop timeout to 1ms so the test doesn't actually wait
+    monkeypatch.setattr("src.api.routes.retrieve.settings.request_timeout_ms", 1)
+    resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
+    assert resp.status_code == 503
+    assert resp.json()["detail"]["error"] == "request_timeout"
 
 
 # ── Happy path ────────────────────────────────────────────────────────────────
