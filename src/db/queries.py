@@ -16,8 +16,22 @@ UPSERT_CHUNK = f"""
     ON CONFLICT (taxonomy_version, bias_id, chunk_type, chunk_hash) DO NOTHING
 """
 
-# T016: cosine similarity search — added when searcher.py is implemented
-# SEARCH_CHUNKS = ...
+# Cosine similarity search using pgvector's <=> operator (lower = more similar).
+# Returns the top-K chunks for the current taxonomy_version, ordered nearest-first.
+SEARCH_CHUNKS = f"""
+    SELECT
+        bias_id,
+        chunk_type,
+        source_section,
+        source,
+        chunk_text,
+        full_document,
+        1 - (embedding <=> $1::vector) AS retrieval_score
+    FROM {TABLE}
+    WHERE taxonomy_version = $2
+    ORDER BY embedding <=> $1::vector
+    LIMIT $3
+"""
 
 # T020: health row count + stats GROUP BY — added when /health and /stats are wired
 # COUNT_BY_VERSION = ...
