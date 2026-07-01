@@ -1,0 +1,7 @@
+{
+  "scenario_id": "pos_003",
+  "group": "positive",
+  "story": "The founding team of a SaaS startup estimated they would reach product-market fit in six months with a $200k budget. Eighteen months and $800k later they are still iterating. Each quarter they project another three months to launch. The CEO argues that stopping now would waste everything invested so far, and the board keeps approving extensions.",
+  "story_analysis": null,
+  "expected_bias_ids": ["planning_fallacy", "sunk_cost_fallacy", "escalation_of_commitment", "optimism_bias"]
+}

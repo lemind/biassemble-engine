@@ -1,0 +1,7 @@
+{
+  "scenario_id": "neg_003",
+  "group": "negative",
+  "story": "The number 47 bus departs from Central Station at 08:15 and arrives at Riverside Park at 08:42. Passengers should validate their tickets before boarding. The service runs every 20 minutes on weekdays and every 40 minutes on weekends.",
+  "story_analysis": null,
+  "expected_bias_ids": []
+}
