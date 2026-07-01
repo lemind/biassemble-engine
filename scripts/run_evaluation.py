@@ -21,7 +21,6 @@ import httpx
 
 from src.config import settings
 from src.evaluation.evaluate import EvalRun, GroupMetrics, ScenarioResult, run_evaluation, run_evaluation_sync
-from src.providers.sentence_transformer import SentenceTransformerProvider
 
 EVAL_DIR = Path("evaluations")
 RUNS_DIR = EVAL_DIR / "runs"
@@ -62,6 +61,8 @@ def _print_run(run: EvalRun) -> None:
 
 
 async def main(promote: bool) -> None:
+    from src.providers.sentence_transformer import SentenceTransformerProvider
+
     RUNS_DIR.mkdir(exist_ok=True)
     BASELINES_DIR.mkdir(exist_ok=True)
 
@@ -107,6 +108,8 @@ def main_sync(promote: bool) -> None:
     No asyncio: avoids event-loop conflicts with loky/joblib semaphores left
     by SentenceTransformer on Python 3.14. psql subprocess connects directly.
     """
+    from src.providers.sentence_transformer import SentenceTransformerProvider
+
     RUNS_DIR.mkdir(exist_ok=True)
     BASELINES_DIR.mkdir(exist_ok=True)
 
