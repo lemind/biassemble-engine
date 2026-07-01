@@ -97,6 +97,18 @@ Tests are written with their implementation, not in a separate phase. Each task 
 
 ---
 
+## Phase 7: Remote Evaluation Endpoint (US3)
+
+**Goal**: Run the evaluation pipeline from the deployed service where Supabase is reachable directly (no proxy). Local machine triggers it via HTTPS and saves results.
+
+**Why**: Local asyncpg vector queries hang through the SOCKS proxy (type introspection second round-trip). HF Spaces has direct DB access — run evaluation there, return `EvalRun` JSON to caller.
+
+- [ ] T021 [US3] Add `POST /evaluate` to `src/api/routes/retrieve.py` — auth-gated (Bearer), runs `run_evaluation(provider, pool, eval_dir=Path("evaluations"), ...)` using the app's already-open pool and provider, returns the full `EvalRun` as JSON. Add `GET /evaluate/latest` to fetch the most recent run (reads `evaluations/runs/` at startup or caches). Update `scripts/run_evaluation.py` to call the endpoint via `httpx` when `PSQL_SEARCH=false` (deployed mode), save result to `evaluations/runs/run_YYYY-MM-DD.json`, handle `--promote`. Add endpoint to README endpoint table. Contract: see `specs/001-rag-retrieval/contracts/evaluate.md` (to be created).
+
+**Checkpoint**: `curl -X POST .../evaluate -H "Authorization: Bearer ..."` returns JSON with `group_metrics`, `scenario_results`, `k`. Local script saves the file and prints the same table as today's `run_evaluation.py`.
+
+---
+
 ## Dependencies & Execution Order
 
 ```
@@ -111,6 +123,8 @@ T001 → T002 → T003 → T004 → T005 → T006 → T007   (stub live, core wi
                      T018 [P] + T019  (evaluation baseline)
                                        ↓
                      T020  (real health/stats)
+                                       ↓
+                     T021  (remote /evaluate endpoint)
 ```
 
 ### Parallel Opportunities

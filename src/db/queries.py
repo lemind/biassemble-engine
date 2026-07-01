@@ -21,22 +21,9 @@ UPSERT_CHUNK = f"""
     ON CONFLICT (taxonomy_version, bias_id, chunk_type, chunk_hash) DO NOTHING
 """
 
-# Cosine similarity search using pgvector's <=> operator (lower = more similar).
-# Returns the top-K chunks for the current taxonomy_version, ordered nearest-first.
-SEARCH_CHUNKS = f"""
-    SELECT
-        bias_id,
-        chunk_type,
-        source_section,
-        source,
-        chunk_text,
-        full_document,
-        1 - (embedding <=> $1::vector) AS retrieval_score
-    FROM {TABLE}
-    WHERE taxonomy_version = $2
-    ORDER BY embedding <=> $1::vector
-    LIMIT $3
-"""
+# Note: the vector similarity query is built dynamically in searcher.py with the
+# embedding interpolated as a literal. asyncpg's type introspection for the 'vector'
+# extension type causes extra DB round-trips that time out through the local proxy.
 
 HEALTH_STATS = f"""
     SELECT COUNT(*)::int AS rows_indexed, MAX(indexed_at) AS last_indexed_at

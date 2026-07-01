@@ -1,5 +1,8 @@
 import asyncio
 import os
+from dataclasses import asdict
+from datetime import date
+from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
@@ -9,6 +12,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from src.config import settings
 from src.db.queries import HEALTH_STATS, STATS_BY_CHUNK_TYPE, STATS_BY_SOURCE, STATS_BY_VERSION
+from src.evaluation.evaluate import run_evaluation
 from src.providers.base import EmbeddingProvider
 from src.retrieval import retriever
 from src.retrieval.retriever import IndexNotFoundError
@@ -151,3 +155,47 @@ async def stats(request: Request) -> dict[str, Any]:
         "built_at": built_at,
         "git_sha": os.environ.get("GIT_SHA"),
     }
+
+
+@router.post("/evaluate")
+async def evaluate(
+    request: Request,
+    _: None = Depends(_verify_token),
+) -> dict[str, Any]:
+    """Run the full evaluation suite and return an EvalRun JSON.
+
+    Runs on the deployed service where the asyncpg pool has direct Supabase
+    access (no proxy). The caller saves the result locally and handles --promote.
+    Evaluation scenarios are read from evaluations/ baked into the Docker image.
+    """
+    provider: EmbeddingProvider = request.app.state.provider
+    pool: asyncpg.Pool | None = request.app.state.pool
+
+    if pool is None:
+        raise HTTPException(status_code=503, detail={"error": "database_unavailable"})
+
+    eval_dir = Path("evaluations")
+    if not eval_dir.exists():
+        raise HTTPException(status_code=503, detail={"error": "eval_dir_not_found"})
+
+    try:
+        run = await asyncio.wait_for(
+            run_evaluation(
+                provider=provider,
+                pool=pool,
+                eval_dir=eval_dir,
+                baselines_dir=eval_dir / "baselines",
+                run_date=date.today().isoformat(),
+                taxonomy_version=settings.taxonomy_version,
+            ),
+            timeout=120.0,
+        )
+    except asyncio.TimeoutError:
+        raise HTTPException(status_code=503, detail={"error": "evaluation_timeout"})
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail={"error": "evaluation_failed", "detail": str(exc)},
+        ) from exc
+
+    return asdict(run)

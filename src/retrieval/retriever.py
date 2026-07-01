@@ -31,7 +31,7 @@ class IndexNotFoundError(Exception):
 async def retrieve(
     request: RetrieveRequest,
     provider: EmbeddingProvider,
-    pool: asyncpg.Pool,
+    pool: asyncpg.Pool | None,
 ) -> tuple[list[RetrievedBias], RetrievalMetadata]:
     """Full retrieval pipeline: build query → embed → vector search → rerank.
 
