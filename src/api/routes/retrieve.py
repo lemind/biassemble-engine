@@ -1,4 +1,5 @@
 import asyncio
+import os
 from typing import Any
 from uuid import uuid4
 
@@ -7,6 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from src.config import settings
+from src.db.queries import HEALTH_STATS, STATS_BY_CHUNK_TYPE, STATS_BY_SOURCE, STATS_BY_VERSION
 from src.providers.base import EmbeddingProvider
 from src.retrieval import retriever
 from src.retrieval.retriever import IndexNotFoundError
@@ -81,6 +83,21 @@ async def retrieve_biases(
 async def health(request: Request) -> dict[str, Any]:
     provider: EmbeddingProvider = request.app.state.provider
     pool: asyncpg.Pool | None = request.app.state.pool
+
+    rows_indexed: int | None = None
+    last_indexed_at = None
+    db_connected = False
+
+    if pool is not None:
+        try:
+            async with pool.acquire() as conn:
+                row = await conn.fetchrow(HEALTH_STATS, settings.taxonomy_version)
+            rows_indexed = row["rows_indexed"]
+            last_indexed_at = row["last_indexed_at"]
+            db_connected = True
+        except Exception:
+            pass
+
     return {
         "status": "ok",
         "model_loaded": True,
@@ -88,23 +105,49 @@ async def health(request: Request) -> dict[str, Any]:
         "embedding_dimension": settings.embedding_dimension,
         "provider_dimension": provider.dimension,
         "taxonomy_version": settings.taxonomy_version,
-        "rows_indexed": 0,
-        "last_indexed_at": None,
-        "database_connected": pool is not None,
+        "rows_indexed": rows_indexed,
+        "last_indexed_at": last_indexed_at,
+        "database_connected": db_connected,
     }
 
 
 @router.get("/stats")
 async def stats(request: Request) -> dict[str, Any]:
     provider: EmbeddingProvider = request.app.state.provider
+    pool: asyncpg.Pool | None = request.app.state.pool
+
+    indexed_rows = 0
+    built_at = None
+    chunk_count_by_type: dict[str, int] = {}
+    sources: dict[str, int] = {}
+    rows_per_taxonomy_version: dict[str, int] = {}
+
+    if pool is not None:
+        try:
+            async with pool.acquire() as conn:
+                health_row = await conn.fetchrow(HEALTH_STATS, settings.taxonomy_version)
+                indexed_rows = health_row["rows_indexed"]
+                built_at = health_row["last_indexed_at"]
+
+                rows = await conn.fetch(STATS_BY_CHUNK_TYPE, settings.taxonomy_version)
+                chunk_count_by_type = {r["chunk_type"]: r["cnt"] for r in rows}
+
+                rows = await conn.fetch(STATS_BY_SOURCE, settings.taxonomy_version)
+                sources = {r["source"]: r["cnt"] for r in rows}
+
+                rows = await conn.fetch(STATS_BY_VERSION)
+                rows_per_taxonomy_version = {r["taxonomy_version"]: r["cnt"] for r in rows}
+        except Exception:
+            pass
+
     return {
         "taxonomy_version": settings.taxonomy_version,
         "embedding_model": provider.model_name,
         "embedding_dimension": provider.dimension,
-        "indexed_rows": 0,
-        "chunk_count_by_type": {},
-        "rows_per_taxonomy_version": {},
-        "sources": {},
-        "built_at": None,
-        "git_sha": None,
+        "indexed_rows": indexed_rows,
+        "chunk_count_by_type": chunk_count_by_type,
+        "rows_per_taxonomy_version": rows_per_taxonomy_version,
+        "sources": sources,
+        "built_at": built_at,
+        "git_sha": os.environ.get("GIT_SHA"),
     }
