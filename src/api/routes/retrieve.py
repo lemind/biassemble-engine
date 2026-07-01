@@ -58,7 +58,15 @@ async def retrieve_biases(
     except asyncio.TimeoutError:
         raise HTTPException(status_code=503, detail={"error": "request_timeout"})
     except IndexNotFoundError:
-        raise HTTPException(status_code=503, detail={"error": "index_not_found"})
+        raise HTTPException(
+            status_code=503,
+            detail={"error": "index_not_found", "taxonomy_version": settings.taxonomy_version},
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail={"error": "retrieval_failed", "detail": str(exc)},
+        ) from exc
 
     return RetrieveResponse(
         biases=[_to_bias_result(b) for b in biases],

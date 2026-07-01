@@ -1,5 +1,10 @@
 TABLE = "bias_embeddings"
 
+
+def fmt_vector(embedding: list[float]) -> str:
+    """Serialize a float list to pgvector wire format: '[0.1,0.2,...]'."""
+    return "[" + ",".join(str(x) for x in embedding) + "]"
+
 # Upsert one chunk row. ON CONFLICT DO NOTHING skips rows that are already indexed
 # under the same (taxonomy_version, bias_id, chunk_type, chunk_hash) — so re-running
 # the indexer on unchanged content is always safe and idempotent.
