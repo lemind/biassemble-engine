@@ -20,7 +20,11 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
             f"model={provider.dimension}, config={settings.embedding_dimension}"
         )
     try:
-        pool: asyncpg.Pool | None = await asyncpg.create_pool(settings.database_url)
+        # statement_cache_size=0 required: Supabase routes through pgbouncer in
+        # transaction mode, which doesn't support asyncpg's prepared statements.
+        pool: asyncpg.Pool | None = await asyncpg.create_pool(
+            settings.database_url, statement_cache_size=0
+        )
     except Exception:
         pool = None
     app.state.provider = provider
