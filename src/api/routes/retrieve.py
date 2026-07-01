@@ -7,7 +7,7 @@ from typing import Any
 from uuid import uuid4
 
 import asyncpg
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from src.config import settings
@@ -26,8 +26,10 @@ _bearer = HTTPBearer(auto_error=False)
 
 def _verify_token(
     credentials: HTTPAuthorizationCredentials | None = Depends(_bearer),
+    x_rag_key: str | None = Header(default=None, alias="X-RAG-Key"),
 ) -> None:
-    if credentials is None or credentials.credentials != settings.rag_api_key:
+    token = x_rag_key or (credentials.credentials if credentials else None)
+    if token != settings.rag_api_key:
         raise HTTPException(status_code=401, detail={"error": "unauthorized"})
 
 
@@ -160,7 +162,6 @@ async def stats(request: Request) -> dict[str, Any]:
 @router.post("/evaluate")
 async def evaluate(
     request: Request,
-    _: None = Depends(_verify_token),
 ) -> dict[str, Any]:
     """Run the full evaluation suite and return an EvalRun JSON.
 
