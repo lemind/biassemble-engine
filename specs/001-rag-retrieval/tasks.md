@@ -53,6 +53,8 @@ Tests are written with their implementation, not in a separate phase. Each task 
 
 **Checkpoint**: `uv run pytest tests/test_normalizer.py tests/test_chunk_builder.py` green. `SELECT COUNT(*) FROM bias_embeddings WHERE taxonomy_version='2026-06-28'` returns ≥150.
 
+> **Seeding note** (2026-07-01): `run_indexing.py` fails mid-operation due to proxy TCP timeout against Supabase. Workaround: generate offline with `scripts/generate_seed_sql.py`, then apply via `supabase db query --linked --file artifacts/seed_embeddings.sql` (HTTPS Management API, bypasses TCP). 190 rows inserted successfully.
+
 ---
 
 ## Phase 4: Retrieval Engine (US1)
@@ -77,7 +79,7 @@ Tests are written with their implementation, not in a separate phase. Each task 
 **Independent Test**: `uv run python scripts/run_evaluation.py` prints Recall@5, MRR, nDCG per group and aggregate. Saves `evaluations/runs/run_YYYY_MM_DD.json`. Second run prints deltas against latest baseline.
 
 - [x] T018 [P] [US3] Seed evaluation datasets: `evaluations/positive/*.json` (≥3 stories with `expected_bias_ids` — port Marcus/NovaTech from biassemble-core); `evaluations/negative/*.json` (≥5 no-bias stories with `expected_bias_ids: []`); `evaluations/edge/*.json` (≥2 ambiguous stories for threshold calibration, not counted in primary metrics); `evaluations/adversarial/*.json` (≥3 adversarial stories — politician speech, satire, emotionally manipulative narrative, AI-hallucinated story); `evaluations/regression/` (leave empty for now — add a file here every time a retrieval bug is found and fixed, never delete). Each file: `{"scenario_id", "group", "story", "story_analysis": null, "expected_bias_ids": [...]}`.
-- [ ] T019 [US3] Write evaluation pipeline: `src/evaluation/evaluate.py` (load datasets by group, run retriever per scenario, compute per-group Recall@K, Precision@K, MRR, nDCG, empty_rate; compare against latest baseline and compute deltas); `scripts/run_evaluation.py` (formatted table output: scenario / expected / retrieved / Recall@5 / MRR / nDCG; saves result to `evaluations/runs/run_YYYY_MM_DD.json`; `--promote` flag copies to `evaluations/baselines/baseline_YYYY-MM-DD.json`). Run it — confirm Recall@5 ≥ 0.85 on positive stories, empty_rate ≥ 90% on negative stories. Run `--promote` to save baseline.
+- [x] T019 [US3] Write evaluation pipeline: `src/evaluation/evaluate.py` (load datasets by group, run retriever per scenario, compute per-group Recall@K, Precision@K, MRR, nDCG, empty_rate; compare against latest baseline and compute deltas); `scripts/run_evaluation.py` (formatted table output: scenario / expected / retrieved / Recall@5 / MRR / nDCG; saves result to `evaluations/runs/run_YYYY_MM_DD.json`; `--promote` flag copies to `evaluations/baselines/baseline_YYYY-MM-DD.json`). Run it — confirm Recall@5 ≥ 0.85 on positive stories, empty_rate ≥ 90% on negative stories. Run `--promote` to save baseline.
 
 **Checkpoint**: `evaluations/baselines/baseline_YYYY-MM-DD.json` saved. Metrics printed. Change similarity_threshold → re-run → deltas shown in output.
 

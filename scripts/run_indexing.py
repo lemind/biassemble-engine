@@ -28,7 +28,7 @@ async def main() -> None:
             f"Dimension mismatch: model={provider.dimension}, config={settings.embedding_dimension}"
         )
 
-    pool = await asyncpg.create_pool(settings.database_url)
+    pool = await asyncpg.create_pool(settings.database_url, statement_cache_size=0)
     try:
         rows = await run_indexing(TaxonomySource(), provider, pool)
         print(f"\nDone — {rows} new rows  (taxonomy_version={settings.taxonomy_version})")
