@@ -1,0 +1,7 @@
+{
+  "scenario_id": "neg_004",
+  "group": "negative",
+  "story": "Version 3.2.1 fixes a crash that occurred when uploading files larger than 2GB. The export function now supports CSV and XLSX formats. Response time on the dashboard has improved by 40% following database query optimisation. Users on legacy plans must update their API keys before September 1st.",
+  "story_analysis": null,
+  "expected_bias_ids": []
+}
