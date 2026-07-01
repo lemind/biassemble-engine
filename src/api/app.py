@@ -6,11 +6,13 @@ from fastapi import FastAPI
 
 from src.api.routes import retrieve
 from src.config import settings
+from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    configure_logging(settings.log_level)
     provider = SentenceTransformerProvider(settings.embedding_model)
     if provider.dimension != settings.embedding_dimension:
         raise RuntimeError(
