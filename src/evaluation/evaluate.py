@@ -9,15 +9,25 @@ Groups skipped: capability_probes (tests capabilities the retriever doesn't have
                 regression (populated on-demand after bug fixes).
 """
 
+import asyncio
+import csv
+import io
 import json
 import math
+import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
 import asyncpg
 
+from src.config import settings
+from src.db.queries import TABLE, fmt_vector
 from src.providers.base import EmbeddingProvider
+from src.retrieval.query_builder import get_query_strategy
+from src.retrieval.reranker import rerank
 from src.retrieval.retriever import IndexNotFoundError, retrieve
+from src.retrieval.searcher import _build_search_query, _row_to_candidate_csv
+from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest, StoryAnalysis
 
 K = 5
@@ -186,31 +196,123 @@ def compute_deltas(
 
 # ── Main pipeline ─────────────────────────────────────────────────────────────
 
-async def run_evaluation(
+def _retrieve_sync(
+    scenario: "Scenario",
     provider: EmbeddingProvider,
-    pool: asyncpg.Pool,
+) -> tuple[list[str], str | None]:
+    """Synchronous retrieval path via psql subprocess — used when psql_search=True.
+
+    Bypasses asyncio entirely: embed is sync, psql subprocess is sync, rerank is sync.
+    Avoids asyncio.create_subprocess_exec hanging on Python 3.14 in this environment.
+    """
+    try:
+        strategy = get_query_strategy(settings.query_strategy)
+        analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
+        req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
+        query_text = strategy.build(req.story, req.story_analysis)
+        embedding = provider.embed_query(query_text)
+
+        vec = fmt_vector(embedding)
+        sql = _build_search_query(vec, settings.taxonomy_version, settings.search_top_k)
+        result = subprocess.run(
+            ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
+            capture_output=True, text=True, timeout=30,
+        )
+        if result.returncode != 0:
+            return [], f"psql error: {result.stderr.strip()}"
+
+        candidates = [_row_to_candidate_csv(r) for r in csv.DictReader(io.StringIO(result.stdout))]
+        if not candidates:
+            return [], "index_not_found"
+
+        biases: list[RetrievedBias] = rerank(candidates, settings.similarity_threshold, settings.return_top_k)
+        return [b.bias_id for b in biases], None
+    except Exception as exc:
+        return [], str(exc)
+
+
+def run_evaluation_sync(
+    provider: EmbeddingProvider,
     eval_dir: Path,
     baselines_dir: Path,
     run_date: str,
     taxonomy_version: str,
 ) -> EvalRun:
-    """Run all scored scenarios and return a fully populated EvalRun."""
+    """Fully synchronous evaluation — used locally when psql_search=True.
+
+    No event loop, no asyncio subprocess, no thread pool. Each scenario calls
+    psql directly via subprocess.run. Avoids asyncio conflicts with loky/joblib
+    semaphores left by SentenceTransformer on Python 3.14.
+    """
     scenarios = load_scenarios(eval_dir)
     results: list[ScenarioResult] = []
 
     for scenario in scenarios:
-        try:
-            analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
-            req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
-            biases, _ = await retrieve(req, provider, pool)
-            retrieved_ids = [b.bias_id for b in biases]
-            error = None
-        except IndexNotFoundError:
-            retrieved_ids = []
-            error = "index_not_found"
-        except Exception as exc:
-            retrieved_ids = []
-            error = str(exc)
+        retrieved_ids, error = _retrieve_sync(scenario, provider)
+        top_k = retrieved_ids[:K]
+        expected = scenario.expected_bias_ids
+        results.append(ScenarioResult(
+            scenario_id=scenario.scenario_id,
+            group=scenario.group,
+            expected=expected,
+            retrieved=retrieved_ids,
+            recall_at_k=recall_at_k(top_k, expected),
+            precision_at_k=precision_at_k(top_k, expected),
+            mrr=mrr(retrieved_ids, expected),
+            ndcg_at_k=ndcg_at_k(top_k, expected),
+            error=error,
+        ))
+
+    group_metrics = _aggregate(results)
+    baseline = load_baseline(baselines_dir)
+    deltas = compute_deltas(group_metrics, baseline) if baseline else None
+
+    return EvalRun(
+        run_date=run_date,
+        taxonomy_version=taxonomy_version,
+        embedding_model=provider.model_name,
+        k=K,
+        scenario_results=results,
+        group_metrics=group_metrics,
+        deltas=deltas,
+    )
+
+
+async def run_evaluation(
+    provider: EmbeddingProvider,
+    pool: asyncpg.Pool | None,
+    eval_dir: Path,
+    baselines_dir: Path,
+    run_date: str,
+    taxonomy_version: str,
+) -> EvalRun:
+    """Run all scored scenarios and return a fully populated EvalRun.
+
+    Uses synchronous psql subprocess when settings.psql_search=True (local dev
+    with SOCKS proxy). Uses async asyncpg path otherwise (deployed service).
+    """
+    if pool is None and not settings.psql_search:
+        raise ValueError("pool is required when psql_search=False")
+
+    scenarios = load_scenarios(eval_dir)
+    results: list[ScenarioResult] = []
+
+    for scenario in scenarios:
+        if settings.psql_search:
+            retrieved_ids, error = await asyncio.to_thread(_retrieve_sync, scenario, provider)
+        else:
+            try:
+                analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
+                req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
+                biases, _ = await retrieve(req, provider, pool)
+                retrieved_ids = [b.bias_id for b in biases]
+                error = None
+            except IndexNotFoundError:
+                retrieved_ids = []
+                error = "index_not_found"
+            except Exception as exc:
+                retrieved_ids = []
+                error = str(exc)
 
         top_k = retrieved_ids[:K]
         expected = scenario.expected_bias_ids

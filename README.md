@@ -49,6 +49,7 @@ uv run uvicorn src.api.app:app --reload
 | `POST` | `/retrieve-biases` | Bearer token | Retrieve top biases for a story |
 | `GET` | `/health` | None | Liveness + DB connectivity check |
 | `GET` | `/stats` | None | Index snapshot (counts, versions, sources) |
+| `POST` | `/evaluate` | Bearer token | Run evaluation suite, return EvalRun JSON |
 
 ### POST /retrieve-biases
 
@@ -87,12 +88,14 @@ Returns biases array with `retrieval_score`, `definition`, `examples`, `indicato
 ## Evaluation
 
 ```bash
-# Run against seeded DB
-ALL_PROXY="" all_proxy="" HF_HUB_OFFLINE=1 uv run python scripts/run_evaluation.py
+# Run via deployed service (recommended — no proxy issues)
+# Set ENGINE_URL in .env, then:
+.venv/bin/python scripts/run_evaluation.py --promote
 
-# Promote result as new baseline
-ALL_PROXY="" all_proxy="" HF_HUB_OFFLINE=1 uv run python scripts/run_evaluation.py --promote
+# Promote saves result to evaluations/baselines/ locally
 ```
+
+The script calls `POST /evaluate` on the deployed HF Spaces service, receives the `EvalRun` JSON, prints the metrics table, and saves to `evaluations/runs/`. Add `--promote` to copy to `evaluations/baselines/`.
 
 Targets: Recall@5 ≥ 0.85 on positive stories; empty_rate ≥ 90% on negative stories.
 
