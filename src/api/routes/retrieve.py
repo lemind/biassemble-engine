@@ -1,3 +1,4 @@
+import asyncio
 from typing import Any
 from uuid import uuid4
 
@@ -7,8 +8,11 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from src.config import settings
 from src.providers.base import EmbeddingProvider
+from src.retrieval import retriever
+from src.retrieval.retriever import IndexNotFoundError
+from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest
-from src.schemas.response import RetrieveResponse
+from src.schemas.response import BiasResult, RetrieveResponse
 
 router = APIRouter()
 _bearer = HTTPBearer(auto_error=False)
@@ -21,6 +25,19 @@ def _verify_token(
         raise HTTPException(status_code=401, detail={"error": "unauthorized"})
 
 
+def _to_bias_result(b: RetrievedBias) -> BiasResult:
+    return BiasResult(
+        id=b.bias_id,
+        name=b.name,
+        retrieval_score=b.retrieval_score,
+        definition=b.definition,
+        examples=b.examples,
+        indicators=b.indicators,
+        false_positives=b.false_positives,
+        related_biases=b.related_biases,
+    )
+
+
 @router.post("/retrieve-biases", response_model=RetrieveResponse)
 async def retrieve_biases(
     body: RetrieveRequest,
@@ -28,12 +45,27 @@ async def retrieve_biases(
     _: None = Depends(_verify_token),
 ) -> RetrieveResponse:
     provider: EmbeddingProvider = request.app.state.provider
+    pool: asyncpg.Pool | None = request.app.state.pool
+
+    if pool is None:
+        raise HTTPException(status_code=503, detail={"error": "database_unavailable"})
+
+    try:
+        biases, meta = await asyncio.wait_for(
+            retriever.retrieve(body, provider, pool),
+            timeout=settings.request_timeout_ms / 1000,
+        )
+    except asyncio.TimeoutError:
+        raise HTTPException(status_code=503, detail={"error": "request_timeout"})
+    except IndexNotFoundError:
+        raise HTTPException(status_code=503, detail={"error": "index_not_found"})
+
     return RetrieveResponse(
-        biases=[],
-        retrieved_chunks=0,
-        taxonomy_version=settings.taxonomy_version,
-        embedding_model=provider.model_name,
-        request_id=body.request_id or str(uuid4()),
+        biases=[_to_bias_result(b) for b in biases],
+        retrieved_chunks=meta.candidate_chunks,
+        taxonomy_version=meta.taxonomy_version,
+        embedding_model=meta.embedding_model,
+        request_id=meta.retrieval_id,
     )
 
 
