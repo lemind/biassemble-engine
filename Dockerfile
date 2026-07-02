@@ -10,7 +10,10 @@ RUN uv sync --frozen --no-dev --no-install-project
 
 # Copy source after deps — only invalidates cache when source changes
 COPY src/ ./src/
-COPY evaluations/ ./evaluations/
+COPY evaluations/positive ./evaluations/positive
+COPY evaluations/negative ./evaluations/negative
+COPY evaluations/adversarial ./evaluations/adversarial
+COPY evaluations/edge ./evaluations/edge
 
 RUN adduser --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
