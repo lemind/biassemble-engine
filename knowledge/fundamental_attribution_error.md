@@ -15,11 +15,11 @@ In education, teachers who observe students struggling attribute the difficulty 
 In politics, citizens attribute national economic performance primarily to the incumbent leader's character and decisions, discounting global economic cycles that constrain any government's room for action.
 
 ## Indicators
-- Explaining others' failures primarily through character or intent
-- Explaining one's own failures primarily through circumstances
-- Neglecting to ask what situational factors the other person faces
-- Drawing stable personality conclusions from single observed behaviors
-- Discounting environmental pressures when evaluating performance
+- Concludes that someone failed or acted badly because of who they are rather than the circumstances they faced
+- Explains personal failures through bad luck or difficult conditions while explaining others' failures through character flaws
+- Does not ask what constraints, pressures, or context the other person was dealing with when making the judgment
+- Draws firm conclusions about someone's character or ability from a single observed behavior
+- Evaluates someone's performance without accounting for the environment or situation they were working in
 
 ## False Positives
 - When there is strong evidence that behavior reflects stable character across many situations and contexts, attributing it to disposition is accurate, not an error

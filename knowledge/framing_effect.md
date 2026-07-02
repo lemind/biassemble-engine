@@ -15,11 +15,11 @@ In retail, ground beef labeled "75% lean" is perceived as higher quality than gr
 In public health, a disease prevention program described as "saves 200 lives" out of 600 at risk is preferred over a statistically equivalent program described as "400 people will die," because the first is gain-framed and the second loss-framed.
 
 ## Indicators
-- Reactions that change based on presentation rather than substance
-- Strong preference for gain-framed versus loss-framed descriptions of identical options
-- Sensitivity to absolute versus relative risk presentations
-- Varying risk tolerance depending on whether a choice is framed as a potential gain or a potential loss
-- Different evaluations of logically equivalent information when numerical format changes
+- Responds differently to the same information depending on whether it is presented as a gain or a loss
+- Prefers a treatment described as "90% survival rate" over one described as "10% mortality rate," even though they are identical
+- Feels more willing to take a risk when options are framed as potential gains, and more cautious when the same options are framed as potential losses
+- Evaluates the same statistic differently when expressed as a percentage versus a frequency
+- Chooses differently between two logically identical options based on which words the presenter used to describe them
 
 ## False Positives
 - Responding differently to genuinely different presentations that carry different information is rational — not all framing differences are misleading

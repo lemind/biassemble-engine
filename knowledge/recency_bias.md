@@ -15,11 +15,11 @@ In weather forecasting interpretation, people who experienced an unusually hot s
 In politics, voter approval ratings spike and drop with the most recent news event, overriding slower-moving assessments of policy performance.
 
 ## Indicators
-- Forecasts that extrapolate recent trends without regression to historical means
-- Risk assessments that track recent events rather than long-term distributions
-- Performance evaluations dominated by last-period outcomes
-- Investment decisions made primarily in response to recent price movements
-- Neglecting historical base rates when recent experience contradicts them
+- Extrapolates a recent trend into the future without checking whether historical patterns suggest it will continue
+- Judges how risky something is based on what has happened in the last few months rather than over the long run
+- Rates a person's overall performance primarily on what they did in the most recent period, discounting a longer track record
+- Makes an investment or financial decision in direct response to recent price movements rather than long-term value
+- Dismisses historical data when recent experience points in a different direction, without examining whether the change is real
 
 ## False Positives
 - Recent data genuinely may be more relevant in rapidly changing environments — updating on new information is rational when the data-generating process has changed

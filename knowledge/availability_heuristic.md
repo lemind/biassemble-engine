@@ -15,11 +15,12 @@ In medicine, a physician who recently treated several cases of a rare disease ov
 In politics, terrorism dominates security spending decisions disproportionate to its statistical contribution to mortality, because individual attacks generate overwhelming media attention compared to car accidents or preventable diseases.
 
 ## Indicators
-- Overestimating frequency of vivid or dramatic events
-- Underestimating risk of common, unglamorous outcomes
-- Strong influence of recent or personally experienced events on probability estimates
-- Risk perception that tracks news cycles rather than statistics
-- Difficulty recalling base rates when dramatic examples are salient
+- Judges something as common or dangerous because a vivid example comes to mind immediately
+- Rates a risk as low because it is hard to picture happening, not because the statistics support that estimate
+- Estimates how often something occurs based on how recently or personally it has been seen or heard about
+- Worries more about dramatic or newsworthy dangers than about common hazards with higher actual rates
+- Cannot bring base rates to mind when a memorable story about the event is available instead
+- Updates a probability estimate when news coverage increases, even when the underlying risk has not changed
 
 ## False Positives
 - Updating risk estimates based on genuinely new statistical evidence is rational, not availability bias

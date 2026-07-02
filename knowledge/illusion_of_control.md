@@ -15,11 +15,11 @@ In medicine, patients who choose their own treatment from a menu of equivalent o
 In technology operations, SREs who developed a monitoring system believe they can predict system failures from pattern observation, when the failures are the result of cascading rare events with genuinely low predictability.
 
 ## Indicators
-- Performing rituals or superstitious behaviors to influence random outcomes
-- Attributing positive random outcomes to personal skill or influence
-- Overestimating the predictability of genuinely random processes
-- Paying more for self-chosen random outcomes than for identical assigned outcomes
-- Confidence in causal intervention in processes with primarily stochastic output
+- Performs a ritual, routine, or superstitious behavior believing it will influence an outcome that is actually random
+- Takes credit for positive random outcomes as if personal actions caused them
+- Believes a random process can be predicted or tilted through careful observation or personal technique
+- Prefers to pick a lottery number or draw a card personally rather than have it assigned, believing the choice affects the result
+- Feels in control of a situation whose outcomes are driven primarily by chance
 
 ## False Positives
 - In domains with genuine skill components, confidence in one's ability to influence outcomes is warranted — illusion of control requires that the outcome is predominantly random and the belief in control is demonstrably false

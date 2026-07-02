@@ -15,11 +15,11 @@ In public policy, lottery players who have been buying the same numbers for year
 In hiring, interviewers who have hired several candidates from one university feel they are "due" to hire from a different university, overriding candidate quality assessment with a belief that selection should balance across institutions.
 
 ## Indicators
-- Believing that independent events must "balance out" over a short sequence
-- Increasing bets after a losing streak because a win is "overdue"
-- Decreasing confidence in a probability after observing a run of successes
-- Treating streaks in independent processes as predictive
-- Attributing corrective pressure to past outcomes in independent systems
+- Believes a string of the same outcome means the opposite is now due
+- Bets more after a losing streak because a win feels overdue, even when each outcome is independent
+- Lowers confidence in a repeated outcome because the streak feels like it must end soon
+- Treats a run of heads, losses, or bad luck as information about what the next independent event will be
+- Expects the process to "correct" a streak, as if past random outcomes create pressure on future ones
 
 ## False Positives
 - In genuinely non-independent processes — where outcomes affect future probabilities — updating on past outcomes is correct. Drawing cards from a deck without replacement is not subject to the gambler's fallacy

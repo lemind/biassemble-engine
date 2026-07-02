@@ -15,11 +15,11 @@ In management, a single critical comment from a performance review is remembered
 In medicine, patients who have experienced a severe drug side effect are significantly more reluctant to try an equivalent medication even when the new drug has a much lower side effect profile, because the prior negative experience dominates risk assessment.
 
 ## Indicators
-- Greater emotional impact from negative events than equivalent positive ones
-- Negative feedback remembered more clearly and longer than positive feedback
-- Risk decisions dominated by loss avoidance rather than gain-seeking
-- News consumption skewed toward negative headlines
-- Protective behaviors that are disproportionate to actual threat levels
+- Remembers criticism, setbacks, or bad news more vividly and longer than praise, successes, or good news of equal significance
+- Weighs the possibility of a bad outcome more heavily than the possibility of an equally large good outcome when deciding
+- Avoids a risk primarily to prevent loss rather than to achieve gain, even when the expected values favor acting
+- Pays more attention to the negative information in feedback, a conversation, or the news than to the positive information of the same magnitude
+- Takes protective action against minor threats while underweighting larger but less salient positive opportunities
 
 ## False Positives
 - Paying more attention to genuine, severe threats is rational risk management, not negativity bias — the bias involves disproportionate weight, not appropriate attention

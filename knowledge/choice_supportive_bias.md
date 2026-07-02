@@ -15,11 +15,11 @@ In politics, voters who chose a candidate reconstruct their memory of the electi
 In academia, researchers who chose a particular methodology recall their reasoning for that choice as stronger than it was, making it harder to recognize when a different approach would have been better.
 
 ## Indicators
-- Post-decision memory that is more positive than pre-decision assessment
-- Difficulty recalling reasons that supported the unchosen alternatives
-- Disproportionate confidence in past decisions
-- Reluctance to revisit decisions because they were "clearly right"
-- Forgetting one's own expressed uncertainty before a decision was made
+- Remembers a past choice as better than it actually seemed at the moment of making it
+- Cannot recall the reasons that made the unchosen option look appealing before deciding
+- Feels more confident that a past decision was right than the evidence available at the time justified
+- Avoids reconsidering a past choice on the grounds that it was obviously the right call, even when new information has arrived
+- Forgets having felt uncertain before a decision and now believes the choice was always clear
 
 ## False Positives
 - Commitment to a decision to avoid second-guessing paralysis is a healthy psychological strategy in some contexts — not all post-decision conviction is choice-supportive bias

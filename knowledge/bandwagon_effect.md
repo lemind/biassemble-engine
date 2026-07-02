@@ -15,11 +15,11 @@ In academia, citation patterns show bandwagon effects: heavily cited papers rece
 In medicine, treatment fashions emerge and persist beyond evidence. Hormone replacement therapy, certain surgical procedures, and dietary interventions have all experienced periods of widespread adoption driven partly by popularity rather than evidence.
 
 ## Indicators
-- Adopting positions primarily because others hold them
-- Treating popularity as evidence of quality or correctness
-- Abandoning positions when they become minority views without new evidence
-- Investment or purchasing decisions driven by what peers are doing
-- Difficulty defending positions that differ from group consensus
+- Adopts a position because most people around them hold it, without finding the reasoning independently compelling
+- Takes something's popularity as evidence that it must be right or good
+- Changes a position when it becomes the minority view, without encountering any new arguments or evidence
+- Invests in something or buys something primarily because peers or the crowd are doing the same
+- Struggles to defend a view that differs from group consensus, even when the reasoning behind it is sound
 
 ## False Positives
 - Using the behavior of others as one legitimate signal among several is rational — social proof can carry genuine information

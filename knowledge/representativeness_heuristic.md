@@ -15,11 +15,11 @@ In hiring, interviewers assess candidates by how closely they match their mental
 In statistics, the gambler's fallacy is a manifestation of representativeness: after a sequence of heads in coin flips, people expect tails because a random sequence "should look random," ignoring that each flip is independent.
 
 ## Indicators
-- Probability judgments based on similarity to a prototype rather than base rates
-- The conjunction fallacy — rating specific scenarios as more likely than general ones
-- Base rate neglect when a vivid description is available
-- Stereotypical reasoning overriding statistical information
-- Pattern recognition applied to domains where the pattern is spurious
+- Judges how likely something is based on how closely it resembles a typical example, without consulting actual probabilities
+- Rates a specific detailed scenario as more likely than the general category that contains it
+- Ignores base rates when a vivid description is available because the description feels more informative
+- Uses the stereotype of what something looks like to estimate whether it is that thing, overriding available statistics
+- Sees a meaningful pattern in data because the data resembles a familiar template, even when the pattern is random
 
 ## False Positives
 - Using reference class statistics to estimate probability is the correct use of base rates — the heuristic becomes a bias only when base rates are neglected in favor of representativeness
