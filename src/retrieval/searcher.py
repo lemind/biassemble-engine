@@ -14,7 +14,8 @@ from src.schemas.internal import CandidateChunk, FullBiasDocument
 
 
 def _row_to_candidate(row: asyncpg.Record) -> CandidateChunk:
-    doc_data: dict = row["full_document"]
+    fd = row["full_document"]
+    doc_data: dict = json.loads(fd) if isinstance(fd, str) else fd
     full_doc = FullBiasDocument(
         name=doc_data["name"],
         definition=doc_data["definition"],
@@ -106,9 +107,18 @@ async def _search_asyncpg(
 ) -> list[CandidateChunk]:
     assert pool is not None, "pool must not be None when psql_search=False"
     vec = fmt_vector(embedding)
-    query = _build_search_query(vec, taxonomy_version, top_k)
+    # $1::text::vector: asyncpg sends $1 as text (known type), PostgreSQL casts to
+    # vector internally. Avoids asyncpg needing the vector OID for parameter binding.
+    query = (
+        f"SELECT bias_id, chunk_type, source_section, source, chunk_text, full_document,"
+        f" 1 - (embedding <=> $1::text::vector) AS retrieval_score"
+        f" FROM {TABLE}"
+        f" WHERE taxonomy_version = $2"
+        f" ORDER BY embedding <=> $1::text::vector"
+        f" LIMIT {top_k}"
+    )
     async with pool.acquire() as conn:
-        rows = await conn.fetch(query)
+        rows = await conn.fetch(query, vec, taxonomy_version)
     return [_row_to_candidate(r) for r in rows]
 
 

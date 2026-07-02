@@ -6,7 +6,6 @@ from fastapi import FastAPI
 
 from src.api.routes import retrieve
 from src.config import settings
-from src.db.connection import init_pool_connection
 from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
 
@@ -24,7 +23,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         # statement_cache_size=0 required: Supabase routes through pgbouncer in
         # transaction mode, which doesn't support asyncpg's prepared statements.
         pool: asyncpg.Pool | None = await asyncpg.create_pool(
-            settings.database_url, statement_cache_size=0, init=init_pool_connection
+            settings.database_url, statement_cache_size=0
         )
     except Exception:
         pool = None
