@@ -37,7 +37,7 @@ class RawDocument:
 
 ## Changed: `TaxonomySource._parse()` — paragraph splitting
 
-`TaxonomySource._parse()` now produces multiple `RawDocument`s per `examples` and `indicators` section instead of one per section.
+`TaxonomySource._parse()` now produces multiple `RawDocument`s per `examples` section instead of one per section. Indicators are still emitted as a single `RawDocument` — grouping into thematic clusters happens in `chunk_builder`, not in `TaxonomySource`.
 
 **For `examples` sections** (split per paragraph):
 ```python
@@ -70,7 +70,7 @@ _DOMAIN_RE = re.compile(r"^\[([A-Za-z]+)\]\s*")  # single-word labels only
 
 def _extract_domain(text: str) -> str | None:
     m = _DOMAIN_RE.match(text)
-    return m.group(1).lower().replace(" ", "_") if m else None
+    return m.group(1).lower() if m else None
 
 def _strip_domain_label(text: str) -> str:
     return _DOMAIN_RE.sub("", text)
@@ -224,7 +224,9 @@ new: 0.341
 delta: +0.159  IMPROVED
 ```
 
-Pass condition: `new_score > old_score`. No fixed threshold.
+Pass condition: `new_score > old_score`. No fixed threshold. This is the condition for **indicator rewrites** (T002) — confirming that the rewritten chunk embeds closer to the story than the old one.
+
+**Domain paragraph validation (T005) is stricter**: a domain example paragraph must satisfy `new_score > SIMILARITY_THRESHOLD` (the threshold set in Phase 2). A paragraph that beats the old chunk but still falls below the retrieval threshold won't be retrieved — the probe must confirm it clears the live threshold, not just that it improved.
 
 ---
 

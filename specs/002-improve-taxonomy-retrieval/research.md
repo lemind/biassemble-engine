@@ -51,7 +51,7 @@ Grouping is done by assigning each bullet to a category based on keyword signals
 
 ## Domain metadata tagging convention
 
-**Decision**: Domain-tagged example paragraphs are written with a bracketed domain label at the start: `[Political] In an election campaign, ...`. `TaxonomySource` detects the pattern `^\[([A-Za-z ]+)\]` at the start of a paragraph, extracts the domain string, stores it in `metadata.domain`, and strips the label from `chunk_text` before embedding. Non-domain-tagged paragraphs have `metadata.domain` absent.
+**Decision**: Domain-tagged example paragraphs are written with a bracketed domain label at the start: `[Political] In an election campaign, ...`. `TaxonomySource` detects the pattern `^\[([A-Za-z]+)\]` at the start of a paragraph, extracts the domain string, stores it in `metadata.domain`, and strips the label from `chunk_text` before embedding. Non-domain-tagged paragraphs have `metadata.domain` absent.
 
 **Rationale**: Self-documenting in the knowledge file; no separate mapping file to maintain; authoring intent is visible without looking at the indexer. The GIN index on `metadata` (already present) enables `WHERE metadata->>'domain' = 'political'` filtering for future domain-specific retrieval.
 
