@@ -1,0 +1,7 @@
+{
+  "scenario_id": "neg_001",
+  "group": "negative",
+  "story": "The meteorologist explained that tomorrow's forecast shows a 70% chance of rain across the region due to an incoming low-pressure system from the north. Residents are advised to carry umbrellas and avoid outdoor events in the afternoon.",
+  "story_analysis": null,
+  "expected_bias_ids": []
+}

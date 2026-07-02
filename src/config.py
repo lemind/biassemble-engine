@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     index_batch_size: int = 32
     request_timeout_ms: int = 450
     log_level: str = "INFO"
+    psql_search: bool = False
+    engine_url: str | None = None
 
 
 settings = Settings()

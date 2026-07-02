@@ -1,4 +1,6 @@
+import asyncio
 import json
+import time
 from dataclasses import asdict
 from pathlib import Path
 
@@ -44,36 +46,71 @@ async def run_indexing(
     return rows_inserted
 
 
+_UPSERT_TIMEOUT = 30  # seconds per attempt
+_UPSERT_RETRIES = 3
+
+
 async def _upsert(
     embedded: list[EmbeddedChunk],
     pool: asyncpg.Pool,
     taxonomy_version: str,
     model_name: str,
 ) -> int:
-    """Insert each chunk row; ON CONFLICT DO NOTHING returns 'INSERT 0 0' for skips."""
-    rows_inserted = 0
-    async with pool.acquire() as conn:
-        for ec in embedded:
-            c = ec.chunk
-            result = await conn.execute(
-                UPSERT_CHUNK,
-                c.bias_id,
-                c.chunk_type,
-                c.source_section,
-                c.chunk_text,
-                c.chunk_hash,
-                json.dumps(asdict(c.full_document)),  # JSONB
-                fmt_vector(ec.embedding),              # pgvector string format
-                c.source,
-                json.dumps(c.metadata),               # JSONB
-                taxonomy_version,
-                model_name,
-                c.chunk_index,
-            )
-            # asyncpg returns the command tag as a string: "INSERT 0 1" or "INSERT 0 0"
-            if result.endswith(" 1"):
-                rows_inserted += 1
-    return rows_inserted
+    """Bulk-insert all chunks via executemany with timeout and retries.
+
+    Falls back message if all retries fail — use scripts/generate_seed_sql.py
+    to produce a SQL file you can apply via the Supabase SQL editor instead.
+    """
+    rows: list[tuple] = [
+        (
+            ec.chunk.bias_id,
+            ec.chunk.chunk_type,
+            ec.chunk.source_section,
+            ec.chunk.chunk_text,
+            ec.chunk.chunk_hash,
+            json.dumps(asdict(ec.chunk.full_document)),
+            fmt_vector(ec.embedding),
+            ec.chunk.source,
+            json.dumps(ec.chunk.metadata),
+            taxonomy_version,
+            model_name,
+            ec.chunk.chunk_index,
+        )
+        for ec in embedded
+    ]
+
+    for attempt in range(1, _UPSERT_RETRIES + 1):
+        try:
+            t0 = time.monotonic()
+            print(f"indexer: upsert attempt {attempt}/{_UPSERT_RETRIES} ({len(rows)} rows)...")
+            async with asyncio.timeout(_UPSERT_TIMEOUT):
+                async with pool.acquire() as conn:
+                    before = await conn.fetchval(
+                        "SELECT COUNT(*) FROM bias_embeddings WHERE taxonomy_version = $1",
+                        taxonomy_version,
+                    )
+                    await conn.executemany(UPSERT_CHUNK, rows)
+                    after = await conn.fetchval(
+                        "SELECT COUNT(*) FROM bias_embeddings WHERE taxonomy_version = $1",
+                        taxonomy_version,
+                    )
+            elapsed = int((time.monotonic() - t0) * 1000)
+            print(f"indexer: upsert done in {elapsed}ms")
+            return int(after - before)
+        except (asyncio.TimeoutError, Exception) as exc:
+            elapsed = int((time.monotonic() - t0) * 1000)
+            print(f"indexer: attempt {attempt} failed after {elapsed}ms — {type(exc).__name__}: {exc}")
+            if attempt == _UPSERT_RETRIES:
+                print(
+                    "\nAll upsert attempts failed. Run the SQL fallback instead:\n"
+                    "  python scripts/generate_seed_sql.py\n"
+                    "Then paste artifacts/seed_embeddings.sql into the Supabase SQL editor."
+                )
+                raise
+            print(f"indexer: retrying in 2s...")
+            await asyncio.sleep(2)
+
+    return 0  # unreachable
 
 
 def _write_chunks_artifact(chunks: list[BiasChunk]) -> None:

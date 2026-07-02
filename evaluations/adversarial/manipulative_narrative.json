@@ -1,0 +1,11 @@
+{
+  "scenario_id": "adv_003",
+  "group": "adversarial",
+  "story": "Every single parent out there knows the gut-wrenching fear of sending their child to a school that could, at any moment, become a statistic. You feel it, I feel it, we all feel it. The question isn't whether we should act \u2014 it's why we haven't acted sooner. Don't let them tell you the numbers don't justify it. Your child's life is not a number.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic",
+    "affect_heuristic",
+    "framing_effect"
+  ]
+}

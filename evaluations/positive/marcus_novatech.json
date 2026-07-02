@@ -1,0 +1,12 @@
+{
+  "scenario_id": "pos_001",
+  "group": "positive",
+  "story": "Marcus bought NovaTech shares at $142 six months ago. The stock has since fallen to $40 after a series of poor earnings reports. His financial advisor recommends selling and reinvesting, but Marcus insists the stock will recover to its original price. He keeps reminding himself how much he paid for it and refuses to evaluate the current fundamentals.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "anchoring_bias",
+    "sunk_cost_fallacy",
+    "confirmation_bias",
+    "loss_aversion"
+  ]
+}

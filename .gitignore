@@ -159,6 +159,9 @@ supabase/
 
 # biassemble-engine: indexing intermediates (debug artifacts only)
 artifacts/
+
+# Evaluation run outputs (generated; baselines are committed)
+evaluations/runs/
 env/
 venv/
 ENV/

@@ -1,0 +1,7 @@
+{
+  "scenario_id": "neg_002",
+  "group": "negative",
+  "story": "Preheat the oven to 180 degrees Celsius. Mix 200g of flour with 100g of butter until crumbly. Add two eggs and a pinch of salt, then knead into a smooth dough. Refrigerate for 30 minutes before rolling out and cutting into shapes. Bake for 12 minutes until golden.",
+  "story_analysis": null,
+  "expected_bias_ids": []
+}
