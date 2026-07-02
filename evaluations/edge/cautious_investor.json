@@ -1,0 +1,11 @@
+{
+  "scenario_id": "edge_002",
+  "group": "edge",
+  "story": "Sofia keeps 90% of her savings in a low-yield government bond account. She watched her parents lose their home in the 2008 financial crisis and has never trusted equity markets. Her colleagues consider her overly cautious, but she has consistently avoided volatile positions that others lost money on.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic",
+    "loss_aversion",
+    "status_quo_bias"
+  ]
+}
