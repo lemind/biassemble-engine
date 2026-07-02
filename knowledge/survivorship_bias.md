@@ -17,7 +17,7 @@ In medicine, historical treatments evaluated only on patients who completed them
 - Believes a strategy or trait leads to success because all the visible successful people used it or have it
 - Does not ask what traits or strategies the people who failed also had
 - Makes optimistic estimates about average outcomes based on data that only includes the cases that survived to be counted
-- Cannot account for the missing population of failures when reasoning about what worked and why
+- Forms a confident view of what leads to success from examples that survived long enough to be visible, without noticing that failed examples are absent from the picture
 
 ## False Positives
 - Studying successful practitioners to learn from them is not survivorship bias when the goal is to understand what they did, not to estimate base rates of success

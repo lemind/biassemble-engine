@@ -17,7 +17,7 @@ In technology, products designed with a default user in mind that matches a narr
 ## Indicators
 - Applies group-level traits to an individual without examining that person's actual behavior or situation
 - Uses a demographic characteristic — age, gender, nationality, profession — as a proxy for how someone will think or act
-- Fails to revise an assessment of an individual even when their behavior clearly contradicts the group expectation
+- Sticks with an initial assessment of an individual even when their actual behavior clearly shows it is wrong
 - Treats a counterexample as "an exception that proves the rule" rather than as evidence against the stereotype
 - Explains what an individual did by referring to their group membership rather than to their individual choices or circumstances
 

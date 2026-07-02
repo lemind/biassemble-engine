@@ -16,7 +16,7 @@ In academia, a PhD student continues toward a degree in a field with no job pros
 - Continues a course of action primarily because of what has already been invested, not because of what the future holds
 - Resists ending a failing project because of how much time, money, or effort has already gone into it
 - Argues that quitting now would mean all the past effort was wasted, treating sunk costs as a reason to keep going
-- Invests more into something that is losing ground in order to justify what was already spent
+- Sits through a bad movie, meeting, or experience rather than leaving early, because walking out would mean acknowledging the time already spent was wasted
 - Finds it emotionally impossible to accept that past losses are gone regardless of what happens next
 
 ## False Positives
