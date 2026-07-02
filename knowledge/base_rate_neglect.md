@@ -19,7 +19,7 @@ In risk assessment, security analysts briefed on a specific threat scenario over
 - Hears a positive test result and concludes the diagnosis is nearly certain, without factoring in how rare the condition is
 - Accepts eyewitness identification as near-definitive without considering how often eyewitnesses are wrong
 - Makes a confident forecast without consulting how often comparable forecasts in similar situations have been right
-- Concludes something must be true primarily because the description of it is compelling and detailed
+- Hears a confident, plausible-sounding story and raises the probability estimate without asking what the actual base rate is
 
 ## False Positives
 - When base rates are genuinely unavailable for a novel phenomenon, relying on case-specific information is the only available evidence

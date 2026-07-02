@@ -18,7 +18,7 @@ In finance, fund comparisons that include a poorly-performing fund as a third op
 - Changes a preference between two options when a third, clearly worse option is added to the set
 - Picks an option primarily because it looks better than the obviously inferior alternative next to it
 - Gravitates toward a mid-tier choice because the expensive option makes it feel like a bargain
-- Lets an inferior third option shift the choice between two unrelated options that were already available
+- Finds that an option which felt overpriced or unappealing suddenly looks reasonable once a clearly worse option is placed next to it
 - Selects a combined or premium option that didn't seem compelling until a dominated option made it look like exceptional value
 
 ## False Positives
