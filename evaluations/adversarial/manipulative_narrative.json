@@ -2,6 +2,10 @@
   "scenario_id": "adv_003",
   "group": "adversarial",
   "story": "Every single parent out there knows the gut-wrenching fear of sending their child to a school that could, at any moment, become a statistic. You feel it, I feel it, we all feel it. The question isn't whether we should act — it's why we haven't acted sooner. Don't let them tell you the numbers don't justify it. Your child's life is not a number.",
-  "story_analysis": null,
+  "story_analysis": {
+    "themes": ["availability heuristic", "affect heuristic", "framing effect", "fear appeal", "emotional manipulation"],
+    "beliefs": ["vivid fear of rare event reflects true probability", "emotional response is more valid than statistics", "framing around children's safety overrides rational analysis"],
+    "claims": ["the threat is more likely because it feels real", "numbers don't matter when emotions are high"]
+  },
   "expected_bias_ids": ["availability_heuristic", "affect_heuristic", "framing_effect"]
 }
