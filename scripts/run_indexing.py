@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import asyncpg
 
 from src.config import settings
+from src.db.connection import init_pool_connection
 from src.indexing.indexer import run_indexing
 from src.indexing.sources.taxonomy import TaxonomySource
 from src.providers.sentence_transformer import SentenceTransformerProvider
@@ -28,7 +29,11 @@ async def main() -> None:
             f"Dimension mismatch: model={provider.dimension}, config={settings.embedding_dimension}"
         )
 
-    pool = await asyncpg.create_pool(settings.database_url, statement_cache_size=0)
+    pool = await asyncpg.create_pool(
+        settings.database_url,
+        statement_cache_size=0,
+        init=init_pool_connection,
+    )
     try:
         rows = await run_indexing(TaxonomySource(), provider, pool)
         print(f"\nDone — {rows} new rows  (taxonomy_version={settings.taxonomy_version})")

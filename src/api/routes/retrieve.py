@@ -162,6 +162,7 @@ async def stats(request: Request) -> dict[str, Any]:
 @router.post("/evaluate")
 async def evaluate(
     request: Request,
+    _: None = Depends(_verify_token),
 ) -> dict[str, Any]:
     """Run the full evaluation suite and return an EvalRun JSON.
 
