@@ -32,7 +32,7 @@ from src.schemas.request import RetrieveRequest, StoryAnalysis
 
 K = 5
 
-_SKIP_GROUPS = {"capability_probes", "regression"}
+_SKIP_GROUPS = {"capability_probes", "regression", "runs", "baselines"}
 
 
 # ── Data structures ───────────────────────────────────────────────────────────
