@@ -14,9 +14,9 @@
 
 **Purpose**: Tooling and environment prerequisites needed before content or code work begins.
 
-- [ ] T001 Bootstrap probe script, pin Python version, and verify index type — create `scripts/probe_chunk.py` (takes `--story`, `--old`, `--new`; embeds all three via `SentenceTransformerProvider`; prints cosine scores and delta; no DB connection); add `.python-version` file containing `3.11`; add `requires-python = ">=3.11,<3.12"` to `pyproject.toml`; **verify no IVFFlat index** on `bias_embeddings` by querying `SELECT indexname FROM pg_indexes WHERE tablename = 'bias_embeddings' AND indexname LIKE '%embedding%'` — if one is found, drop it before proceeding (exact scan is required for all subsequent eval numbers to be meaningful; IVFFlat introduces approximation error that would invalidate phase comparisons)
+- [x] T001 Bootstrap probe script, pin Python version, and verify index type — create `scripts/probe_chunk.py` (takes `--story`, `--old`, `--new`; embeds all three via `SentenceTransformerProvider`; prints cosine scores and delta; no DB connection); add `.python-version` file containing `3.11`; add `requires-python = ">=3.11,<3.12"` to `pyproject.toml`; **verify no IVFFlat index** on `bias_embeddings` by querying `SELECT indexname FROM pg_indexes WHERE tablename = 'bias_embeddings' AND indexname LIKE '%embedding%'` — if one is found, drop it before proceeding (exact scan is required for all subsequent eval numbers to be meaningful; IVFFlat introduces approximation error that would invalidate phase comparisons)
 
-**Checkpoint**: `uv run python scripts/probe_chunk.py --story "..." --old "..." --new "..."` works locally. DB query confirms no IVFFlat index on `bias_embeddings`.
+**Checkpoint**: ✅ `probe_chunk.py` runs correctly — example output: `old: 0.019 / new: 0.162 / delta: +0.143 IMPROVED`. ✅ DB query confirms no vector index on `bias_embeddings` — all indexes are btree/GIN on non-embedding columns; exact scan confirmed. **Note**: use `.venv/bin/python` directly instead of `uv run` — the system SOCKS proxy (`ALL_PROXY=socks://...`) causes `uv run` to hang; `probe_chunk.py` clears proxy env vars internally before importing httpx-dependent libraries.
 
 ---
 
