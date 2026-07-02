@@ -164,8 +164,13 @@ def main_remote(promote: bool) -> None:
     url = f"{settings.engine_url.rstrip('/')}/evaluate"
     print(f"calling {url} ...")
 
+    hf_token = Path.home() / ".cache/huggingface/token"
+    headers = {"X-RAG-Key": settings.rag_api_key}
+    if hf_token.exists():
+        headers["Authorization"] = f"Bearer {hf_token.read_text().strip()}"
+
     with httpx.Client(timeout=300.0) as client:
-        resp = client.post(url, headers={"Authorization": f"Bearer {settings.rag_api_key}"})
+        resp = client.post(url, headers=headers)
 
     if resp.status_code != 200:
         print(f"ERROR {resp.status_code}: {resp.text}")
