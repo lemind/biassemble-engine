@@ -2,6 +2,10 @@
   "scenario_id": "edge_001",
   "group": "edge",
   "story": "After his son died in a car accident, Robert became an outspoken advocate for stricter speed limits. He campaigns at every town council meeting and floods local news sites with comments whenever road safety comes up. Friends say he brings the topic into every conversation, even when unrelated.",
-  "story_analysis": null,
+  "story_analysis": {
+    "themes": ["availability heuristic", "affect heuristic", "emotional salience", "vivid personal experience distorting risk perception"],
+    "beliefs": ["car accidents are extremely common because of personal experience", "emotional intensity validates the cause"],
+    "claims": ["speed limits must change because of what happened to his son", "his personal tragedy makes the risk more real than statistics"]
+  },
   "expected_bias_ids": ["availability_heuristic", "affect_heuristic"]
 }

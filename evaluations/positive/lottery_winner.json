@@ -2,6 +2,10 @@
   "scenario_id": "pos_004",
   "group": "positive",
   "story": "After winning a small lottery prize twice in a row, Elena is convinced she has a lucky streak and begins buying ten tickets every week. She believes her chances of winning again are higher than everyone else's because she has already won recently. She starts turning down overtime shifts to spend more time choosing ticket numbers.",
-  "story_analysis": null,
+  "story_analysis": {
+    "themes": ["hot hand fallacy", "illusion of control", "overconfidence", "gambling", "lucky streak"],
+    "beliefs": ["recent wins increase future win probability", "she has special ability to pick winning numbers", "her chances are higher than others"],
+    "claims": ["winning twice means a streak is real", "choosing numbers carefully improves odds"]
+  },
   "expected_bias_ids": ["hot_hand_fallacy", "illusion_of_control", "overconfidence_bias"]
 }

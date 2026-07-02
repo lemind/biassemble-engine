@@ -2,6 +2,10 @@
   "scenario_id": "pos_002",
   "group": "positive",
   "story": "Dr. Patel has believed for years that a particular supplement reduces inflammation. When a new meta-analysis finds no significant effect, she dismisses it as poorly designed. She continues citing the three older studies that supported her view and ignores the dozen that did not. Her residents notice she only assigns readings that confirm the supplement's benefits.",
-  "story_analysis": null,
+  "story_analysis": {
+    "themes": ["confirmation bias", "overconfidence bias", "selective evidence", "belief perseverance"],
+    "beliefs": ["existing belief overrides contradicting evidence", "her judgment is more reliable than the meta-analysis", "she is certain the supplement works"],
+    "claims": ["contradicting studies are poorly designed", "older confirming studies are more trustworthy"]
+  },
   "expected_bias_ids": ["confirmation_bias", "overconfidence_bias"]
 }
