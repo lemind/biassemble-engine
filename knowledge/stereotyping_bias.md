@@ -15,11 +15,11 @@ In law enforcement, stereotype-based suspicion leads to differential enforcement
 In technology, products designed with a default user in mind that matches a narrow demographic fail to accommodate the needs of users who do not fit that prototype — stereotyping users before even meeting them.
 
 ## Indicators
-- Applying group-level traits to individuals without evidence about the individual
-- Using demographic characteristics as proxies for behavioral or character traits
-- Failure to update assessments in the face of contrary individual evidence
-- Treating exceptions as confirming the rule rather than as disconfirming evidence
-- Attributing individual actions to group membership rather than individual choice
+- Applies group-level traits to an individual without examining that person's actual behavior or situation
+- Uses a demographic characteristic — age, gender, nationality, profession — as a proxy for how someone will think or act
+- Fails to revise an assessment of an individual even when their behavior clearly contradicts the group expectation
+- Treats a counterexample as "an exception that proves the rule" rather than as evidence against the stereotype
+- Explains what an individual did by referring to their group membership rather than to their individual choices or circumstances
 
 ## False Positives
 - Using statistically validated base rates about a group in probabilistic reasoning — while remaining open to updating on individual evidence — is statistical inference, not stereotyping bias

@@ -15,11 +15,11 @@ In finance, individual investors believe their trading decisions are being scrut
 In academic settings, a student who gives a poor answer in class believes classmates are forming lasting negative judgments, when classmates are absorbed in their own anxiety about being called on.
 
 ## Indicators
-- Excessive self-consciousness about minor errors or imperfections
-- Avoidance of social situations due to anticipated scrutiny
-- Belief that past mistakes are remembered and judged by others long after the fact
-- Overestimation of the proportion of people who noticed a specific behavior
-- Reluctance to speak or act because of anticipated criticism
+- Feels certain that everyone around noticed a mistake or awkward moment that most people did not register
+- Avoids a social or professional situation because of an expectation of being watched and judged
+- Believes others still remember and think about a past embarrassing moment that they have long since forgotten
+- Overestimates how many people noticed or were bothered by something that went unnoticed by nearly everyone
+- Holds back from speaking or acting because of an anticipated level of criticism far higher than what would actually occur
 
 ## False Positives
 - In genuine high-visibility contexts — live broadcasts, formal presentations to a prepared audience, leadership announcements — others really are attending closely, and heightened self-awareness is accurate

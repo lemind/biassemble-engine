@@ -13,11 +13,11 @@ In law, the first damages figure mentioned in a civil lawsuit influences the jur
 In salary negotiation, whichever party names a number first anchors the negotiation. A candidate who asks for $120,000 will generally receive a higher offer than one who asks for $90,000, even with identical qualifications.
 
 ## Indicators
-- Difficulty adjusting away from the first number encountered
-- Framing decisions relative to an initial reference point
-- Treating arbitrary numbers as meaningful baselines
-- Resistance to moving far from an opening offer in negotiation
-- Using purchase price or historical price as the primary valuation benchmark
+- Treats the first number heard as the center of gravity for all subsequent estimates
+- Stays close to an opening offer in negotiation even when the opening was arbitrary or extreme
+- Judges a price as fair or unfair based primarily on what it was before, rather than what it is worth now
+- Uses last year's budget or last quarter's price as the primary reference for a current decision without questioning whether that reference is still valid
+- Adjusts from a starting point rather than reasoning from scratch about what the answer should be
 
 ## False Positives
 - Using a well-researched comparable as a benchmark is rational reference-class forecasting, not anchoring

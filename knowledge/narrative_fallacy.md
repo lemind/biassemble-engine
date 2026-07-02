@@ -15,11 +15,11 @@ In history, wars are explained through clear chains of cause and effect, attribu
 In technology, post-mortems of large failures often produce clean narratives of "how it happened" that obscure the complex interplay of independent contributing factors and make the failure seem more predictable and avoidable than it was.
 
 ## Indicators
-- Confident causal explanations for outcomes that are better characterized as probabilistic or random
-- Discomfort with "we don't know why this happened" as an answer
-- Preferring a compelling story over a calibrated probability distribution
-- Hindsight narratives that make outcomes seem inevitable
-- Post-hoc rationalization that constructs cause after observing effect
+- Constructs a confident causal story for an outcome that was probably the result of chance or multiple independent factors
+- Refuses "we don't know" as an acceptable answer and insists on an explanation, even a speculative one
+- Finds a compelling story more convincing than a probability distribution, even when the distribution is more accurate
+- Tells a story about how an outcome was inevitable or logically necessary, when it was one of many possible outcomes
+- Invents a cause after observing an effect and then believes the constructed cause explains what happened
 
 ## False Positives
 - Genuine causal chains that are well-supported by evidence are not narrative fallacy — the fallacy involves imposing narrative on noise, not all causal reasoning

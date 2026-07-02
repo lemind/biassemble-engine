@@ -15,11 +15,11 @@ In real estate, a property slightly inferior in size and location to a target pr
 In finance, fund comparisons that include a poorly-performing fund as a third option can shift investor preference between the two genuinely competitive funds toward the one that most dominates the decoy.
 
 ## Indicators
-- Preference reversals when a new option is added that should be irrelevant to the decision
-- Choosing an option primarily because it dominates an available inferior option
-- Pricing behavior that systematically drives buyers toward a specific tier
-- Menu or product line structures designed around an obviously inferior third option
-- Disproportionate uptake of a mid-tier option when a dominated decoy is present
+- Changes a preference between two options when a third, clearly worse option is added to the set
+- Picks an option primarily because it looks better than the obviously inferior alternative next to it
+- Gravitates toward a mid-tier choice because the expensive option makes it feel like a bargain
+- Lets an inferior third option shift the choice between two unrelated options that were already available
+- Selects a combined or premium option that didn't seem compelling until a dominated option made it look like exceptional value
 
 ## False Positives
 - A third option that genuinely provides useful comparison information for making a choice is not a decoy — it adds relevant signal

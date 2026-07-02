@@ -13,11 +13,11 @@ In medicine, a patient continues an ineffective treatment regimen because "I've 
 In academia, a PhD student continues toward a degree in a field with no job prospects because they have already spent four years in the program, even after their interests have changed.
 
 ## Indicators
-- Citing past investment as the primary reason to continue
-- Resisting exit from a failing project despite clear negative signals
-- "We've come too far to quit now" reasoning
-- Throwing good money after bad to justify prior spending
-- Emotional difficulty recognizing that past losses cannot be recovered
+- Continues a course of action primarily because of what has already been invested, not because of what the future holds
+- Resists ending a failing project because of how much time, money, or effort has already gone into it
+- Argues that quitting now would mean all the past effort was wasted, treating sunk costs as a reason to keep going
+- Invests more into something that is losing ground in order to justify what was already spent
+- Finds it emotionally impossible to accept that past losses are gone regardless of what happens next
 
 ## False Positives
 - Completing a project because the marginal cost to finish is low and the output has residual value is rational, not a fallacy

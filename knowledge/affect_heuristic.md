@@ -15,11 +15,12 @@ In technology, products that generate emotional enthusiasm — wearables, AI ass
 In public health, vaccines associated with negative media narratives are assessed as riskier than their actual adverse event rates warrant, while the risk of the diseases they prevent is simultaneously underestimated.
 
 ## Indicators
-- Risk and benefit estimates moving in opposite directions when they should be independent
-- Strong emotional responses that precede rather than follow analysis
-- Positive feeling associated with an option leading to lower risk perception
-- Negative feeling associated with an option leading to lower benefit perception
-- Resistance to evidence-based risk reassessment when emotional associations are strong
+- Decides something feels safe because it feels good, without checking the actual risk data
+- Concludes something must be risky or harmful because it feels wrong or uncomfortable
+- Uses "I just feel like this is the right call" as a reason to act without examining evidence
+- Trusts a gut reaction about danger or safety over statistics that point in the other direction
+- Refuses to update a risk assessment even when the evidence changes, because the emotional association hasn't changed
+- Rates a beloved option as low-risk and a disliked option as low-benefit, without independent evidence for either
 
 ## False Positives
 - Emotions carry genuine information in domains with feedback — experienced fear or enthusiasm can reflect accurate pattern recognition from past experience

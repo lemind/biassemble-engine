@@ -15,11 +15,11 @@ In management, executives attribute company success to their strategic decisions
 In negotiation, each party believes their position is fair and reasonable, and attributes the failure to reach agreement to the other party's unreasonableness rather than to the incompatibility of positions.
 
 ## Indicators
-- Consistent asymmetry in success/failure attribution across time
-- Credit-claiming after success without evidence of causal role
-- Blame attribution after failure without evidence that external factors were decisive
-- Difficulty accurately reconstructing one's own role in negative outcomes
-- Conflict with others who have competing self-serving narratives of the same event
+- Takes personal credit for successes while attributing failures to external factors, circumstances, or other people
+- Claims a causal role in a good outcome without examining what actually drove it
+- Attributes a bad outcome to bad luck, others' mistakes, or difficult conditions rather than to personal decisions
+- Cannot accurately reconstruct their own contribution to a failure because memory reshapes it toward self-protection
+- Disagrees with someone else's account of a shared event because that version assigns less credit or more blame
 
 ## False Positives
 - When success genuinely resulted from skill and effort, attributing it to those factors is accurate, not self-serving bias
