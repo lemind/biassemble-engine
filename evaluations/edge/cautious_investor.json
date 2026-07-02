@@ -2,10 +2,10 @@
   "scenario_id": "edge_002",
   "group": "edge",
   "story": "Sofia keeps 90% of her savings in a low-yield government bond account. She watched her parents lose their home in the 2008 financial crisis and has never trusted equity markets. Her colleagues consider her overly cautious, but she has consistently avoided volatile positions that others lost money on.",
-  "story_analysis": {
-    "themes": ["availability heuristic", "loss aversion", "status quo bias", "vivid memory driving decisions"],
-    "beliefs": ["2008 crisis will repeat", "avoiding change protects against loss", "memorable past loss defines future risk"],
-    "claims": ["equity markets are too dangerous because of what she witnessed", "keeping the same allocation is safest"]
-  },
-  "expected_bias_ids": ["availability_heuristic", "loss_aversion", "status_quo_bias"]
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic",
+    "loss_aversion",
+    "status_quo_bias"
+  ]
 }

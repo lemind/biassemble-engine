@@ -2,10 +2,10 @@
   "scenario_id": "adv_001",
   "group": "adversarial",
   "story": "Our nation has always been great. The statistics show that crime is down, employment is up, and prosperity is spreading to every corner of the country. Those who claim otherwise are peddling fear. The evidence is clear: our policies are working, and anyone who disagrees simply hasn't looked at the facts.",
-  "story_analysis": {
-    "themes": ["confirmation bias", "framing effect", "overconfidence bias", "cherry-picking evidence", "dismissing dissent"],
-    "beliefs": ["only supporting statistics are credible", "certainty in policy effectiveness is justified", "framing critics as fearmongers invalidates their view"],
-    "claims": ["evidence clearly confirms policies work", "disagreement means ignorance not alternative interpretation"]
-  },
-  "expected_bias_ids": ["confirmation_bias", "framing_effect", "overconfidence_bias"]
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "confirmation_bias",
+    "framing_effect",
+    "overconfidence_bias"
+  ]
 }
