@@ -16,7 +16,7 @@ Improve bias retrieval coverage by rewriting all 38 knowledge files' indicator s
 
 **Testing**: pytest — existing test suite; `test_chunk_builder.py` and `test_normalizer.py` receive new cases for splitting and domain tag extraction
 
-**Target Platform**: Linux server (Railway) — unchanged
+**Target Platform**: HuggingFace Spaces (Linux container) — unchanged
 
 **Project Type**: Data pipeline + web service — this feature primarily changes the data pipeline (TaxonomySource, chunk_builder) and knowledge file content
 
@@ -47,7 +47,7 @@ specs/002-improve-taxonomy-retrieval/
 ├── data-model.md        ← Phase 1 output
 ├── checklists/
 │   └── requirements.md
-└── tasks.md             ← /speckit-tasks output (not yet created)
+└── tasks.md             ← /speckit-tasks output
 ```
 
 No contracts/ — this feature introduces no new API endpoints or external interface changes.

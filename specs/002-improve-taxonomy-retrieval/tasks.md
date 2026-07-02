@@ -10,7 +10,7 @@
 
 ---
 
-## Phase 1: Setup
+## Phase 0: Setup
 
 **Purpose**: Tooling and environment prerequisites needed before content or code work begins.
 
@@ -20,7 +20,7 @@
 
 ---
 
-## Phase 2: Indicator Rewrites [US1]
+## Phase 1: Indicator Rewrites [US1]
 
 **Goal**: All 38 bias `## Indicators` sections rewritten in behavioral, observable, and first-order reasoning language. For biases implicated in current failures, delta probe confirms improvement. For all others, full eval shows no regressions.
 
@@ -32,7 +32,7 @@
 
 ---
 
-## Phase 3: Chunk Splitting Infrastructure [US2]
+## Phase 2: Chunk Splitting Infrastructure [US2]
 
 **Goal**: All chunk types split into atomic per-unit vectors. Each example paragraph is its own chunk. Indicators grouped into 2–3 thematic clusters. Index rebuilt. Threshold recalibrated.
 
@@ -53,7 +53,7 @@
 
 ---
 
-## Phase 4: Retrieval Diagnostics [US3]
+## Phase 3: Retrieval Diagnostics [US3]
 
 **Goal**: Full error analysis dataset produced for every failed scenario — expected biases, retrieved biases, scores, chunk types. This dataset drives Phase 5 domain decisions.
 
@@ -79,7 +79,7 @@
 
 ---
 
-## Phase 5: Domain Expansion [US4]
+## Phase 4: Domain Expansion [US4]
 
 **Goal**: New example paragraphs added to the specific biases and domains identified as failing in Phase 4. Each paragraph tagged with a controlled-vocab `[Domain]` label. Reindexed and validated.
 
@@ -91,7 +91,7 @@
 
 ---
 
-## Phase 6: Observable Patterns [US5] *(conditional — only if adversarial Recall@5 = 0 after T005)*
+## Phase 5: Observable Patterns [US5] *(conditional — only if adversarial Recall@5 = 0 after T005)*
 
 **Goal**: New `observable_patterns` chunk type per bias containing 5–8 short phrases people actually say when exhibiting the bias. Adversarial group recall moves off zero.
 
@@ -103,7 +103,7 @@
 
 ---
 
-## Phase 7: Assessment-Level Validation *(always runs — final gate)*
+## Phase 6: Assessment-Level Validation *(always runs — final gate)*
 
 **Goal**: Confirm that retrieval improvements do not degrade assessment quality. The end metric for this feature is whether the LLM assessment gets better, not whether retrieval scores improve.
 
@@ -118,14 +118,14 @@
 ## Dependencies & Execution Order
 
 ```
-T001 (setup + ivfflat check)
-  └── T002 [US1] indicator rewrites + reindex YYYY-MM-DD.1
-        └── T003 [US2] splitting infrastructure + reindex YYYY-MM-DD.2
-              └── T004 [US3] diagnostics dataset + mandatory analysis doc
-                    └── T005 [US4] domain expansion + reindex YYYY-MM-DD.3
-                          ├── T006 [US5] observable_patterns + reindex YYYY-MM-DD.4
+T001 (Phase 0: setup + ivfflat check)
+  └── T002 [US1] Phase 1: indicator rewrites + reindex YYYY-MM-DD.1
+        └── T003 [US2] Phase 2: splitting infrastructure + reindex YYYY-MM-DD.2
+              └── T004 [US3] Phase 3: diagnostics dataset + mandatory analysis doc
+                    └── T005 [US4] Phase 4: domain expansion + reindex YYYY-MM-DD.3
+                          ├── T006 [US5] Phase 5: observable_patterns + reindex YYYY-MM-DD.4
                           │         (only if T005 leaves adversarial = 0)
-                          └── T007 assessment eval (always runs; input = highest YYYY-MM-DD.N)
+                          └── T007 Phase 6: assessment eval (always runs; input = highest YYYY-MM-DD.N)
 ```
 
 Strictly sequential — each phase depends on the reindexed state from the previous one.

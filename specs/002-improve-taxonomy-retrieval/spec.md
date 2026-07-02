@@ -106,7 +106,7 @@ A new chunk type — `observable_patterns` — is added per bias containing 5–
 - **FR-005**: The retrieval index MUST be rebuilt to reflect the new chunk structure after Phases 1 and 2.
 - **FR-006**: A full evaluation run MUST be executed after Phases 1 and 2 to establish a post-rewrite baseline before any domain expansion begins.
 - **FR-007**: The error analysis output MUST capture, per failed scenario: expected biases, retrieved biases, similarity scores for each retrieved result, chunk types, and top retrieved chunks. NDCG is tracked in run output but is not a phase-gate metric.
-- **FR-008**: New domain example paragraphs MUST only be added to biases and domains explicitly identified as failing in the Phase 3 error analysis. Each new domain chunk MUST carry a `domain` metadata tag identifying its domain (e.g., `political`, `everyday_social`).
+- **FR-008**: New domain example paragraphs MUST only be added to biases and domains explicitly identified as failing in the Phase 3 error analysis. Each new domain chunk MUST carry a `domain` metadata tag identifying its domain (e.g., `political`, `social`).
 - **FR-009**: observable_patterns chunks MUST only be added if the adversarial group remains at zero recall after Phase 4. The gate condition MUST be explicitly verified before this phase begins.
 - **FR-010**: The evaluation dataset MUST remain read-only at all times. No modification to evaluation scenarios for any reason.
 - **FR-011**: No previously passing evaluation scenario MUST regress at any phase boundary.
