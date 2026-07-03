@@ -50,3 +50,17 @@ STATS_BY_VERSION = f"""
     FROM {TABLE}
     GROUP BY taxonomy_version
 """
+
+# One definition chunk per bias — used to build the fallback roster at startup.
+# DISTINCT ON picks the first row per bias_id ordered by chunk_index so the result
+# is deterministic even if multiple definition chunks exist.
+ROSTER_QUERY = f"""
+    SELECT DISTINCT ON (bias_id)
+        bias_id,
+        full_document->>'name'       AS name,
+        full_document->>'definition' AS definition
+    FROM {TABLE}
+    WHERE taxonomy_version = $1
+      AND chunk_type = 'semantic_definition'
+    ORDER BY bias_id, chunk_index
+"""

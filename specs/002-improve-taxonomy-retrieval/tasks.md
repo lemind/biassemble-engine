@@ -115,6 +115,17 @@
 
 ---
 
+## Phase 7: Retrieval Fallback — Never Return Empty
+
+**Story**: US6 — Retrieval Fallback: Never Return Empty
+**Goal**: `/retrieve-biases` always returns bias context; when vector search finds nothing, it returns the full compact roster instead of an empty list.
+
+- [ ] T008 [US6] Implement roster fallback in `src/api/routes/retrieve.py` — no schema changes: (A) at app startup query DB for one `semantic_definition` chunk per bias and cache `list[BiasResult]` on `app.state.roster` (`retrieval_score=0.0`, empty strings for examples/indicators/false_positives/related_biases); (B) in the `retrieve_biases` route handler, after `retriever.retrieve()`, add one condition: if `biases` is empty use `app.state.roster`, otherwise use `[_to_bias_result(b) for b in biases]`. Response shape unchanged.
+
+**Checkpoint**: `pytest` passes. Integration test: POST `/retrieve-biases` with a zero-overlap story → `source: "roster"`, 38 entries. POST with a normal bias story → `source: "retrieved"`, existing behaviour unchanged. SC-009 verified by integration test, not eval harness.
+
+---
+
 ## Dependencies & Execution Order
 
 ```
@@ -126,6 +137,7 @@ T001 (Phase 0: setup + ivfflat check)
                           ├── T006 [US5] Phase 5: observable_patterns + reindex YYYY-MM-DD.4
                           │         (only if T005 leaves adversarial = 0)
                           └── T007 Phase 6: assessment eval (always runs; input = highest YYYY-MM-DD.N)
+                                └── T008 [US6] Phase 7: retrieval fallback (no index change, pure endpoint)
 ```
 
 Strictly sequential — each phase depends on the reindexed state from the previous one.

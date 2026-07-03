@@ -85,6 +85,22 @@ A new chunk type — `observable_patterns` — is added per bias containing 5–
 
 ---
 
+### User Story 6 - Retrieval Fallback: Never Return Empty (Priority: P6)
+
+The `/retrieve-biases` endpoint must never return an empty bias list. When vector search finds no sufficiently similar chunks (the current negative-group behaviour), the endpoint falls back to returning a compact roster of all biases — one line per bias containing its ID, name, and one-sentence definition. The response carries a `source` field: `"retrieved"` when real matches were found, `"roster"` when the fallback fired.
+
+**Why this priority**: The engine's job is filtering — giving the LLM the narrowest useful context. Returning nothing defeats the purpose: the LLM is left with no bias vocabulary at all, which guarantees missed detections even for obvious cases. The roster fallback ensures the LLM always has at least minimal context to work with. Stories from unfamiliar domains (fields, finance, medical) where vocabulary doesn't match the taxonomy are the primary trigger.
+
+**Independent Test**: Given a story whose vocabulary has zero overlap with any bias chunk (e.g., a clinical trial story), when `/retrieve-biases` is called, the response contains `source: "roster"` and a non-empty `biases` list covering all 38 biases with short descriptions.
+
+**Acceptance Scenarios**:
+
+1. **Given** a story with no vocabulary overlap with the taxonomy, **When** `/retrieve-biases` is called, **Then** the response has `source: "roster"` and `biases` is non-empty.
+2. **Given** a story that retrieves at least one bias above threshold, **When** `/retrieve-biases` is called, **Then** the response has `source: "retrieved"` and `biases` contains the matched results (existing behaviour, unchanged).
+3. **Given** a negative-group story (no bias), **When** `/retrieve-biases` is called with roster fallback enabled, **Then** the response has `source: "roster"` (threshold correctly filtered all results) and the roster is returned — the LLM is still responsible for concluding no bias is present.
+
+---
+
 ### Edge Cases
 
 - A rewritten indicator that improves one story but causes regressions elsewhere must be rejected and revised before committing.
@@ -114,6 +130,9 @@ A new chunk type — `observable_patterns` — is added per bias containing 5–
 - **FR-013**: The full document payload returned per retrieved chunk MUST remain the complete merged canonical sections of the bias (not the matched atomic chunk text alone). The matched chunk's text MUST also be returned separately so the assessment layer can choose what to use. This preserves full context for assessment while enabling atomic retrieval.
 - **FR-014**: After the Phase 2 reindex, similarity threshold recalibration MUST be performed. The recalibrated threshold must maintain Empty Retrieval Rate = 100% on the negative evaluation group before Phase 3 proceeds.
 - **FR-015**: Every phase boundary that produces a new retrieval index MUST increment the `taxonomy_version`. Every evaluation run MUST record the `taxonomy_version` it measured against, so phase-boundary comparisons remain unambiguous.
+- **FR-016**: The `/retrieve-biases` endpoint MUST never return an empty `biases` list. When vector search returns no results above threshold, the endpoint MUST fall back to returning all 38 biases as `BiasResult` entries with `id`, `name`, `definition` filled, `retrieval_score=0.0`, and `examples`/`indicators`/`false_positives`/`related_biases` as empty strings.
+- **FR-017**: The API response schema MUST NOT change. The fallback is a pure internal behaviour change — the caller always receives `biases: list[BiasResult]` with the same shape regardless of whether results were retrieved or the fallback fired.
+- **FR-018**: The roster fallback MUST NOT modify the retrieval threshold — threshold behaviour for the negative group is unchanged. The fallback fires only after threshold filtering has already discarded all candidates.
 
 ### Key Entities
 
@@ -136,6 +155,7 @@ A new chunk type — `observable_patterns` — is added per bias containing 5–
 - **SC-006**: After Phase 4 domain expansion, at least one scenario from each identified failing domain shows Recall@5 > 0.
 - **SC-007**: Adversarial group Precision@5 is tracked at every phase boundary. Retrieving the correct bias behind multiple wrong ones is not treated as an improvement — the wrong retrievals must decrease.
 - **SC-008**: After the final phase, an assessment-level evaluation (FP rate, evidence_grounded_rate) is run with the new retrieval index and confirms no degradation from the pre-feature baseline. Retrieval is the means; assessment quality is the outcome.
+- **SC-009**: `/retrieve-biases` never returns an empty `biases` list for any input — verified by an integration test against the live endpoint (not the eval harness, which measures pre-fallback retrieval quality). The eval harness negative-group `empty_rate` continues to reflect `retriever.retrieve()` output and remains a valid retrieval quality metric unaffected by the fallback.
 
 ## Assumptions
 

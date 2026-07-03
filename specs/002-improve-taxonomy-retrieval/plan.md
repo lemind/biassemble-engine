@@ -78,6 +78,34 @@ biassemble-engine/
     └── test_normalizer.py           # new cases: domain label extraction
 ```
 
+## Phase 7 — Retrieval Fallback (T008)
+
+**Where the change lives**: `src/api/routes/retrieve.py` — in the `retrieve_biases` route handler, after `retriever.retrieve()` returns. One condition. No schema changes, no new models, no new fields.
+
+**Startup roster cache**: At app startup (alongside pool init), query the DB for one `semantic_definition` chunk per bias and cache a `list[BiasResult]` on `app.state.roster` with `retrieval_score=0.0` and empty strings for `examples`, `indicators`, `false_positives`, `related_biases`:
+```sql
+SELECT DISTINCT ON (bias_id) bias_id, full_document->>'name' AS name, full_document->>'definition' AS definition
+FROM bias_embeddings
+WHERE taxonomy_version = $1 AND chunk_type = 'semantic_definition'
+ORDER BY bias_id
+```
+
+**Route handler** (`src/api/routes/retrieve.py`):
+```python
+biases, meta = await retriever.retrieve(...)
+if not biases:
+    biases_out = request.app.state.roster  # list[BiasResult], pre-built at startup
+else:
+    biases_out = [_to_bias_result(b) for b in biases]
+return RetrieveResponse(biases=biases_out, retrieved_chunks=meta.candidate_chunks, ...)
+```
+
+No schema changes. No new models. The response shape is identical to today.
+
+**Evaluation**: The eval harness measures `retriever.retrieve()` directly (pre-fallback). Negative-group `empty_rate` remains valid retrieval quality metric, unaffected by the fallback. SC-009 verified by an integration test against the live endpoint.
+
+No new index build. No threshold change. No evaluation dataset change.
+
 ## Assessment-Level Validation (final step)
 
 After all retrieval phases complete, run biassemble-core's assessment evaluation against the new index and confirm:
