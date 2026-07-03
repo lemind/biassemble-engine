@@ -1,9 +1,22 @@
+import re
 from pathlib import Path
 
 from src.config import settings
 from src.indexing.sources.base import KnowledgeSource, RawDocument
 
 KNOWLEDGE_DIR = Path("knowledge")
+
+_DOMAIN_RE = re.compile(r"^\[([A-Za-z]+)\]\s*")
+
+
+def _extract_domain(text: str) -> str | None:
+    m = _DOMAIN_RE.match(text)
+    return m.group(1).lower() if m else None
+
+
+def _strip_domain_label(text: str) -> str:
+    return _DOMAIN_RE.sub("", text)
+
 
 _SECTION_MAP = {
     "definition": "definition",
@@ -64,12 +77,31 @@ class TaxonomySource(KnowledgeSource):
             text = "\n".join(text_lines).strip()
             if not text:
                 continue
-            docs.append(RawDocument(
-                bias_id=bias_id,
-                chunk_type=chunk_type,
-                text=text,
-                source=self.name,
-                metadata={"source_file": path.name, "display_name": display_name},
-            ))
+
+            if chunk_type == "examples":
+                paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+                for i, para in enumerate(paragraphs):
+                    domain = _extract_domain(para)
+                    clean = _strip_domain_label(para)
+                    meta: dict = {"source_file": path.name, "display_name": display_name}
+                    if domain:
+                        meta["domain"] = domain
+                    docs.append(RawDocument(
+                        bias_id=bias_id,
+                        chunk_type="examples",
+                        text=clean,
+                        source=self.name,
+                        metadata=meta,
+                        paragraph_index=i,
+                    ))
+            else:
+                docs.append(RawDocument(
+                    bias_id=bias_id,
+                    chunk_type=chunk_type,
+                    text=text,
+                    source=self.name,
+                    metadata={"source_file": path.name, "display_name": display_name},
+                    paragraph_index=0,
+                ))
 
         return docs

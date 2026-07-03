@@ -15,11 +15,11 @@ In policy, governments often find it politically easier to allow a harm to conti
 In software development, developers are more likely to ship unchanged code with known bugs than to refactor — the action of changing code feels riskier even when the cost of the bugs exceeds the cost of the refactor.
 
 ## Indicators
-- Judging identical outcomes as worse when caused by action than by inaction
-- Preferring inaction in decision-making when evidence supports action
-- Higher moral condemnation of acting agents than non-acting agents for equivalent harms
-- "Don't just do something, stand there" as a default strategy
-- Reluctance to implement preventive interventions when the harm being prevented is statistical rather than concrete
+- Feels that causing harm by doing something is worse than causing the same harm by doing nothing
+- Defaults to inaction when evidence supports acting, because taking action feels riskier than staying still
+- Blames someone who acted and caused harm more harshly than someone who did nothing and caused the same harm
+- Treats "not acting" as a safe neutral position even when inaction has predictable negative consequences
+- Resists a preventive intervention because the harm it would prevent is statistical and abstract rather than immediate and concrete
 
 ## False Positives
 - In genuinely reversible decisions, preference for inaction pending more information is appropriate caution rather than omission bias

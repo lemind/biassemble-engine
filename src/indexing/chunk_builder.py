@@ -1,4 +1,5 @@
 import hashlib
+import re
 from dataclasses import dataclass
 from typing import Any
 
@@ -27,6 +28,20 @@ _CHUNK_TYPE_MAP: dict[str, tuple[str, str]] = {
 _CANONICAL_ORDER: list[str] = [
     "definition", "examples", "indicators", "false_positives", "related_biases"
 ]
+
+# Post-T002 indicators use first-person thinking language. _VERBAL captures the
+# reasoning/cognitive register; _BEHAVIORAL captures the action register.
+_VERBAL = re.compile(
+    r"\b(treats|judges|believes|rates|evaluates|assumes|expects|hears|concludes"
+    r"|draws|attributes|estimates|remembers|feels|finds|forms|trusts|accepts"
+    r"|interprets|dismisses|states|claims|insists|asserts|declares|says|tells)\b"
+)
+_BEHAVIORAL = re.compile(
+    r"\b(makes|takes|refuses|explains|avoids|uses|holds|chooses|changes"
+    r"|resists|prefers|applies|gives|reads|asks|adopts|sets|plans|revises"
+    r"|updates|invests|buys|bets|stays|adjusts|lowers|increases|struggles"
+    r"|defers|selects|seeks)\b"
+)
 
 
 @dataclass
@@ -63,9 +78,34 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
             if mapping is None:
                 continue
             semantic_type, source_section = mapping
-            chunk_text = f"{full_doc.name} — {source_section}: {doc.text}"
-            chunks.append(
-                BiasChunk(
+            section_base = _CANONICAL_ORDER.index(doc.chunk_type)
+
+            if doc.chunk_type == "indicators":
+                groups = _group_indicator_bullets(doc.text)
+                if not groups:
+                    groups = [doc.text]
+                for para_idx, group_text in enumerate(groups):
+                    assert para_idx < 100, (
+                        f"paragraph_index overflow: {bias_id} indicators idx={para_idx}"
+                    )
+                    chunk_text = f"{full_doc.name} — {source_section}: {group_text}"
+                    chunks.append(BiasChunk(
+                        bias_id=bias_id,
+                        chunk_type=semantic_type,
+                        source_section=source_section,
+                        chunk_text=chunk_text,
+                        chunk_hash=_compute_hash(bias_id, semantic_type, chunk_text, taxonomy_version),
+                        full_document=full_doc,
+                        source=doc.source,
+                        metadata=doc.metadata,
+                        chunk_index=section_base * 100 + para_idx,
+                    ))
+            else:
+                assert doc.paragraph_index < 100, (
+                    f"paragraph_index overflow: {bias_id} {doc.chunk_type} idx={doc.paragraph_index}"
+                )
+                chunk_text = f"{full_doc.name} — {source_section}: {doc.text}"
+                chunks.append(BiasChunk(
                     bias_id=bias_id,
                     chunk_type=semantic_type,
                     source_section=source_section,
@@ -74,9 +114,8 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
                     full_document=full_doc,
                     source=doc.source,
                     metadata=doc.metadata,
-                    chunk_index=_CANONICAL_ORDER.index(doc.chunk_type),
-                )
-            )
+                    chunk_index=section_base * 100 + doc.paragraph_index,
+                ))
 
     _print_stats(chunks)
     return chunks
@@ -84,16 +123,63 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
 
 def _build_full_document(bias_id: str, docs: list[RawDocument]) -> FullBiasDocument:
     """Assemble FullBiasDocument from all sections for a single bias_id."""
-    by_section: dict[str, str] = {doc.chunk_type: doc.text for doc in docs}
+    by_section: dict[str, list[str]] = {}
+    for doc in docs:
+        by_section.setdefault(doc.chunk_type, []).append(doc.text)
     display_name = docs[0].metadata.get("display_name") or _derive_name(bias_id)
     return FullBiasDocument(
         name=display_name,
-        definition=by_section.get("definition", ""),
-        examples=by_section.get("examples", ""),
-        indicators=by_section.get("indicators", ""),
-        false_positives=by_section.get("false_positives", ""),
-        related_biases=by_section.get("related_biases", ""),
+        definition=by_section.get("definition", [""])[0],
+        examples="\n\n".join(by_section.get("examples", [])),
+        indicators=by_section.get("indicators", [""])[0],
+        false_positives=by_section.get("false_positives", [""])[0],
+        related_biases=by_section.get("related_biases", [""])[0],
     )
+
+
+def _group_indicator_bullets(text: str) -> list[str]:
+    """Split indicator bullet list into thematic groups (behavioral / verbal).
+
+    Unmatched bullets go to the smallest classified group. If no behavioral or
+    verbal bullets are found, returns a single group containing all bullets.
+    Warns when any group captures >80% of bullets — signals keyword list needs
+    updating for the post-rewrite indicator language.
+    """
+    bullets = [b.strip().lstrip("- ").strip() for b in text.splitlines() if b.strip()]
+    if not bullets:
+        return []
+
+    verbal: list[str] = []
+    behavioral: list[str] = []
+    unmatched: list[str] = []
+
+    for b in bullets:
+        lower = b.lower()
+        if _VERBAL.search(lower):
+            verbal.append(b)
+        elif _BEHAVIORAL.search(lower):
+            behavioral.append(b)
+        else:
+            unmatched.append(b)
+
+    classified = [g for g in [behavioral, verbal] if g]
+
+    if not classified:
+        return ["- " + "\n- ".join(unmatched)]
+
+    if unmatched:
+        smallest = min(classified, key=len)
+        smallest.extend(unmatched)
+
+    total = sum(len(g) for g in classified)
+    for g in classified:
+        if total > 0 and len(g) / total > 0.8:
+            print(
+                f"chunk_builder WARNING: indicator group has {len(g)}/{total} bullets "
+                f"— keyword signals may need updating for post-rewrite indicator language"
+            )
+
+    return ["- " + "\n- ".join(g) for g in classified]
 
 
 def _derive_name(bias_id: str) -> str:

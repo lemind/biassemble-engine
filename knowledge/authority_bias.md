@@ -15,11 +15,11 @@ In politics, voters update their positions more after a statement from a leader 
 In technology, architectural decisions in organizations are disproportionately influenced by the seniority of the person advocating them rather than by the strength of the technical argument, leading junior engineers' valid concerns to be dismissed.
 
 ## Indicators
-- Accepting claims with less scrutiny when delivered by a recognized authority
-- Deferring to credentials or titles rather than evaluating the argument
-- Crediting authority figures with expertise outside their domain
-- Discomfort with or suppression of dissent from high-status figures
-- Updating beliefs more based on who said something than on what was said
+- Accepts a claim as true because of who said it rather than evaluating the reasoning or evidence
+- Defers to a credential or title instead of assessing whether the argument actually holds up
+- Assumes expertise in one field carries over to an unrelated field where the authority has no track record
+- Holds back a disagreement because the person on the other side holds a more senior or prestigious position
+- Changes a view when a recognized authority disagrees, without requiring any new reasoning or evidence
 
 ## False Positives
 - Deferring to genuine domain expertise when you lack the knowledge to independently evaluate a claim is rational, not authority bias — the bias involves over-deference, particularly when evidence is available and you are capable of evaluating it

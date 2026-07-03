@@ -33,8 +33,9 @@ ARTIFACTS_DIR = Path("artifacts")
 
 
 def _sql_str(value: str) -> str:
-    """Escape and quote a string for SQL — doubles single quotes."""
-    return "'" + value.replace("'", "''") + "'"
+    """Escape and quote a string for SQL using E'' syntax so newlines are single-line safe."""
+    escaped = value.replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "\\r").replace("'", "''")
+    return "E'" + escaped + "'"
 
 
 def _sql_jsonb(obj: object) -> str:

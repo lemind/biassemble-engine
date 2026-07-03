@@ -78,3 +78,25 @@ def test_valid_documents_pass_through():
     result = normalize(docs)
     assert len(result) == 10
     assert {d.bias_id for d in result} == {"bias_a", "bias_b"}
+
+
+def test_multiple_example_paragraphs_all_pass_through():
+    """Normalizer must not drop split example paragraphs from the same source file."""
+    base = [d for d in _make_docs("b") if d.chunk_type != "examples"]
+    para0 = RawDocument("b", "examples", "Para one.", "taxonomy",
+                        {"source_file": "test.md"}, paragraph_index=0)
+    para1 = RawDocument("b", "examples", "Para two.", "taxonomy",
+                        {"source_file": "test.md"}, paragraph_index=1)
+    result = normalize(base + [para0, para1])
+    example_docs = [d for d in result if d.chunk_type == "examples"]
+    assert len(example_docs) == 2
+
+
+def test_paragraph_index_preserved_through_normalize():
+    """paragraph_index set by TaxonomySource must survive the normalize pipeline."""
+    base = [d for d in _make_docs("b") if d.chunk_type != "examples"]
+    para = RawDocument("b", "examples", "Para.", "taxonomy",
+                       {"source_file": "test.md"}, paragraph_index=3)
+    result = normalize(base + [para])
+    ex = next(d for d in result if d.chunk_type == "examples")
+    assert ex.paragraph_index == 3

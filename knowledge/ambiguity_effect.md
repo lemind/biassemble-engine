@@ -15,11 +15,11 @@ In product development, companies invest in extending existing product lines (kn
 In law, defendants prefer the certainty of a negotiated plea deal over the ambiguity of trial outcomes, even when the expected sentence from a trial is lower — certainty about the outcome is worth more than the favorable expected value.
 
 ## Indicators
-- Systematic preference for familiar, well-characterized options over novel ones with potentially better profiles
-- Reluctance to act when outcome probabilities are unquantified
-- Decision-making that requires quantified probability before action, even in domains where quantification is impossible
-- Over-indexing on historical data in domains where the future is genuinely different from the past
-- Discomfort with genuinely novel situations that lack reference cases
+- Chooses the familiar option over an unfamiliar one even when the unfamiliar option looks objectively better
+- Refuses to decide until someone provides a specific probability, even when no probability exists
+- Treats "I don't know the odds" as a reason to avoid an option rather than a reason to gather more information
+- Relies on historical data in situations where past patterns genuinely don't apply to the current case
+- Avoids acting on a new opportunity because there is no track record to consult, regardless of what the available evidence shows
 
 ## False Positives
 - Requiring evidence before acting in domains where evidence is obtainable is rational, not ambiguity aversion

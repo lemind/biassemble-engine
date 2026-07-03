@@ -21,18 +21,17 @@ from pathlib import Path
 import asyncpg
 
 from src.config import settings
-from src.db.queries import TABLE, fmt_vector
+from src.db.queries import fmt_vector
 from src.providers.base import EmbeddingProvider
 from src.retrieval.query_builder import get_query_strategy
-from src.retrieval.reranker import rerank
 from src.retrieval.retriever import IndexNotFoundError, retrieve
-from src.retrieval.searcher import _build_search_query, _row_to_candidate_csv
+from src.retrieval.searcher import _dedup_bias_rows, _diagnostics_search_query, _lightweight_search_query
 from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest, StoryAnalysis
 
 K = 5
 
-_SKIP_GROUPS = {"capability_probes", "regression", "runs", "baselines"}
+_SKIP_GROUPS = {"capability_probes", "regression", "runs", "baselines", "diagnostics"}
 
 
 # ── Data structures ───────────────────────────────────────────────────────────
@@ -57,6 +56,7 @@ class ScenarioResult:
     mrr: float
     ndcg_at_k: float
     error: str | None = None
+    retrieved_with_diagnostics: list[dict] | None = None
 
 
 @dataclass
@@ -199,11 +199,13 @@ def compute_deltas(
 def _retrieve_sync(
     scenario: "Scenario",
     provider: EmbeddingProvider,
-) -> tuple[list[str], str | None]:
+    diagnostics: bool = False,
+) -> tuple[list[str], list[dict] | None, str | None]:
     """Synchronous retrieval path via psql subprocess — used when psql_search=True.
 
-    Bypasses asyncio entirely: embed is sync, psql subprocess is sync, rerank is sync.
-    Avoids asyncio.create_subprocess_exec hanging on Python 3.14 in this environment.
+    Uses a lightweight query normally. When diagnostics=True, uses a richer query
+    that includes chunk_type, source_section, and domain (from metadata JSONB).
+    Returns (bias_ids, diag_rows_or_None, error).
     """
     try:
         strategy = get_query_strategy(settings.query_strategy)
@@ -213,22 +215,35 @@ def _retrieve_sync(
         embedding = provider.embed_query(query_text)
 
         vec = fmt_vector(embedding)
-        sql = _build_search_query(vec, settings.taxonomy_version, settings.search_top_k)
+        if diagnostics:
+            sql = _diagnostics_search_query(vec, settings.taxonomy_version, settings.search_top_k)
+        else:
+            sql = _lightweight_search_query(vec, settings.taxonomy_version, settings.search_top_k)
         result = subprocess.run(
             ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
-            capture_output=True, text=True, timeout=30,
+            capture_output=True, text=True, timeout=60,
         )
         if result.returncode != 0:
-            return [], f"psql error: {result.stderr.strip()}"
+            return [], None, f"psql error: {result.stderr.strip()}"
 
-        candidates = [_row_to_candidate_csv(r) for r in csv.DictReader(io.StringIO(result.stdout))]
-        if not candidates:
-            return [], "index_not_found"
+        rows = list(csv.DictReader(io.StringIO(result.stdout)))
+        if not rows:
+            return [], None, "index_not_found"
 
-        biases: list[RetrievedBias] = rerank(candidates, settings.similarity_threshold, settings.return_top_k)
-        return [b.bias_id for b in biases], None
+        bias_ids = _dedup_bias_rows(rows, settings.similarity_threshold, settings.return_top_k)
+        diag_rows = [
+            {
+                "bias_id": r["bias_id"],
+                "chunk_type": r.get("chunk_type", ""),
+                "source_section": r.get("source_section", ""),
+                "domain": r.get("domain") or None,
+                "retrieval_score": float(r["retrieval_score"]),
+            }
+            for r in rows
+        ] if diagnostics else None
+        return bias_ids, diag_rows, None
     except Exception as exc:
-        return [], str(exc)
+        return [], None, str(exc)
 
 
 def run_evaluation_sync(
@@ -237,6 +252,7 @@ def run_evaluation_sync(
     baselines_dir: Path,
     run_date: str,
     taxonomy_version: str,
+    diagnostics: bool = False,
 ) -> EvalRun:
     """Fully synchronous evaluation — used locally when psql_search=True.
 
@@ -248,7 +264,7 @@ def run_evaluation_sync(
     results: list[ScenarioResult] = []
 
     for scenario in scenarios:
-        retrieved_ids, error = _retrieve_sync(scenario, provider)
+        retrieved_ids, diag_rows, error = _retrieve_sync(scenario, provider, diagnostics=diagnostics)
         top_k = retrieved_ids[:K]
         expected = scenario.expected_bias_ids
         results.append(ScenarioResult(
@@ -261,6 +277,7 @@ def run_evaluation_sync(
             mrr=mrr(retrieved_ids, expected),
             ndcg_at_k=ndcg_at_k(top_k, expected),
             error=error,
+            retrieved_with_diagnostics=diag_rows,
         ))
 
     group_metrics = _aggregate(results)
@@ -299,7 +316,7 @@ async def run_evaluation(
 
     for scenario in scenarios:
         if settings.psql_search:
-            retrieved_ids, error = await asyncio.to_thread(_retrieve_sync, scenario, provider)
+            retrieved_ids, _, error = await asyncio.to_thread(_retrieve_sync, scenario, provider)
         else:
             try:
                 analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None

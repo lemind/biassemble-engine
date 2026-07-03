@@ -14,12 +14,15 @@ In policy, welfare program design that frames benefits as preventing loss of exi
 
 In sports, tennis players exert more effort on points that would prevent falling behind than on equivalent points that would advance them ahead, consistent with loss aversion around a reference point of the current score.
 
+[Consumer] Sofia watched her parents lose everything in the 2008 financial crisis. Now she keeps 90% of her savings in government bonds. She knows the long-term math: equity markets outperform bonds significantly over any 20-year period. But every time she considers changing her allocation, she imagines losing it all again. The possibility of that loss feels catastrophic in a way that the opportunity cost of staying in bonds — real money, measurable year over year — does not. She is not risk-averse in a calculated sense; she is specifically avoiding the feeling of loss itself.
+
+
 ## Indicators
-- Stronger negative emotional response to losses than positive response to equivalent gains
-- Risk-seeking behavior in the loss domain and risk-aversion in the gain domain
-- Holding losing positions to avoid realizing losses
-- Preference for certain smaller amounts over risky alternatives with better expected value when the alternatives are framed as losses
-- Asymmetric effort in defending versus gaining equivalent outcomes
+- Feels the pain of losing something much more strongly than the pleasure of gaining something of equivalent value
+- Takes bigger risks to avoid a loss than to achieve an equivalent gain
+- Holds onto a losing investment because selling would make the loss feel final
+- Chooses a guaranteed smaller outcome over a better expected outcome when the alternative is framed as a risk of losing
+- Works harder to prevent losing something than to gain something of the same size
 
 ## False Positives
 - Rational risk aversion in high-stakes irreversible situations justifies weighting losses more heavily — not all asymmetric weighting is loss aversion

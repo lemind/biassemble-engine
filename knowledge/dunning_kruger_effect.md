@@ -13,11 +13,11 @@ In finance, first-time investors who profit in a bull market attribute the gains
 In academia, undergraduates who have just completed an introductory course in a subject often feel they understand it more thoroughly than graduate students who are deeply aware of the unsolved problems in the field.
 
 ## Indicators
-- Confident assertions in areas where deep knowledge would reveal significant uncertainty
-- Dismissing expert advice without engagement with the substance
-- Inability to enumerate the limits of one's own knowledge
-- Proficiency that plateaus because errors go unrecognized
-- Claiming rapid mastery of genuinely complex skills
+- Makes confident assertions in an area where more knowledge would reveal how much is actually uncertain
+- Dismisses expert advice without engaging with what the expert is actually saying
+- Cannot name the gaps or limits in what they know about a topic when asked
+- Stops improving at a skill because mistakes go unnoticed rather than serving as feedback
+- Claims to have mastered something genuinely complex after only brief exposure to it
 
 ## False Positives
 - Confident behavior in a domain where someone is genuinely competent is not Dunning-Kruger — the effect requires that confidence exceeds actual competence
