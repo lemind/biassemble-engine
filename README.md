@@ -97,6 +97,24 @@ Returns biases array with `retrieval_score`, `definition`, `examples`, `indicato
 
 The script calls `POST /evaluate` on the deployed HF Spaces service, receives the `EvalRun` JSON, prints the metrics table, and saves to `evaluations/runs/`. Add `--promote` to copy to `evaluations/baselines/`.
 
+### Metrics
+
+| Metric | What it measures |
+|--------|-----------------|
+| **Recall@5** | Did the correct bias appear in the top 5 results? 1.0 = always found, 0.0 = never found. Main success signal. |
+| **Precision@5** | Of the 5 results returned, how many were actually correct? Penalises returning noise alongside the right answer. |
+| **MRR** (Mean Reciprocal Rank) | How high up was the correct bias ranked? 1.0 = always #1, 0.5 = usually #2. Measures ranking quality, not just presence. |
+| **Empty Retrieval Rate** | For stories with no bias, did the engine correctly return nothing above threshold? Should stay at 100%. |
+
+### Story groups
+
+| Group | Description |
+|-------|-------------|
+| **Positive** | Story clearly exhibits a known bias. Engine should find it. |
+| **Negative** | No bias present. Engine should return nothing (empty retrieval rate). |
+| **Edge** | Bias is subtle or indirect. Harder to retrieve. |
+| **Adversarial** | Story uses the vocabulary of a bias domain (investing, politics) without actually exhibiting one. Designed to fool the retriever. |
+
 Targets: Recall@5 ≥ 0.85 on positive stories; empty_rate ≥ 90% on negative stories.
 
 ## Deploy (Railway)
