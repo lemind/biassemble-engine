@@ -1,0 +1,271 @@
+{
+  "run_date": "2026-07-03",
+  "taxonomy_version": "2026-07-03.2",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "k": 5,
+  "scenario_results": [
+    {
+      "scenario_id": "adv_003",
+      "group": "adversarial",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic",
+        "framing_effect"
+      ],
+      "retrieved": [],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null
+    },
+    {
+      "scenario_id": "adv_001",
+      "group": "adversarial",
+      "expected": [
+        "confirmation_bias",
+        "framing_effect",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "recency_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null
+    },
+    {
+      "scenario_id": "edge_002",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "loss_aversion",
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "zero_risk_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null
+    },
+    {
+      "scenario_id": "edge_001",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic"
+      ],
+      "retrieved": [],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null
+    },
+    {
+      "scenario_id": "neg_003",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null
+    },
+    {
+      "scenario_id": "neg_005",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null
+    },
+    {
+      "scenario_id": "neg_004",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null
+    },
+    {
+      "scenario_id": "neg_002",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null
+    },
+    {
+      "scenario_id": "neg_001",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null
+    },
+    {
+      "scenario_id": "pos_004",
+      "group": "positive",
+      "expected": [
+        "hot_hand_fallacy",
+        "illusion_of_control",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "gamblers_fallacy",
+        "hot_hand_fallacy",
+        "illusion_of_control"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "precision_at_k": 0.6666666666666666,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.5307212739772434,
+      "error": null
+    },
+    {
+      "scenario_id": "pos_001",
+      "group": "positive",
+      "expected": [
+        "anchoring_bias",
+        "sunk_cost_fallacy",
+        "confirmation_bias",
+        "loss_aversion"
+      ],
+      "retrieved": [
+        "sunk_cost_fallacy",
+        "anchoring_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6366824387328317,
+      "error": null
+    },
+    {
+      "scenario_id": "pos_003",
+      "group": "positive",
+      "expected": [
+        "planning_fallacy",
+        "sunk_cost_fallacy",
+        "escalation_of_commitment",
+        "optimism_bias"
+      ],
+      "retrieved": [
+        "overconfidence_bias",
+        "sunk_cost_fallacy",
+        "optimism_bias",
+        "escalation_of_commitment",
+        "planning_fallacy"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.8,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.7606395682357036,
+      "error": null
+    },
+    {
+      "scenario_id": "pos_002",
+      "group": "positive",
+      "expected": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "ambiguity_effect",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.38685280723454163,
+      "error": null
+    }
+  ],
+  "group_metrics": {
+    "adversarial": {
+      "group": "adversarial",
+      "count": 2,
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.5
+    },
+    "edge": {
+      "group": "edge",
+      "count": 2,
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.5
+    },
+    "negative": {
+      "group": "negative",
+      "count": 5,
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "empty_rate": 1.0
+    },
+    "positive": {
+      "group": "positive",
+      "count": 4,
+      "recall_at_k": 0.6666666666666666,
+      "precision_at_k": 0.7416666666666667,
+      "mrr": 0.625,
+      "ndcg_at_k": 0.5787240220450801,
+      "empty_rate": 0.0
+    }
+  },
+  "deltas": {
+    "adversarial": {
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.5
+    },
+    "edge": {
+      "recall_at_k": -0.41666666666666663,
+      "precision_at_k": -0.6,
+      "mrr": -0.75,
+      "ndcg_at_k": -0.4546145518656618,
+      "empty_rate": 0.5
+    },
+    "negative": {
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.0
+    },
+    "positive": {
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.1416666666666666,
+      "mrr": -0.375,
+      "ndcg_at_k": -0.15971290808802607,
+      "empty_rate": 0.0
+    }
+  }
+}

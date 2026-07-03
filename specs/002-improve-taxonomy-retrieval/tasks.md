@@ -38,15 +38,15 @@
 
 **Independent Test**: Reindex at `YYYY-MM-DD.2`, run threshold sweep, confirm negative empty_rate = 100% at new threshold. Run full eval — positive Recall@5 does not decrease from `YYYY-MM-DD.1` baseline.
 
-- [ ] T003 [US2] Implement paragraph splitting and indicator grouping in the indexing pipeline — complete in this order with intermediate commits:
+- [x] T003 [US2] Implement paragraph splitting and indicator grouping in the indexing pipeline — complete in this order with intermediate commits:
 
-  **Step A — Code + tests** *(commit after this step)*:
+  **[x] Step A — Code + tests** *(commit after this step)*:
   Add `paragraph_index: int = 0` to `RawDocument` in `src/indexing/sources/base.py`; update `TaxonomySource._parse()` in `src/indexing/sources/taxonomy.py` to split examples on `\n\n`, extract `[Domain]` labels using `_DOMAIN_RE = re.compile(r"^\[([A-Za-z]+)\]\s*")` (single-word only — per `knowledge/STYLE_GUIDE.md` controlled vocab; multi-word labels like `Everyday Social` are invalid), strip labels from chunk text, and set `paragraph_index`; add `_group_indicator_bullets()` to `src/indexing/chunk_builder.py` using `\b`-bounded regex (not substring `in`), grouping into reasoning/behavioral/verbal clusters with distribution warning when any group exceeds 80%; update `chunk_index` formula to `section_base * 100 + paragraph_index` with `assert paragraph_index < 100`; update tests in `tests/test_chunk_builder.py` and `tests/test_normalizer.py` for splitting, grouping, and domain extraction
 
-  **Step B — tune_threshold.py** *(commit after this step)*:
+  **[x] Step B — tune_threshold.py** *(commit after this step)*:
   Create `scripts/tune_threshold.py` that sweeps 0.25–0.60 in 0.025 steps and reports `neg_empty`, `adv_empty`, and `pos_recall@5` per threshold
 
-  **Step C — Reindex, sweep, eval** *(commit after this step)*:
+  **[x] Step C — Reindex, sweep, eval** *(commit after this step)*:
   Bump `TAXONOMY_VERSION=YYYY-MM-DD.2` in `.env`; run `uv run python scripts/run_indexing.py`; run `uv run python scripts/tune_threshold.py` and update `SIMILARITY_THRESHOLD` in `.env` to the recommended value (highest threshold maintaining neg_empty=100% that does not crush positive Recall@5 below `YYYY-MM-DD.1` baseline); run `uv run python scripts/run_evaluation.py` and verify SC-003 (positive recall ≥ baseline), SC-004 (negative empty_rate = 100%)
 
 **Checkpoint**: Eval run at `YYYY-MM-DD.2` shows chunk count ~380, positive recall maintained, negative empty_rate = 100%. Promote to baseline.

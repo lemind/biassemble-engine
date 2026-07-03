@@ -2,17 +2,23 @@
 """Run the bias retrieval evaluation against live Supabase.
 
 Usage:
-    uv run python scripts/run_evaluation.py
-    uv run python scripts/run_evaluation.py --promote
+    ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py
+    ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --promote
 """
 import argparse
 import asyncio
 import json
+import os
 import shutil
 import sys
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
+
+# httpx crashes on socks:// proxy scheme. Save and clear before any imports
+# that trigger httpx client creation. Restore after so psql subprocess inherits them.
+_PROXY_VARS = ("ALL_PROXY", "all_proxy", "HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy")
+_saved_proxy = {k: os.environ.pop(k) for k in _PROXY_VARS if k in os.environ}
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -115,6 +121,8 @@ def main_sync(promote: bool) -> None:
 
     print(f"taxonomy_version={settings.taxonomy_version}  model={settings.embedding_model}")
     provider = SentenceTransformerProvider(settings.embedding_model)
+    # Restore proxy vars now that httpx client is created — psql subprocess needs them.
+    os.environ.update(_saved_proxy)
 
     run = run_evaluation_sync(
         provider=provider,

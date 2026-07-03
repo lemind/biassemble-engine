@@ -62,14 +62,48 @@ def _build_search_query(vec: str, taxonomy_version: str, top_k: int) -> str:
     # Vector is inlined as a literal — asyncpg's type introspection for the
     # 'vector' extension OID triggers a second DB round-trip that the proxy drops.
     # Inlining avoids parameterized vector types entirely.
+    # CTE defines the literal once: two 8 KB literals in one statement cause the
+    # planner to hang when scanning >200 rows (pgvector cost model quirk).
     return (
-        f"SELECT bias_id, chunk_type, source_section, source, chunk_text, full_document,"
-        f" 1 - (embedding <=> '{vec}'::vector) AS retrieval_score"
-        f" FROM {TABLE}"
+        f"WITH q(v) AS (SELECT '{vec}'::vector)"
+        f" SELECT bias_id, chunk_type, source_section, source, chunk_text, full_document,"
+        f" 1 - (embedding <=> q.v) AS retrieval_score"
+        f" FROM {TABLE}, q"
         f" WHERE taxonomy_version = '{taxonomy_version}'"
-        f" ORDER BY embedding <=> '{vec}'::vector"
+        f" ORDER BY embedding <=> q.v"
         f" LIMIT {top_k};"
     )
+
+
+def _lightweight_search_query(vec: str, taxonomy_version: str, top_k: int) -> str:
+    """Return bias_id + score only — avoids TOAST fetch for chunk_text / full_document.
+
+    Using full_document / chunk_text causes the Supabase pooler to drop the
+    connection for result sets > ~5 rows (TOAST heap access through PgBouncer).
+    For evaluation and threshold sweeps only bias_ids are needed.
+    """
+    if not _SAFE_VERSION.match(taxonomy_version):
+        raise ValueError(f"unsafe taxonomy_version: {taxonomy_version!r}")
+    return (
+        f"WITH q(v) AS (SELECT '{vec}'::vector)"
+        f" SELECT bias_id, 1 - (embedding <=> q.v) AS retrieval_score"
+        f" FROM {TABLE}, q"
+        f" WHERE taxonomy_version = '{taxonomy_version}'"
+        f" ORDER BY embedding <=> q.v"
+        f" LIMIT {top_k};"
+    )
+
+
+def _dedup_bias_rows(rows: list[dict], threshold: float, return_top_k: int) -> list[str]:
+    """Filter lightweight rows by threshold, dedup by max score, return top-K bias_ids."""
+    surviving = [(r["bias_id"], score) for r in rows if (score := float(r["retrieval_score"])) >= threshold]
+    if not surviving:
+        return []
+    best: dict[str, float] = {}
+    for bid, score in surviving:
+        if bid not in best or score > best[bid]:
+            best[bid] = score
+    return [bid for bid, _ in sorted(best.items(), key=lambda x: x[1], reverse=True)[:return_top_k]]
 
 
 async def _search_psql(embedding: list[float], taxonomy_version: str, top_k: int) -> list[CandidateChunk]:

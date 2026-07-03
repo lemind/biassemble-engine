@@ -21,12 +21,11 @@ from pathlib import Path
 import asyncpg
 
 from src.config import settings
-from src.db.queries import TABLE, fmt_vector
+from src.db.queries import fmt_vector
 from src.providers.base import EmbeddingProvider
 from src.retrieval.query_builder import get_query_strategy
-from src.retrieval.reranker import rerank
 from src.retrieval.retriever import IndexNotFoundError, retrieve
-from src.retrieval.searcher import _build_search_query, _row_to_candidate_csv
+from src.retrieval.searcher import _build_search_query, _dedup_bias_rows, _lightweight_search_query, _row_to_candidate_csv
 from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest, StoryAnalysis
 
@@ -202,8 +201,8 @@ def _retrieve_sync(
 ) -> tuple[list[str], str | None]:
     """Synchronous retrieval path via psql subprocess — used when psql_search=True.
 
-    Bypasses asyncio entirely: embed is sync, psql subprocess is sync, rerank is sync.
-    Avoids asyncio.create_subprocess_exec hanging on Python 3.14 in this environment.
+    Uses a lightweight query (bias_id + score only) to avoid TOAST timeouts
+    through the Supabase pooler. Dedup is done inline without the full reranker.
     """
     try:
         strategy = get_query_strategy(settings.query_strategy)
@@ -213,7 +212,7 @@ def _retrieve_sync(
         embedding = provider.embed_query(query_text)
 
         vec = fmt_vector(embedding)
-        sql = _build_search_query(vec, settings.taxonomy_version, settings.search_top_k)
+        sql = _lightweight_search_query(vec, settings.taxonomy_version, settings.search_top_k)
         result = subprocess.run(
             ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
             capture_output=True, text=True, timeout=30,
@@ -221,12 +220,12 @@ def _retrieve_sync(
         if result.returncode != 0:
             return [], f"psql error: {result.stderr.strip()}"
 
-        candidates = [_row_to_candidate_csv(r) for r in csv.DictReader(io.StringIO(result.stdout))]
-        if not candidates:
+        rows = list(csv.DictReader(io.StringIO(result.stdout)))
+        if not rows:
             return [], "index_not_found"
 
-        biases: list[RetrievedBias] = rerank(candidates, settings.similarity_threshold, settings.return_top_k)
-        return [b.bias_id for b in biases], None
+        bias_ids = _dedup_bias_rows(rows, settings.similarity_threshold, settings.return_top_k)
+        return bias_ids, None
     except Exception as exc:
         return [], str(exc)
 

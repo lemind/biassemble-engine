@@ -2,11 +2,12 @@
 """Sweep similarity_threshold from 0.25 to 0.60 and report retrieval metrics.
 
 Usage:
-    .venv/bin/python scripts/tune_threshold.py
+    HF_HUB_OFFLINE=1 .venv/bin/python scripts/tune_threshold.py
 
 Embeds all scenario stories once, fetches DB candidates once per scenario via
-psql, then re-runs the reranker at each candidate threshold with no extra DB
-queries. Reports neg_empty, pos_recall@5, and adv_empty side by side.
+psql (lightweight query — no full_document/chunk_text to avoid TOAST timeouts),
+then re-runs deduplication at each candidate threshold with no extra DB queries.
+Reports neg_empty, pos_recall@5, and adv_empty side by side.
 
 Pick the highest threshold where neg_empty = 100% that does not crush
 pos_recall@5 below the pre-feature baseline. Set it in .env manually.
@@ -18,8 +19,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-for _var in ("ALL_PROXY", "all_proxy", "HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
-    os.environ.pop(_var, None)
+# httpx (used by huggingface_hub) crashes on socks:// scheme.
+# psql subprocess needs the proxy vars to route traffic to Supabase.
+# Save them now, clear for the Python process (httpx), re-inject per subprocess.
+_PROXY_VARS = ("ALL_PROXY", "all_proxy", "HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy")
+_saved_proxy = {k: os.environ.pop(k) for k in _PROXY_VARS if k in os.environ}
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -28,32 +32,45 @@ from src.db.queries import fmt_vector
 from src.evaluation.evaluate import K, load_baseline, load_scenarios, recall_at_k
 from src.providers.sentence_transformer import SentenceTransformerProvider
 from src.retrieval.query_builder import get_query_strategy
-from src.retrieval.reranker import rerank
-from src.retrieval.searcher import _build_search_query, _row_to_candidate_csv
+from src.retrieval.searcher import _lightweight_search_query
 from src.schemas.request import RetrieveRequest, StoryAnalysis
 
 EVAL_DIR = Path("evaluations")
 BASELINES_DIR = EVAL_DIR / "baselines"
-
 THRESHOLDS = [round(0.25 + i * 0.025, 3) for i in range(15)]  # 0.250 … 0.600
 
 
-def _fetch_candidates(scenario, provider) -> list:
+def _fetch_candidates(scenario, provider) -> list[tuple[str, float]]:
+    """Return [(bias_id, score), ...] for a scenario, fetched via psql."""
     strategy = get_query_strategy(settings.query_strategy)
     analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
     req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
     query_text = strategy.build(req.story, req.story_analysis)
     embedding = provider.embed_query(query_text)
 
-    sql = _build_search_query(fmt_vector(embedding), settings.taxonomy_version, settings.search_top_k)
+    sql = _lightweight_search_query(fmt_vector(embedding), settings.taxonomy_version, settings.search_top_k)
     result = subprocess.run(
         ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
-        capture_output=True, text=True, timeout=30,
+        capture_output=True, text=True, timeout=90,
+        env={**os.environ, **_saved_proxy},
     )
     if result.returncode != 0:
         print(f"  psql error for {scenario.scenario_id}: {result.stderr.strip()}", file=sys.stderr)
         return []
-    return [_row_to_candidate_csv(r) for r in csv.DictReader(io.StringIO(result.stdout))]
+    return [(r["bias_id"], float(r["retrieval_score"])) for r in csv.DictReader(io.StringIO(result.stdout))]
+
+
+def _apply_threshold(raw: list[tuple[str, float]], threshold: float) -> list[str]:
+    """Filter by threshold, dedup by max score per bias_id, return top-K bias_ids."""
+    surviving = [(bid, score) for bid, score in raw if score >= threshold]
+    if not surviving:
+        return []
+    best: dict[str, float] = {}
+    for bid, score in surviving:
+        if bid not in best or score > best[bid]:
+            best[bid] = score
+    sorted_biases = sorted(best.items(), key=lambda x: x[1], reverse=True)
+    return [bid for bid, _ in sorted_biases[:settings.return_top_k]]
 
 
 def main() -> None:
@@ -79,9 +96,8 @@ def main() -> None:
     recommended: float | None = None
     for threshold in THRESHOLDS:
         by_group: dict[str, list[dict]] = {}
-        for s, candidates in scenario_candidates:
-            biases = rerank(candidates, threshold, settings.return_top_k)
-            retrieved = [b.bias_id for b in biases]
+        for s, raw in scenario_candidates:
+            retrieved = _apply_threshold(raw, threshold)
             by_group.setdefault(s.group, []).append({
                 "retrieved": retrieved,
                 "recall": recall_at_k(retrieved[:K], s.expected_bias_ids),
