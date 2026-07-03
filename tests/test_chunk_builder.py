@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from src.indexing.chunk_builder import build_chunks
+import pytest
+
+from src.indexing.chunk_builder import _group_indicator_bullets, build_chunks
 from src.indexing.sources.base import RawDocument
 
 TAXONOMY_VERSION = "2026-06-28"
@@ -104,7 +106,7 @@ def test_source_section_is_human_readable():
 
 
 def test_chunk_index_is_canonical_regardless_of_file_order():
-    """chunk_index must reflect canonical section order, not markdown file order."""
+    """chunk_index must use section_base*100 formula, independent of markdown order."""
     sections = ["related_biases", "false_positives", "indicators", "examples", "definition"]
     docs = [
         RawDocument("b", s, f"text {s}", "taxonomy", {"source_file": "b.md", "display_name": "B"})
@@ -112,11 +114,11 @@ def test_chunk_index_is_canonical_regardless_of_file_order():
     ]
     chunks = build_chunks(docs, TAXONOMY_VERSION)
     index_by_section = {c.source_section: c.chunk_index for c in chunks}
-    assert index_by_section["Definition"] == 0
-    assert index_by_section["Examples"] == 1
-    assert index_by_section["Indicators"] == 2
-    assert index_by_section["False Positives"] == 3
-    assert index_by_section["Related Biases"] == 4
+    assert index_by_section["Definition"] == 0        # section_base 0 * 100 + 0
+    assert index_by_section["Examples"] == 100        # section_base 1 * 100 + 0
+    assert index_by_section["Indicators"] == 200      # section_base 2 * 100 + 0
+    assert index_by_section["False Positives"] == 300 # section_base 3 * 100 + 0
+    assert index_by_section["Related Biases"] == 400  # section_base 4 * 100 + 0
 
 
 def test_derive_name_fallback_when_no_display_name_in_metadata():
@@ -127,3 +129,90 @@ def test_derive_name_fallback_when_no_display_name_in_metadata():
     ]
     chunks = build_chunks(docs, TAXONOMY_VERSION)
     assert chunks[0].full_document.name == "Sunk Cost Fallacy"
+
+
+def test_multiple_example_paragraphs_produce_separate_chunks():
+    """Each example paragraph (split by TaxonomySource) becomes its own chunk."""
+    docs = _make_docs("confirmation_bias")
+    # Replace the single examples doc with two separate paragraph docs
+    docs = [d for d in docs if d.chunk_type != "examples"]
+    docs += [
+        RawDocument("confirmation_bias", "examples", "Para one.", "taxonomy",
+                    {"source_file": "confirmation_bias.md", "display_name": "Confirmation Bias"},
+                    paragraph_index=0),
+        RawDocument("confirmation_bias", "examples", "Para two.", "taxonomy",
+                    {"source_file": "confirmation_bias.md", "display_name": "Confirmation Bias"},
+                    paragraph_index=1),
+    ]
+    chunks = build_chunks(docs, TAXONOMY_VERSION)
+    example_chunks = [c for c in chunks if c.source_section == "Examples"]
+    assert len(example_chunks) == 2
+    assert example_chunks[0].chunk_index == 100
+    assert example_chunks[1].chunk_index == 101
+
+
+def test_example_paragraph_index_in_chunk_index():
+    """chunk_index for examples = 1*100 + paragraph_index."""
+    docs = _make_docs("anchoring_bias")
+    docs = [d for d in docs if d.chunk_type != "examples"]
+    docs.append(RawDocument(
+        "anchoring_bias", "examples", "Para.", "taxonomy",
+        {"source_file": "anchoring_bias.md", "display_name": "Anchoring Bias"},
+        paragraph_index=3,
+    ))
+    chunks = build_chunks(docs, TAXONOMY_VERSION)
+    ex = next(c for c in chunks if c.source_section == "Examples")
+    assert ex.chunk_index == 103
+
+
+def test_full_document_examples_concatenated_from_multiple_paragraphs():
+    """FullBiasDocument.examples joins split paragraphs back with double newline."""
+    docs = _make_docs("confirmation_bias")
+    docs = [d for d in docs if d.chunk_type != "examples"]
+    docs += [
+        RawDocument("confirmation_bias", "examples", "First.", "taxonomy",
+                    {"source_file": "f.md", "display_name": "C"}, paragraph_index=0),
+        RawDocument("confirmation_bias", "examples", "Second.", "taxonomy",
+                    {"source_file": "f.md", "display_name": "C"}, paragraph_index=1),
+    ]
+    chunks = build_chunks(docs, TAXONOMY_VERSION)
+    fd = chunks[0].full_document
+    assert fd.examples == "First.\n\nSecond."
+
+
+def test_indicator_grouping_verbal_and_behavioral():
+    """Bullets matching verbal/behavioral regex split into two groups."""
+    docs = _make_docs("confirmation_bias")
+    docs = [d for d in docs if d.chunk_type != "indicators"]
+    docs.append(RawDocument(
+        "confirmation_bias", "indicators",
+        "- States the conclusion before reviewing evidence\n- Refuses to read contradicting studies",
+        "taxonomy",
+        {"source_file": "confirmation_bias.md", "display_name": "Confirmation Bias"},
+    ))
+    chunks = build_chunks(docs, TAXONOMY_VERSION)
+    indicator_chunks = [c for c in chunks if c.source_section == "Indicators"]
+    assert len(indicator_chunks) == 2
+    assert indicator_chunks[0].chunk_index == 200
+    assert indicator_chunks[1].chunk_index == 201
+
+
+def test_indicator_all_unmatched_produces_one_group():
+    """When no bullets match verbal/behavioral, all go into a single group."""
+    groups = _group_indicator_bullets(
+        "- Interprets ambiguous data as confirming\n- Remembers supporting evidence better"
+    )
+    assert len(groups) == 1
+
+
+def test_indicator_grouping_empty_text():
+    assert _group_indicator_bullets("") == []
+
+
+def test_group_indicator_bullets_uses_word_boundary():
+    """'overstates' must not match 'states'; 'characteristics' must not match 'acts'."""
+    groups = _group_indicator_bullets(
+        "- overstates the risk\n- exhibits characteristics of overconfidence"
+    )
+    # No true verbal/behavioral match → single group
+    assert len(groups) == 1
