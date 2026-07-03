@@ -1,0 +1,1991 @@
+[
+  {
+    "scenario_id": "adv_003",
+    "group": "adversarial",
+    "expected": [
+      "availability_heuristic",
+      "affect_heuristic",
+      "framing_effect"
+    ],
+    "retrieved": [],
+    "recall_at_k": 0.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "omission_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.300711497770474
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.289122973575949
+      },
+      {
+        "bias_id": "omission_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.280099544537015
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.270485712122065
+      },
+      {
+        "bias_id": "affect_heuristic",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.253721327033203
+      },
+      {
+        "bias_id": "fundamental_attribution_error",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.245820946368717
+      },
+      {
+        "bias_id": "zero_risk_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.244525595846845
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.2412308885868
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.240177123567717
+      },
+      {
+        "bias_id": "base_rate_neglect",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.235207660222968
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.233543453638967
+      },
+      {
+        "bias_id": "self_serving_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.233409208072879
+      },
+      {
+        "bias_id": "choice_supportive_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.232726885838923
+      },
+      {
+        "bias_id": "omission_bias",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.228970048304804
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.228780565116474
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.227681909156131
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.227039847826936
+      },
+      {
+        "bias_id": "choice_supportive_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.222666141112584
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.222092419862754
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.221079554686495
+      }
+    ]
+  },
+  {
+    "scenario_id": "adv_001",
+    "group": "adversarial",
+    "expected": [
+      "confirmation_bias",
+      "framing_effect",
+      "overconfidence_bias"
+    ],
+    "retrieved": [
+      "recency_bias"
+    ],
+    "recall_at_k": 0.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.35185307264328
+      },
+      {
+        "bias_id": "fundamental_attribution_error",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.329134981087746
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.320899982506036
+      },
+      {
+        "bias_id": "status_quo_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.305821386500126
+      },
+      {
+        "bias_id": "hindsight_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.299563556909561
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.297602534294128
+      },
+      {
+        "bias_id": "survivorship_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.295250189587463
+      },
+      {
+        "bias_id": "status_quo_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.286246865987778
+      },
+      {
+        "bias_id": "confirmation_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.285710734980659
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.285313921291466
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.282800180745115
+      },
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.279472870858141
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.274332642555237
+      },
+      {
+        "bias_id": "bandwagon_effect",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.273560583591461
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.268811998508932
+      },
+      {
+        "bias_id": "hindsight_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.263496824011112
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.262822933877198
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.258377089597161
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.255904152637473
+      },
+      {
+        "bias_id": "base_rate_neglect",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.25586786866188
+      }
+    ]
+  },
+  {
+    "scenario_id": "edge_002",
+    "group": "edge",
+    "expected": [
+      "availability_heuristic",
+      "loss_aversion",
+      "status_quo_bias"
+    ],
+    "retrieved": [
+      "zero_risk_bias"
+    ],
+    "recall_at_k": 0.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "zero_risk_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.385771357165061
+      },
+      {
+        "bias_id": "omission_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.33900990021111
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.332818478345871
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.329038987813057
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.327236990497292
+      },
+      {
+        "bias_id": "in_group_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.323263487426821
+      },
+      {
+        "bias_id": "hindsight_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.322762876749039
+      },
+      {
+        "bias_id": "loss_aversion",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.322547326163868
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.321543842554092
+      },
+      {
+        "bias_id": "loss_aversion",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.312391638755798
+      },
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.308969926299458
+      },
+      {
+        "bias_id": "zero_risk_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.30808699131012
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.304381370544434
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.302879631519318
+      },
+      {
+        "bias_id": "ambiguity_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.302050888538361
+      },
+      {
+        "bias_id": "omission_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.300480145244608
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.295613944530487
+      },
+      {
+        "bias_id": "authority_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.294266509668023
+      },
+      {
+        "bias_id": "survivorship_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.290332522123981
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.287815392017365
+      }
+    ]
+  },
+  {
+    "scenario_id": "edge_001",
+    "group": "edge",
+    "expected": [
+      "availability_heuristic",
+      "affect_heuristic"
+    ],
+    "retrieved": [],
+    "recall_at_k": 0.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "framing_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.321965326187929
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.30426065947179
+      },
+      {
+        "bias_id": "bandwagon_effect",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.29256406933833
+      },
+      {
+        "bias_id": "authority_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.290539771318438
+      },
+      {
+        "bias_id": "bandwagon_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.289350297094908
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.288976009694577
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.284707069396975
+      },
+      {
+        "bias_id": "framing_effect",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.283474266529085
+      },
+      {
+        "bias_id": "zero_risk_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.28280458245332
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.279308931786355
+      },
+      {
+        "bias_id": "fundamental_attribution_error",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.279074387495184
+      },
+      {
+        "bias_id": "confirmation_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.275557623836853
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.270965218544008
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.267710983753206
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.265886187553408
+      },
+      {
+        "bias_id": "fundamental_attribution_error",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.265404121005781
+      },
+      {
+        "bias_id": "framing_effect",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.261381820522656
+      },
+      {
+        "bias_id": "hindsight_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.256099209552957
+      },
+      {
+        "bias_id": "framing_effect",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.255655542353126
+      },
+      {
+        "bias_id": "spotlight_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.25512531399727
+      }
+    ]
+  },
+  {
+    "scenario_id": "neg_003",
+    "group": "negative",
+    "expected": [],
+    "retrieved": [],
+    "recall_at_k": 1.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.104494934872247
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.101144085858586
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0969264908709077
+      },
+      {
+        "bias_id": "bandwagon_effect",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0913536704796855
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0896558788316214
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.0742451272679904
+      },
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.0671238174177354
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0617583375203115
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.0598815326427959
+      },
+      {
+        "bias_id": "decoy_effect",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.0583398488664537
+      },
+      {
+        "bias_id": "illusion_of_control",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0566479577107392
+      },
+      {
+        "bias_id": "representativeness_heuristic",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0520560430951171
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0506850980426401
+      },
+      {
+        "bias_id": "affect_heuristic",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0503600031244756
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0494006998658389
+      },
+      {
+        "bias_id": "fundamental_attribution_error",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0464075584477983
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0443608997571737
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0350343595455396
+      },
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0340935225514627
+      },
+      {
+        "bias_id": "representativeness_heuristic",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.0335650379528116
+      }
+    ]
+  },
+  {
+    "scenario_id": "neg_005",
+    "group": "negative",
+    "expected": [],
+    "retrieved": [],
+    "recall_at_k": 1.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.149709522724152
+      },
+      {
+        "bias_id": "hindsight_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.146834820508957
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.13178888748818
+      },
+      {
+        "bias_id": "in_group_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.130640760064125
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.129122100524777
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.127205669879913
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.125394258659907
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.120944768190384
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.119141857896503
+      },
+      {
+        "bias_id": "choice_supportive_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.115619964897633
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.113625758074179
+      },
+      {
+        "bias_id": "self_serving_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.111708975536166
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.111068874597549
+      },
+      {
+        "bias_id": "ambiguity_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.103198423981667
+      },
+      {
+        "bias_id": "curse_of_knowledge",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.0985305666047674
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.0956359562656856
+      },
+      {
+        "bias_id": "ambiguity_effect",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.0940054524537652
+      },
+      {
+        "bias_id": "loss_aversion",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0902498513460159
+      },
+      {
+        "bias_id": "anchoring_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0890492599919218
+      },
+      {
+        "bias_id": "survivorship_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.087313249707222
+      }
+    ]
+  },
+  {
+    "scenario_id": "neg_004",
+    "group": "negative",
+    "expected": [],
+    "retrieved": [],
+    "recall_at_k": 1.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.204567432403564
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.174445644021034
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.153592213988304
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.133598700165749
+      },
+      {
+        "bias_id": "status_quo_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.13150196561229
+      },
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.130528524518013
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.129159484182581
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.127080202102661
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.124162919819355
+      },
+      {
+        "bias_id": "status_quo_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.119846906052254
+      },
+      {
+        "bias_id": "omission_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.119064369015174
+      },
+      {
+        "bias_id": "survivorship_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.113393068313599
+      },
+      {
+        "bias_id": "survivorship_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.112547959019062
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.10998836487497
+      },
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.106318847458431
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.105725619367529
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.105261883453243
+      },
+      {
+        "bias_id": "curse_of_knowledge",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.103878799196446
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.101723037660122
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.09958939847883
+      }
+    ]
+  },
+  {
+    "scenario_id": "neg_002",
+    "group": "negative",
+    "expected": [],
+    "retrieved": [],
+    "recall_at_k": 1.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.104046093935241
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.102051499547109
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0986328183789743
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0959397181868553
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0938912630081177
+      },
+      {
+        "bias_id": "illusion_of_control",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0903772711753845
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0869892187721004
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0693608563757454
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0692112636096039
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.067255440815959
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.065367523409872
+      },
+      {
+        "bias_id": "dunning_kruger_effect",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0599535423503382
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.0591666567077237
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0570927035565797
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0567028820514679
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0550534319845778
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.0537591832136622
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.0516553909079848
+      },
+      {
+        "bias_id": "hindsight_bias",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.05086386355352
+      },
+      {
+        "bias_id": "self_serving_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.0501523315906525
+      }
+    ]
+  },
+  {
+    "scenario_id": "neg_001",
+    "group": "negative",
+    "expected": [],
+    "retrieved": [],
+    "recall_at_k": 1.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.334956308302659
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.290960631043893
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.289597924613767
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.289451995177627
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.269683973174332
+      },
+      {
+        "bias_id": "availability_heuristic",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.268962256045275
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.260024861098818
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.25500877931688
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.243438594238801
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.242098978945522
+      },
+      {
+        "bias_id": "ambiguity_effect",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.237540341542373
+      },
+      {
+        "bias_id": "projection_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.226800075972083
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.214989755897798
+      },
+      {
+        "bias_id": "base_rate_neglect",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.21151221428848
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.211102581355053
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.204500502482072
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.201716548255579
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.200858312921969
+      },
+      {
+        "bias_id": "zero_risk_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.1995490669801
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.199202305054733
+      }
+    ]
+  },
+  {
+    "scenario_id": "pos_004",
+    "group": "positive",
+    "expected": [
+      "hot_hand_fallacy",
+      "illusion_of_control",
+      "overconfidence_bias"
+    ],
+    "retrieved": [
+      "gamblers_fallacy",
+      "hot_hand_fallacy",
+      "illusion_of_control"
+    ],
+    "recall_at_k": 0.6666666666666666,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.492468729839663
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.437633143733946
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.429091947512382
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.415175629114379
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.409958732424937
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.409912610644854
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.409103673967829
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.397789072924527
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.388369046948495
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.373217035138101
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.364610206026143
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.363985213397612
+      },
+      {
+        "bias_id": "illusion_of_control",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.358691754224159
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.333427856368657
+      },
+      {
+        "bias_id": "illusion_of_control",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.332924554733174
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.331209133005415
+      },
+      {
+        "bias_id": "loss_aversion",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.330850829532792
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.310773501121208
+      },
+      {
+        "bias_id": "representativeness_heuristic",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.307758725614396
+      },
+      {
+        "bias_id": "hot_hand_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.297773191266453
+      }
+    ]
+  },
+  {
+    "scenario_id": "pos_001",
+    "group": "positive",
+    "expected": [
+      "anchoring_bias",
+      "sunk_cost_fallacy",
+      "confirmation_bias",
+      "loss_aversion"
+    ],
+    "retrieved": [
+      "sunk_cost_fallacy",
+      "anchoring_bias"
+    ],
+    "recall_at_k": 0.5,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.418643236160278
+      },
+      {
+        "bias_id": "anchoring_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.403761899807625
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.303000253260121
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.300222039222717
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.298786342144012
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.29190468788147
+      },
+      {
+        "bias_id": "spotlight_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.28381784058703
+      },
+      {
+        "bias_id": "anchoring_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.283709176889336
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.271396994590759
+      },
+      {
+        "bias_id": "gamblers_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.264819622039795
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.260332435369492
+      },
+      {
+        "bias_id": "base_rate_neglect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.259343021453294
+      },
+      {
+        "bias_id": "loss_aversion",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.254331246276573
+      },
+      {
+        "bias_id": "loss_aversion",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.254073232412338
+      },
+      {
+        "bias_id": "authority_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.251709833843103
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.24571882213838
+      },
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.238268061773066
+      },
+      {
+        "bias_id": "status_quo_bias",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.231266111135483
+      },
+      {
+        "bias_id": "choice_supportive_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.228242039680481
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.227146744728088
+      }
+    ]
+  },
+  {
+    "scenario_id": "pos_003",
+    "group": "positive",
+    "expected": [
+      "planning_fallacy",
+      "sunk_cost_fallacy",
+      "escalation_of_commitment",
+      "optimism_bias"
+    ],
+    "retrieved": [
+      "overconfidence_bias",
+      "sunk_cost_fallacy",
+      "optimism_bias",
+      "escalation_of_commitment",
+      "planning_fallacy"
+    ],
+    "recall_at_k": 1.0,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "overconfidence_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.49981677531104
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.498710751533508
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.484255850315094
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.481788396835327
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.461889920347329
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.444681819956412
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.440978109836578
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.435219079256058
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.431338548660278
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.42605909705162
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.40993994474411
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_related",
+        "source_section": "Related Biases",
+        "domain": null,
+        "retrieval_score": 0.409398853778839
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.391444813950205
+      },
+      {
+        "bias_id": "escalation_of_commitment",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.388741850852966
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.38386489104822
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.383180267621263
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.380587495530398
+      },
+      {
+        "bias_id": "planning_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.373649954795837
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_definition",
+        "source_section": "Definition",
+        "domain": null,
+        "retrieval_score": 0.369853101363964
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.368603836554403
+      }
+    ]
+  },
+  {
+    "scenario_id": "pos_002",
+    "group": "positive",
+    "expected": [
+      "confirmation_bias",
+      "overconfidence_bias"
+    ],
+    "retrieved": [
+      "ambiguity_effect",
+      "confirmation_bias"
+    ],
+    "recall_at_k": 0.5,
+    "retrieved_with_diagnostics": [
+      {
+        "bias_id": "ambiguity_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.411699021559896
+      },
+      {
+        "bias_id": "confirmation_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.391830896600863
+      },
+      {
+        "bias_id": "recency_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.34960757789657
+      },
+      {
+        "bias_id": "bandwagon_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.349316337745414
+      },
+      {
+        "bias_id": "sunk_cost_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.342347225090696
+      },
+      {
+        "bias_id": "negativity_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.341279288606602
+      },
+      {
+        "bias_id": "loss_aversion",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.336002389908122
+      },
+      {
+        "bias_id": "omission_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.327259381250107
+      },
+      {
+        "bias_id": "confirmation_bias",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.325793862342837
+      },
+      {
+        "bias_id": "survivorship_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.324553658041577
+      },
+      {
+        "bias_id": "choice_supportive_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.318278430546382
+      },
+      {
+        "bias_id": "optimism_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.318094401189184
+      },
+      {
+        "bias_id": "dunning_kruger_effect",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.316393314277528
+      },
+      {
+        "bias_id": "affect_heuristic",
+        "chunk_type": "semantic_indicator",
+        "source_section": "Indicators",
+        "domain": null,
+        "retrieval_score": 0.316147018441381
+      },
+      {
+        "bias_id": "affect_heuristic",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.314872054595237
+      },
+      {
+        "bias_id": "confirmation_bias",
+        "chunk_type": "semantic_false_positive",
+        "source_section": "False Positives",
+        "domain": null,
+        "retrieval_score": 0.313517589182711
+      },
+      {
+        "bias_id": "curse_of_knowledge",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.303630906559879
+      },
+      {
+        "bias_id": "stereotyping_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.293249841921017
+      },
+      {
+        "bias_id": "narrative_fallacy",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.29269708947522
+      },
+      {
+        "bias_id": "authority_bias",
+        "chunk_type": "semantic_example",
+        "source_section": "Examples",
+        "domain": null,
+        "retrieval_score": 0.292019580843399
+      }
+    ]
+  }
+]
