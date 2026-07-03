@@ -109,7 +109,7 @@
 
 **Independent Test**: biassemble-core assessment FP rate and `evidence_grounded_rate` are equal to or better than pre-feature baseline.
 
-- [ ] T007 Run biassemble-core assessment evaluation against the final index (whichever version is current — `YYYY-MM-DD.3` if T006 was skipped, `YYYY-MM-DD.4` if T006 ran) and verify SC-008: assessment FP rate does not degrade from pre-feature baseline; `evidence_grounded_rate` does not degrade from pre-feature baseline; document results in `evaluations/assessment_eval_YYYY-MM-DD.md`
+- [x] T007 Run biassemble-core assessment evaluation against the final index (whichever version is current — `YYYY-MM-DD.3` if T006 was skipped, `YYYY-MM-DD.4` if T006 ran) and verify SC-008: assessment FP rate does not degrade from pre-feature baseline; `evidence_grounded_rate` does not degrade from pre-feature baseline; document results in `evaluations/assessment_eval_YYYY-MM-DD.md`
 
 **Checkpoint**: SC-008 passes. Feature complete.
 
