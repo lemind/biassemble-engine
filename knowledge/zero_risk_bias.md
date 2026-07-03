@@ -15,11 +15,11 @@ In aviation safety, after a high-profile accident, regulatory and public pressur
 In technology security, teams spend disproportionate effort eliminating a specific vulnerability class to zero rather than reducing overall attack surface, when the overall attack surface reduction would yield greater security improvement.
 
 ## Indicators
-- Preference for options that eliminate a specific risk over options that reduce total expected harm more
-- Strong emotional appeal of "zero" as a target regardless of the cost to achieve it
-- Reluctance to accept any residual probability in domains where near-zero probabilities are achievable
-- Resource allocation that favors certainty over expected value
-- Resistance to trade-offs that accept a small probability of harm to achieve larger gains elsewhere
+- Chooses to eliminate a small risk completely over reducing a larger risk more substantially elsewhere
+- Finds "zero risk" emotionally compelling even when the cost of achieving it is far higher than the benefit
+- Refuses to accept any residual probability of a bad outcome even when the probability is already very small
+- Allocates resources toward achieving certainty rather than toward reducing total expected harm
+- Resists a trade-off that accepts a small chance of harm in order to achieve a much larger reduction in risk overall
 
 ## False Positives
 - Eliminating a risk that is the dominant risk, where zero is achievable at low marginal cost, is rational resource allocation, not zero-risk bias

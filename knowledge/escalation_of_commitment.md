@@ -15,11 +15,11 @@ In construction, projects that overrun their initial budget and timeline receive
 In relationships and partnerships, organizations continue dysfunctional vendor relationships or business partnerships long past the point where the costs clearly exceed the benefits, because the history of investment makes exit feel like abandonment.
 
 ## Indicators
-- Increasing investment in response to negative feedback rather than reassessing
-- Publicly defending a course of action despite mounting evidence of failure
-- Framing exit as failure and continuation as resilience
-- Seeking confirming information rather than reassessing the decision
-- Personal or organizational identity attached to a specific course of action
+- Puts in more time or money after receiving bad results, to justify what has already been spent
+- Defends a failing course of action publicly despite mounting evidence that it is not working
+- Treats stopping as giving up and continuing as being resilient, regardless of what the evidence shows
+- Looks for information that supports continuing rather than reassessing whether the direction is still right
+- Cannot separate the decision from personal identity, making it feel impossible to reverse course
 
 ## False Positives
 - Persisting through a known difficult phase of a genuinely sound project is not escalation — the key distinction is whether evidence of fundamental failure is present and being discounted

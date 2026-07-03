@@ -15,11 +15,11 @@ In law, litigants overestimate their probability of winning, leading to fewer se
 In technology product development, feature completion estimates are consistently too optimistic, leading to chronic schedule overruns despite teams knowing their own historical track record.
 
 ## Indicators
-- Estimating personal risk below base rates without differential evidence
-- Confident projections that exceed historical outcomes in comparable cases
-- Reluctance to engage in contingency planning because failure feels unlikely
-- Treating the optimistic scenario as the plan rather than as one scenario among several
-- Dismissing historical reference class data in favor of unique personal factors
+- Estimates personal odds of a bad outcome as lower than statistical rates, without a specific reason to expect different results
+- Makes projections that consistently exceed what comparable situations have historically produced
+- Skips contingency planning because failure doesn't feel like a realistic possibility
+- Treats the best-case scenario as the plan rather than as one scenario among several
+- Dismisses historical base rates with "but this situation is different" or "that was them, not us"
 
 ## False Positives
 - Accurate positive expectations in domains where the person has genuine skill that justifies above-average outcomes are not optimism bias

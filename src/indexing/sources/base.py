@@ -10,6 +10,7 @@ class RawDocument:
     text: str
     source: str
     metadata: dict[str, Any] = field(default_factory=dict)
+    paragraph_index: int = 0
 
 
 class KnowledgeSource(ABC):

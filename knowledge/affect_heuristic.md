@@ -14,12 +14,17 @@ In technology, products that generate emotional enthusiasm — wearables, AI ass
 
 In public health, vaccines associated with negative media narratives are assessed as riskier than their actual adverse event rates warrant, while the risk of the diseases they prevent is simultaneously underestimated.
 
+[Social] After a devastating personal loss in a preventable accident, someone stops being able to weigh risk rationally. Every conversation loops back to the danger; they become an advocate who brings the topic into every setting — not because the statistics justify constant urgency but because the feeling of danger is constant and overwhelming. When a risk estimate suggests things are safer than they feel, the response is that the numbers must be missing something.
+
+[Political] A political speech operates entirely on emotional register: gut-wrenching fear, gut-wrenching anger at anyone who disagrees. The audience does not evaluate the policy on its merits — they evaluate it based on how the speech makes them feel. People moved by the appeal judge the solution as effective and urgent; people who feel the appeal is manipulative judge the same solution as inadequate. The question people leave with is not what this policy would actually accomplish — it's how that speech made them feel.
+
 ## Indicators
-- Risk and benefit estimates moving in opposite directions when they should be independent
-- Strong emotional responses that precede rather than follow analysis
-- Positive feeling associated with an option leading to lower risk perception
-- Negative feeling associated with an option leading to lower benefit perception
-- Resistance to evidence-based risk reassessment when emotional associations are strong
+- Decides something feels safe because it feels good, without checking the actual risk data
+- Concludes something must be risky or harmful because it feels wrong or uncomfortable
+- Uses "I just feel like this is the right call" as a reason to act without examining evidence
+- Trusts a gut reaction about danger or safety over statistics that point in the other direction
+- Refuses to update a risk assessment even when the evidence changes, because the emotional association hasn't changed
+- Rates a beloved option as low-risk and a disliked option as low-benefit, without independent evidence for either
 
 ## False Positives
 - Emotions carry genuine information in domains with feedback — experienced fear or enthusiasm can reflect accurate pattern recognition from past experience

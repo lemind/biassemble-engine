@@ -15,11 +15,11 @@ In sports journalism, referees unconsciously grant marginally more favorable cal
 In international relations, nations attribute their own military operations as defensive and proportionate while characterizing equivalent operations by adversaries as aggressive and disproportionate.
 
 ## Indicators
-- Higher trust, competence ratings, or likeability for in-group members without differential evidence
-- Double standards applied to identical behaviors from in-group versus out-group members
-- Attribution of in-group failures to circumstances and out-group failures to character
-- Reluctance to criticize in-group members publicly even when criticism is warranted
-- Preference for in-group members in resource allocation, promotion, and hiring
+- Trusts, rates, or likes in-group members more than equally qualified outsiders without examining the specific evidence
+- Applies different standards to the same behavior depending on whether it comes from a group member or an outsider
+- Explains a group member's failure through difficult circumstances while explaining an outsider's equivalent failure through character
+- Holds back criticism of a group member that would be freely expressed about an outsider doing the same thing
+- Favors group members when allocating resources, assigning high-profile work, or making hiring and promotion decisions without a performance basis
 
 ## False Positives
 - Having more information about in-group members and therefore greater trust is calibrated epistemic behavior when the information is genuine and relevant

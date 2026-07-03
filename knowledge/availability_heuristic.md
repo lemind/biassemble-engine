@@ -14,12 +14,17 @@ In medicine, a physician who recently treated several cases of a rare disease ov
 
 In politics, terrorism dominates security spending decisions disproportionate to its statistical contribution to mortality, because individual attacks generate overwhelming media attention compared to car accidents or preventable diseases.
 
+[Political] A parent testifies at a town hall after seeing repeated news coverage of a school shooting. They demand immediate security spending, even though the school has had no incidents in decades and car accidents kill far more children every year. Because the disturbing footage played repeatedly on every channel, the risk feels immediate and certain — the statistics about relative risk are invisible next to the ease of recalling those images. Every politician listening experiences the same thing, and any vote against the security package looks like indifference to dead children.
+
+[Social] After his son died in a car accident, Robert became convinced that road deaths were at crisis levels. He brings the topic into every conversation, organizes campaigns, talks to strangers about it. The event is so vivid and personal that it reshaped his entire sense of how often these deaths occur — he can recall it instantly, in full detail, while statistics about declining accident rates simply don't register. The ease with which he pictures his son's accident makes the danger feel constantly present, far more common than the numbers show.
+
 ## Indicators
-- Overestimating frequency of vivid or dramatic events
-- Underestimating risk of common, unglamorous outcomes
-- Strong influence of recent or personally experienced events on probability estimates
-- Risk perception that tracks news cycles rather than statistics
-- Difficulty recalling base rates when dramatic examples are salient
+- Judges something as common or dangerous because a vivid example comes to mind immediately
+- Rates a risk as low because it is hard to picture happening, not because the statistics support that estimate
+- Estimates how often something occurs based on how recently or personally it has been seen or heard about
+- Worries more about dramatic or newsworthy dangers than about common hazards with higher actual rates
+- Cannot bring base rates to mind when a memorable story about the event is available instead
+- Updates a probability estimate when news coverage increases, even when the underlying risk has not changed
 
 ## False Positives
 - Updating risk estimates based on genuinely new statistical evidence is rational, not availability bias

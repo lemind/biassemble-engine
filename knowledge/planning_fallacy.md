@@ -15,11 +15,11 @@ In academia, dissertations and research projects routinely take twice as long to
 In product launches, marketing teams consistently overestimate adoption rates and underestimate the time required to acquire early customers in new markets.
 
 ## Indicators
-- Project timelines that consistently slip to the right
-- Budget estimates that are revised upward during execution
-- Failure to consult historical outcomes from similar projects
-- Optimistic best-case planning treated as the expected case
-- Insufficient contingency buffers in project plans
+- Sets a deadline or budget based on how long the work would take if everything goes right, not how long it typically takes
+- Does not consult how long similar projects have actually taken before committing to a timeline
+- Treats the best-case scenario as the expected case when building a plan
+- Plans with insufficient contingency because identified risks feel unlikely rather than because they have been measured
+- Revises timelines and budgets upward as the project progresses rather than starting from realistic historical estimates
 
 ## False Positives
 - Deliberately setting aggressive targets to motivate a team is a management tactic, not planning fallacy — the bias involves sincere underestimation, not strategic goal-setting

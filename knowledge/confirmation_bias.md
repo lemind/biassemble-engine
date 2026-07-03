@@ -12,13 +12,15 @@ In politics, a voter who supports a party reads news outlets that align with tha
 
 In academia, a researcher who has published a theory interprets ambiguous experimental results as supporting their theory and attributes contradictory findings to methodological flaws in the contradicting studies.
 
+[Political] A politician explains that critics are simply afraid of success: "Anyone who disagrees just hasn't looked at the facts — or they have, and they don't want you to know." Every piece of criticism is treated as proof of bad faith rather than as an argument to engage with. Statistics that support the current policy get cited in speeches; statistics that challenge it get dismissed as partisan or distorted. Every press statement features statistics that support the current policy; statistics pointing the other way are never mentioned or are called partisan before the numbers are examined. Disagreement is not a signal to reconsider — it is evidence that the other side doesn't want the truth to come out.
+
 ## Indicators
-- Seeking out sources that agree with an existing position
-- Dismissing contradictory evidence as flawed or biased
-- Interpreting ambiguous information as confirmatory
-- Remembering supporting evidence better than contradicting evidence
-- Asking questions designed to elicit agreement rather than probe truth
-- Spending more time on supporting arguments than opposing ones
+- Reads only the sources, articles, or experts that already agree with the current view
+- Explains away contradictory evidence as unreliable, biased, or methodologically flawed rather than engaging with it
+- Interprets ambiguous information as support for what is already believed
+- Remembers evidence that fits the existing view more clearly than evidence that challenges it
+- Asks questions designed to get agreement rather than to find out whether the current view is wrong
+- Spends more time building the case for the current position than seriously examining the case against it
 
 ## False Positives
 - A scientist who forms a hypothesis and then tests it is not exhibiting confirmation bias — the bias requires selectively ignoring contradictory results, not merely starting with a hypothesis

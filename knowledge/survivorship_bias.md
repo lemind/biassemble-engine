@@ -13,11 +13,11 @@ In military history, the WWII example: analysts recommended adding armor to the 
 In medicine, historical treatments evaluated only on patients who completed them ignore dropout rates, leading to overestimated efficacy.
 
 ## Indicators
-- Drawing conclusions from a sample that excludes failures
-- Belief that strategies work because successful practitioners used them
-- Attributing survivor traits to success rather than to survival selection
-- Absence of data about the failed population
-- Overoptimistic assessments of average outcomes
+- Draws conclusions about what works by looking only at the successes, without asking what the failures looked like
+- Believes a strategy or trait leads to success because all the visible successful people used it or have it
+- Does not ask what traits or strategies the people who failed also had
+- Makes optimistic estimates about average outcomes based on data that only includes the cases that survived to be counted
+- Forms a confident view of what leads to success from examples that survived long enough to be visible, without noticing that failed examples are absent from the picture
 
 ## False Positives
 - Studying successful practitioners to learn from them is not survivorship bias when the goal is to understand what they did, not to estimate base rates of success

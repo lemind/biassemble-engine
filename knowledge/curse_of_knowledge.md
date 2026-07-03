@@ -15,11 +15,11 @@ In education, expert instructors skip steps in explanations that feel obvious to
 In product design, engineers build interfaces that make sense given their deep knowledge of the system's internals, producing unintuitive experiences for users who see only the surface.
 
 ## Indicators
-- Expert communication that is accurate but unintelligible to the target audience
-- Impatience when explanations need to be repeated at a more basic level
-- Surprise that "obvious" steps require explicit description
-- Instructions that skip prerequisite concepts the writer has forgotten were ever learned
-- Feedback that documentation or teaching "assumes too much"
+- Explains something accurately but in a way the audience cannot follow, without noticing the gap
+- Gets frustrated when someone needs a more basic explanation of something that feels obvious
+- Cannot understand why steps that seem self-evident would need to be spelled out explicitly
+- Writes instructions that skip foundational concepts, not realizing those concepts were ever difficult to learn
+- Gives feedback or directions without explaining background terms or context that the audience does not share
 
 ## False Positives
 - Calibrating communication to an expert audience when the audience actually is expert is not the curse of knowledge — it is appropriate audience awareness

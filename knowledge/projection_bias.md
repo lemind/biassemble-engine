@@ -15,11 +15,11 @@ In medicine, patients asked to make advance decisions about medical procedures (
 In career planning, professionals make long-term career decisions based on their current interests and values, underestimating how substantially interests, priorities, and personal circumstances change over a ten-year horizon.
 
 ## Indicators
-- Long-term planning that mirrors current preferences without adjustment for expected change
-- Grocery shopping or purchasing behavior heavily influenced by current hunger or emotional state
-- Underestimating adaptation to both good and bad changed circumstances
-- Decisions that will be regretted when circumstances change
-- Difficulty imagining a future self with different priorities or preferences
+- Makes long-term plans based on current preferences without considering that those preferences will change
+- Buys more food than needed when shopping hungry because it feels like the current level of hunger will persist
+- Expects a major life change to feel as significant one year from now as it does today
+- Cannot vividly imagine wanting something different in the future than what feels important right now
+- Makes a commitment based on the current emotional state that turns out to be wrong when that state changes
 
 ## False Positives
 - Some preferences genuinely are stable across time and circumstances — projecting stable preferences into the future is accurate forecasting, not bias

@@ -15,11 +15,11 @@ In hiring, an interviewer's vivid impression of a candidate dominates the actuar
 In risk assessment, security analysts briefed on a specific threat scenario overestimate its probability, underweighting the base rate of that threat type occurring in similar geopolitical contexts.
 
 ## Indicators
-- Assigning very high probability to specific scenarios driven by narrative rather than base rates
-- Positive test results interpreted as near-certain diagnosis without reference to prevalence
-- Eyewitness testimony treated as definitive without considering false identification rates
-- Forecast confidence that ignores reference class performance distributions
-- "That story sounds so compelling it must be true" reasoning
+- Treats a vivid, detailed scenario as highly likely without asking how often situations like that actually occur
+- Hears a positive test result and concludes the diagnosis is nearly certain, without factoring in how rare the condition is
+- Accepts eyewitness identification as near-definitive without considering how often eyewitnesses are wrong
+- Makes a confident forecast without consulting how often comparable forecasts in similar situations have been right
+- Hears a confident, plausible-sounding story and raises the probability estimate without asking what the actual base rate is
 
 ## False Positives
 - When base rates are genuinely unavailable for a novel phenomenon, relying on case-specific information is the only available evidence

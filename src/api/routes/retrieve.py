@@ -4,7 +4,6 @@ from dataclasses import asdict
 from datetime import date
 from pathlib import Path
 from typing import Any
-from uuid import uuid4
 
 import asyncpg
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
@@ -76,8 +75,9 @@ async def retrieve_biases(
             detail={"error": "retrieval_failed", "detail": str(exc)},
         ) from exc
 
+    biases_out = [_to_bias_result(b) for b in biases] if biases else request.app.state.roster
     return RetrieveResponse(
-        biases=[_to_bias_result(b) for b in biases],
+        biases=biases_out,
         retrieved_chunks=meta.candidate_chunks,
         taxonomy_version=meta.taxonomy_version,
         embedding_model=meta.embedding_model,

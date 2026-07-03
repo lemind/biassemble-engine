@@ -15,11 +15,11 @@ In sports, losing coaches are second-guessed for tactical decisions that seemed 
 In technology, the failures of projects like Google Glass or early social networks are described as obvious in hindsight, despite receiving strong positive signals from sophisticated investors and users at the time of launch.
 
 ## Indicators
-- "I knew it all along" statements after surprising outcomes
-- Retrospective probability estimates for known outcomes that are far higher than prospective estimates
-- Harsh evaluation of past decision-makers for not foreseeing what is now known
-- Difficulty remembering one's actual uncertainty before the outcome was known
-- Treating realized outcomes as the only plausible outcomes that existed
+- Says "I knew it all along" or "it was obvious" after learning how something turned out
+- Looks back on an event and feels it was far more predictable than it actually seemed before it happened
+- Criticizes someone harshly for a past decision that seemed reasonable given what was known at the time
+- Cannot accurately recall how uncertain things felt before the outcome was revealed
+- Treats what actually happened as the only thing that could plausibly have happened, making alternative outcomes seem implausible in hindsight
 
 ## False Positives
 - Recognizing that warning signs existed before an event, when those signs genuinely were legible at the time, is accurate historical analysis, not hindsight bias

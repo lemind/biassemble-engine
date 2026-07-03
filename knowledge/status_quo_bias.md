@@ -14,12 +14,14 @@ In policy, voters resist healthcare, pension, or tax reforms even when presented
 
 In career decisions, professionals stay in unsatisfying roles because the familiarity of the current position feels safer than the uncertainty of a job search, even when the expected value of switching is clearly positive.
 
+[Consumer] Sofia defaults to government bonds and keeps defaulting there year after year, even as her financial situation stabilizes and her advisor recommends gradual diversification. Changing the allocation feels like choosing to take on risk, even though staying put is already costing her through suboptimal returns. Keeping everything as it is does not feel like an active decision — it feels like the absence of a decision, which makes it the natural path. The question she never asks is: if she were starting fresh today, would she choose this allocation?
+
 ## Indicators
-- Preference for current arrangements without active evaluation
-- Framing change as inherently risky regardless of the specifics
-- Default option acceptance without deliberation
-- "We've always done it this way" as a primary justification
-- Reluctance to experiment even when the cost of failure is low and reversible
+- Prefers the current arrangement without actively evaluating whether it is the best option
+- Treats any change as risky by default, without assessing the actual risks and benefits of the proposed change
+- Accepts a default option without deliberating on whether it is right for the situation
+- Justifies a current practice primarily because it is how things have always been done
+- Avoids experimenting with a change even when the cost of trying it is low and the outcome is reversible
 
 ## False Positives
 - Genuine preference for stability after careful evaluation of alternatives is a legitimate value, not status quo bias

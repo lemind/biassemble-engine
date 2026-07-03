@@ -15,11 +15,12 @@ In technology, software engineers overestimate their ability to write bug-free c
 In product development, founders overestimate product-market fit before launch, underestimate iteration requirements, and project adoption curves that exceed historical norms for comparable product launches.
 
 ## Indicators
-- Confidence intervals that are too narrow relative to actual outcome distributions
-- Reluctance to hedge or build in contingency
-- Surprise at outcomes that were within the objectively predictable range
-- Resistance to probabilistic thinking in favor of confident point predictions
-- Track records that consistently underperform stated confidence levels
+- States an outcome as certain or highly likely without acknowledging the realistic range of things that could happen
+- Refuses to hedge or build in a buffer, treating contingency planning as unnecessary pessimism
+- Is surprised when an outcome falls outside the predicted range, even when that range was always too narrow
+- Gives a single definitive answer rather than a range, even in situations where the uncertainty is real and significant
+- Has a track record where actual outcomes consistently fall outside the stated confidence range
+- Cannot point to a recent time when their stated confidence level turned out to be miscalibrated
 
 ## False Positives
 - Experts in domains with regular feedback and clear outcome metrics can develop genuine calibration — expressing high confidence after a track record that supports it is not bias

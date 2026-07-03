@@ -15,11 +15,11 @@ In academia, students who write a well-formatted, clearly presented essay receiv
 In hiring, candidates who perform well in the first interview question are rated higher on all subsequent questions, while candidates who stumble early are rated lower on otherwise identical responses.
 
 ## Indicators
-- Assuming competence in one domain implies competence in unrelated domains
-- Attributing positive character traits to physically attractive or prestigious individuals without evidence
-- Applying brand reputation to product quality assessments regardless of specific product merits
-- Reluctance to criticize a person with strong positive traits in one visible area
-- Generalizing from a single positive or negative interaction to a holistic judgment
+- Assumes someone who excels in one area must also be capable or trustworthy in unrelated areas
+- Credits positive personal qualities to someone who is attractive, charismatic, or prestigious, without any evidence for those qualities
+- Rates a product as higher quality because the brand has a strong reputation, without examining the specific product
+- Hesitates to criticize someone who has made a strong first impression or holds a strong reputation in one area
+- Forms a complete positive or negative impression of a person based on a single interaction or a single visible trait
 
 ## False Positives
 - Some traits genuinely correlate across domains — a person who is highly organized may genuinely be reliable in both personal and professional contexts

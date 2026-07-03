@@ -15,11 +15,11 @@ In sales management, a salesperson who closes several deals in a row is assigned
 In hiring, candidates who perform well early in an interview process are expected to perform well in final rounds based on their momentum, rather than independent assessment of each round.
 
 ## Indicators
-- Believing that a streak signals elevated underlying probability of future success
-- Adjusting strategy based on recent streak performance rather than stable ability estimates
-- "They're on fire — keep feeding them" reasoning in team situations
-- Increasing bets or position sizes after a winning streak
-- Attributing runs of good outcomes to personal skill or momentum
+- Believes someone on a winning streak is more likely to keep winning because they are "in the zone"
+- Changes strategy to favor whoever has been performing well recently rather than whoever is most capable overall
+- Passes to the player who scored last rather than the one with the highest stable performance rate
+- Increases bets or position sizes after a winning streak, treating the streak as evidence of elevated underlying ability
+- Attributes a run of good outcomes to skill or momentum rather than normal statistical variation
 
 ## False Positives
 - In domains with genuine serial dependence — where confidence, physical state, or momentum truly do affect performance — the hot hand can be a real phenomenon. Some studies show genuine hot hand effects in free throws and three-point shooting when controlling for shot selection. The fallacy is in applying this belief indiscriminately to all domains, including genuinely independent ones
