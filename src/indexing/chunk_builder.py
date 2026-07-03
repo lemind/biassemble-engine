@@ -29,8 +29,19 @@ _CANONICAL_ORDER: list[str] = [
     "definition", "examples", "indicators", "false_positives", "related_biases"
 ]
 
-_VERBAL = re.compile(r"\b(says|tells|claims|insists|argues|states|asserts|declares)\b")
-_BEHAVIORAL = re.compile(r"\b(chooses|avoids|seeks|refuses|selects|invests|buys|sells|acts upon|acts on)\b")
+# Post-T002 indicators use first-person thinking language. _VERBAL captures the
+# reasoning/cognitive register; _BEHAVIORAL captures the action register.
+_VERBAL = re.compile(
+    r"\b(treats|judges|believes|rates|evaluates|assumes|expects|hears|concludes"
+    r"|draws|attributes|estimates|remembers|feels|finds|forms|trusts|accepts"
+    r"|interprets|dismisses|states|claims|insists|asserts|declares|says|tells)\b"
+)
+_BEHAVIORAL = re.compile(
+    r"\b(makes|takes|refuses|explains|avoids|uses|holds|chooses|changes"
+    r"|resists|prefers|applies|gives|reads|asks|adopts|sets|plans|revises"
+    r"|updates|invests|buys|bets|stays|adjusts|lowers|increases|struggles"
+    r"|defers|selects|seeks)\b"
+)
 
 
 @dataclass
