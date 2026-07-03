@@ -14,6 +14,8 @@ In policy, voters resist healthcare, pension, or tax reforms even when presented
 
 In career decisions, professionals stay in unsatisfying roles because the familiarity of the current position feels safer than the uncertainty of a job search, even when the expected value of switching is clearly positive.
 
+[Consumer] Sofia defaults to government bonds and keeps defaulting there year after year, even as her financial situation stabilizes and her advisor recommends gradual diversification. Changing the allocation feels like choosing to take on risk, even though staying put is already costing her through suboptimal returns. Keeping everything as it is does not feel like an active decision — it feels like the absence of a decision, which makes it the natural path. The question she never asks is: if she were starting fresh today, would she choose this allocation?
+
 ## Indicators
 - Prefers the current arrangement without actively evaluating whether it is the best option
 - Treats any change as risky by default, without assessing the actual risks and benefits of the proposed change

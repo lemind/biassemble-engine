@@ -14,6 +14,10 @@ In medicine, a physician who recently treated several cases of a rare disease ov
 
 In politics, terrorism dominates security spending decisions disproportionate to its statistical contribution to mortality, because individual attacks generate overwhelming media attention compared to car accidents or preventable diseases.
 
+[Political] A parent testifies at a town hall after seeing repeated news coverage of a school shooting. They demand immediate security spending, even though the school has had no incidents in decades and car accidents kill far more children every year. Because the disturbing footage played repeatedly on every channel, the risk feels immediate and certain — the statistics about relative risk are invisible next to the ease of recalling those images. Every politician listening experiences the same thing, and any vote against the security package looks like indifference to dead children.
+
+[Social] After his son died in a car accident, Robert became convinced that road deaths were at crisis levels. He brings the topic into every conversation, organizes campaigns, talks to strangers about it. The event is so vivid and personal that it reshaped his entire sense of how often these deaths occur — he can recall it instantly, in full detail, while statistics about declining accident rates simply don't register. The ease with which he pictures his son's accident makes the danger feel constantly present, far more common than the numbers show.
+
 ## Indicators
 - Judges something as common or dangerous because a vivid example comes to mind immediately
 - Rates a risk as low because it is hard to picture happening, not because the statistics support that estimate
