@@ -25,7 +25,7 @@ from src.db.queries import fmt_vector
 from src.providers.base import EmbeddingProvider
 from src.retrieval.query_builder import get_query_strategy
 from src.retrieval.retriever import IndexNotFoundError, retrieve
-from src.retrieval.searcher import _build_search_query, _dedup_bias_rows, _diagnostics_search_query, _lightweight_search_query, _row_to_candidate_csv
+from src.retrieval.searcher import _dedup_bias_rows, _diagnostics_search_query, _lightweight_search_query
 from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest, StoryAnalysis
 

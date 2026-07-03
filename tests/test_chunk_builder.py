@@ -198,9 +198,9 @@ def test_indicator_grouping_verbal_and_behavioral():
 
 
 def test_indicator_all_unmatched_produces_one_group():
-    """When no bullets match verbal/behavioral, all go into a single group."""
+    """When no bullets match reasoning/behavioral, all go into a single group."""
     groups = _group_indicator_bullets(
-        "- Interprets ambiguous data as confirming\n- Remembers supporting evidence better"
+        "- Ponders the implications without deciding\n- Wonders whether the risk is real"
     )
     assert len(groups) == 1
 
