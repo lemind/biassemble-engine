@@ -19,6 +19,7 @@ from src.schemas.internal import (
     RetrievalMetadata,
     RetrievedBias,
 )
+from src.schemas.response import BiasResult
 
 STORY_PAYLOAD = {"story": "Marcus bought NovaTech at $142 and refuses to sell."}
 HEADERS = {"Authorization": f"Bearer {settings.rag_api_key}"}
@@ -31,13 +32,14 @@ def _make_mock_provider() -> MagicMock:
     return m
 
 
-def _make_client(monkeypatch, pool):
+def _make_client(monkeypatch, pool, roster=None):
     mock_provider = _make_mock_provider()
 
     @asynccontextmanager
     async def fake_lifespan(a):
         a.state.provider = mock_provider
         a.state.pool = pool
+        a.state.roster = roster or []
         yield
 
     monkeypatch.setattr(app.router, "lifespan_context", fake_lifespan)
@@ -187,7 +189,8 @@ def test_200_retrieved_chunks_count(client, monkeypatch):
 
 
 def test_200_empty_biases_for_neutral_story(client, monkeypatch):
-    # Search finds chunks but all scores are below threshold → 200, not 503
+    # Search finds chunks but all scores are below threshold → roster fallback fires.
+    # The client fixture has an empty roster, so biases == [].
     doc = FullBiasDocument(
         name="X", definition="d", examples="e",
         indicators="i", false_positives="fp", related_biases="rb",
@@ -206,3 +209,42 @@ def test_200_empty_biases_for_neutral_story(client, monkeypatch):
     resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
     assert resp.status_code == 200
     assert resp.json()["biases"] == []
+
+
+def test_200_roster_fallback_when_nothing_retrieved(monkeypatch):
+    # When all candidates are below threshold, retriever returns empty biases list
+    # → roster fallback fires and returns pre-built roster entries.
+    roster = [
+        BiasResult(id="confirmation-bias", name="Confirmation Bias",
+                   retrieval_score=0.0, definition="Seeking info that confirms existing beliefs.",
+                   examples="", indicators="", false_positives="", related_biases=""),
+        BiasResult(id="anchoring", name="Anchoring Bias",
+                   retrieval_score=0.0, definition="Over-relying on the first piece of information.",
+                   examples="", indicators="", false_positives="", related_biases=""),
+    ]
+    client = _make_client(monkeypatch, pool=MagicMock(), roster=roster)
+
+    doc = FullBiasDocument(
+        name="X", definition="d", examples="e",
+        indicators="i", false_positives="fp", related_biases="rb",
+    )
+    below_threshold = CandidateChunk(
+        bias_id="some_bias", chunk_type="semantic_definition",
+        source_section="Definition", source="taxonomy",
+        chunk_text="...", full_document=doc, retrieval_score=0.1,
+    )
+
+    async def low_score_search(*_a, **_kw):
+        return [below_threshold]
+
+    monkeypatch.setattr("src.retrieval.retriever.search_chunks", low_score_search)
+
+    resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert len(data["biases"]) == 2
+    ids = {b["id"] for b in data["biases"]}
+    assert ids == {"confirmation-bias", "anchoring"}
+    assert data["biases"][0]["retrieval_score"] == 0.0
+
+    client.__exit__(None, None, None)

@@ -6,8 +6,10 @@ from fastapi import FastAPI
 
 from src.api.routes import retrieve
 from src.config import settings
+from src.db.queries import ROSTER_QUERY
 from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
+from src.schemas.response import BiasResult
 
 
 @asynccontextmanager
@@ -29,6 +31,29 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         pool = None
     app.state.provider = provider
     app.state.pool = pool
+
+    roster: list[BiasResult] = []
+    if pool is not None:
+        try:
+            async with pool.acquire() as conn:
+                rows = await conn.fetch(ROSTER_QUERY, settings.taxonomy_version)
+            roster = [
+                BiasResult(
+                    id=r["bias_id"],
+                    name=r["name"] or r["bias_id"],
+                    retrieval_score=0.0,
+                    definition=r["definition"] or "",
+                    examples="",
+                    indicators="",
+                    false_positives="",
+                    related_biases="",
+                )
+                for r in rows
+            ]
+        except Exception:
+            pass
+    app.state.roster = roster
+
     yield
     if pool is not None:
         await pool.close()
