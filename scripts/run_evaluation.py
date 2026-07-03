@@ -4,6 +4,7 @@
 Usage:
     ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py
     ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --promote
+    ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --diagnostics
 """
 import argparse
 import asyncio
@@ -108,7 +109,7 @@ async def main(promote: bool) -> None:
         print(f"Promoted → {baseline_path}")
 
 
-def main_sync(promote: bool) -> None:
+def main_sync(promote: bool, diagnostics: bool = False) -> None:
     """Fully synchronous path — used locally when PSQL_SEARCH=true.
 
     No asyncio: avoids event-loop conflicts with loky/joblib semaphores left
@@ -120,6 +121,8 @@ def main_sync(promote: bool) -> None:
     BASELINES_DIR.mkdir(exist_ok=True)
 
     print(f"taxonomy_version={settings.taxonomy_version}  model={settings.embedding_model}")
+    if diagnostics:
+        print("diagnostics mode — fetching chunk metadata per scenario")
     provider = SentenceTransformerProvider(settings.embedding_model)
     # Restore proxy vars now that httpx client is created — psql subprocess needs them.
     os.environ.update(_saved_proxy)
@@ -130,6 +133,7 @@ def main_sync(promote: bool) -> None:
         baselines_dir=BASELINES_DIR,
         run_date=date.today().isoformat(),
         taxonomy_version=settings.taxonomy_version,
+        diagnostics=diagnostics,
     )
 
     _print_run(run)
@@ -137,6 +141,24 @@ def main_sync(promote: bool) -> None:
     run_path = RUNS_DIR / f"run_{run.run_date}.json"
     run_path.write_text(json.dumps(asdict(run), indent=2))
     print(f"\nSaved → {run_path}")
+
+    if diagnostics:
+        diag_dir = EVAL_DIR / "diagnostics"
+        diag_dir.mkdir(exist_ok=True)
+        diag_path = diag_dir / f"diagnostics_{run.run_date}.json"
+        diag_data = [
+            {
+                "scenario_id": r.scenario_id,
+                "group": r.group,
+                "expected": r.expected,
+                "retrieved": r.retrieved,
+                "recall_at_k": r.recall_at_k,
+                "retrieved_with_diagnostics": r.retrieved_with_diagnostics,
+            }
+            for r in run.scenario_results
+        ]
+        diag_path.write_text(json.dumps(diag_data, indent=2))
+        print(f"Diagnostics → {diag_path}")
 
     if promote:
         baseline_path = BASELINES_DIR / f"baseline_{run.run_date}.json"
@@ -200,11 +222,15 @@ def main_remote(promote: bool) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--promote", action="store_true", help="Copy run to baselines/")
+    parser.add_argument("--diagnostics", action="store_true", help="Fetch chunk metadata per scenario and write diagnostics JSON")
     args = parser.parse_args()
+
+    if args.diagnostics and (settings.engine_url or not settings.psql_search):
+        print("WARNING: --diagnostics is only supported with PSQL_SEARCH=true and ENGINE_URL unset; flag ignored")
 
     if settings.engine_url:
         main_remote(args.promote)
     elif settings.psql_search:
-        main_sync(args.promote)
+        main_sync(args.promote, args.diagnostics)
     else:
         asyncio.run(main(args.promote))

@@ -75,6 +75,26 @@ def _build_search_query(vec: str, taxonomy_version: str, top_k: int) -> str:
     )
 
 
+def _diagnostics_search_query(vec: str, taxonomy_version: str, top_k: int) -> str:
+    """Return bias_id, chunk_type, source_section, domain, score — no TOAST columns.
+
+    Omits chunk_text and full_document (both TOAST-stored and cause pooler timeouts).
+    Extracts domain from the metadata JSONB field (small, never TOAST-stored).
+    """
+    if not _SAFE_VERSION.match(taxonomy_version):
+        raise ValueError(f"unsafe taxonomy_version: {taxonomy_version!r}")
+    return (
+        f"WITH q(v) AS (SELECT '{vec}'::vector)"
+        f" SELECT bias_id, chunk_type, source_section,"
+        f" metadata->>'domain' AS domain,"
+        f" 1 - (embedding <=> q.v) AS retrieval_score"
+        f" FROM {TABLE}, q"
+        f" WHERE taxonomy_version = '{taxonomy_version}'"
+        f" ORDER BY embedding <=> q.v"
+        f" LIMIT {top_k};"
+    )
+
+
 def _lightweight_search_query(vec: str, taxonomy_version: str, top_k: int) -> str:
     """Return bias_id + score only — avoids TOAST fetch for chunk_text / full_document.
 
