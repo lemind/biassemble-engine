@@ -12,6 +12,8 @@ In politics, a voter who supports a party reads news outlets that align with tha
 
 In academia, a researcher who has published a theory interprets ambiguous experimental results as supporting their theory and attributes contradictory findings to methodological flaws in the contradicting studies.
 
+[Political] A politician explains that critics are simply afraid of success: "Anyone who disagrees just hasn't looked at the facts — or they have, and they don't want you to know." Every piece of criticism is treated as proof of bad faith rather than as an argument to engage with. Statistics that support the current policy get cited in speeches; statistics that challenge it get dismissed as partisan or distorted. Every press statement features statistics that support the current policy; statistics pointing the other way are never mentioned or are called partisan before the numbers are examined. Disagreement is not a signal to reconsider — it is evidence that the other side doesn't want the truth to come out.
+
 ## Indicators
 - Reads only the sources, articles, or experts that already agree with the current view
 - Explains away contradictory evidence as unreliable, biased, or methodologically flawed rather than engaging with it

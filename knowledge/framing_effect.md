@@ -14,6 +14,10 @@ In retail, ground beef labeled "75% lean" is perceived as higher quality than gr
 
 In public health, a disease prevention program described as "saves 200 lives" out of 600 at risk is preferred over a statistically equivalent program described as "400 people will die," because the first is gain-framed and the second loss-framed.
 
+[Political] Describing the same economic data as "proof our policies are working" versus "a modest recovery still lagging projections" produces opposite assessments of the same administration, even among voters shown the identical underlying statistics. A speech that opens with job-creation numbers frames the economy as a success; one that opens with wage-stagnation figures frames it as a failure. Framing controls the verdict before the numbers are even examined.
+
+[Social] A school safety campaign presents the same statistics two ways. One version says "3 children were involved in school safety incidents last year in this county." The other says "Every single parent knows the gut-wrenching fear — your child could be next, at any moment." The first produces measured discussion about resources. The second produces fear-driven demand for immediate action, even though both describe the same data. The emotional language adds no information; it adds arousal that replaces deliberate evaluation.
+
 ## Indicators
 - Responds differently to the same information depending on whether it is presented as a gain or a loss
 - Prefers a treatment described as "90% survival rate" over one described as "10% mortality rate," even though they are identical
