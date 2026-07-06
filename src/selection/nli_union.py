@@ -53,9 +53,22 @@ class NLIUnionStrategy:
             truncated=nli_result.truncated_premise,
         )
 
-        # Combiner not yet wired (Phase 6) — admit on NLI gate alone.
-        scores = {bid: s for bid, s in nli_result.scores.items() if s >= settings.nli_gate}
+        if self._combiner is not None:
+            output = self._combiner(nli_result.scores, vector_scores)
+            scores = {bid: output.combined_scores[bid] for bid in output.admitted}
+            log.info("combiner_done", admitted=len(output.admitted))
+            return scores, candidates, StrategyMetadata(
+                selection_strategy="nli_union",
+                hypotheses_version=self._hypotheses_version,
+                nli_latency_ms=nli_result.latency_ms,
+                truncated_premise=nli_result.truncated_premise,
+                nli_scores=nli_result.scores,
+                vector_scores=output.vector_scores,
+                combined_scores=output.combined_scores,
+            )
 
+        # Pre-combiner fallback — admit on NLI gate alone.
+        scores = {bid: s for bid, s in nli_result.scores.items() if s >= settings.nli_gate}
         return scores, candidates, StrategyMetadata(
             selection_strategy="nli_union",
             hypotheses_version=self._hypotheses_version,
