@@ -61,6 +61,8 @@ async def retrieve(
 
     with TimingContext() as rerank_t:
         biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k, admitted_ids=admitted_ids)
+        # Re-order by strategy scores: combined_score for nli_union, max_cosine for vector_only.
+        biases.sort(key=lambda b: scores.get(b.bias_id, 0.0), reverse=True)
     log.info(EVT_RERANKED, latency_ms=rerank_t.elapsed_ms, returned=len(biases))
 
     total_ms = int((time.monotonic() - t_total) * 1000)

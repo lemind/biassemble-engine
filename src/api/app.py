@@ -14,7 +14,10 @@ from src.db.queries import ROSTER_QUERY
 from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
 from src.schemas.response import BiasResult
+import functools
+
 from src.nli.classifier import NLIClassifier
+from src.nli.combiner import CombinerConfig, combine
 from src.nli.hypothesis_loader import load_hypotheses
 from src.selection.nli_union import NLIUnionStrategy
 from src.selection.vector_only import VectorOnlyStrategy
@@ -68,9 +71,19 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         )
         _log.info("nli_warmup_complete", latency_ms=round(_warmup.latency_ms, 1))
 
+        combiner_fn = functools.partial(
+            combine,
+            config=CombinerConfig(
+                w_nli=settings.w_nli,
+                w_vec=settings.w_vec,
+                nli_gate=settings.nli_gate,
+                vec_gate=settings.vec_gate,
+                combined_threshold=settings.combined_threshold,
+            ),
+        )
         app.state.selection_strategy = NLIUnionStrategy(
             nli_classifier,
-            combiner=None,
+            combiner=combiner_fn,
             vector_strategy=VectorOnlyStrategy(provider, pool),
             hypotheses=hypotheses,
             hypotheses_version=hypotheses_version,
