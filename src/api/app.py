@@ -12,6 +12,7 @@ from src.db.queries import ROSTER_QUERY
 from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
 from src.schemas.response import BiasResult
+from src.nli.classifier import NLIClassifier
 from src.selection.nli_union import NLIUnionStrategy
 from src.selection.vector_only import VectorOnlyStrategy
 
@@ -35,11 +36,36 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         pool = None
     app.state.provider = provider
     app.state.pool = pool
+    _log = structlog.get_logger()
     if settings.selection_strategy == "nli_union":
-        structlog.get_logger().warning(
-            "nli_union strategy selected — NLI module not yet wired (Phase 4); requests will raise NotImplementedError"
+        try:
+            nli_classifier = NLIClassifier()
+        except Exception as exc:
+            raise RuntimeError(f"NLI model load failed — aborting startup: {exc}") from exc
+        app.state.nli_classifier = nli_classifier
+        _log.info("nli_classifier_loaded", model=settings.nli_model)
+
+        # Warmup: profile latency on a ~200-word story, log result.
+        _warmup_story = (
+            "Marcus bought NovaTech shares at $142 six months ago. The stock has since fallen "
+            "to $40 after a series of poor earnings reports. His financial advisor recommends "
+            "selling and reinvesting, but Marcus insists the stock will recover to its original "
+            "price. He keeps reminding himself how much he paid for it and believes the market "
+            "will eventually correct. Meanwhile the company has announced further write-downs "
+            "and two board members have resigned. His advisor warns that holding is costing him "
+            "opportunity elsewhere, but Marcus refuses to realise the loss."
         )
-        app.state.selection_strategy = NLIUnionStrategy(None, None)
+        _warmup = nli_classifier.classify(
+            _warmup_story,
+            [("warmup", "The decision-maker commits more resources despite clear failure signals.")],
+        )
+        _log.info("nli_warmup_complete", latency_ms=round(_warmup.latency_ms, 1))
+
+        app.state.selection_strategy = NLIUnionStrategy(
+            nli_classifier,
+            combiner=None,
+            vector_strategy=VectorOnlyStrategy(provider, pool),
+        )
     else:
         app.state.selection_strategy = VectorOnlyStrategy(provider, pool)
 
