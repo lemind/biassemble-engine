@@ -15,6 +15,12 @@ COPY evaluations/negative ./evaluations/negative
 COPY evaluations/adversarial ./evaluations/adversarial
 COPY evaluations/edge ./evaluations/edge
 
+# Bake NLI model into image — prevents runtime download timeout on cold start.
+# ENV keeps build-time ARG and runtime default in sync; HF Space env var overrides both.
+ARG NLI_MODEL=MoritzLaurer/deberta-v3-base-zeroshot-v2.0
+ENV NLI_MODEL=${NLI_MODEL}
+RUN uv run python -c "from transformers import pipeline; pipeline('zero-shot-classification', model='${NLI_MODEL}')"
+
 RUN adduser --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
