@@ -4,6 +4,8 @@ from typing import AsyncGenerator
 import asyncpg
 from fastapi import FastAPI
 
+from pathlib import Path
+
 import structlog
 
 from src.api.routes import retrieve
@@ -13,6 +15,7 @@ from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
 from src.schemas.response import BiasResult
 from src.nli.classifier import NLIClassifier
+from src.nli.hypothesis_loader import load_hypotheses
 from src.selection.nli_union import NLIUnionStrategy
 from src.selection.vector_only import VectorOnlyStrategy
 
@@ -38,6 +41,10 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     app.state.pool = pool
     _log = structlog.get_logger()
     if settings.selection_strategy == "nli_union":
+        hypotheses = load_hypotheses(settings.hypotheses_path)
+        hypotheses_version = Path(settings.hypotheses_path).stem
+        _log.info("hypotheses_loaded", version=hypotheses_version, count=len(hypotheses))
+
         try:
             nli_classifier = NLIClassifier()
         except Exception as exc:
@@ -45,7 +52,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         app.state.nli_classifier = nli_classifier
         _log.info("nli_classifier_loaded", model=settings.nli_model)
 
-        # Warmup: profile latency on a ~200-word story, log result.
+        # Warmup: profile latency on a ~200-word story, log result (T013).
         _warmup_story = (
             "Marcus bought NovaTech shares at $142 six months ago. The stock has since fallen "
             "to $40 after a series of poor earnings reports. His financial advisor recommends "
@@ -65,6 +72,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
             nli_classifier,
             combiner=None,
             vector_strategy=VectorOnlyStrategy(provider, pool),
+            hypotheses=hypotheses,
+            hypotheses_version=hypotheses_version,
         )
     else:
         app.state.selection_strategy = VectorOnlyStrategy(provider, pool)
