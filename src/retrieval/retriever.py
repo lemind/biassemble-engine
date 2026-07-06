@@ -51,7 +51,7 @@ async def retrieve(
         strategy = VectorOnlyStrategy(provider, pool)
 
     with TimingContext() as search_t:
-        scores, candidates = await strategy.select(request.story, request.story_analysis)
+        scores, candidates, strategy_meta = await strategy.select(request.story, request.story_analysis)
     log.info(EVT_VECTOR_SEARCH, latency_ms=search_t.elapsed_ms, candidates=len(candidates))
 
     if not candidates:
@@ -84,6 +84,13 @@ async def retrieve(
         top_retrieval_score=max(bias_scores) if bias_scores else None,
         avg_retrieval_score=sum(bias_scores) / len(bias_scores) if bias_scores else None,
         threshold_used=settings.similarity_threshold,
+        selection_strategy=strategy_meta.selection_strategy,
+        hypotheses_version=strategy_meta.hypotheses_version,
+        nli_latency_ms=strategy_meta.nli_latency_ms,
+        truncated_premise=strategy_meta.truncated_premise,
+        nli_scores=strategy_meta.nli_scores,
+        vector_scores=strategy_meta.vector_scores,
+        combined_scores=strategy_meta.combined_scores,
     )
 
     return biases, meta

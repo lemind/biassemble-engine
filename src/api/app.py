@@ -4,12 +4,15 @@ from typing import AsyncGenerator
 import asyncpg
 from fastapi import FastAPI
 
+import structlog
+
 from src.api.routes import retrieve
 from src.config import settings
 from src.db.queries import ROSTER_QUERY
 from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
 from src.schemas.response import BiasResult
+from src.selection.nli_union import NLIUnionStrategy
 from src.selection.vector_only import VectorOnlyStrategy
 
 
@@ -32,7 +35,13 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         pool = None
     app.state.provider = provider
     app.state.pool = pool
-    app.state.selection_strategy = VectorOnlyStrategy(provider, pool)
+    if settings.selection_strategy == "nli_union":
+        structlog.get_logger().warning(
+            "nli_union strategy selected — NLI module not yet wired (Phase 4); requests will raise NotImplementedError"
+        )
+        app.state.selection_strategy = NLIUnionStrategy(None, None)
+    else:
+        app.state.selection_strategy = VectorOnlyStrategy(provider, pool)
 
     roster: list[BiasResult] = []
     if pool is not None:
