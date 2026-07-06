@@ -109,23 +109,59 @@ async def main(promote: bool) -> None:
         print(f"Promoted → {baseline_path}")
 
 
-def main_sync(promote: bool, diagnostics: bool = False) -> None:
+def main_sync(promote: bool, diagnostics: bool = False, strategy: str = "vector_only") -> None:
     """Fully synchronous path — used locally when PSQL_SEARCH=true.
 
     No asyncio: avoids event-loop conflicts with loky/joblib semaphores left
     by SentenceTransformer on Python 3.14. psql subprocess connects directly.
+    --strategy nli_only / nli_union loads NLIClassifier + hypotheses at startup.
     """
     from src.providers.sentence_transformer import SentenceTransformerProvider
 
     RUNS_DIR.mkdir(exist_ok=True)
     BASELINES_DIR.mkdir(exist_ok=True)
 
-    print(f"taxonomy_version={settings.taxonomy_version}  model={settings.embedding_model}")
+    print(f"taxonomy_version={settings.taxonomy_version}  model={settings.embedding_model}  strategy={strategy}")
     if diagnostics:
         print("diagnostics mode — fetching chunk metadata per scenario")
     provider = SentenceTransformerProvider(settings.embedding_model)
     # Restore proxy vars now that httpx client is created — psql subprocess needs them.
     os.environ.update(_saved_proxy)
+
+    nli_kwargs: dict = {}
+    if strategy in ("nli_only", "nli_union"):
+        from pathlib import Path as _Path
+        from src.nli.classifier import NLIClassifier
+        from src.nli.combiner import CombinerConfig
+        from src.nli.hypothesis_loader import load_hypotheses
+
+        print("Loading hypotheses and NLI model (first run ~30s) ...")
+        hypotheses = load_hypotheses(settings.hypotheses_path)
+        hypotheses_version = _Path(settings.hypotheses_path).stem
+
+        nli_classifier = NLIClassifier()
+        print(f"NLI model loaded: {settings.nli_model}")
+        hypotheses_snapshot = {bid: hyp for bid, hyp in hypotheses}
+
+        if strategy == "nli_only":
+            w_nli, w_vec, vec_gate = 1.0, 0.0, 1.1  # disable vector gate for pure NLI eval
+        else:
+            w_nli, w_vec, vec_gate = settings.w_nli, settings.w_vec, settings.vec_gate
+
+        combiner_config = CombinerConfig(
+            w_nli=w_nli, w_vec=w_vec,
+            nli_gate=settings.nli_gate,
+            vec_gate=vec_gate,
+            combined_threshold=settings.combined_threshold,
+        )
+        nli_kwargs = dict(
+            nli_classifier=nli_classifier,
+            hypotheses=hypotheses,
+            hypotheses_version=hypotheses_version,
+            combiner_config=combiner_config,
+            hypotheses_snapshot=hypotheses_snapshot,
+            selection_strategy=strategy,
+        )
 
     run = run_evaluation_sync(
         provider=provider,
@@ -134,6 +170,7 @@ def main_sync(promote: bool, diagnostics: bool = False) -> None:
         run_date=date.today().isoformat(),
         taxonomy_version=settings.taxonomy_version,
         diagnostics=diagnostics,
+        **nli_kwargs,
     )
 
     _print_run(run)
@@ -183,6 +220,9 @@ def _make_eval_run(data: dict) -> EvalRun:
         scenario_results=scenario_results,
         group_metrics=group_metrics,
         deltas=data.get("deltas"),
+        selection_strategy=data.get("selection_strategy"),
+        hypotheses_version=data.get("hypotheses_version"),
+        hypotheses=data.get("hypotheses"),
     )
 
 
@@ -223,14 +263,24 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--promote", action="store_true", help="Copy run to baselines/")
     parser.add_argument("--diagnostics", action="store_true", help="Fetch chunk metadata per scenario and write diagnostics JSON")
+    parser.add_argument(
+        "--strategy",
+        choices=["vector_only", "nli_only", "nli_union"],
+        default="vector_only",
+        help="Selection strategy: nli_only (W_VEC=0), nli_union (weighted), vector_only (default)",
+    )
     args = parser.parse_args()
 
     if args.diagnostics and (settings.engine_url or not settings.psql_search):
         print("WARNING: --diagnostics is only supported with PSQL_SEARCH=true and ENGINE_URL unset; flag ignored")
 
+    if args.strategy != "vector_only" and not settings.psql_search:
+        print("ERROR: --strategy nli_only/nli_union requires PSQL_SEARCH=true for local NLI evaluation")
+        raise SystemExit(1)
+
     if settings.engine_url:
         main_remote(args.promote)
     elif settings.psql_search:
-        main_sync(args.promote, args.diagnostics)
+        main_sync(args.promote, args.diagnostics, args.strategy)
     else:
         asyncio.run(main(args.promote))
