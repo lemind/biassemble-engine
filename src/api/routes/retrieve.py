@@ -59,7 +59,7 @@ async def retrieve_biases(
 
     try:
         biases, meta = await asyncio.wait_for(
-            retriever.retrieve(body, provider, pool),
+            retriever.retrieve(body, provider, pool, request.app.state.selection_strategy),
             timeout=settings.request_timeout_ms / 1000,
         )
     except asyncio.TimeoutError:
