@@ -28,6 +28,8 @@ _SECTION_MAP = {
     "false positive": "false_positives",
     "related biases": "related_biases",
     "related bias": "related_biases",
+    "story patterns": "story_patterns",
+    "story pattern": "story_patterns",
 }
 
 
@@ -78,7 +80,7 @@ class TaxonomySource(KnowledgeSource):
             if not text:
                 continue
 
-            if chunk_type == "examples":
+            if chunk_type in ("examples", "story_patterns"):
                 paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
                 for i, para in enumerate(paragraphs):
                     domain = _extract_domain(para)
@@ -88,7 +90,7 @@ class TaxonomySource(KnowledgeSource):
                         meta["domain"] = domain
                     docs.append(RawDocument(
                         bias_id=bias_id,
-                        chunk_type="examples",
+                        chunk_type=chunk_type,
                         text=clean,
                         source=self.name,
                         metadata=meta,
