@@ -10,6 +10,7 @@ from src.schemas.internal import (
     CHUNK_TYPE_FALSE_POSITIVE,
     CHUNK_TYPE_INDICATOR,
     CHUNK_TYPE_RELATED,
+    CHUNK_TYPE_STORY_PATTERN,
     FullBiasDocument,
 )
 
@@ -21,12 +22,13 @@ _CHUNK_TYPE_MAP: dict[str, tuple[str, str]] = {
     "indicators":      (CHUNK_TYPE_INDICATOR,      "Indicators"),
     "false_positives": (CHUNK_TYPE_FALSE_POSITIVE, "False Positives"),
     "related_biases":  (CHUNK_TYPE_RELATED,        "Related Biases"),
+    "story_patterns":  (CHUNK_TYPE_STORY_PATTERN,  "Story Pattern"),
 }
 
 # Canonical section order — chunk_index is derived from this, not from the order
 # sections appear in the markdown file, so ordering is consistent across all biases.
 _CANONICAL_ORDER: list[str] = [
-    "definition", "examples", "indicators", "false_positives", "related_biases"
+    "definition", "examples", "indicators", "false_positives", "related_biases", "story_patterns"
 ]
 
 # Post-T002 indicators use first-person thinking language. _VERBAL captures the
@@ -100,6 +102,24 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
                         metadata=doc.metadata,
                         chunk_index=section_base * 100 + para_idx,
                     ))
+            elif doc.chunk_type == "story_patterns":
+                assert doc.paragraph_index < 100, (
+                    f"paragraph_index overflow: {bias_id} story_patterns idx={doc.paragraph_index}"
+                )
+                # No bias-name prefix — keep raw story text so embedding stays in
+                # the same vector space as real user stories.
+                chunk_text = doc.text
+                chunks.append(BiasChunk(
+                    bias_id=bias_id,
+                    chunk_type=semantic_type,
+                    source_section=source_section,
+                    chunk_text=chunk_text,
+                    chunk_hash=_compute_hash(bias_id, semantic_type, chunk_text, taxonomy_version),
+                    full_document=full_doc,
+                    source=doc.source,
+                    metadata=doc.metadata,
+                    chunk_index=section_base * 100 + doc.paragraph_index,
+                ))
             else:
                 assert doc.paragraph_index < 100, (
                     f"paragraph_index overflow: {bias_id} {doc.chunk_type} idx={doc.paragraph_index}"

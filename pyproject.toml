@@ -55,3 +55,8 @@ explicit = true
 torch = [{ index = "pytorch-cpu" }]
 torchvision = [{ index = "pytorch-cpu" }]
 torchaudio = [{ index = "pytorch-cpu" }]
+
+[dependency-groups]
+dev = [
+    "httpx[socks]>=0.28.1",
+]
