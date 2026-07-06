@@ -104,9 +104,9 @@
 
 **Independent Test**: `python evaluations/run_evaluation.py --strategy nli_only` completes and saves a run JSON. `python scripts/tune_threshold.py --sweep-weights` produces a results table across the w_nli × threshold grid.
 
-- [ ] T022 [P] [US5] Extend `evaluations/run_evaluation.py` with `--strategy` flag accepting `nli_only` (`W_VEC=0.0, W_NLI=1.0`), `vector_only`, `nli_union`; add per-failure diagnostics fields to run JSON: `nli_scores`, `vector_scores`, `combined_scores`, `admitted_by`, `missed_by` (signals that failed to admit each expected bias); snapshot full hypothesis text into run JSON alongside `hypotheses_version` (not just the version string — enables historical reproduction if the file is later overwritten)
-- [ ] T023 [P] [US5] Extend `scripts/tune_threshold.py` with `--sweep-weights` flag: iterate `W_NLI ∈ {0.5, 0.7, 0.9}` × `NLI_GATE ∈ {0.70, 0.75, 0.80}` × `COMBINED_THRESHOLD ∈ {0.50, 0.55, 0.60, 0.65}`; report `neg_empty_rate`, `pos_recall@5`, `adv_recall@5`, `edge_recall@5` per config
-- [ ] T024 [US5] Add `hypotheses_version` to eval run JSON output in `evaluations/run_evaluation.py`
+- [x] T022 [P] [US5] Extend `evaluations/run_evaluation.py` with `--strategy` flag accepting `nli_only` (`W_VEC=0.0, W_NLI=1.0`), `vector_only`, `nli_union`; add per-failure diagnostics fields to run JSON: `nli_scores`, `vector_scores`, `combined_scores`, `admitted_by`, `missed_by` (signals that failed to admit each expected bias); snapshot full hypothesis text into run JSON alongside `hypotheses_version` (not just the version string — enables historical reproduction if the file is later overwritten)
+- [x] T023 [P] [US5] Extend `scripts/tune_threshold.py` with `--sweep-weights` flag: iterate `W_NLI ∈ {0.5, 0.7, 0.9}` × `NLI_GATE ∈ {0.70, 0.75, 0.80}` × `COMBINED_THRESHOLD ∈ {0.50, 0.55, 0.60, 0.65}`; report `neg_empty_rate`, `pos_recall@5`, `adv_recall@5`, `edge_recall@5` per config
+- [x] T024 [US5] Add `hypotheses_version` to eval run JSON output in `evaluations/run_evaluation.py`
 - [ ] T025 [US5] Run T-eval-1 (`--strategy nli_only`): record results in `evaluations/runs/`; compare to Jul 3 baseline. **Must run before T-eval-2.**
 - [ ] T026 [US5] Run T-eval-2 (`--sweep-weights`): identify best config meeting `neg_empty_rate ≥ 0.90`; record winning `W_NLI`, `NLI_GATE`, `COMBINED_THRESHOLD`
 - [ ] T027 [US5] Run T-eval-3 (sentence-level, offline only): on best T-eval-2 config, enable `SENTENCE_MODE=true` and run eval; record quality delta and latency for a 15-sentence story; **do not set as production default**
