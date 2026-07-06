@@ -19,9 +19,9 @@
 
 **Purpose**: Install dependencies and create module scaffolding that all user stories share.
 
-- [ ] T001 Install NLI dependencies: `uv add "transformers[sentencepiece]" torch --index pytorch-cpu` and verify import works
-- [ ] T002 [P] Create `src/selection/__init__.py`, `src/selection/base.py` — `SelectionStrategy` Protocol: `select(story: str) -> dict[str, float]` returning `{bias_id: score}` for all 38 biases
-- [ ] T003 [P] Create `src/nli/__init__.py` empty module scaffold
+- [x] T001 Install NLI dependencies: `uv add "transformers[sentencepiece]" torch --index pytorch-cpu` and verify import works
+- [x] T002 [P] Create `src/selection/__init__.py`, `src/selection/base.py` — `SelectionStrategy` Protocol: `select(story: str) -> dict[str, float]` returning `{bias_id: score}` for all 38 biases
+- [x] T003 [P] Create `src/nli/__init__.py` empty module scaffold
 
 **Checkpoint**: `python -c "from transformers import pipeline"` succeeds. Module directories exist.
 
@@ -121,7 +121,7 @@
 **Purpose**: Core timeout config, Docker bake-in, assessment regression check, ADR closure.
 
 - [ ] T029 Set `RAG_TIMEOUT_MS=5000` in `biassemble-core` Vercel env and local `.env` — required before end-to-end testing (NLI latency is incompatible with default 500ms)
-- [ ] T030 Add model bake-in to `Dockerfile`: `RUN python -c "from transformers import pipeline; pipeline('zero-shot-classification', model='MoritzLaurer/deberta-v3-base-zeroshot-v2.0')"` — prohibits runtime download at cold start
+- [x] T030 Add model bake-in to `Dockerfile`: `RUN python -c "from transformers import pipeline; pipeline('zero-shot-classification', model='MoritzLaurer/deberta-v3-base-zeroshot-v2.0')"` — prohibits runtime download at cold start
 - [ ] T031 Run `biassemble-core` assessment regression check (`pnpm eval`) against winning engine config with `RAG_TIMEOUT_MS=5000`; verify no FP rate or evidence_grounded_rate regression vs pre-spec baseline
 - [ ] T032 Update `adr/002-nli-zero-shot-shortlist.md` status to `CLOSED — MERGED` (or `CLOSED — PARKED`) with final gate numbers and winning config
 
