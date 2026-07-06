@@ -5,6 +5,7 @@ from src.providers.base import EmbeddingProvider
 from src.retrieval.query_builder import get_query_strategy
 from src.retrieval.searcher import search_chunks
 from src.schemas.internal import CandidateChunk
+from src.selection.base import StrategyMetadata
 
 
 class VectorOnlyStrategy:
@@ -20,8 +21,8 @@ class VectorOnlyStrategy:
 
     async def select(
         self, story: str, story_analysis=None
-    ) -> tuple[dict[str, float], list[CandidateChunk]]:
-        """Embed story, run vector search, apply similarity_threshold. Returns (scores, candidates)."""
+    ) -> tuple[dict[str, float], list[CandidateChunk], StrategyMetadata]:
+        """Embed story, run vector search, apply similarity_threshold. Returns (scores, candidates, meta)."""
         query_strategy = get_query_strategy(settings.query_strategy)
         query_text = query_strategy.build(story, story_analysis)
         embedding = self._provider.embed_query(query_text)
@@ -34,4 +35,4 @@ class VectorOnlyStrategy:
                 bid = chunk.bias_id
                 if bid not in scores or chunk.retrieval_score > scores[bid]:
                     scores[bid] = chunk.retrieval_score
-        return scores, candidates
+        return scores, candidates, StrategyMetadata(selection_strategy="vector_only")

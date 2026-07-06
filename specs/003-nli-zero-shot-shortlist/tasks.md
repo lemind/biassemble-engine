@@ -46,9 +46,9 @@
 
 **Independent Test**: `SELECTION_STRATEGY=vector_only` → identical baseline. `SELECTION_STRATEGY=nli_union` with a stub NLI → response includes `selection_strategy`, `nli_scores`, `hypotheses_version` fields.
 
-- [ ] T008 [US1] Extend `src/schemas.py` `RetrievalMetadata` with optional fields: `selection_strategy: str | None`, `hypotheses_version: str | None`, `nli_latency_ms: float | None`, `truncated_premise: bool | None`, `nli_scores: dict[str, float] | None`, `vector_scores: dict[str, float] | None`, `combined_scores: dict[str, float] | None`
-- [ ] T009 [US1] Create `src/selection/nli_union.py` — `NLIUnionStrategy` skeleton: constructor accepts `nli_classifier` and `combiner`; `select()` raises `NotImplementedError` (filled in US2/US4); wire into `src/main.py` lifespan when `SELECTION_STRATEGY="nli_union"`
-- [ ] T010 [US1] Update retriever response building in `src/retriever.py` to populate new `RetrievalMetadata` fields from strategy output when `SELECTION_STRATEGY=nli_union`
+- [x] T008 [US1] Extend `src/schemas.py` `RetrievalMetadata` with optional fields: `selection_strategy: str | None`, `hypotheses_version: str | None`, `nli_latency_ms: float | None`, `truncated_premise: bool | None`, `nli_scores: dict[str, float] | None`, `vector_scores: dict[str, float] | None`, `combined_scores: dict[str, float] | None`
+- [x] T009 [US1] Create `src/selection/nli_union.py` — `NLIUnionStrategy` skeleton: constructor accepts `nli_classifier` and `combiner`; `select()` raises `NotImplementedError` (filled in US2/US4); wire into `src/main.py` lifespan when `SELECTION_STRATEGY="nli_union"`
+- [x] T010 [US1] Update retriever response building in `src/retriever.py` to populate new `RetrievalMetadata` fields from strategy output when `SELECTION_STRATEGY=nli_union`
 
 **Checkpoint**: `SELECTION_STRATEGY=vector_only` still passes baseline. `SELECTION_STRATEGY=nli_union` raises `NotImplementedError` cleanly (expected — NLI not yet wired).
 
