@@ -1,0 +1,239 @@
+version: "v1"
+
+# Authoring rules: actor-language ("The narrator..."), mechanism-shaped,
+# tonal biases get tonal phrasing, disambiguate related biases.
+# Priority order: known-miss biases from spec 002 diagnostics first.
+# Never read eval stories while authoring — hypothesis-to-eval leakage fakes the win.
+
+hypotheses:
+  # ── Priority: known-miss biases from spec 002 diagnostics ─────────────────
+  - bias_id: overconfidence_bias
+    hypothesis: >-
+      The narrator expresses certainty about their own judgment or prediction
+      without acknowledging the realistic range of possible outcomes, and refuses
+      to hedge even when the uncertainty is real and significant.
+
+  - bias_id: confirmation_bias
+    hypothesis: >-
+      The narrator seeks out information that confirms their existing view and
+      dismisses or explains away contradictory evidence rather than engaging
+      with it seriously.
+
+  - bias_id: sunk_cost_fallacy
+    hypothesis: >-
+      The narrator continues a course of action primarily because of what has
+      already been invested — time, money, or effort — treating past costs as a
+      reason to keep going rather than evaluating what the future holds.
+
+  - bias_id: hot_hand_fallacy
+    hypothesis: >-
+      The narrator believes a person or team on a recent winning streak is more
+      likely to keep succeeding because they are in the zone or on a roll, and
+      changes strategy to favor whoever has been performing well recently.
+
+  - bias_id: availability_heuristic
+    hypothesis: >-
+      The narrator judges how likely or dangerous something is based on how
+      easily a vivid or recent example comes to mind, rather than consulting
+      actual statistics or base rates.
+
+  # ── Remaining 33 in alphabetical order ────────────────────────────────────
+  - bias_id: affect_heuristic
+    hypothesis: >-
+      The narrator uses emotional reactions — whether something feels good or
+      bad — as the primary basis for judging its risk or safety, without
+      examining actual evidence or data.
+
+  - bias_id: ambiguity_effect
+    hypothesis: >-
+      The narrator avoids an option primarily because its probability or outcome
+      is unknown rather than because the option is objectively worse, choosing
+      the familiar over the uncertain even when the uncertain option looks better.
+
+  - bias_id: anchoring_bias
+    hypothesis: >-
+      The narrator remains anchored to an initial number, estimate, or reference
+      point and makes only small adjustments away from it, even when that
+      starting value is arbitrary or clearly outdated.
+
+  - bias_id: authority_bias
+    hypothesis: >-
+      The narrator accepts a claim or defers to a decision because of the
+      credentials, seniority, or prestige of the source rather than evaluating
+      the underlying reasoning or evidence.
+
+  - bias_id: bandwagon_effect
+    hypothesis: >-
+      The narrator adopts a view, strategy, or purchase because most people
+      around them hold it, treating popularity or social consensus as evidence
+      that something is correct rather than reasoning independently.
+
+  - bias_id: base_rate_neglect
+    hypothesis: >-
+      The narrator makes a probability judgment based on the specific details of
+      a case without asking how often situations like this actually occur in
+      general, ignoring statistical base rates when vivid details are available.
+
+  - bias_id: choice_supportive_bias
+    hypothesis: >-
+      The narrator remembers a past decision as clearly correct or better than
+      the alternatives, without accurately acknowledging the doubts or drawbacks
+      that were visible at the time the choice was made.
+
+  - bias_id: curse_of_knowledge
+    hypothesis: >-
+      The narrator explains or instructs in a way that assumes the audience
+      already possesses knowledge the narrator has, and fails to notice that
+      foundational context is missing for the listener.
+
+  - bias_id: decoy_effect
+    hypothesis: >-
+      The narrator's preference between two options shifts when a third, clearly
+      inferior option is added to the set, because the decoy makes one of the
+      original options look relatively more attractive.
+
+  - bias_id: dunning_kruger_effect
+    hypothesis: >-
+      The narrator expresses high confidence in a domain where they have limited
+      knowledge, showing no awareness of the gaps or limits in what they
+      actually understand.
+
+  - bias_id: escalation_of_commitment
+    hypothesis: >-
+      The narrator increases investment — adding more time, money, or effort —
+      into a failing course of action in order to justify or recover what has
+      already been spent, despite mounting evidence that the direction is not
+      working.
+
+  - bias_id: framing_effect
+    hypothesis: >-
+      The narrator responds differently to two options that are objectively
+      equivalent because one is framed as a potential gain and the other as a
+      potential loss, even though the underlying outcomes are identical.
+
+  - bias_id: fundamental_attribution_error
+    hypothesis: >-
+      The narrator explains another person's failure or poor behavior through
+      their character or ability rather than the circumstances or pressures they
+      were dealing with at the time.
+
+  - bias_id: gamblers_fallacy
+    hypothesis: >-
+      The narrator believes that a streak of one outcome makes the opposite
+      outcome more likely on the next independent event, as if chance must
+      balance out or correct itself after a run.
+
+  - bias_id: halo_effect
+    hypothesis: >-
+      The narrator credits someone with positive qualities — trustworthiness,
+      competence, or good judgment — in areas unrelated to the one domain where
+      that person is known to excel or has made a strong impression.
+
+  - bias_id: hindsight_bias
+    hypothesis: >-
+      The narrator describes a past outcome as having been obvious or predictable
+      all along, looking back on it after already knowing how events turned out
+      in a way that misrepresents how uncertain things actually seemed beforehand.
+
+  - bias_id: illusion_of_control
+    hypothesis: >-
+      The narrator believes their personal actions, rituals, or choices can
+      influence or control an outcome that is actually determined by chance or
+      forces outside their control.
+
+  - bias_id: in_group_bias
+    hypothesis: >-
+      The narrator judges or treats a member of their own group more favorably
+      than an equally qualified outsider, applying different standards based on
+      group membership rather than individual merit.
+
+  - bias_id: loss_aversion
+    hypothesis: >-
+      The narrator feels the potential loss of something they have far more
+      strongly than the potential gain of something of equal value, and accepts
+      worse expected outcomes in order to avoid the possibility of loss.
+
+  - bias_id: narrative_fallacy
+    hypothesis: >-
+      The narrator constructs a confident causal story explaining why an outcome
+      happened, when the outcome was more plausibly the result of chance,
+      complexity, or factors they did not observe.
+
+  - bias_id: negativity_bias
+    hypothesis: >-
+      The narrator gives significantly more weight to negative information,
+      setbacks, or criticism than to positive information of equal significance,
+      letting bad news dominate their assessment or memory.
+
+  - bias_id: omission_bias
+    hypothesis: >-
+      The narrator treats inaction as a safe or neutral default and judges harm
+      caused by acting as worse than equivalent harm caused by failing to act,
+      even when inaction has predictable negative consequences.
+
+  - bias_id: optimism_bias
+    hypothesis: >-
+      The narrator assumes their own situation will turn out better than the
+      statistical average for comparable situations, without a specific reason
+      to expect different results from the base rate.
+
+  - bias_id: planning_fallacy
+    hypothesis: >-
+      The narrator sets timelines or budgets based on how long the work would
+      take if everything goes right, without consulting how long comparable
+      projects have actually taken or building in realistic contingency.
+
+  - bias_id: projection_bias
+    hypothesis: >-
+      The narrator makes long-term plans or predictions based on their current
+      preferences or emotional state, without accounting for how those
+      preferences will likely change over time.
+
+  - bias_id: recency_bias
+    hypothesis: >-
+      The narrator judges the likelihood of a future outcome or the quality of
+      a person's performance based primarily on what has happened recently,
+      discounting a longer historical pattern in favor of the latest data points.
+
+  - bias_id: representativeness_heuristic
+    hypothesis: >-
+      The narrator judges how likely something is based on how closely it
+      resembles a typical example or stereotype, overriding available statistical
+      information about actual frequency.
+
+  - bias_id: self_serving_bias
+    hypothesis: >-
+      The narrator takes personal credit for successes while attributing failures
+      to external factors, bad luck, or other people rather than to their own
+      decisions.
+
+  - bias_id: spotlight_effect
+    hypothesis: >-
+      The narrator believes others notice, remember, and judge their mistakes or
+      awkward moments far more than those people actually do, overestimating
+      how much attention their behavior receives.
+
+  - bias_id: status_quo_bias
+    hypothesis: >-
+      The narrator prefers the existing arrangement or default option without
+      genuinely evaluating whether it is better than the alternatives, treating
+      any change as inherently risky regardless of the evidence.
+
+  - bias_id: stereotyping_bias
+    hypothesis: >-
+      The narrator judges or predicts an individual's behavior, ability, or
+      views based on their group membership rather than examining that person's
+      actual record or individual behavior.
+
+  - bias_id: survivorship_bias
+    hypothesis: >-
+      The narrator draws conclusions about what leads to success by examining
+      only the visible successes, without asking what happened to the cases that
+      failed under the same conditions.
+
+  - bias_id: zero_risk_bias
+    hypothesis: >-
+      The narrator chooses to eliminate a small risk completely rather than take
+      an action that would reduce a larger risk by a greater total amount,
+      treating zero residual probability as uniquely and disproportionately
+      desirable.

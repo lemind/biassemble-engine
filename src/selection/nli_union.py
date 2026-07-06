@@ -16,17 +16,28 @@ class NLIUnionStrategy:
     Combiner is wired in Phase 6 (T018-T021). Until then, NLI gate alone admits biases.
     """
 
-    def __init__(self, nli_classifier, combiner, vector_strategy: VectorOnlyStrategy, hypotheses=None) -> None:
+    def __init__(
+        self,
+        nli_classifier,
+        combiner,
+        vector_strategy: VectorOnlyStrategy,
+        hypotheses: list[tuple[str, str]] | None = None,
+        hypotheses_version: str | None = None,
+    ) -> None:
         self._nli_classifier = nli_classifier
         self._combiner = combiner
         self._vector_strategy = vector_strategy
-        self._hypotheses: list[tuple[str, str]] | None = hypotheses
+        self._hypotheses = hypotheses
+        self._hypotheses_version = hypotheses_version
 
     async def select(
         self, story: str, story_analysis=None
     ) -> tuple[dict[str, float], list[CandidateChunk], StrategyMetadata]:
         if not self._hypotheses:
-            raise NotImplementedError("Hypotheses not loaded — Phase 5 (T017)")
+            raise RuntimeError(
+                "NLIUnionStrategy: hypotheses not loaded — "
+                "set SELECTION_STRATEGY=nli_union only after hypotheses/v1.yaml is present"
+            )
 
         loop = asyncio.get_running_loop()
 
@@ -47,6 +58,7 @@ class NLIUnionStrategy:
 
         return scores, candidates, StrategyMetadata(
             selection_strategy="nli_union",
+            hypotheses_version=self._hypotheses_version,
             nli_latency_ms=nli_result.latency_ms,
             truncated_premise=nli_result.truncated_premise,
             nli_scores=nli_result.scores,

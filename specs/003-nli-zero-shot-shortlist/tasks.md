@@ -75,9 +75,9 @@
 
 **Independent Test**: Server starts, hypotheses loaded without error. `evaluations/positive/marcus_novatech.json` scores `anchoring_bias` and `sunk_cost_fallacy` high; an absurd hypothesis scores near zero.
 
-- [ ] T015 [P] [US3] Create `src/nli/hypothesis_loader.py` — `load_hypotheses(path: str) -> list[tuple[str, str]]`: reads YAML, validates exactly 38 entries with valid `bias_id` and `hypothesis` fields, raises `ValueError` at startup if any missing or malformed; returns list of `(bias_id, hypothesis)` tuples
-- [ ] T016 [P] [US3] Create `hypotheses/v1.yaml` — author all 38 hypotheses following authoring rules from `research.md` §Hypothesis Authoring: actor-language, mechanism-shaped, tonal biases get tonal phrasing, disambiguate related biases. Priority order: `overconfidence_bias`, `confirmation_bias`, `sunk_cost_fallacy`, `hot_hand_fallacy`, `availability_heuristic` first (known-miss biases from spec 002 diagnostics), then remaining 33. One hypothesis per bias.
-- [ ] T017 [US3] Add hypothesis load to `src/main.py` lifespan handler alongside NLI model: `app.state.hypotheses = load_hypotheses(config.HYPOTHESES_PATH)`; wire into `NLIUnionStrategy` constructor
+- [x] T015 [P] [US3] Create `src/nli/hypothesis_loader.py` — `load_hypotheses(path: str) -> list[tuple[str, str]]`: reads YAML, validates exactly 38 entries with valid `bias_id` and `hypothesis` fields, raises `ValueError` at startup if any missing or malformed; returns list of `(bias_id, hypothesis)` tuples
+- [x] T016 [P] [US3] Create `hypotheses/v1.yaml` — author all 38 hypotheses following authoring rules from `research.md` §Hypothesis Authoring: actor-language, mechanism-shaped, tonal biases get tonal phrasing, disambiguate related biases. Priority order: `overconfidence_bias`, `confirmation_bias`, `sunk_cost_fallacy`, `hot_hand_fallacy`, `availability_heuristic` first (known-miss biases from spec 002 diagnostics), then remaining 33. One hypothesis per bias.
+- [x] T017 [US3] Add hypothesis load to `src/main.py` lifespan handler alongside NLI model: `app.state.hypotheses = load_hypotheses(config.HYPOTHESES_PATH)`; wire into `NLIUnionStrategy` constructor
 
 **Checkpoint**: `GET /health` returns healthy with `hypotheses_version: "v1"` in response. Sanity ritual passes with real hypotheses.
 
