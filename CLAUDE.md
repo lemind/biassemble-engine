@@ -1,19 +1,19 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-specs/002-improve-taxonomy-retrieval/plan.md
+specs/003-nli-zero-shot-shortlist/plan.md
 
 Supporting artifacts:
-- specs/002-improve-taxonomy-retrieval/spec.md — feature specification
-- specs/002-improve-taxonomy-retrieval/research.md — technical decisions and rationale
-- specs/002-improve-taxonomy-retrieval/data-model.md — schema changes (delta from 001)
-- specs/002-improve-taxonomy-retrieval/checklists/requirements.md — spec quality checklist (completed)
-- specs/001-rag-retrieval/data-model.md — full baseline schema (reference)
-- specs/001-rag-retrieval/contracts/retrieve-biases.md — POST /retrieve-biases contract (unchanged)
+- specs/003-nli-zero-shot-shortlist/spec.md — feature specification
+- specs/003-nli-zero-shot-shortlist/research.md — technical decisions and rationale
+- specs/003-nli-zero-shot-shortlist/data-model.md — new entities and config (no DB changes)
+- specs/003-nli-zero-shot-shortlist/contracts/retrieve-biases-v2.md — additive contract changes
+- adr/002-nli-zero-shot-shortlist.md — accepted decision record (prompt-ADR, paste into sessions)
+- adr/001-vector-search-retrieval.md — baseline decision record (retroactive)
+- specs/001-rag-retrieval/contracts/retrieve-biases.md — POST /retrieve-biases contract (v1, unchanged)
 - specs/001-rag-retrieval/contracts/health.md — GET /health contract (unchanged)
 - specs/001-rag-retrieval/contracts/stats.md — GET /stats contract (unchanged)
 - specs/001-rag-retrieval/python-patterns.md — Python patterns reference
-- biassemble-rag-spec-v1.md — full technical design spec (authoritative)
 <!-- SPECKIT END -->
 
 ## Conventions
