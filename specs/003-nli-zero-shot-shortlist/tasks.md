@@ -31,10 +31,10 @@
 
 **Purpose**: Config plumbing and `VectorOnlyStrategy` must exist before any NLI work begins — all user stories depend on the strategy injection point in `src/main.py`.
 
-- [ ] T004 Add new env vars to `src/config.py`: `SELECTION_STRATEGY` (default `"vector_only"`), `NLI_MODEL` (default `"MoritzLaurer/deberta-v3-base-zeroshot-v2.0"`), `W_NLI` (default `0.7`), `W_VEC` (default `0.3`), `NLI_GATE` (default `0.80`), `VEC_GATE` (default `0.35`), `COMBINED_THRESHOLD` (default `0.60`), `SENTENCE_MODE` (default `False`), `HYPOTHESES_PATH` (default `"hypotheses/v1.yaml"`)
-- [ ] T005 Create `src/selection/vector_only.py` — `VectorOnlyStrategy`: wraps existing retriever output; maps each bias to its `max_chunk_cosine` (0.0 for absent biases — for combiner use only); `retrieval_score` in `BiasResult` remains the raw cosine — backward-compatible with pre-spec response
-- [ ] T006 Wire `SelectionStrategy` injection into `src/main.py` lifespan: instantiate `VectorOnlyStrategy` when `SELECTION_STRATEGY="vector_only"`; store on `app.state`; pass into retriever call site in `src/retriever.py`
-- [ ] T007 Update `src/retriever.py` to delegate candidate admission to `app.state.selection_strategy.select(story)` instead of the inline vector threshold — threshold logic moves into `VectorOnlyStrategy`
+- [x] T004 Add new env vars to `src/config.py`: `SELECTION_STRATEGY` (default `"vector_only"`), `NLI_MODEL` (default `"MoritzLaurer/deberta-v3-base-zeroshot-v2.0"`), `W_NLI` (default `0.7`), `W_VEC` (default `0.3`), `NLI_GATE` (default `0.80`), `VEC_GATE` (default `0.35`), `COMBINED_THRESHOLD` (default `0.60`), `SENTENCE_MODE` (default `False`), `HYPOTHESES_PATH` (default `"hypotheses/v1.yaml"`)
+- [x] T005 Create `src/selection/vector_only.py` — `VectorOnlyStrategy`: wraps existing retriever output; maps each bias to its `max_chunk_cosine` (0.0 for absent biases — for combiner use only); `retrieval_score` in `BiasResult` remains the raw cosine — backward-compatible with pre-spec response
+- [x] T006 Wire `SelectionStrategy` injection into `src/main.py` lifespan: instantiate `VectorOnlyStrategy` when `SELECTION_STRATEGY="vector_only"`; store on `app.state`; pass into retriever call site in `src/retriever.py`
+- [x] T007 Update `src/retriever.py` to delegate candidate admission to `app.state.selection_strategy.select(story)` instead of the inline vector threshold — threshold logic moves into `VectorOnlyStrategy`
 
 **Checkpoint**: Existing eval run against Jul 3 baseline reproduces identical numbers. `SELECTION_STRATEGY=vector_only` response is byte-for-byte identical to pre-spec.
 

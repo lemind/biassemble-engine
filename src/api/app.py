@@ -10,6 +10,7 @@ from src.db.queries import ROSTER_QUERY
 from src.observability import configure_logging
 from src.providers.sentence_transformer import SentenceTransformerProvider
 from src.schemas.response import BiasResult
+from src.selection.vector_only import VectorOnlyStrategy
 
 
 @asynccontextmanager
@@ -31,6 +32,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         pool = None
     app.state.provider = provider
     app.state.pool = pool
+    app.state.selection_strategy = VectorOnlyStrategy(provider, pool)
 
     roster: list[BiasResult] = []
     if pool is not None:
