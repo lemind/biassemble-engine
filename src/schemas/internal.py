@@ -5,6 +5,7 @@ CHUNK_TYPE_EXAMPLE = "semantic_example"
 CHUNK_TYPE_INDICATOR = "semantic_indicator"
 CHUNK_TYPE_FALSE_POSITIVE = "semantic_false_positive"
 CHUNK_TYPE_RELATED = "semantic_related"
+CHUNK_TYPE_STORY_PATTERN = "semantic_story_pattern"
 
 
 @dataclass
