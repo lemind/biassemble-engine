@@ -1,4 +1,4 @@
-version: "v1"
+version: "v2"
 
 # Authoring rules: actor-language ("The narrator..."), mechanism-shaped,
 # tonal biases get tonal phrasing, disambiguate related biases.
@@ -9,15 +9,18 @@ hypotheses:
   # ── Priority: known-miss biases from spec 002 diagnostics ─────────────────
   - bias_id: overconfidence_bias
     hypothesis: >-
-      The narrator expresses certainty about their own judgment or prediction
-      without acknowledging the realistic range of possible outcomes, and refuses
-      to hedge even when the uncertainty is real and significant.
+      The narrator makes a confident personal prediction or assessment about
+      how something will turn out, expressing certainty that exceeds what the
+      available evidence supports, without acknowledging that the outcome is
+      genuinely uncertain or that others with the same information might
+      reasonably disagree.
 
   - bias_id: confirmation_bias
     hypothesis: >-
-      The narrator seeks out information that confirms their existing view and
-      dismisses or explains away contradictory evidence rather than engaging
-      with it seriously.
+      The narrator accepts information that aligns with their prior belief
+      without scrutiny while finding reasons to doubt, dismiss, or reframe
+      information that contradicts it, maintaining their original conclusion
+      regardless of the weight of evidence against it.
 
   - bias_id: sunk_cost_fallacy
     hypothesis: >-
@@ -33,16 +36,18 @@ hypotheses:
 
   - bias_id: availability_heuristic
     hypothesis: >-
-      The narrator judges how likely or dangerous something is based on how
-      easily a vivid or recent example comes to mind, rather than consulting
-      actual statistics or base rates.
+      The narrator estimates how common, likely, or significant something is
+      based on how easily a vivid or personally memorable example of it comes
+      to mind, without accounting for how representative that example is of
+      the actual frequency or distribution.
 
   # ── Remaining 33 in alphabetical order ────────────────────────────────────
   - bias_id: affect_heuristic
     hypothesis: >-
-      The narrator uses emotional reactions — whether something feels good or
-      bad — as the primary basis for judging its risk or safety, without
-      examining actual evidence or data.
+      The narrator relies on whether something feels good or bad as the main
+      basis for judging its quality, risk, or value, treating an emotional
+      reaction as a substitute for examining the actual evidence or reasoning
+      about consequences.
 
   - bias_id: ambiguity_effect
     hypothesis: >-
@@ -70,9 +75,10 @@ hypotheses:
 
   - bias_id: base_rate_neglect
     hypothesis: >-
-      The narrator makes a probability judgment based on the specific details of
-      a case without asking how often situations like this actually occur in
-      general, ignoring statistical base rates when vivid details are available.
+      The narrator estimates the probability of an outcome by focusing on the
+      vivid or specific features of the individual case, while failing to ask
+      how often that type of outcome occurs across comparable cases, even when
+      such statistics are knowable or have been mentioned.
 
   - bias_id: choice_supportive_bias
     hypothesis: >-
@@ -107,9 +113,11 @@ hypotheses:
 
   - bias_id: framing_effect
     hypothesis: >-
-      The narrator responds differently to two options that are objectively
-      equivalent because one is framed as a potential gain and the other as a
-      potential loss, even though the underlying outcomes are identical.
+      The narrator's decision is determined by whether identical information is
+      described as a gain or a loss, so that the same factual outcome phrased
+      in gain terms would lead to a different choice than when phrased in loss
+      terms, without the narrator questioning whether the wording is shaping
+      their judgment.
 
   - bias_id: fundamental_attribution_error
     hypothesis: >-

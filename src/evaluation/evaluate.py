@@ -15,6 +15,7 @@ import io
 import json
 import math
 import subprocess
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -205,6 +206,32 @@ def compute_deltas(
 
 # ── NLI helpers ──────────────────────────────────────────────────────────────
 
+def _psql_query(sql: str, scenario_id: str = "?") -> list[dict]:
+    """Run a SQL query via psql subprocess with retry on timeout.
+
+    Proxy vars are restored into os.environ by main_sync() before this is called.
+    Retries up to 3 times with 5s backoff — proxy connections drop between
+    sequential queries and re-establishing them adds latency.
+    Raises RuntimeError on persistent failure.
+    """
+    for attempt in range(3):
+        try:
+            result = subprocess.run(
+                ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
+                capture_output=True, text=True, timeout=120,
+            )
+            if result.returncode != 0:
+                raise RuntimeError(f"psql error: {result.stderr.strip()}")
+            return list(csv.DictReader(io.StringIO(result.stdout)))
+        except subprocess.TimeoutExpired:
+            if attempt < 2:
+                print(f"\n  timeout for {scenario_id}, retrying in 5s...", flush=True)
+                time.sleep(5)
+            else:
+                raise RuntimeError(f"psql timed out for {scenario_id} after 3 attempts")
+    return []  # unreachable
+
+
 def _compute_missed_by(
     expected: list[str],
     admitted_set: set[str],
@@ -257,14 +284,7 @@ def _retrieve_sync_nli(
         embedding = provider.embed_query(query_text)
 
         sql = _lightweight_search_query(fmt_vector(embedding), settings.taxonomy_version, settings.search_top_k)
-        result = subprocess.run(
-            ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
-            capture_output=True, text=True, timeout=60,
-        )
-        if result.returncode != 0:
-            return [], None, f"psql error: {result.stderr.strip()}"
-
-        rows = list(csv.DictReader(io.StringIO(result.stdout)))
+        rows = _psql_query(sql, scenario.scenario_id)
 
         # Mirror production path: apply similarity_threshold so normalization
         # uses the same set of biases as NLIUnionStrategy → VectorOnlyStrategy.
@@ -320,14 +340,7 @@ def _retrieve_sync(
             sql = _diagnostics_search_query(vec, settings.taxonomy_version, settings.search_top_k)
         else:
             sql = _lightweight_search_query(vec, settings.taxonomy_version, settings.search_top_k)
-        result = subprocess.run(
-            ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
-            capture_output=True, text=True, timeout=60,
-        )
-        if result.returncode != 0:
-            return [], None, f"psql error: {result.stderr.strip()}"
-
-        rows = list(csv.DictReader(io.StringIO(result.stdout)))
+        rows = _psql_query(sql, scenario.scenario_id)
         if not rows:
             return [], None, "index_not_found"
 
