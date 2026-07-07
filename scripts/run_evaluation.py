@@ -242,11 +242,19 @@ def main_remote(promote: bool) -> None:
     with httpx.Client(timeout=float(settings.evaluate_timeout_s)) as client:
         resp = client.post(url, headers=headers)
 
+    # Non-200 still fires for pre-stream errors (401 auth, 503 pool/eval_dir).
+    # Evaluation errors return 200 with {"error": ...} in the body (streaming
+    # commits the status code before we know if evaluation will succeed).
     if resp.status_code != 200:
         print(f"ERROR {resp.status_code}: {resp.text}")
         raise SystemExit(1)
 
-    run = _make_eval_run(resp.json())
+    data = resp.json()
+    if "error" in data:
+        print(f"ERROR: {data['error']} — {data.get('detail', '')}")
+        raise SystemExit(1)
+
+    run = _make_eval_run(data)
     _print_run(run)
 
     run_path = RUNS_DIR / f"run_{run.run_date}.json"

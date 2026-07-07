@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 import time
 from dataclasses import asdict
@@ -9,6 +10,7 @@ from typing import Any
 import asyncpg
 import structlog
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from src.config import settings
@@ -165,16 +167,17 @@ async def stats(request: Request) -> dict[str, Any]:
 async def evaluate(
     request: Request,
     _: None = Depends(_verify_token),
-) -> dict[str, Any]:
-    """Run the full evaluation suite and return an EvalRun JSON.
+) -> StreamingResponse:
+    """Run the full evaluation suite and stream the EvalRun JSON back.
 
-    Runs on the deployed service where the asyncpg pool has direct Supabase
-    access (no proxy). The caller saves the result locally and handles --promote.
-    Evaluation scenarios are read from evaluations/ baked into the Docker image.
+    Sends newline heartbeats every 5 s while computing so the HF Space proxy
+    does not close the idle connection (NLI takes ~90 s per scenario × 13
+    scenarios = ~20 min total). The final line of the response body is the
+    JSON result (or {"error": ...} on failure). Leading newlines are valid
+    JSON whitespace so the caller can parse the body directly with json.loads.
     """
     provider: EmbeddingProvider = request.app.state.provider
     pool: asyncpg.Pool | None = request.app.state.pool
-
     log = structlog.get_logger()
 
     if pool is None:
@@ -186,30 +189,54 @@ async def evaluate(
         log.error("evaluate_aborted", reason="eval_dir_not_found", path=str(eval_dir.resolve()))
         raise HTTPException(status_code=503, detail={"error": "eval_dir_not_found"})
 
-    log.info("evaluate_started", strategy=settings.selection_strategy)
-    t0 = time.monotonic()
-    try:
-        run = await asyncio.wait_for(
-            run_evaluation(
-                provider=provider,
-                pool=pool,
-                eval_dir=eval_dir,
-                baselines_dir=eval_dir / "baselines",
-                run_date=date.today().isoformat(),
-                taxonomy_version=settings.taxonomy_version,
-                strategy=request.app.state.selection_strategy,
-            ),
-            timeout=float(settings.evaluate_timeout_s),
-        )
-    except asyncio.TimeoutError:
-        log.error("evaluate_timeout", elapsed_s=round(time.monotonic() - t0))
-        raise HTTPException(status_code=503, detail={"error": "evaluation_timeout"})
-    except Exception as exc:
-        log.error("evaluate_failed", error=str(exc), elapsed_s=round(time.monotonic() - t0))
-        raise HTTPException(
-            status_code=500,
-            detail={"error": "evaluation_failed", "detail": str(exc)},
-        ) from exc
+    strategy = request.app.state.selection_strategy
 
-    log.info("evaluate_complete", elapsed_s=round(time.monotonic() - t0))
-    return asdict(run)
+    async def _stream():
+        log.info("evaluate_started", strategy=settings.selection_strategy)
+        t0 = time.monotonic()
+        task = asyncio.create_task(run_evaluation(
+            provider=provider,
+            pool=pool,
+            eval_dir=eval_dir,
+            baselines_dir=eval_dir / "baselines",
+            run_date=date.today().isoformat(),
+            taxonomy_version=settings.taxonomy_version,
+            strategy=strategy,
+        ))
+        deadline = t0 + float(settings.evaluate_timeout_s)
+
+        try:
+            while not task.done():
+                if time.monotonic() > deadline:
+                    log.error("evaluate_timeout", elapsed_s=round(time.monotonic() - t0))
+                    # Status code is already committed to 200 by StreamingResponse;
+                    # callers must inspect the body for {"error": ...}.
+                    yield json.dumps({"error": "evaluation_timeout"}).encode()
+                    return
+                yield b"\n"
+                await asyncio.sleep(5)
+
+            elapsed = round(time.monotonic() - t0)
+            try:
+                run = task.result()
+            except BaseException as exc:
+                # BaseException catches CancelledError (not a subclass of Exception
+                # since Python 3.8) in addition to regular evaluation failures.
+                log.error("evaluate_failed", error=str(exc), elapsed_s=elapsed)
+                yield json.dumps({"error": "evaluation_failed", "detail": str(exc)}).encode()
+                return
+
+            log.info("evaluate_complete", elapsed_s=elapsed)
+            yield json.dumps(asdict(run)).encode()
+        finally:
+            # Ensure the background task is cancelled and fully awaited on any
+            # exit path (timeout return, client disconnect, exception). Without
+            # this the NLI thread keeps running after the response is closed.
+            if not task.done():
+                task.cancel()
+            try:
+                await task
+            except BaseException:
+                pass
+
+    return StreamingResponse(_stream(), media_type="application/json")
