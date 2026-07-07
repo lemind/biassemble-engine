@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     rerank_strategy: str = "max"
     index_batch_size: int = 32
     request_timeout_ms: int = 450
+    evaluate_timeout_s: int = 1800
     log_level: str = "INFO"
     psql_search: bool = False
     engine_url: str | None = None

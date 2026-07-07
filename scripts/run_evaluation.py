@@ -239,7 +239,7 @@ def main_remote(promote: bool) -> None:
     if hf_token.exists():
         headers["Authorization"] = f"Bearer {hf_token.read_text().strip()}"
 
-    with httpx.Client(timeout=300.0) as client:
+    with httpx.Client(timeout=float(settings.evaluate_timeout_s)) as client:
         resp = client.post(url, headers=headers)
 
     if resp.status_code != 200:

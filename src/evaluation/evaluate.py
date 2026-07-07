@@ -20,6 +20,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import asyncpg
+import structlog
 
 from src.config import settings
 from src.db.queries import fmt_vector
@@ -450,10 +451,14 @@ async def run_evaluation(
     if pool is None and not settings.psql_search:
         raise ValueError("pool is required when psql_search=False")
 
+    log = structlog.get_logger()
     scenarios = load_scenarios(eval_dir)
+    total = len(scenarios)
     results: list[ScenarioResult] = []
 
-    for scenario in scenarios:
+    for i, scenario in enumerate(scenarios):
+        t_scenario = time.monotonic()
+        log.info("scenario_start", n=f"{i+1}/{total}", scenario_id=scenario.scenario_id, group=scenario.group)
         if settings.psql_search:
             retrieved_ids, _, error = await asyncio.to_thread(_retrieve_sync, scenario, provider)
         else:
@@ -469,6 +474,7 @@ async def run_evaluation(
             except Exception as exc:
                 retrieved_ids = []
                 error = str(exc)
+        log.info("scenario_done", n=f"{i+1}/{total}", scenario_id=scenario.scenario_id, latency_ms=round((time.monotonic() - t_scenario) * 1000))
 
         top_k = retrieved_ids[:K]
         expected = scenario.expected_bias_ids

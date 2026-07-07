@@ -199,7 +199,7 @@ async def evaluate(
                 taxonomy_version=settings.taxonomy_version,
                 strategy=request.app.state.selection_strategy,
             ),
-            timeout=120.0,
+            timeout=float(settings.evaluate_timeout_s),
         )
     except asyncio.TimeoutError:
         log.error("evaluate_timeout", elapsed_s=round(time.monotonic() - t0))
