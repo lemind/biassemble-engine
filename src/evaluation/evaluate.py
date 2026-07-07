@@ -459,15 +459,24 @@ async def run_evaluation(
     for i, scenario in enumerate(scenarios):
         t_scenario = time.monotonic()
         log.info("scenario_start", n=f"{i+1}/{total}", scenario_id=scenario.scenario_id, group=scenario.group)
+        nli_meta: dict | None = None
         if settings.psql_search:
             retrieved_ids, _, error = await asyncio.to_thread(_retrieve_sync, scenario, provider)
         else:
             try:
                 analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
                 req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
-                biases, _ = await retrieve(req, provider, pool, strategy)
+                biases, meta = await retrieve(req, provider, pool, strategy)
                 retrieved_ids = [b.bias_id for b in biases]
                 error = None
+                if meta.nli_scores is not None:
+                    nli_meta = {
+                        "nli_scores": meta.nli_scores,
+                        "vector_scores": meta.vector_scores,
+                        "combined_scores": meta.combined_scores,
+                        "admitted_by": None,
+                        "missed_by": None,
+                    }
             except IndexNotFoundError:
                 retrieved_ids = []
                 error = "index_not_found"
@@ -488,6 +497,11 @@ async def run_evaluation(
             mrr=mrr(retrieved_ids, expected),
             ndcg_at_k=ndcg_at_k(top_k, expected),
             error=error,
+            nli_scores=nli_meta["nli_scores"] if nli_meta else None,
+            vector_scores=nli_meta["vector_scores"] if nli_meta else None,
+            combined_scores=nli_meta["combined_scores"] if nli_meta else None,
+            admitted_by=nli_meta["admitted_by"] if nli_meta else None,
+            missed_by=nli_meta["missed_by"] if nli_meta else None,
         ))
 
     group_metrics = _aggregate(results)
