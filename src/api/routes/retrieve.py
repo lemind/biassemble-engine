@@ -239,4 +239,10 @@ async def evaluate(
             except BaseException:
                 pass
 
-    return StreamingResponse(_stream(), media_type="application/json")
+    # X-Accel-Buffering: no disables nginx proxy buffering so heartbeat chunks
+    # are flushed to the client immediately rather than held in the proxy buffer.
+    return StreamingResponse(
+        _stream(),
+        media_type="application/json",
+        headers={"X-Accel-Buffering": "no", "Cache-Control": "no-cache"},
+    )
