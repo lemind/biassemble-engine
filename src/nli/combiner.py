@@ -55,7 +55,7 @@ def combine(
         gates: list[str] = []
         if nli_scores[bid] >= config.nli_gate:
             gates.append("NLI")
-        if vec_norm[bid] >= config.vec_gate:
+        if vector_scores_raw.get(bid, 0.0) >= config.vec_gate:
             gates.append("VECTOR")
         if combined[bid] >= config.combined_threshold:
             gates.append("COMBINED")

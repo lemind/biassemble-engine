@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-"""Sweep similarity_threshold from 0.25 to 0.60 and report retrieval metrics.
+"""Sweep similarity_threshold or NLI weight configs and report retrieval metrics.
+
+--- Threshold sweep (default) ---
 
 Usage:
-    HF_HUB_OFFLINE=1 .venv/bin/python scripts/tune_threshold.py
+    PSQL_SEARCH=true HF_HUB_OFFLINE=1 .venv/bin/python scripts/tune_threshold.py
 
 Embeds all scenario stories once, fetches DB candidates once per scenario via
 psql (lightweight query — no full_document/chunk_text to avoid TOAST timeouts),
@@ -10,13 +12,39 @@ then re-runs deduplication at each candidate threshold with no extra DB queries.
 Reports neg_empty, pos_recall@5, and adv_empty side by side.
 
 Pick the highest threshold where neg_empty = 100% that does not crush
-pos_recall@5 below the pre-feature baseline. Set it in .env manually.
+pos_recall@5 below the pre-feature baseline. Set SIMILARITY_THRESHOLD in .env.
+
+--- NLI weight sweep (--sweep-weights, T026) ---
+
+Usage:
+    # First run — downloads DeBERTa model (~500MB) to ~/.cache/huggingface/hub/:
+    PSQL_SEARCH=true .venv/bin/python scripts/tune_threshold.py --sweep-weights
+
+    # Subsequent runs — model already cached:
+    PSQL_SEARCH=true HF_HUB_OFFLINE=1 .venv/bin/python scripts/tune_threshold.py --sweep-weights
+
+Prerequisites:
+    PSQL_SEARCH=true   — required; uses psql subprocess for DB access
+    DB reachable       — fetches vector candidates for all 13 eval scenarios
+    DeBERTa cached     — run once without HF_HUB_OFFLINE=1 to download the model
+
+What it does:
+    Fetches vector candidates from DB once per scenario, runs NLI inference once
+    per scenario, then re-applies 36 weight configs in-memory (no extra DB calls).
+    Grid: W_NLI ∈ {0.5, 0.7, 0.9} × NLI_GATE ∈ {0.70, 0.75, 0.80} ×
+          COMBINED_THRESHOLD ∈ {0.50, 0.55, 0.60, 0.65}
+
+How to pick the winning config:
+    Find the row where neg_empty_rate = 100% and pos_recall@5 is highest.
+    Set W_NLI, NLI_GATE, COMBINED_THRESHOLD in .env to those values.
+    Gate: neg_empty_rate >= 0.90 required (SC-002).
 """
 import csv
 import io
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 # httpx (used by huggingface_hub) crashes on socks:// scheme.
@@ -40,12 +68,16 @@ BASELINES_DIR = EVAL_DIR / "baselines"
 THRESHOLDS = [round(0.25 + i * 0.025, 3) for i in range(15)]  # 0.250 … 0.600
 
 _NLI_WEIGHTS = [0.5, 0.7, 0.9]
-_NLI_GATES = [0.70, 0.75, 0.80]
+_NLI_GATES = [0.70, 0.75, 0.80, 0.85, 0.90, 0.95]
 _COMB_THRESHOLDS = [0.50, 0.55, 0.60, 0.65]
 
 
 def _fetch_candidates(scenario, provider) -> list[tuple[str, float]]:
-    """Return [(bias_id, score), ...] for a scenario, fetched via psql."""
+    """Return [(bias_id, score), ...] for a scenario, fetched via psql.
+
+    Retries up to 3 times on timeout — proxy connections drop between sequential
+    queries and re-establishing them adds latency.
+    """
     strategy = get_query_strategy(settings.query_strategy)
     analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
     req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
@@ -53,15 +85,25 @@ def _fetch_candidates(scenario, provider) -> list[tuple[str, float]]:
     embedding = provider.embed_query(query_text)
 
     sql = _lightweight_search_query(fmt_vector(embedding), settings.taxonomy_version, settings.search_top_k)
-    result = subprocess.run(
-        ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
-        capture_output=True, text=True, timeout=90,
-        env={**os.environ, **_saved_proxy},
-    )
-    if result.returncode != 0:
-        print(f"  psql error for {scenario.scenario_id}: {result.stderr.strip()}", file=sys.stderr)
-        return []
-    return [(r["bias_id"], float(r["retrieval_score"])) for r in csv.DictReader(io.StringIO(result.stdout))]
+    for attempt in range(3):
+        try:
+            result = subprocess.run(
+                ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
+                capture_output=True, text=True, timeout=120,
+                env={**os.environ, **_saved_proxy},
+            )
+            if result.returncode != 0:
+                print(f"  psql error for {scenario.scenario_id}: {result.stderr.strip()}", file=sys.stderr)
+                return []
+            return [(r["bias_id"], float(r["retrieval_score"])) for r in csv.DictReader(io.StringIO(result.stdout))]
+        except subprocess.TimeoutExpired:
+            if attempt < 2:
+                print(f"\n  timeout for {scenario.scenario_id}, retrying in 5s...", file=sys.stderr)
+                time.sleep(5)
+            else:
+                print(f"\n  timeout for {scenario.scenario_id} after 3 attempts, skipping", file=sys.stderr)
+                return []
+    return []
 
 
 def _apply_threshold(raw: list[tuple[str, float]], threshold: float) -> list[str]:
@@ -183,6 +225,10 @@ def sweep_weights() -> None:
         print(f"  {i}/{len(scenarios)}  {s.scenario_id}", end="\r")
     print()
 
+    # Restore proxy vars before NLIClassifier() — transformers uses requests (not
+    # httpx) so it handles socks:// fine. The proxy was popped at import time to
+    # protect httpx; restore it now so the model download / cache lookup works.
+    os.environ.update(_saved_proxy)
     print("Loading NLI model (first run ~30s) ...")
     hypotheses = load_hypotheses(settings.hypotheses_path)
     nli_classifier = NLIClassifier()
