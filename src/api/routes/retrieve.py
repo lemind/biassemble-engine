@@ -189,6 +189,7 @@ async def evaluate(
                 baselines_dir=eval_dir / "baselines",
                 run_date=date.today().isoformat(),
                 taxonomy_version=settings.taxonomy_version,
+                strategy=request.app.state.selection_strategy,
             ),
             timeout=120.0,
         )

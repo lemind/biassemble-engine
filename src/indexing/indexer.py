@@ -79,24 +79,24 @@ async def _upsert(
         for ec in embedded
     ]
 
+    # Snapshot row count before any attempt so retries after a partial timeout
+    # don't double-count rows inserted by a previous attempt.
+    async with pool.acquire() as conn:
+        before = await conn.fetchval(
+            "SELECT COUNT(*) FROM bias_embeddings WHERE taxonomy_version = $1",
+            taxonomy_version,
+        )
+
     for attempt in range(1, _UPSERT_RETRIES + 1):
         try:
             t0 = time.monotonic()
             print(f"indexer: upsert attempt {attempt}/{_UPSERT_RETRIES} ({len(rows)} rows)...")
             async with asyncio.timeout(_UPSERT_TIMEOUT):
                 async with pool.acquire() as conn:
-                    before = await conn.fetchval(
-                        "SELECT COUNT(*) FROM bias_embeddings WHERE taxonomy_version = $1",
-                        taxonomy_version,
-                    )
                     await conn.executemany(UPSERT_CHUNK, rows)
-                    after = await conn.fetchval(
-                        "SELECT COUNT(*) FROM bias_embeddings WHERE taxonomy_version = $1",
-                        taxonomy_version,
-                    )
             elapsed = int((time.monotonic() - t0) * 1000)
             print(f"indexer: upsert done in {elapsed}ms")
-            return int(after - before)
+            break
         except (asyncio.TimeoutError, Exception) as exc:
             elapsed = int((time.monotonic() - t0) * 1000)
             print(f"indexer: attempt {attempt} failed after {elapsed}ms — {type(exc).__name__}: {exc}")
@@ -110,7 +110,12 @@ async def _upsert(
             print(f"indexer: retrying in 2s...")
             await asyncio.sleep(2)
 
-    return 0  # unreachable
+    async with pool.acquire() as conn:
+        after = await conn.fetchval(
+            "SELECT COUNT(*) FROM bias_embeddings WHERE taxonomy_version = $1",
+            taxonomy_version,
+        )
+    return int(after - before)
 
 
 def _write_chunks_artifact(chunks: list[BiasChunk]) -> None:

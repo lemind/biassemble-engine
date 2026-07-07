@@ -271,6 +271,10 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    if args.diagnostics and args.strategy != "vector_only":
+        print("ERROR: --diagnostics is only supported with --strategy vector_only; NLI paths do not produce chunk-level diagnostics")
+        raise SystemExit(1)
+
     if args.diagnostics and (settings.engine_url or not settings.psql_search):
         print("WARNING: --diagnostics is only supported with PSQL_SEARCH=true and ENGINE_URL unset; flag ignored")
 
