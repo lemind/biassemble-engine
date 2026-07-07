@@ -51,6 +51,19 @@ STATS_BY_VERSION = f"""
     GROUP BY taxonomy_version
 """
 
+# Fetch one definition chunk per bias_id for a list of IDs — used to hydrate
+# NLI-admitted biases that have no vector candidate chunk.
+FETCH_BY_BIAS_IDS = f"""
+    SELECT DISTINCT ON (bias_id)
+        bias_id, chunk_type, source_section, source, chunk_text, full_document,
+        0.0 AS retrieval_score
+    FROM {TABLE}
+    WHERE taxonomy_version = $1
+      AND bias_id = ANY($2)
+      AND chunk_type = 'semantic_definition'
+    ORDER BY bias_id, chunk_index
+"""
+
 # One definition chunk per bias — used to build the fallback roster at startup.
 # DISTINCT ON picks the first row per bias_id ordered by chunk_index so the result
 # is deterministic even if multiple definition chunks exist.

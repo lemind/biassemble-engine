@@ -13,9 +13,11 @@ from src.observability import (
     KEY_REQUEST_ID,
     TimingContext,
 )
+from src.db.queries import FETCH_BY_BIAS_IDS
 from src.providers.base import EmbeddingProvider
 from src.retrieval.reranker import rerank
-from src.schemas.internal import RetrievalMetadata, RetrievedBias
+from src.retrieval.searcher import _row_to_candidate
+from src.schemas.internal import CandidateChunk, RetrievalMetadata, RetrievedBias
 from src.schemas.request import RetrieveRequest
 from src.selection.base import SelectionStrategy
 from src.selection.vector_only import VectorOnlyStrategy
@@ -58,6 +60,29 @@ async def retrieve(
         raise IndexNotFoundError(settings.taxonomy_version)
 
     admitted_ids = set(scores.keys())
+
+    # NLI-admitted biases with no vector chunk won't survive the reranker's candidate
+    # filter. Fetch one definition chunk per missing bias so they can be hydrated.
+    candidate_bias_ids = {c.bias_id for c in candidates}
+    missing_ids = admitted_ids - candidate_bias_ids
+    if missing_ids and pool is not None:
+        async with pool.acquire() as conn:
+            rows = await conn.fetch(FETCH_BY_BIAS_IDS, settings.taxonomy_version, list(missing_ids))
+        if rows:
+            hydrated: list[CandidateChunk] = []
+            for r in rows:
+                c = _row_to_candidate(r)
+                hydrated.append(CandidateChunk(
+                    bias_id=c.bias_id,
+                    chunk_type=c.chunk_type,
+                    source_section=c.source_section,
+                    source=c.source,
+                    chunk_text=c.chunk_text,
+                    full_document=c.full_document,
+                    retrieval_score=scores.get(c.bias_id, 0.0),
+                ))
+            candidates = list(candidates) + hydrated
+            log.info("nli_only_admits_hydrated", count=len(rows), bias_ids=sorted(missing_ids))
 
     with TimingContext() as rerank_t:
         biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k, admitted_ids=admitted_ids)
