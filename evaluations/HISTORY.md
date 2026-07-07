@@ -33,24 +33,33 @@ Engine built: story → `all-MiniLM-L6-v2` embedding → pgvector cosine search 
 
 The ceiling was visible immediately: positive Recall@5 at 0.667, target 0.85. Misses concentrated in `overconfidence_bias` and implicit `confirmation_bias` — biases whose signal is *how* someone talks (certainty markers, implicit certainty), not *what* they talk about.
 
-### Spec 002 — three content interventions, zero movement (winter 2025)
+### Spec 002 — three content interventions, zero positive movement (winter 2025)
 
 Hypothesis: the knowledge base chunks weren't vocabulary-rich enough. Three rounds of fixes:
 
-1. **Indicator rewrites** — rewrote indicator lists from passive taxonomy prose to first-person actor language ("I know how these go" style)
+1. **Indicator rewrites (T005)** — rewrote indicator lists from passive taxonomy prose to first-person actor language ("I know how these go" style)
 2. **Atomic chunking + domain examples** — split chunks finer, added profession-specific examples (medical, finance, legal)
 3. **Story patterns** — generated 20+ short story snippets per bias via Gemini, reindexed (~760 chunks)
 
-Result after all three interventions:
+Post-T005 state (indicators + atomic chunks — this became the spec 003 baseline):
 
 | Group | Recall@5 | empty_rate |
 |-------|----------|------------|
-| positive | **0.667** | — |
+| positive | 0.667 | — |
 | negative | — | 100% |
-| edge | 0.583 | — |
-| adversarial | 0.333 → **0.000** (regressed) | — |
+| edge | **0.583** | — |
+| adversarial | **0.333** | — |
 
-Positive recall: 0.667 flat, unchanged across all three interventions. The story-patterns index additionally regressed adversarial recall from 0.333 to 0.000 and was parked unmerged.
+Then the story-patterns branch was applied on top:
+
+| Group | Change |
+|-------|--------|
+| positive | 0.667 → 0.667 (flat) |
+| adversarial | 0.333 → **0.000** (regressed) |
+
+Story-patterns branch parked unmerged. Spec 003 baseline = post-T005 state above.
+
+Positive recall: 0.667 flat across all three interventions. Edge and adversarial moved with content work, but positive — the primary target — did not.
 
 Conclusion (ADR-001): mechanism ceiling, not vocabulary gap. Single-vector embeddings encode topic. Tonal biases encode tone. Three weeks of content work, zero positive-recall movement — evidence that the problem is structural, not fixable by more examples.
 
@@ -60,14 +69,15 @@ New mechanism: `MoritzLaurer/deberta-v3-base-zeroshot-v2.0` runs 38 hypothesis p
 
 **First weight sweep (T026)** — 36 configs, w_nli × nli_gate × combined_threshold:
 
-| Config | pos R@5 | neg empty_rate |
-|--------|---------|----------------|
-| w_nli=0.5, nli_gate=0.70–0.75 | 0.792 | 40% |
-| w_nli=0.5, nli_gate=0.80 | **0.792** | **60%** |
-| w_nli=0.7–0.9, any gate | 0.583 | 40–60% |
-| vector-only (deployed) | 0.667 | **100%** |
+| Config | pos R@5 | neg empty_rate | adv R@5 |
+|--------|---------|----------------|---------|
+| w_nli=0.5, nli_gate=0.70–0.85 | 0.792 | 40–60% | 0.333 |
+| w_nli=0.5, nli_gate=0.90 | 0.792 | 80% | 0.167 |
+| w_nli=0.5, nli_gate=0.95 | 0.792 | **100%** | 0.000 |
+| w_nli=0.7–0.9, any gate | 0.583 | 40–60% | 0.333 |
+| vector-only (deployed) | 0.667 | **100%** | 0.000 |
 
-NLI produced the largest single positive-recall movement in the project's history (+0.125 vs baseline), but broke negative empty_rate (100% → 60%). The combined_threshold axis had zero effect — biases are admitted entirely via NLI or VEC gate, never by combined score alone.
+NLI at w_nli=0.5 produced +0.125 on positive recall vs baseline — the largest single movement in the project's history. But no config simultaneously achieved neg_empty=100% AND pos_r@5=0.792: raising the gate to 0.95 fixed negatives but dropped adversarial to 0.000. The combined_threshold axis had zero effect across all 36 rows — biases are admitted entirely via NLI or VEC gate, never by combined score alone.
 
 **NLI-only diagnostics (T-eval-1)** — NLI alone, W_VEC=0:
 
@@ -76,8 +86,9 @@ NLI produced the largest single positive-recall movement in the project's histor
 | positive | 0.583 | — |
 | negative | — | **20%** |
 | edge | 0.250 | — |
+| adversarial | **0.333** | — |
 
-NLI alone is weaker than vector on positives. Negative empty_rate collapses to 20% — 4 of 5 negatives leak. The culprit identified in the run JSON:
+NLI alone is weaker than vector on positives and edge, but recovers adversarial to 0.333 (matching the post-T005 baseline). Negative empty_rate collapses to 20% — 4 of 5 negatives leak. The culprit identified in the run JSON:
 
 | Negative scenario | framing_effect score | verdict |
 |-------------------|---------------------|---------|
