@@ -1,11 +1,13 @@
 import asyncio
 import os
+import time
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
 from typing import Any
 
 import asyncpg
+import structlog
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
@@ -173,13 +175,19 @@ async def evaluate(
     provider: EmbeddingProvider = request.app.state.provider
     pool: asyncpg.Pool | None = request.app.state.pool
 
+    log = structlog.get_logger()
+
     if pool is None:
+        log.error("evaluate_aborted", reason="pool_is_none")
         raise HTTPException(status_code=503, detail={"error": "database_unavailable"})
 
     eval_dir = Path("evaluations")
     if not eval_dir.exists():
+        log.error("evaluate_aborted", reason="eval_dir_not_found", path=str(eval_dir.resolve()))
         raise HTTPException(status_code=503, detail={"error": "eval_dir_not_found"})
 
+    log.info("evaluate_started", strategy=settings.selection_strategy)
+    t0 = time.monotonic()
     try:
         run = await asyncio.wait_for(
             run_evaluation(
@@ -194,11 +202,14 @@ async def evaluate(
             timeout=120.0,
         )
     except asyncio.TimeoutError:
+        log.error("evaluate_timeout", elapsed_s=round(time.monotonic() - t0))
         raise HTTPException(status_code=503, detail={"error": "evaluation_timeout"})
     except Exception as exc:
+        log.error("evaluate_failed", error=str(exc), elapsed_s=round(time.monotonic() - t0))
         raise HTTPException(
             status_code=500,
             detail={"error": "evaluation_failed", "detail": str(exc)},
         ) from exc
 
+    log.info("evaluate_complete", elapsed_s=round(time.monotonic() - t0))
     return asdict(run)
