@@ -20,6 +20,7 @@ from src.schemas.internal import (
     RetrievedBias,
 )
 from src.schemas.response import BiasResult
+from src.selection.vector_only import VectorOnlyStrategy
 
 STORY_PAYLOAD = {"story": "Marcus bought NovaTech at $142 and refuses to sell."}
 HEADERS = {"Authorization": f"Bearer {settings.rag_api_key}"}
@@ -40,6 +41,7 @@ def _make_client(monkeypatch, pool, roster=None):
         a.state.provider = mock_provider
         a.state.pool = pool
         a.state.roster = roster or []
+        a.state.selection_strategy = VectorOnlyStrategy(mock_provider, pool)
         yield
 
     monkeypatch.setattr(app.router, "lifespan_context", fake_lifespan)
@@ -90,7 +92,7 @@ def test_503_index_not_found(client, monkeypatch):
     async def empty_search(*_a, **_kw):
         return []
 
-    monkeypatch.setattr("src.retrieval.retriever.search_chunks", empty_search)
+    monkeypatch.setattr("src.selection.vector_only.search_chunks",empty_search)
     resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
     assert resp.status_code == 503
     detail = resp.json()["detail"]
@@ -105,7 +107,7 @@ def test_503_request_timeout(client, monkeypatch):
         await asyncio.sleep(10)
         return []
 
-    monkeypatch.setattr("src.retrieval.retriever.search_chunks", slow_search)
+    monkeypatch.setattr("src.selection.vector_only.search_chunks",slow_search)
     # Drop timeout to 1ms so the test doesn't actually wait
     monkeypatch.setattr("src.api.routes.retrieve.settings.request_timeout_ms", 1)
     resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
@@ -152,7 +154,7 @@ def _mock_meta() -> RetrievalMetadata:
 
 
 def test_200_happy_path_biases_present(client, monkeypatch):
-    async def fake_retrieve(req, provider, pool):
+    async def fake_retrieve(req, provider, pool, strategy):
         return [_mock_bias()], _mock_meta()
 
     monkeypatch.setattr("src.api.routes.retrieve.retriever.retrieve", fake_retrieve)
@@ -165,7 +167,7 @@ def test_200_happy_path_biases_present(client, monkeypatch):
 
 
 def test_200_request_id_echoed(client, monkeypatch):
-    async def fake_retrieve(req, provider, pool):
+    async def fake_retrieve(req, provider, pool, strategy):
         return [_mock_bias()], _mock_meta()
 
     monkeypatch.setattr("src.api.routes.retrieve.retriever.retrieve", fake_retrieve)
@@ -179,7 +181,7 @@ def test_200_request_id_echoed(client, monkeypatch):
 
 
 def test_200_retrieved_chunks_count(client, monkeypatch):
-    async def fake_retrieve(req, provider, pool):
+    async def fake_retrieve(req, provider, pool, strategy):
         return [_mock_bias()], _mock_meta()
 
     monkeypatch.setattr("src.api.routes.retrieve.retriever.retrieve", fake_retrieve)
@@ -204,7 +206,7 @@ def test_200_empty_biases_for_neutral_story(client, monkeypatch):
     async def low_score_search(*_a, **_kw):
         return [low_score_chunk]
 
-    monkeypatch.setattr("src.retrieval.retriever.search_chunks", low_score_search)
+    monkeypatch.setattr("src.selection.vector_only.search_chunks",low_score_search)
 
     resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
     assert resp.status_code == 200
@@ -237,7 +239,7 @@ def test_200_roster_fallback_when_nothing_retrieved(monkeypatch):
     async def low_score_search(*_a, **_kw):
         return [below_threshold]
 
-    monkeypatch.setattr("src.retrieval.retriever.search_chunks", low_score_search)
+    monkeypatch.setattr("src.selection.vector_only.search_chunks",low_score_search)
 
     resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
     assert resp.status_code == 200

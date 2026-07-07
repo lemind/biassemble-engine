@@ -66,7 +66,10 @@ class TaxonomySource(KnowledgeSource):
 
         for line in lines:
             if line.startswith("## "):
-                current = line[3:].strip()
+                heading = line[3:].strip()
+                if heading in sections:
+                    print(f"taxonomy WARNING: {path.name}: duplicate heading '## {heading}' — content will be overwritten")
+                current = heading
                 sections[current] = []
             elif current is not None:
                 sections[current].append(line)

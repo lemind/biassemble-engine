@@ -109,8 +109,11 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
                 )
                 for r in rows
             ]
-        except Exception:
-            pass
+            if not roster:
+                _log.warning("roster_empty", taxonomy_version=settings.taxonomy_version,
+                             msg="index may not be built yet — fallback will return empty list")
+        except Exception as exc:
+            _log.warning("roster_query_failed", error=str(exc))
     app.state.roster = roster
 
     yield

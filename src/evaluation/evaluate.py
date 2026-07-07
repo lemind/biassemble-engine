@@ -428,6 +428,7 @@ async def run_evaluation(
     baselines_dir: Path,
     run_date: str,
     taxonomy_version: str,
+    strategy=None,
 ) -> EvalRun:
     """Run all scored scenarios and return a fully populated EvalRun.
 
@@ -447,7 +448,7 @@ async def run_evaluation(
             try:
                 analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
                 req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
-                biases, _ = await retrieve(req, provider, pool)
+                biases, _ = await retrieve(req, provider, pool, strategy)
                 retrieved_ids = [b.bias_id for b in biases]
                 error = None
             except IndexNotFoundError:

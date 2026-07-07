@@ -209,7 +209,7 @@ def sweep_weights() -> None:
                 by_group: dict[str, list[dict]] = {}
                 for (s, vec_raw), nli_scores in zip(scenario_vec, nli_scores_list):
                     output = combine(nli_scores, vec_raw, config)
-                    admitted = output.admitted[:settings.return_top_k]
+                    admitted = output.admitted[:K]
                     by_group.setdefault(s.group, []).append({
                         "retrieved": admitted,
                         "recall": recall_at_k(admitted, s.expected_bias_ids),

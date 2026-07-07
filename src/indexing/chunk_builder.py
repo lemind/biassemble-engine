@@ -87,9 +87,8 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
                 if not groups:
                     groups = [doc.text]
                 for para_idx, group_text in enumerate(groups):
-                    assert para_idx < 100, (
-                        f"paragraph_index overflow: {bias_id} indicators idx={para_idx}"
-                    )
+                    if para_idx >= 100:
+                        raise ValueError(f"paragraph_index overflow: {bias_id} indicators idx={para_idx}")
                     chunk_text = f"{full_doc.name} — {source_section}: {group_text}"
                     chunks.append(BiasChunk(
                         bias_id=bias_id,
@@ -103,9 +102,8 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
                         chunk_index=section_base * 100 + para_idx,
                     ))
             elif doc.chunk_type == "story_patterns":
-                assert doc.paragraph_index < 100, (
-                    f"paragraph_index overflow: {bias_id} story_patterns idx={doc.paragraph_index}"
-                )
+                if doc.paragraph_index >= 100:
+                    raise ValueError(f"paragraph_index overflow: {bias_id} story_patterns idx={doc.paragraph_index}")
                 # No bias-name prefix — keep raw story text so embedding stays in
                 # the same vector space as real user stories.
                 chunk_text = doc.text
@@ -121,9 +119,8 @@ def build_chunks(documents: list[RawDocument], taxonomy_version: str) -> list[Bi
                     chunk_index=section_base * 100 + doc.paragraph_index,
                 ))
             else:
-                assert doc.paragraph_index < 100, (
-                    f"paragraph_index overflow: {bias_id} {doc.chunk_type} idx={doc.paragraph_index}"
-                )
+                if doc.paragraph_index >= 100:
+                    raise ValueError(f"paragraph_index overflow: {bias_id} {doc.chunk_type} idx={doc.paragraph_index}")
                 chunk_text = f"{full_doc.name} — {source_section}: {doc.text}"
                 chunks.append(BiasChunk(
                     bias_id=bias_id,
@@ -187,11 +184,10 @@ def _group_indicator_bullets(text: str) -> list[str]:
     if not classified:
         return ["- " + "\n- ".join(unmatched)]
 
+    total = sum(len(g) for g in classified)  # snapshot before unmatched redistribution
     if unmatched:
         smallest = min(classified, key=len)
         smallest.extend(unmatched)
-
-    total = sum(len(g) for g in classified)
     for g in classified:
         if total > 0 and len(g) / total > 0.8:
             print(
