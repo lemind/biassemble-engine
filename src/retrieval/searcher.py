@@ -142,6 +142,9 @@ async def _search_asyncpg(
     taxonomy_version: str,
     top_k: int,
 ) -> list[CandidateChunk]:
+    import time
+    import structlog
+    log = structlog.get_logger()
     assert pool is not None, "pool must not be None when psql_search=False"
     vec = fmt_vector(embedding)
     # $1::text::vector: asyncpg sends $1 as text (known type), PostgreSQL casts to
@@ -154,8 +157,15 @@ async def _search_asyncpg(
         f" ORDER BY embedding <=> $1::text::vector"
         f" LIMIT {top_k}"
     )
-    async with pool.acquire() as conn:
-        rows = await conn.fetch(query, vec, taxonomy_version)
+    t0 = time.monotonic()
+    log.debug("asyncpg_query_start", taxonomy_version=taxonomy_version)
+    try:
+        async with pool.acquire() as conn:
+            rows = await conn.fetch(query, vec, taxonomy_version)
+        log.info("asyncpg_query_ok", rows=len(rows), latency_ms=round((time.monotonic() - t0) * 1000))
+    except Exception as exc:
+        log.error("asyncpg_query_failed", error=str(exc), latency_ms=round((time.monotonic() - t0) * 1000))
+        raise
     return [_row_to_candidate(r) for r in rows]
 
 

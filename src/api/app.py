@@ -16,6 +16,7 @@ from src.providers.sentence_transformer import SentenceTransformerProvider
 from src.schemas.response import BiasResult
 import functools
 
+from src.db.connection import init_pool_connection
 from src.nli.classifier import NLIClassifier
 from src.nli.combiner import CombinerConfig, combine
 from src.nli.hypothesis_loader import load_hypotheses
@@ -32,17 +33,19 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
             f"Embedding dimension mismatch: "
             f"model={provider.dimension}, config={settings.embedding_dimension}"
         )
+    _log = structlog.get_logger()
     try:
         # statement_cache_size=0 required: Supabase routes through pgbouncer in
         # transaction mode, which doesn't support asyncpg's prepared statements.
         pool: asyncpg.Pool | None = await asyncpg.create_pool(
-            settings.database_url, statement_cache_size=0
+            settings.database_url, statement_cache_size=0, init=init_pool_connection
         )
-    except Exception:
+        _log.info("db_pool_created", min_size=10, max_size=10)
+    except Exception as exc:
+        _log.error("db_pool_failed", error=str(exc))
         pool = None
     app.state.provider = provider
     app.state.pool = pool
-    _log = structlog.get_logger()
     if settings.selection_strategy == "nli_union":
         hypotheses = load_hypotheses(settings.hypotheses_path)
         hypotheses_version = Path(settings.hypotheses_path).stem
