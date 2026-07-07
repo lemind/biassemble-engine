@@ -57,7 +57,7 @@ async def retrieve(
     if not candidates:
         raise IndexNotFoundError(settings.taxonomy_version)
 
-    admitted_ids = {bid for bid, s in scores.items() if s > 0.0}
+    admitted_ids = set(scores.keys())
 
     with TimingContext() as rerank_t:
         biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k, admitted_ids=admitted_ids)

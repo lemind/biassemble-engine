@@ -24,6 +24,7 @@ from src.config import settings
 from src.db.queries import fmt_vector
 from src.providers.base import EmbeddingProvider
 from src.retrieval.query_builder import get_query_strategy
+from src.nli.combiner import combine
 from src.retrieval.retriever import IndexNotFoundError, retrieve
 from src.retrieval.searcher import _dedup_bias_rows, _diagnostics_search_query, _lightweight_search_query
 from src.schemas.internal import RetrievedBias
@@ -248,8 +249,6 @@ def _retrieve_sync_nli(
     nli_meta carries nli_scores, vector_scores (normalized), combined_scores,
     admitted_by, and missed_by for diagnostic logging.
     """
-    from src.nli.combiner import combine
-
     try:
         strategy = get_query_strategy(settings.query_strategy)
         analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
@@ -278,7 +277,7 @@ def _retrieve_sync_nli(
 
         nli_result = nli_classifier.classify(scenario.story, hypotheses)
         output = combine(nli_result.scores, vec_raw, combiner_config)
-        admitted_ids = output.admitted[:settings.return_top_k]
+        admitted_ids = output.admitted[:K]
 
         nli_meta = {
             "nli_scores": nli_result.scores,

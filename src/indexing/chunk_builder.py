@@ -3,7 +3,11 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
+import structlog
+
 from src.indexing.sources.base import RawDocument
+log = structlog.get_logger()
+
 from src.schemas.internal import (
     CHUNK_TYPE_DEFINITION,
     CHUNK_TYPE_EXAMPLE,
@@ -190,10 +194,8 @@ def _group_indicator_bullets(text: str) -> list[str]:
         smallest.extend(unmatched)
     for g in classified:
         if total > 0 and len(g) / total > 0.8:
-            print(
-                f"chunk_builder WARNING: indicator group has {len(g)}/{total} bullets "
-                f"— keyword signals may need updating for post-rewrite indicator language"
-            )
+            log.warning("indicator_group_skewed", group_size=len(g), total=total,
+                        msg="keyword signals may need updating for post-rewrite indicator language")
 
     return ["- " + "\n- ".join(g) for g in classified]
 
@@ -211,4 +213,4 @@ def _compute_hash(bias_id: str, chunk_type: str, chunk_text: str, taxonomy_versi
 
 def _print_stats(chunks: list[BiasChunk]) -> None:
     bias_count = len({c.bias_id for c in chunks})
-    print(f"chunk_builder: {len(chunks)} chunks across {bias_count} biases")
+    log.info("chunks_built", chunk_count=len(chunks), bias_count=bias_count)

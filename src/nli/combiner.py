@@ -6,7 +6,7 @@ class CombinerOutput:
     admitted: list[str]
     admitted_by: dict[str, list[str]]
     nli_scores: dict[str, float]
-    vector_scores: dict[str, float]
+    vector_scores: dict[str, float]    # min-max normalized over all 38 biases, NOT raw cosine scores
     combined_scores: dict[str, float]
 
 
