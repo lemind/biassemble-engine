@@ -10,6 +10,7 @@ RUN uv sync --frozen --no-dev --no-install-project
 
 # Copy source after deps — only invalidates cache when source changes
 COPY src/ ./src/
+COPY hypotheses/ ./hypotheses/
 COPY evaluations/positive ./evaluations/positive
 COPY evaluations/negative ./evaluations/negative
 COPY evaluations/adversarial ./evaluations/adversarial
