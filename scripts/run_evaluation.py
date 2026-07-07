@@ -239,17 +239,31 @@ def main_remote(promote: bool) -> None:
     if hf_token.exists():
         headers["Authorization"] = f"Bearer {hf_token.read_text().strip()}"
 
-    with httpx.Client(timeout=float(settings.evaluate_timeout_s)) as client:
-        resp = client.post(url, headers=headers)
+    # Use streaming mode: the /evaluate endpoint sends \n heartbeats every 5 s
+    # while NLI runs, then the final JSON as the last chunk. Per-chunk read
+    # timeout of 30 s is well above the 5 s heartbeat interval; the total wall
+    # time is unbounded (no overall timeout needed — server enforces its own).
+    timeout = httpx.Timeout(connect=30.0, read=30.0, write=30.0, pool=30.0)
+    final_chunk = b""
+    with httpx.Client(timeout=timeout) as client:
+        with client.stream("POST", url, headers=headers) as resp:
+            # Non-200 fires for pre-stream errors (401, 503) raised before streaming starts.
+            if resp.status_code != 200:
+                body = resp.read()
+                print(f"ERROR {resp.status_code}: {body.decode()}")
+                raise SystemExit(1)
+            for chunk in resp.iter_bytes():
+                if chunk.strip():
+                    final_chunk = chunk
+                else:
+                    print(".", end="", flush=True)  # show heartbeat progress
 
-    # Non-200 still fires for pre-stream errors (401 auth, 503 pool/eval_dir).
-    # Evaluation errors return 200 with {"error": ...} in the body (streaming
-    # commits the status code before we know if evaluation will succeed).
-    if resp.status_code != 200:
-        print(f"ERROR {resp.status_code}: {resp.text}")
+    print()
+    if not final_chunk:
+        print("ERROR: empty response from /evaluate")
         raise SystemExit(1)
 
-    data = resp.json()
+    data = json.loads(final_chunk)
     if "error" in data:
         print(f"ERROR: {data['error']} — {data.get('detail', '')}")
         raise SystemExit(1)
@@ -258,7 +272,7 @@ def main_remote(promote: bool) -> None:
     _print_run(run)
 
     run_path = RUNS_DIR / f"run_{run.run_date}.json"
-    run_path.write_text(resp.text)
+    run_path.write_text(final_chunk.decode())
     print(f"\nSaved → {run_path}")
 
     if promote:
