@@ -1,7 +1,7 @@
 import asyncio
-import json
 import os
 import time
+import uuid
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
@@ -10,7 +10,6 @@ from typing import Any
 import asyncpg
 import structlog
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
-from fastapi.responses import StreamingResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from src.config import settings
@@ -163,86 +162,78 @@ async def stats(request: Request) -> dict[str, Any]:
     }
 
 
-@router.post("/evaluate")
-async def evaluate(
+# In-memory job store — single-process uvicorn on HF Space, no multiprocessing needed.
+_eval_jobs: dict[str, dict[str, Any]] = {}
+
+
+@router.post("/evaluate", status_code=202)
+async def evaluate_start(
     request: Request,
     _: None = Depends(_verify_token),
-) -> StreamingResponse:
-    """Run the full evaluation suite and stream the EvalRun JSON back.
+) -> dict[str, Any]:
+    """Start evaluation in the background and return a job_id immediately.
 
-    Sends newline heartbeats every 5 s while computing so the HF Space proxy
-    does not close the idle connection (NLI takes ~90 s per scenario × 13
-    scenarios = ~20 min total). The final line of the response body is the
-    JSON result (or {"error": ...} on failure). Leading newlines are valid
-    JSON whitespace so the caller can parse the body directly with json.loads.
+    HF Space's proxy hard-kills connections after ~90 s, making synchronous or
+    streaming long-running responses unreliable. Instead: POST returns 202 with
+    a job_id; the client polls GET /evaluate/{job_id} every 10 s with short
+    timeouts until the result arrives.
     """
     provider: EmbeddingProvider = request.app.state.provider
     pool: asyncpg.Pool | None = request.app.state.pool
     log = structlog.get_logger()
 
     if pool is None:
-        log.error("evaluate_aborted", reason="pool_is_none")
         raise HTTPException(status_code=503, detail={"error": "database_unavailable"})
 
     eval_dir = Path("evaluations")
     if not eval_dir.exists():
-        log.error("evaluate_aborted", reason="eval_dir_not_found", path=str(eval_dir.resolve()))
         raise HTTPException(status_code=503, detail={"error": "eval_dir_not_found"})
 
+    job_id = str(uuid.uuid4())
+    _eval_jobs[job_id] = {"status": "running"}
     strategy = request.app.state.selection_strategy
 
-    async def _stream():
-        log.info("evaluate_started", strategy=settings.selection_strategy)
+    async def _run() -> None:
+        log.info("evaluate_started", job_id=job_id, strategy=settings.selection_strategy)
         t0 = time.monotonic()
-        task = asyncio.create_task(run_evaluation(
-            provider=provider,
-            pool=pool,
-            eval_dir=eval_dir,
-            baselines_dir=eval_dir / "baselines",
-            run_date=date.today().isoformat(),
-            taxonomy_version=settings.taxonomy_version,
-            strategy=strategy,
-        ))
-        deadline = t0 + float(settings.evaluate_timeout_s)
-
         try:
-            while not task.done():
-                if time.monotonic() > deadline:
-                    log.error("evaluate_timeout", elapsed_s=round(time.monotonic() - t0))
-                    # Status code is already committed to 200 by StreamingResponse;
-                    # callers must inspect the body for {"error": ...}.
-                    yield json.dumps({"error": "evaluation_timeout"}).encode()
-                    return
-                yield b"\n"
-                await asyncio.sleep(5)
+            run = await asyncio.wait_for(
+                run_evaluation(
+                    provider=provider,
+                    pool=pool,
+                    eval_dir=eval_dir,
+                    baselines_dir=eval_dir / "baselines",
+                    run_date=date.today().isoformat(),
+                    taxonomy_version=settings.taxonomy_version,
+                    strategy=strategy,
+                ),
+                timeout=float(settings.evaluate_timeout_s),
+            )
+            log.info("evaluate_complete", job_id=job_id, elapsed_s=round(time.monotonic() - t0))
+            _eval_jobs[job_id] = {"status": "done", "result": asdict(run)}
+        except asyncio.TimeoutError:
+            log.error("evaluate_timeout", job_id=job_id, elapsed_s=round(time.monotonic() - t0))
+            _eval_jobs[job_id] = {"status": "failed", "error": "evaluation_timeout"}
+        except Exception as exc:
+            log.error("evaluate_failed", job_id=job_id, error=str(exc), elapsed_s=round(time.monotonic() - t0))
+            _eval_jobs[job_id] = {"status": "failed", "error": str(exc)}
 
-            elapsed = round(time.monotonic() - t0)
-            try:
-                run = task.result()
-            except BaseException as exc:
-                # BaseException catches CancelledError (not a subclass of Exception
-                # since Python 3.8) in addition to regular evaluation failures.
-                log.error("evaluate_failed", error=str(exc), elapsed_s=elapsed)
-                yield json.dumps({"error": "evaluation_failed", "detail": str(exc)}).encode()
-                return
+    asyncio.create_task(_run())
+    return {"job_id": job_id, "status": "running"}
 
-            log.info("evaluate_complete", elapsed_s=elapsed)
-            yield json.dumps(asdict(run)).encode()
-        finally:
-            # Ensure the background task is cancelled and fully awaited on any
-            # exit path (timeout return, client disconnect, exception). Without
-            # this the NLI thread keeps running after the response is closed.
-            if not task.done():
-                task.cancel()
-            try:
-                await task
-            except BaseException:
-                pass
 
-    # X-Accel-Buffering: no disables nginx proxy buffering so heartbeat chunks
-    # are flushed to the client immediately rather than held in the proxy buffer.
-    return StreamingResponse(
-        _stream(),
-        media_type="application/json",
-        headers={"X-Accel-Buffering": "no", "Cache-Control": "no-cache"},
-    )
+@router.get("/evaluate/{job_id}")
+async def evaluate_result(
+    job_id: str,
+    _: None = Depends(_verify_token),
+) -> dict[str, Any]:
+    """Poll for evaluation result. Returns {"status": "running"} while in progress,
+    the full EvalRun JSON when done, or 404 if the job_id is unknown."""
+    job = _eval_jobs.get(job_id)
+    if job is None:
+        raise HTTPException(status_code=404, detail={"error": "job_not_found"})
+    if job["status"] == "running":
+        return {"status": "running"}
+    if job["status"] == "failed":
+        raise HTTPException(status_code=500, detail={"error": job["error"]})
+    return job["result"]

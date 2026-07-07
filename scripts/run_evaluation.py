@@ -239,40 +239,40 @@ def main_remote(promote: bool) -> None:
     if hf_token.exists():
         headers["Authorization"] = f"Bearer {hf_token.read_text().strip()}"
 
-    # Use streaming mode: the /evaluate endpoint sends \n heartbeats every 5 s
-    # while NLI runs, then the final JSON as the last chunk. Per-chunk read
-    # timeout of 30 s is well above the 5 s heartbeat interval; the total wall
-    # time is unbounded (no overall timeout needed — server enforces its own).
-    timeout = httpx.Timeout(connect=30.0, read=30.0, write=30.0, pool=30.0)
-    final_chunk = b""
-    with httpx.Client(timeout=timeout) as client:
-        with client.stream("POST", url, headers=headers) as resp:
-            # Non-200 fires for pre-stream errors (401, 503) raised before streaming starts.
-            if resp.status_code != 200:
-                body = resp.read()
-                print(f"ERROR {resp.status_code}: {body.decode()}")
-                raise SystemExit(1)
-            for chunk in resp.iter_bytes():
-                if chunk.strip():
-                    final_chunk = chunk
-                else:
-                    print(".", end="", flush=True)  # show heartbeat progress
+    # POST /evaluate → 202 + job_id (returns immediately, computation runs in background)
+    with httpx.Client(timeout=30.0) as client:
+        resp = client.post(url, headers=headers)
+    if resp.status_code != 202:
+        print(f"ERROR {resp.status_code}: {resp.text}")
+        raise SystemExit(1)
+    job_id = resp.json()["job_id"]
+    poll_url = f"{settings.engine_url.rstrip('/')}/evaluate/{job_id}"
+    print(f"job_id={job_id}  polling every 10 s ...")
+
+    # Poll GET /evaluate/{job_id} until done
+    import time as _time
+    while True:
+        _time.sleep(10)
+        with httpx.Client(timeout=30.0) as client:
+            resp = client.get(poll_url, headers=headers)
+        if resp.status_code == 404:
+            print(f"\nERROR: job not found ({job_id})")
+            raise SystemExit(1)
+        if resp.status_code == 500:
+            print(f"\nERROR: {resp.json().get('error', resp.text)}")
+            raise SystemExit(1)
+        data = resp.json()
+        if data.get("status") == "running":
+            print(".", end="", flush=True)
+            continue
+        break
 
     print()
-    if not final_chunk:
-        print("ERROR: empty response from /evaluate")
-        raise SystemExit(1)
-
-    data = json.loads(final_chunk)
-    if "error" in data:
-        print(f"ERROR: {data['error']} — {data.get('detail', '')}")
-        raise SystemExit(1)
-
     run = _make_eval_run(data)
     _print_run(run)
 
     run_path = RUNS_DIR / f"run_{run.run_date}.json"
-    run_path.write_text(final_chunk.decode())
+    run_path.write_text(json.dumps(data, indent=2))
     print(f"\nSaved → {run_path}")
 
     if promote:
