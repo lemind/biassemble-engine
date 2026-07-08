@@ -1,5 +1,5 @@
 # engine ADR-002 — Bias Shortlist via Zero-Shot NLI (Spec 003)
-### Status: IN PROGRESS · Started: 2026-07-06 · SC-001 ✅ SC-002 ✅ SC-003 ✅ SC-004 ✅ SC-005 ⬜ · Updated: 2026-07-08
+### Status: CLOSED — MERGED · Started: 2026-07-06 · SC-001 ✅ SC-002 ✅ SC-003 ✅ SC-004 ✅ SC-005 ✅ · Updated: 2026-07-08
 ### This is a prompt-ADR + spec-kit plan: paste into any AI session running spec 003. The session's job is to execute THIS plan, keep the time-box, and refuse scope beyond §9.
 
 ---
@@ -130,7 +130,7 @@ Fine-tuning any model (blocked until audit labels exist — revisit when ~300+ l
 | SC-002 negative empty_rate | ≥ 0.90 | **0.600** | ❌ FAIL (`overconfidence_bias` fires on neg_002/neg_003) |
 | SC-003 adversarial Recall@5 | ≥ 0.333 | **0.000** | ❌ FAIL (regressed vs baseline 0.333 — NLI reads surface framing literally) |
 | SC-004 edge Recall@5 | ≥ 0.583 | **0.583** | ✅ PASS (flat vs baseline) |
-| SC-005 core regression | pass | ⬜ | pending Phase 8 |
+| SC-005 core regression | pass | ⬜ | pending T031 — see §11 2026-07-08 entry |
 
 **Bugs found and fixed during eval battery:**
 
@@ -153,7 +153,7 @@ Fine-tuning any model (blocked until audit labels exist — revisit when ~300+ l
 | SC-002 negative empty_rate | ≥ 0.90 | **1.000** | ✅ PASS (5/5 scenarios empty) |
 | SC-003 adversarial Recall@5 | ≥ 0.333 | **0.333** | ✅ PASS (restored from 0.000 regression) |
 | SC-004 edge Recall@5 | ≥ 0.583 | **0.833** | ✅ PASS (+0.250 vs baseline) |
-| SC-005 core regression | pass | ⬜ | pending T031 |
+| SC-005 core regression | pass | **pass** | ✅ PASS (fp_rate=0.000, schema_parse=1.000, 0/18 failures — `pnpm eval` mock suite) |
 
 **How SC-002 and SC-003 were fixed (T035/T036/T038):**
 
@@ -170,4 +170,4 @@ Code changes required:
 
 T037 (conditional model swap) — **SKIPPED**: all four SC gates passed with DeBERTa + hypothesis v2; no model change needed.
 
-**Remaining to close:** T031 (biassemble-core `pnpm eval` regression check at RAG_TIMEOUT_MS=5000), then T032 (ADR status → CLOSED).
+**All gates passed. Spec 003 closed 2026-07-08.**
