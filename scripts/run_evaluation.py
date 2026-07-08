@@ -249,14 +249,26 @@ def main_remote(promote: bool) -> None:
     poll_url = f"{settings.engine_url.rstrip('/')}/evaluate/{job_id}"
     print(f"job_id={job_id}  polling every 10 s ...")
 
-    # Poll GET /evaluate/{job_id} until done
+    # Poll GET /evaluate/{job_id} until done.
+    # timeout=120s: NLI thread occasionally holds the GIL long enough to delay
+    # uvicorn's response. Retry up to 5 times before giving up.
     import time as _time
     while True:
         _time.sleep(10)
-        with httpx.Client(timeout=30.0) as client:
-            resp = client.get(poll_url, headers=headers)
+        resp = None
+        for attempt in range(5):
+            try:
+                with httpx.Client(timeout=120.0) as client:
+                    resp = client.get(poll_url, headers=headers)
+                break
+            except httpx.ReadTimeout:
+                print(f"\n  poll timeout (attempt {attempt + 1}/5), retrying...", flush=True)
+                _time.sleep(5)
+        if resp is None:
+            print("\nERROR: poll timed out 5 times in a row — worker may be unresponsive")
+            raise SystemExit(1)
         if resp.status_code == 404:
-            print(f"\nERROR: job not found ({job_id})")
+            print(f"\nERROR: job not found — worker likely restarted mid-eval ({job_id})")
             raise SystemExit(1)
         if resp.status_code == 500:
             print(f"\nERROR: {resp.json().get('error', resp.text)}")
