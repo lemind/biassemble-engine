@@ -86,10 +86,13 @@ class NLIClassifier:
         raw_scores: dict[str, dict[str, float]] = {}
         for i, (bias_id, _) in enumerate(hypotheses):
             p = probs[i]
-            scores[bias_id] = float(p[self._entailment_idx])
-            raw_scores[bias_id] = {
-                self._id2label[j]: float(p[j]) for j in range(probs.shape[1])
-            }
+            score = float(p[self._entailment_idx])
+            # Multi-phrasing: keep max entailment score across phrasings.
+            if score > scores.get(bias_id, -1.0):
+                scores[bias_id] = score
+                raw_scores[bias_id] = {
+                    self._id2label[j]: float(p[j]) for j in range(probs.shape[1])
+                }
 
         return NLIResult(
             scores=scores,

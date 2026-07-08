@@ -141,10 +141,10 @@ SC-001 ✅ pos R@5=0.875 · SC-002 ❌ neg empty_rate=0.60 (target ≥ 0.90) · 
 
 **Remaining work (unblocks Phase 8):**
 
-- [ ] T035 [US5] Hypothesis v2 for SC-002: refine `overconfidence_bias` hypothesis to not fire on neg_002/neg_003 (stories without overt certainty-marker language); re-run `--strategy nli_union --promote`; target neg empty_rate ≥ 0.90 with SC-001/SC-004 held
-- [ ] T036 [US5] Adversarial analysis for SC-003: diagnose why NLI regressed adversarial 0.333 → 0.000 vs baseline (expected biases: confirmation_bias / framing_effect / affect_heuristic — NLI reads surface framing literally on adversarial stories); try hypothesis refinement for those biases; target adv R@5 ≥ 0.333 (restore baseline, no further regression)
-- [ ] T037 [P] [US5] [conditional — one iteration only] If T035+T036 do not close SC-002/SC-003: benchmark `cross-encoder/nli-MiniLM2-L6-H768` vs current `deberta-v3-base-zeroshot-v2.0` on same hypotheses + same eval; choose model by SC-002/SC-003 gate and CPU latency; update `Dockerfile` and `NLI_MODEL` env if swapping
-- [ ] T038 [US5] Re-run full eval with winning config after T035/T036 (and T037 if triggered); confirm SC-001–SC-004 all pass; promote as new baseline → Phase 8 unblocked (T029/T031/T032 can proceed)
+- [x] T035 [US5] Hypothesis v2 for SC-002: refine `overconfidence_bias` hypothesis to not fire on neg_002/neg_003 (stories without overt certainty-marker language); re-run `--strategy nli_union --promote`; target neg empty_rate ≥ 0.90 with SC-001/SC-004 held
+- [x] T036 [US5] Adversarial analysis for SC-003: diagnose why NLI regressed adversarial 0.333 → 0.000 vs baseline (expected biases: confirmation_bias / framing_effect / affect_heuristic — NLI reads surface framing literally on adversarial stories); try hypothesis refinement for those biases; target adv R@5 ≥ 0.333 (restore baseline, no further regression)
+- ~~[ ] T037 [P] [US5] [conditional — one iteration only] If T035+T036 do not close SC-002/SC-003: benchmark `cross-encoder/nli-MiniLM2-L6-H768` vs current `deberta-v3-base-zeroshot-v2.0` on same hypotheses + same eval; choose model by SC-002/SC-003 gate and CPU latency; update `Dockerfile` and `NLI_MODEL` env if swapping~~ — **SKIPPED**: all SC-001–SC-004 gates pass without model swap
+- [x] T038 [US5] Re-run full eval with winning config after T035/T036 (and T037 if triggered); confirm SC-001–SC-004 all pass; promote as new baseline → Phase 8 unblocked (T029/T031/T032 can proceed)
 
 **Checkpoint**: SC-001–SC-004 all pass at one config. Phase 8 (T029/T031/T032) unblocked.
 
