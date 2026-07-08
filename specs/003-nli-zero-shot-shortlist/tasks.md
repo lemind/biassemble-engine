@@ -120,9 +120,9 @@
 
 **Purpose**: Core timeout config, Docker bake-in, assessment regression check, ADR closure.
 
-- [ ] T029 Set `RAG_TIMEOUT_MS=5000` in `biassemble-core` Vercel env and local `.env` — required before end-to-end testing (NLI latency is incompatible with default 500ms)
+- [x] T029 Set `RAG_TIMEOUT_MS=5000` in `biassemble-core` Vercel env and local `.env` — required before end-to-end testing (NLI latency is incompatible with default 500ms)
 - [x] T030 Add model bake-in to `Dockerfile`: `RUN python -c "from transformers import pipeline; pipeline('zero-shot-classification', model='MoritzLaurer/deberta-v3-base-zeroshot-v2.0')"` — prohibits runtime download at cold start
-- [ ] T031 Run `biassemble-core` assessment regression check (`pnpm eval`) against winning engine config with `RAG_TIMEOUT_MS=5000`; verify no FP rate or evidence_grounded_rate regression vs pre-spec baseline
+- [x] T031 Run `biassemble-core` assessment regression check (`pnpm eval`) against winning engine config with `RAG_TIMEOUT_MS=5000`; verify no FP rate or evidence_grounded_rate regression vs pre-spec baseline
 - [ ] T032 Update `adr/002-nli-zero-shot-shortlist.md` status to `CLOSED — MERGED` (or `CLOSED — PARKED`) with final gate numbers and winning config
 
 **Checkpoint**: All SC-001–SC-005 pass. ADR closed.
