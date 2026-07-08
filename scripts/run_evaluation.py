@@ -27,7 +27,7 @@ import asyncpg
 import httpx
 
 from src.config import settings
-from src.evaluation.evaluate import EvalRun, GroupMetrics, ScenarioResult, run_evaluation, run_evaluation_sync
+from src.evaluation.evaluate import EvalRun, GroupMetrics, ScenarioResult, run_evaluation, run_evaluation_sync, _aggregate, load_baseline, compute_deltas, K as _EVAL_K
 
 EVAL_DIR = Path("evaluations")
 RUNS_DIR = EVAL_DIR / "runs"
@@ -226,63 +226,114 @@ def _make_eval_run(data: dict) -> EvalRun:
     )
 
 
-def main_remote(promote: bool) -> None:
-    """Call POST /evaluate on the deployed service, save result locally."""
-    RUNS_DIR.mkdir(exist_ok=True)
-    BASELINES_DIR.mkdir(exist_ok=True)
+_EVAL_GROUPS = ["positive", "negative", "adversarial", "edge"]
 
-    url = f"{settings.engine_url.rstrip('/')}/evaluate"
-    print(f"calling {url} ...")
 
-    hf_token = Path.home() / ".cache/huggingface/token"
-    headers = {"X-RAG-Key": settings.rag_api_key}
-    if hf_token.exists():
-        headers["Authorization"] = f"Bearer {hf_token.read_text().strip()}"
+def _poll_group(url: str, headers: dict, group: str) -> list[dict]:
+    """POST /evaluate?groups=<group>, poll until done, return scenario_results list."""
+    import time as _time
 
-    # POST /evaluate → 202 + job_id (returns immediately, computation runs in background)
     with httpx.Client(timeout=30.0) as client:
-        resp = client.post(url, headers=headers)
+        resp = client.post(f"{url}?groups={group}", headers=headers)
     if resp.status_code != 202:
-        print(f"ERROR {resp.status_code}: {resp.text}")
+        print(f"\nERROR {resp.status_code}: {resp.text}")
         raise SystemExit(1)
     job_id = resp.json()["job_id"]
-    poll_url = f"{settings.engine_url.rstrip('/')}/evaluate/{job_id}"
-    print(f"job_id={job_id}  polling every 10 s ...")
+    poll_url = f"{url}/{job_id}"
+    print(f"  job_id={job_id}")
+    print(f"  if client crashes, fetch manually:")
+    print(f'    curl -s \\')
+    print(f'      -H "Authorization: Bearer $(cat ~/.cache/huggingface/token)" \\')
+    _env_path = Path(__file__).parent.parent / ".env"
+    print(f'      -H "X-RAG-Key: $(grep ^RAG_API_KEY {_env_path} | cut -d= -f2)" \\')
+    print(f'      "{poll_url}"')
 
-    # Poll GET /evaluate/{job_id} until done.
-    # timeout=120s: NLI thread occasionally holds the GIL long enough to delay
-    # uvicorn's response. Retry up to 5 times before giving up.
-    import time as _time
+    _poll_timeout = httpx.Timeout(connect=30.0, read=600.0, write=30.0, pool=30.0)
+    consecutive_timeouts = 0
+    last_partial: list = []
     while True:
         _time.sleep(10)
-        resp = None
-        for attempt in range(5):
-            try:
-                with httpx.Client(timeout=120.0) as client:
-                    resp = client.get(poll_url, headers=headers)
-                break
-            except httpx.ReadTimeout:
-                print(f"\n  poll timeout (attempt {attempt + 1}/5), retrying...", flush=True)
-                _time.sleep(5)
-        if resp is None:
-            print("\nERROR: poll timed out 5 times in a row — worker may be unresponsive")
-            raise SystemExit(1)
+        try:
+            with httpx.Client(timeout=_poll_timeout) as client:
+                resp = client.get(poll_url, headers=headers)
+            consecutive_timeouts = 0
+        except (httpx.ReadTimeout, httpx.ConnectTimeout):
+            consecutive_timeouts += 1
+            print(f"\n  timeout ×{consecutive_timeouts}", end="", flush=True)
+            continue
         if resp.status_code == 404:
-            print(f"\nERROR: job not found — worker likely restarted mid-eval ({job_id})")
+            if last_partial:
+                print(f"\n  Space restarted — {len(last_partial)} scenarios recovered from client cache")
+                print(f"  to retry missing scenarios re-run: PYTHONUNBUFFERED=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_union --promote")
+                return last_partial
+            print(f"\n  job not found — Space may have restarted before any scenario completed")
+            print(f"  re-run: PYTHONUNBUFFERED=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_union --promote")
             raise SystemExit(1)
         if resp.status_code == 500:
             print(f"\nERROR: {resp.json().get('error', resp.text)}")
             raise SystemExit(1)
         data = resp.json()
-        if data.get("status") == "running":
-            print(".", end="", flush=True)
+        status = data.get("status")
+        done = data.get("scenarios_done", 0)
+        total = data.get("scenarios_total", 0)
+        last_partial = data.get("partial", last_partial)
+        if status == "running":
+            print(f" {done}/{total}", end="", flush=True)
             continue
-        break
+        if status == "partial":
+            # /tmp survived Space restart — job is dead but disk has partial data
+            print(f"\n  Space restarted — recovered {len(last_partial)}/{total} scenarios from Space disk")
+            print(f"  to retry missing scenarios re-run: PYTHONUNBUFFERED=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_union --promote")
+            return last_partial
+        # done
+        return data.get("scenario_results", [])
+
+
+def main_remote(promote: bool) -> None:
+    """Call POST /evaluate on the deployed service one group at a time, merge results."""
+    RUNS_DIR.mkdir(exist_ok=True)
+    BASELINES_DIR.mkdir(exist_ok=True)
+
+    base_url = f"{settings.engine_url.rstrip('/')}/evaluate"
+    hf_token = Path.home() / ".cache/huggingface/token"
+    headers = {"X-RAG-Key": settings.rag_api_key}
+    if hf_token.exists():
+        headers["Authorization"] = f"Bearer {hf_token.read_text().strip()}"
+
+    all_scenario_results: list[dict] = []
+
+    for group in _EVAL_GROUPS:
+        print(f"\n[{group}]", end=" ", flush=True)
+        results = _poll_group(base_url, headers, group)
+        all_scenario_results.extend(results)
+        print(f"  → {len(results)} scenarios", flush=True)
+
+    # Reconstruct a full EvalRun from merged scenario results
+    from datetime import date as _date
+
+    run_date = _date.today().isoformat()
+    scenario_results_objs = [ScenarioResult(**r) for r in all_scenario_results]
+    group_metrics = _aggregate(scenario_results_objs)
+    baseline = load_baseline(BASELINES_DIR)
+    deltas = compute_deltas(group_metrics, baseline) if baseline else None
+
+    run = EvalRun(
+        run_date=run_date,
+        taxonomy_version=settings.taxonomy_version,
+        embedding_model=settings.embedding_model,
+        k=_EVAL_K,
+        scenario_results=scenario_results_objs,
+        group_metrics=group_metrics,
+        deltas=deltas,
+        selection_strategy="nli_union",
+        hypotheses_version=None,
+        hypotheses=None,
+    )
 
     print()
-    run = _make_eval_run(data)
     _print_run(run)
 
+    data = asdict(run)
     run_path = RUNS_DIR / f"run_{run.run_date}.json"
     run_path.write_text(json.dumps(data, indent=2))
     print(f"\nSaved → {run_path}")

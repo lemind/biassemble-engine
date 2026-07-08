@@ -6,6 +6,7 @@ def rerank(
     threshold: float,
     return_top_k: int,
     admitted_ids: set[str] | None = None,
+    score_override: dict[str, float] | None = None,
 ) -> list[RetrievedBias]:
     """Collapse raw candidate chunks into deduplicated, ranked RetrievedBias objects.
 
@@ -54,6 +55,9 @@ def rerank(
             )
         )
 
-    # Step 5 & 6: sort descending, trim to top_k
-    results.sort(key=lambda r: r.retrieval_score, reverse=True)
+    # Step 5 & 6: sort descending by combined score (when provided) then trim to top_k
+    results.sort(
+        key=lambda r: score_override[r.bias_id] if score_override and r.bias_id in score_override else r.retrieval_score,
+        reverse=True,
+    )
     return results[:return_top_k]

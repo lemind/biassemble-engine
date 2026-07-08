@@ -124,38 +124,48 @@ supabase db query --linked --file artifacts/seed_embeddings.sql
 
 Runs all eval scenarios and reports Recall@5, Precision@5, MRR, nDCG@5, and empty_rate per story group. Saves a run JSON to `evaluations/runs/`. Use `--promote` to copy to `evaluations/baselines/` (sets the comparison baseline for future runs).
 
-#### Remote mode — call deployed service (no proxy issues)
+#### Mode comparison
 
-**When**: after deploying to HF Spaces; use this as the canonical measurement.
+| | Local (`ENGINE_URL=""`) | Remote (`.env` `ENGINE_URL` set) |
+|---|---|---|
+| Vector search | psql against Supabase directly | HF Space runs it |
+| NLI inference | DeBERTa on your CPU | DeBERTa on Space CPU |
+| Code under test | Working directory (local edits visible) | Deployed Space SHA |
+| Hypothesis file | Local `hypotheses/` | Space's deployed copy |
+| When to use | Iterating before push | Post-deploy smoke test |
+
+#### Remote mode — post-deploy smoke test
+
+**When**: after pushing and confirming the Space is running.
 
 ```bash
-# Set ENGINE_URL in .env, then:
-.venv/bin/python scripts/run_evaluation.py --promote
+# ENGINE_URL is read from .env automatically
+PYTHONUNBUFFERED=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_union --promote
 ```
 
-Calls `POST /evaluate` on the deployed service, saves the returned JSON locally.
+Calls `POST /evaluate` on the deployed Space (async job queue), polls for result, saves JSON locally.
 
-#### Local sync mode — run against DB directly via psql
+#### Local sync mode — iterate before deploy
 
-**When**: iterating locally before deploy; requires `PSQL_SEARCH=true`.
+**When**: developing locally; validates local code and hypothesis changes before push.
 
 ```bash
+# NLI+vector combined (canonical gate command)
+ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_union --promote
+
 # Vector-only (default) — baseline measurement
-PSQL_SEARCH=true HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py
+ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py
 
 # With diagnostics — writes evaluations/diagnostics/diagnostics_YYYY-MM-DD.json
-# (chunk type, domain, score per retrieved chunk; vector_only only)
-PSQL_SEARCH=true HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --diagnostics
+ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --diagnostics
 
-# NLI-only (T025) — measures DeBERTa entailment signal alone, W_VEC=0
-# Run this before --sweep-weights to establish a clean NLI baseline
-PSQL_SEARCH=true HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_only
-
-# NLI+vector combined — uses W_NLI/NLI_GATE/COMBINED_THRESHOLD from .env
-PSQL_SEARCH=true HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_union
+# NLI-only — measures DeBERTa signal alone (W_VEC=0); run before sweep
+ENGINE_URL="" HF_HUB_OFFLINE=1 .venv/bin/python scripts/run_evaluation.py --strategy nli_only
 ```
 
-Note: `--strategy nli_only/nli_union` requires the DeBERTa model to be cached locally. First run without `HF_HUB_OFFLINE=1` to download it.
+`ENGINE_URL=""` overrides the `.env` value and forces local psql path. `HF_HUB_OFFLINE=1` prevents the `transformers` library from checking HF Hub for model updates — DeBERTa loads from local cache only (no effect on the HF Space).
+
+Note: `--strategy nli_only/nli_union` requires DeBERTa cached locally. First run without `HF_HUB_OFFLINE=1` to download it.
 
 #### Eval metrics
 

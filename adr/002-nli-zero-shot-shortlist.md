@@ -1,5 +1,5 @@
 # engine ADR-002 — Bias Shortlist via Zero-Shot NLI (Spec 003)
-### Status: CLOSED — MERGED · Started: 2026-07-06 · SC-001 ✅ SC-002 ✅ SC-003 ✅ SC-004 ✅ SC-005 ✅ · Updated: 2026-07-08
+### Status: CLOSED — MERGED · Started: 2026-07-06 · SC-001 ✅ SC-002 ✅ SC-003 ✅ SC-004 ✅ SC-005 ✅ · Updated: 2026-07-09
 ### This is a prompt-ADR + spec-kit plan: paste into any AI session running spec 003. The session's job is to execute THIS plan, keep the time-box, and refuse scope beyond §9.
 
 ---
@@ -171,3 +171,21 @@ Code changes required:
 T037 (conditional model swap) — **SKIPPED**: all four SC gates passed with DeBERTa + hypothesis v2; no model change needed.
 
 **All gates passed. Spec 003 closed 2026-07-08.**
+
+---
+
+**State as of 2026-07-09** — remote eval confirmation after reranker bug fix.
+
+**Bug found post-close (reranker top-K ordering):** `rerank()` sorted and cut to top-K by raw DB cosine BEFORE the combined-score re-sort in `retriever.py`. The combined-score sort was operating on an already-cut list. `overconfidence_bias` (combined score rank #3, raw cosine rank #6) was dropped from top-5 on the Space before re-sort could promote it — this caused remote pos Recall@5 = 0.688 while local showed 0.875 (local uses psql path which avoids asyncpg chunk ordering). Fixed by adding `score_override: dict[str, float] | None` to `rerank()` — sort and cut now use combined scores directly.
+
+Remote eval on HF Space (`nli_union`, `hypotheses/v2.yaml`, reranker fixed):
+
+| Gate | Target | Actual | |
+|---|---|---|---|
+| SC-001 positive Recall@5 | ≥ 0.85 | **0.875** | ✅ PASS (remote confirmed, matches local) |
+| SC-002 negative empty_rate | ≥ 0.90 | **1.000** | ✅ PASS |
+| SC-003 adversarial Recall@5 | ≥ 0.333 | **0.333** | ✅ PASS |
+| SC-004 edge Recall@5 | ≥ 0.583 | **0.833** | ✅ PASS |
+| SC-005 core regression | pass | **pass** | ✅ PASS (unchanged) |
+
+Baseline promoted → `evaluations/baselines/baseline_2026-07-09.json`.

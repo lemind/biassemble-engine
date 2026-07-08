@@ -139,11 +139,13 @@ def ndcg_at_k(retrieved: list[str], expected: list[str]) -> float:
 
 # ── I/O helpers ───────────────────────────────────────────────────────────────
 
-def load_scenarios(eval_dir: Path) -> list[Scenario]:
-    """Load all scenario JSON files, skipping non-scored groups."""
+def load_scenarios(eval_dir: Path, only_groups: set[str] | None = None) -> list[Scenario]:
+    """Load scenario JSON files. Pass only_groups to restrict to specific groups."""
     scenarios: list[Scenario] = []
     for group_dir in sorted(eval_dir.iterdir()):
         if not group_dir.is_dir() or group_dir.name in _SKIP_GROUPS:
+            continue
+        if only_groups and group_dir.name not in only_groups:
             continue
         for f in sorted(group_dir.glob("*.json")):
             data = json.loads(f.read_text())
@@ -442,6 +444,8 @@ async def run_evaluation(
     run_date: str,
     taxonomy_version: str,
     strategy=None,
+    on_scenario_done=None,
+    only_groups: set[str] | None = None,
 ) -> EvalRun:
     """Run all scored scenarios and return a fully populated EvalRun.
 
@@ -452,7 +456,7 @@ async def run_evaluation(
         raise ValueError("pool is required when psql_search=False")
 
     log = structlog.get_logger()
-    scenarios = load_scenarios(eval_dir)
+    scenarios = load_scenarios(eval_dir, only_groups=only_groups)
     total = len(scenarios)
     results: list[ScenarioResult] = []
 
@@ -487,7 +491,7 @@ async def run_evaluation(
 
         top_k = retrieved_ids[:K]
         expected = scenario.expected_bias_ids
-        results.append(ScenarioResult(
+        sr = ScenarioResult(
             scenario_id=scenario.scenario_id,
             group=scenario.group,
             expected=expected,
@@ -502,7 +506,10 @@ async def run_evaluation(
             combined_scores=nli_meta["combined_scores"] if nli_meta else None,
             admitted_by=nli_meta["admitted_by"] if nli_meta else None,
             missed_by=nli_meta["missed_by"] if nli_meta else None,
-        ))
+        )
+        results.append(sr)
+        if on_scenario_done is not None:
+            on_scenario_done(sr, i + 1, total)
 
     group_metrics = _aggregate(results)
     baseline = load_baseline(baselines_dir)

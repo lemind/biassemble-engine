@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-07-08",
+  "run_date": "2026-07-09",
   "taxonomy_version": "2026-07-06.1",
   "embedding_model": "all-MiniLM-L6-v2",
   "k": 5,
@@ -157,16 +157,16 @@
         "loss_aversion"
       ],
       "retrieved": [
+        "sunk_cost_fallacy",
         "anchoring_bias",
+        "escalation_of_commitment",
         "hot_hand_fallacy",
-        "loss_aversion",
-        "confirmation_bias",
-        "negativity_bias"
+        "loss_aversion"
       ],
       "recall_at_k": 0.75,
       "precision_at_k": 0.6,
       "mrr": 1.0,
-      "ndcg_at_k": 0.75369761125927,
+      "ndcg_at_k": 0.787702056960637,
       "error": null,
       "retrieved_with_diagnostics": null,
       "nli_scores": {
@@ -304,14 +304,14 @@
       "retrieved": [
         "planning_fallacy",
         "sunk_cost_fallacy",
+        "escalation_of_commitment",
         "overconfidence_bias",
-        "confirmation_bias",
-        "survivorship_bias"
+        "confirmation_bias"
       ],
-      "recall_at_k": 0.5,
-      "precision_at_k": 0.4,
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.6,
       "mrr": 1.0,
-      "ndcg_at_k": 0.6366824387328317,
+      "ndcg_at_k": 0.8318724637288826,
       "error": null,
       "retrieved_with_diagnostics": null,
       "nli_scores": {
@@ -447,14 +447,14 @@
       "retrieved": [
         "confirmation_bias",
         "framing_effect",
-        "authority_bias",
-        "stereotyping_bias",
-        "in_group_bias"
+        "overconfidence_bias",
+        "dunning_kruger_effect",
+        "authority_bias"
       ],
-      "recall_at_k": 0.5,
-      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
       "mrr": 1.0,
-      "ndcg_at_k": 0.6131471927654584,
+      "ndcg_at_k": 0.9197207891481876,
       "error": null,
       "retrieved_with_diagnostics": null,
       "nli_scores": {
@@ -1549,7 +1549,7 @@
         "status_quo_bias",
         "halo_effect",
         "sunk_cost_fallacy",
-        "dunning_kruger_effect"
+        "negativity_bias"
       ],
       "recall_at_k": 0.6666666666666666,
       "precision_at_k": 0.4,
@@ -1690,14 +1690,14 @@
       "retrieved": [
         "availability_heuristic",
         "negativity_bias",
+        "affect_heuristic",
         "halo_effect",
-        "in_group_bias",
-        "omission_bias"
+        "in_group_bias"
       ],
-      "recall_at_k": 0.5,
-      "precision_at_k": 0.2,
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
       "mrr": 1.0,
-      "ndcg_at_k": 0.6131471927654584,
+      "ndcg_at_k": 0.9197207891481876,
       "error": null,
       "retrieved_with_diagnostics": null,
       "nli_scores": {
@@ -1828,10 +1828,10 @@
     "positive": {
       "group": "positive",
       "count": 4,
-      "recall_at_k": 0.6875,
-      "precision_at_k": 0.4875,
+      "recall_at_k": 0.875,
+      "precision_at_k": 0.5875,
       "mrr": 1.0,
-      "ndcg_at_k": 0.7273881695730606,
+      "ndcg_at_k": 0.8613301863430973,
       "empty_rate": 0.0
     },
     "negative": {
@@ -1855,19 +1855,19 @@
     "edge": {
       "group": "edge",
       "count": 2,
-      "recall_at_k": 0.5833333333333333,
-      "precision_at_k": 0.30000000000000004,
+      "recall_at_k": 0.8333333333333333,
+      "precision_at_k": 0.4,
       "mrr": 1.0,
-      "ndcg_at_k": 0.68925391487704,
+      "ndcg_at_k": 0.8425407130684046,
       "empty_rate": 0.0
     }
   },
   "deltas": {
     "positive": {
-      "recall_at_k": -0.1875,
-      "precision_at_k": -0.10000000000000003,
+      "recall_at_k": 0.1875,
+      "precision_at_k": 0.10000000000000003,
       "mrr": 0.0,
-      "ndcg_at_k": -0.1339420167700367,
+      "ndcg_at_k": 0.1339420167700367,
       "empty_rate": 0.0
     },
     "negative": {
@@ -1885,10 +1885,10 @@
       "empty_rate": 0.0
     },
     "edge": {
-      "recall_at_k": -0.25,
-      "precision_at_k": -0.09999999999999998,
+      "recall_at_k": 0.25,
+      "precision_at_k": 0.09999999999999998,
       "mrr": 0.0,
-      "ndcg_at_k": -0.1532867981913646,
+      "ndcg_at_k": 0.1532867981913646,
       "empty_rate": 0.0
     }
   },
