@@ -175,26 +175,26 @@ Goal: T-eval-1, T-eval-2, T-eval-3 run and results recorded.
 
 ---
 
-### Phase 7 (conditional): Hypothesis v2 iteration (T7)
+### Phase 7: Hypothesis v2 iteration (T7)
 
-Triggered only if T-eval-2 fails SC-001 (positive Recall@5 ≥ 0.85).
+**Triggered** (2026-07-07): SC-001 passed (pos R@5=0.875 ✅), but SC-002 (neg empty_rate=0.60 ❌) and SC-003 (adv R@5=0.000 ❌) are unmet. Phase 7 is active for those two gates.
 
-1. Identify failing biases from T-eval-2 diagnostics.
-2. Write 2–3 alternative phrasings for each failing bias; score = max over phrasings.
-3. Re-run T-eval-2 sweep with updated hypotheses.
-4. One round only. If still failing → fallback path (biassemble-core ADR required).
+1. **SC-002**: `overconfidence_bias` fires on neg_002/neg_003 (false positives). Refine hypothesis to require overt certainty-marker language; re-run `--strategy nli_union`.
+2. **SC-003**: NLI regressed adversarial 0.333 → 0.000 vs baseline. Diagnose which biases NLI fails on (expected: confirmation_bias / framing_effect / affect_heuristic); try hypothesis refinement.
+3. One round only. If SC-002/SC-003 still fail → model swap: `cross-encoder/nli-MiniLM2-L6-H768` vs current DeBERTa (replaces bart-large-mnli from §2 falsifiability clause — smaller, faster, may generalise differently on adversarial). If model swap also fails → fallback path (biassemble-core ADR required).
 
-**Gate**: Either gates pass, or fallback path is formally triggered.
+**Gate**: SC-001–SC-004 all pass at one config, or fallback path formally triggered.
 
 ---
 
 ### Phase 8: Assessment regression check + merge decision (T8)
 
-1. Raise `RAG_TIMEOUT_MS=5000` in biassemble-core `.env` / Vercel config.
-2. Run biassemble-core assessment eval (`pnpm eval`) against the winning engine config.
+**Status (2026-07-07)**: Blocked on Phase 7. SC-001 ✅ SC-002 ❌ SC-003 ❌ SC-004 ✅ SC-005 ⬜.
+
+1. Raise `RAG_TIMEOUT_MS=5000` in biassemble-core `.env` / Vercel config (T029).
+2. Run biassemble-core assessment eval (`pnpm eval`) against the winning engine config (T031).
 3. Verify no FP rate or evidence_grounded_rate regression vs pre-spec baseline.
-4. Update ADR-002 status to `CLOSED — MERGED` or `CLOSED — PARKED` with final numbers.
-5. Update this plan with actual results.
+4. Update ADR-002 status to `CLOSED — MERGED` or `CLOSED — PARKED` with final numbers (T032).
 
 **Gate**: All SC-001–SC-005 pass at one config. ADR status updated.
 

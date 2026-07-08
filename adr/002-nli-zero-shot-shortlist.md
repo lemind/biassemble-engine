@@ -1,5 +1,5 @@
 # engine ADR-002 — Bias Shortlist via Zero-Shot NLI (Spec 003)
-### Status: ACCEPTED · Date: 2026-07-06 · Supersedes selection role of engine ADR-001
+### Status: IN PROGRESS · Started: 2026-07-06 · SC-001 ✅ SC-002 ❌ SC-003 ❌ SC-004 ✅ SC-005 ⬜ · Updated: 2026-07-07
 ### This is a prompt-ADR + spec-kit plan: paste into any AI session running spec 003. The session's job is to execute THIS plan, keep the time-box, and refuse scope beyond §9.
 
 ---
@@ -117,3 +117,26 @@ Fine-tuning any model (blocked until audit labels exist — revisit when ~300+ l
 - **Positive:** mechanism-appropriate selection for tonal biases; free/local/CPU; permanent cartridge interface enabling the future self-trained model; vector infra retained for b2b; the retrieval saga gets a hard ending this week.
 - **Negative/accepted:** +1 model in the engine image (~700MB base) and +1–3s latency per story (mitigated by concurrent execution); a new versioned artifact to maintain (hypotheses); NLI calibration is unstudied on this domain — mitigated by the eval gates being the sole arbiter.
 - **After this spec, regardless of outcome:** run the Marta golden story through the merged config and verify anchoring appears in the retrieved/selected biases (closing a known miss from the product-line master plan), then build the b2b extract/verify golden sets — the audit pipeline this engine ultimately serves.
+
+---
+
+## 11. Execution log
+
+**State as of 2026-07-07** — `nli_union`, `deberta-v3-base-zeroshot-v2.0`, `hypotheses/v1.yaml`, best sweep config.
+
+| Gate | Target | Actual | |
+|---|---|---|---|
+| SC-001 positive Recall@5 | ≥ 0.85 | **0.875** | ✅ PASS (+0.208 vs vector-only baseline 0.667) |
+| SC-002 negative empty_rate | ≥ 0.90 | **0.600** | ❌ FAIL (`overconfidence_bias` fires on neg_002/neg_003) |
+| SC-003 adversarial Recall@5 | ≥ 0.333 | **0.000** | ❌ FAIL (regressed vs baseline 0.333 — NLI reads surface framing literally) |
+| SC-004 edge Recall@5 | ≥ 0.583 | **0.583** | ✅ PASS (flat vs baseline) |
+| SC-005 core regression | pass | ⬜ | pending Phase 8 |
+
+**Bugs found and fixed during eval battery:**
+
+- **4→3 bias drop (T033):** NLI-only admitted biases with no vector candidate chunk were silently dropped by the reranker's candidate filter. Fix: fetch one `semantic_definition` chunk per missing bias from DB and hydrate with the combined score before reranking. Deployed; confirmed live by `nli_only_admits_hydrated` log event on HF Space (adm_ids=["in_group_bias"] on pos_002).
+- **Remote eval timeout (T034):** HF Space proxy hard-kills HTTP connections at ~90 s regardless of heartbeats or streaming headers. Fix: replaced synchronous/streaming `/evaluate` with async job queue — `POST /evaluate` returns 202 + `job_id` immediately; `GET /evaluate/{job_id}` polls with 5-retry + 120 s timeout. `scripts/run_evaluation.py` updated for polling client.
+
+**Falsifiability clause update (§2):** §2 names `bart-large-mnli` as the one alternative model swap if base DeBERTa fails gates. Updated candidate: `cross-encoder/nli-MiniLM2-L6-H768` — ~4× faster on CPU (smaller model), may generalise differently on adversarial stories. If one hypothesis-v2 iteration (T035/T036) does not close SC-002/SC-003, T037 compares MiniLM2-L6-H768 vs current DeBERTa in place of bart-large-mnli.
+
+**Remaining work:** T035 (hypothesis v2 for `overconfidence_bias`, SC-002), T036 (adversarial analysis for confirmation_bias / framing_effect / affect_heuristic, SC-003), T037 conditional model swap, T038 re-eval → then Phase 8 (T029/T031/T032 → close).
