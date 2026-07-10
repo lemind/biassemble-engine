@@ -27,8 +27,8 @@ Per ADR-003 §2 (falsifiability) and spec FR-008/SC-001: **T003 (the spike) bloc
 
 **Purpose**: Dependencies for local CPU GGUF inference.
 
-- [ ] T001 Add and pin `llama-cpp-python` (a version with prebuilt CPU wheels) and `huggingface_hub` to `pyproject.toml`; record the fallback note (raw `transformers` if the wheel fails to build) in a comment per research R3. **The exact pinned version is provisional here and CONFIRMED by the spike (T003), which is the first place the wheel actually builds/loads on the Space kernel** — if T003 reveals the pinned version has no working wheel, update this pin before proceeding. (Phase 0 research R3 chooses the provisional pin; T003 validates it.)
-- [ ] T002 [P] Add `llm_model_repo`, `llm_gguf_file`, `llm_context_tokens`, `llm_max_output_tokens`, `llm_temperature`, `llm_threads`, `llm_log_raw` settings (defaults per data-model.md) to `src/config.py` — do not yet wire them anywhere.
+- [x] T001 Added `llama-cpp-python==0.3.19` (exact pin — highest version with a prebuilt cp311 `linux_x86_64` CPU wheel on the abetlen index; base image `python:3.11-slim` has no build tools so source builds are impossible) + `huggingface-hub>=0.26.0` to `pyproject.toml`, with a new `[[tool.uv.index]]` `llama-cpp-cpu` (abetlen CPU wheels) + `[tool.uv.sources]` mapping mirroring the existing `pytorch-cpu` pattern, and the `transformers`-fallback note in a comment. Regenerated `uv.lock` (resolved from the CPU index; `uv lock --check` passes so the `--frozen` Docker build stays valid). **Pin still provisional — the spike (T003) is where the wheel actually loads on the Space kernel.**
+- [x] T002 [P] Added `llm_model_repo` (default `Qwen/Qwen2.5-1.5B-Instruct-GGUF`), `llm_gguf_file` (`qwen2.5-1.5b-instruct-q4_k_m.gguf` — verified the file exists in the repo), `llm_context_tokens`, `llm_max_output_tokens`, `llm_temperature`, `llm_threads`, `llm_log_raw` to `src/config.py` (defaults per data-model.md), not wired anywhere. Verified config parses with the new fields.
 
 ---
 

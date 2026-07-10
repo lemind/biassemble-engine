@@ -31,5 +31,16 @@ class Settings(BaseSettings):
     sentence_mode: bool = False
     hypotheses_path: str = "hypotheses/v1.yaml"
 
+    # spec-004 (ADR-003): generative LLM bias selection (SELECTION_STRATEGY=llm_union).
+    # Not wired anywhere yet — declared here per task T002. The model is a candidate
+    # cartridge pending the spike (T003); see specs/004-add-llm-model/research.md.
+    llm_model_repo: str = "Qwen/Qwen2.5-1.5B-Instruct-GGUF"
+    llm_gguf_file: str = "qwen2.5-1.5b-instruct-q4_k_m.gguf"
+    llm_context_tokens: int = 4096
+    llm_max_output_tokens: int = 512
+    llm_temperature: float = 0.0  # greedy → reproducible eval runs (FR-011)
+    llm_threads: int = 2  # match cpu-basic vCPUs; override via LLM_THREADS env (e.g. 4 on cpu-upgrade)
+    llm_log_raw: bool = False  # debug only — log raw model output (too large for prod)
+
 
 settings = Settings()
