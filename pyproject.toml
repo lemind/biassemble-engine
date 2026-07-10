@@ -14,6 +14,22 @@ dependencies = [
     "pgvector>=0.3.0",
     "structlog>=24.0.0",
     "transformers[sentencepiece]>=5.12.1",
+    # spec-004 (ADR-003): local generative LLM bias selection.
+    # llama-cpp-python is pinned EXACTLY to a version with a prebuilt cp311 CPU wheel
+    # on the abetlen index (see [tool.uv.sources] below). The base image is
+    # python:3.11-slim with NO build tools, so building from source is not an option —
+    # the pin MUST track a version that has a prebuilt linux_x86_64 cp311 wheel.
+    # Provisional per tasks T001; confirmed by the spike (T003). Fallback if the wheel
+    # ever fails to load: raw `transformers` generation (slower, but proven-installable).
+    #
+    # KNOWN LIMITATION (integrity): the abetlen index publishes no hashes, so uv.lock
+    # records these wheels by URL only — no `hash=`/`size=`, i.e. NO integrity check on
+    # install (unlike PyPI deps). Mitigations: (1) exact pin `==0.3.19`; (2) the wheel is
+    # a tagged GitHub release asset (effectively immutable). Verification anchor — the
+    # expected linux_x86_64 cp311 wheel sha256 (verify manually if ever suspicious):
+    #   bf993a7c49fa2c71d851aadc6ad7d26149109dbb87f4466326d8fa60c49148c7
+    "llama-cpp-python==0.3.19",
+    "huggingface-hub>=0.26.0",
 ]
 
 [project.optional-dependencies]
@@ -52,10 +68,17 @@ name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
 explicit = true
 
+# spec-004: prebuilt CPU wheels for llama-cpp-python (base image has no build tools).
+[[tool.uv.index]]
+name = "llama-cpp-cpu"
+url = "https://abetlen.github.io/llama-cpp-python/whl/cpu"
+explicit = true
+
 [tool.uv.sources]
 torch = [{ index = "pytorch-cpu" }]
 torchvision = [{ index = "pytorch-cpu" }]
 torchaudio = [{ index = "pytorch-cpu" }]
+llama-cpp-python = [{ index = "llama-cpp-cpu" }]
 
 [dependency-groups]
 dev = [
