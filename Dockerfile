@@ -4,6 +4,13 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 WORKDIR /app
 
+# Build tools for compiling llama-cpp-python from source (spec-004): the only prebuilt
+# linux wheel is musl-linked and won't load on this glibc image, and PyPI ships sdist
+# only — so it must compile. cmake + a C/C++ toolchain are required at install time.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential cmake \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install deps first — this layer is cached until pyproject.toml or uv.lock changes
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project

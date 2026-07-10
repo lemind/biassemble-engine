@@ -80,8 +80,30 @@ Then take top-K (existing `return_top_k`).
 | Unknown | Resolution |
 |---|---|
 | Which model | Qwen2.5-1.5B-Instruct (ungated, Apache-2.0, GGUF); ladder 0.5B↔1.5B↔3B |
-| Which runtime | llama-cpp-python Q4_K_M; transformers fallback |
-| Prompt/output shape | system + catalog(indicators) + story → strict JSON, greedy, repair, catalog-constrained |
+| Which runtime | llama-cpp-python Q4_K_M; **built from source** (see Spike result); transformers fallback |
+| Prompt/output shape | **chat template required** (instruct model) — `create_chat_completion`, NOT raw text completion; system + catalog(indicators) + story → strict JSON, greedy, catalog-constrained |
 | llm↔vector combination | union admit; separate scores; source tagging; no cross-scale blend |
-| Meets <45s? | plausible (one prefill+short decode); spike measures; ladder mitigates |
-| Install risk | llama-cpp-python build → pin wheel; transformers fallback |
+| Meets <45s? | plausible locally (warm ~12s w/ full catalog); **cpu-basic unconfirmed — T020 gate**; levers: prompt-prefix cache, trim catalog, 0.5B |
+| Install risk | **materialized** — only prebuilt linux wheel is musl (fails on glibc); build from source + Dockerfile build tools |
+
+## Spike result (T003/T004 — 2026-07-10) — **GO** ✅
+
+Ran `scripts/spike_llm_bias.py` locally (glibc): Qwen2.5-1.5B-Instruct Q4_K_M via source-built llama-cpp-python, 38-bias catalog from `knowledge/*.md`, greedy.
+
+**Functional — GO.** With the **chat template** (`create_chat_completion`), valid in-catalog JSON on all four stories:
+- overconfidence story → `confirmation_bias` (plausible catalog bias, valid JSON — arguably should be `overconfidence_bias`; precision is an SC-005/006 concern, not the gate)
+- sunk-cost story → `sunk_cost_fallacy` ✅ exact
+- confirmation story → `confirmation_bias` ✅ exact
+- neutral story → `[]` ✅ **no hallucination**
+
+The model finds biases, constrains to the catalog, includes evidence, and stays empty on neutral input. Gate ("finds biases at all") passes.
+
+**Critical prompt finding**: raw text completion (`llm(prompt)`) produced garbage (`{"bias_id": ""}` / `{}`) — Qwen is an *instruct* model and MUST be prompted via its chat template. First integration decision: use `create_chat_completion`, not raw completion. Parser must still tolerate a stray object-vs-array and non-catalog ids (staged parse, R4).
+
+**Latency** (local, faster than cpu-basic): model load 0.7s; warm ~12s/story (11.7–16.2s); cold first call ~65s (long-catalog prefill). Warm is dominated by prefill of the catalog prompt, not decode. **cpu-basic will be slower — unconfirmed, gated at T020.** Levers if it misses <45s: (a) llama.cpp prompt-prefix caching (the catalog prefix is identical every call — big win), (b) trim catalog further, (c) 0.5B rung. Do not treat 12s local as the cpu-basic number.
+
+**Catalog size caveat (compare like-for-like at T020):** the 12s figure is for **38 biases × ≤3 indicators each** (`scripts/spike_llm_bias.py`'s `inds[:3]` trim), not the full indicator lists in `knowledge/*.md` (which run up to 10 per file, per `STYLE_GUIDE.md`). If T006's real `build_prompt` sends more than 3 indicators/bias, the prompt is longer and warm latency will exceed 12s — T020 must profile against the **actual** prompt `build_prompt` sends, not re-use this number. Confirm the indicator count used at integration time and note it alongside the T020 result.
+
+**Runtime finding (deployment-critical)**: the only prebuilt linux `llama-cpp-python` wheel (abetlen `cpu` index, `linux_x86_64`) is **musl-linked** (`libc.musl-x86_64.so.1 => not found`) and will not load on the glibc base image; PyPI ships sdist only. → **build from source.** Applied: dropped the abetlen index from `pyproject.toml`, added `build-essential cmake` to the `Dockerfile`, re-locked to the PyPI sdist. Verified building on glibc (~2m) and loading + running the GGUF.
+
+**Model rung**: 1.5B passes functionally. Keep 0.5B as the latency fallback for T020 if cpu-basic warm exceeds the budget.

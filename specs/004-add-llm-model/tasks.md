@@ -36,10 +36,10 @@ Per ADR-003 §2 (falsifiability) and spec FR-008/SC-001: **T003 (the spike) bloc
 
 **Purpose**: Prove the model detects biases at all before any integration (SC-001).
 
-- [ ] T003 Write `scripts/spike_llm_bias.py` (throwaway): download the GGUF via `huggingface_hub`, build a prompt (system + catalog `bias_id`/`name`/`indicators` + story), greedily generate, print raw output + parsed JSON + wall time. Run on 2–3 known-bias stories (overconfidence, sunk-cost, confirmation) + 1 neutral story. **Measure cold vs warm separately** — load, then run the same story 3× — so later comparisons aren't cold-vs-warm apples-to-oranges; report both the first-call (cold) and steady-state (warm) latency.
-- [ ] T004 Record the spike result in `specs/004-add-llm-model/research.md` (append a "Spike result" note): which model rung passed, measured cold + warm ~200-word latency on cpu-basic, and a first read on false positives (did the neutral story stay empty?). Go/no-go. **GATE: if no-go, stop here.**
+- [x] T003 Wrote `scripts/spike_llm_bias.py` and ran it end-to-end (glibc, source-built llama-cpp-python, Qwen2.5-1.5B Q4, 38-bias catalog from `knowledge/*.md`). Cold vs warm measured. **Key fix discovered mid-spike: instruct model needs the chat template (`create_chat_completion`), not raw text completion** — raw gave garbage.
+- [x] T004 Recorded the "Spike result — GO" section in `research.md`: 3/4 stories exact + 1 plausible, neutral → `[]` (no hallucination); load 0.7s, warm ~12s local (full catalog), cpu-basic gated at T020; **musl-wheel-vs-glibc finding → build from source** (Dockerfile + pyproject updated, re-locked). Go. **GATE PASSED.**
 
-**Checkpoint**: Model provably names catalog biases within a plausible latency budget. Integration may begin.
+**Checkpoint**: ✅ Model provably names catalog biases (valid in-catalog JSON, no hallucination on neutral). Integration may begin. Carry-forward into US1: use `create_chat_completion`; watch cpu-basic latency (T020) with prompt-prefix caching as the primary lever.
 
 ---
 
