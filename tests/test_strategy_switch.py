@@ -1,9 +1,10 @@
 """T012: selection_strategy flag safety (FR-004).
 
 vector_only and nli_union response shape must be unchanged by this feature
-(no `source` field, identical shape); llm_union must produce a valid result;
-an unknown flag value must raise at Settings() construction, never silently
-fall back to a default.
+(the additive `source` field is present but null — contract v3 explicitly
+allows "absent / null" for byte-compat with v1/v2 clients); llm_union must
+produce a valid result; an unknown flag value must raise at Settings()
+construction, never silently fall back to a default.
 """
 from contextlib import asynccontextmanager
 from unittest.mock import MagicMock
@@ -75,10 +76,10 @@ def test_vector_only_response_shape_unchanged(monkeypatch):
 
     assert resp.status_code == 200
     bias = resp.json()["biases"][0]
-    assert "source" not in bias
+    assert bias["source"] is None
     assert set(bias) == {
         "id", "name", "retrieval_score", "definition",
-        "examples", "indicators", "false_positives", "related_biases",
+        "examples", "indicators", "false_positives", "related_biases", "source",
     }
 
 
@@ -101,15 +102,18 @@ def test_nli_union_response_shape_unchanged(monkeypatch):
 
     assert resp.status_code == 200
     bias = resp.json()["biases"][0]
-    assert "source" not in bias
+    assert bias["source"] is None
     assert set(bias) == {
         "id", "name", "retrieval_score", "definition",
-        "examples", "indicators", "false_positives", "related_biases",
+        "examples", "indicators", "false_positives", "related_biases", "source",
     }
 
 
 def test_llm_union_produces_valid_result(monkeypatch):
     generator = MagicMock()
+    generator.context_tokens = 4096
+    generator.max_output_tokens = 512
+    generator.count_tokens.return_value = 10
     generator.generate.return_value = (
         '[{"bias_id": "confirmation_bias", "confidence": 0.9, "evidence": "quote"}]'
     )

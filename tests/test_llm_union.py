@@ -27,6 +27,9 @@ class _VectorWithHit:
 
 def _make_generator(response_json: str) -> MagicMock:
     gen = MagicMock()
+    gen.context_tokens = 4096
+    gen.max_output_tokens = 512
+    gen.count_tokens.return_value = 10
     gen.generate.return_value = response_json
     return gen
 
@@ -55,6 +58,9 @@ async def test_llm_union_neutral_story_returns_empty():
 
 async def test_llm_union_generator_exception_degrades_to_empty_not_raise():
     generator = MagicMock()
+    generator.context_tokens = 4096
+    generator.max_output_tokens = 512
+    generator.count_tokens.return_value = 10
     generator.generate.side_effect = RuntimeError("model exploded")
     strategy = LLMUnionStrategy(generator, CATALOG, _StubVectorStrategy())
 
