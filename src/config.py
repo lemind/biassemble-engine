@@ -1,4 +1,7 @@
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+VALID_SELECTION_STRATEGIES = {"vector_only", "nli_union", "llm_union"}
 
 
 class Settings(BaseSettings):
@@ -41,6 +44,15 @@ class Settings(BaseSettings):
     llm_temperature: float = 0.0  # greedy → reproducible eval runs (FR-011)
     llm_threads: int = 2  # match cpu-basic vCPUs; override via LLM_THREADS env (e.g. 4 on cpu-upgrade)
     llm_log_raw: bool = False  # debug only — log raw model output (too large for prod)
+
+    @field_validator("selection_strategy")
+    @classmethod
+    def _validate_selection_strategy(cls, v: str) -> str:
+        if v not in VALID_SELECTION_STRATEGIES:
+            raise ValueError(
+                f"selection_strategy={v!r} is not one of {sorted(VALID_SELECTION_STRATEGIES)}"
+            )
+        return v
 
 
 settings = Settings()
