@@ -88,8 +88,37 @@ def fit_story_to_budget(
 # raises; any stage failure falls through to an empty candidate list (FR-007). ──
 
 def _extract_json(raw: str) -> str | None:
-    m = re.search(r"\[.*\]", raw, re.DOTALL)
-    return m.group(0) if m else None
+    """Find the first balanced top-level JSON array, ignoring brackets inside
+    string literals. A plain greedy `\\[.*\\]` regex matches from the first '['
+    to the LAST ']' in the whole response — if the model appends any
+    bracket-containing commentary after the array (e.g. "...]\\nNote: [see X]."),
+    that swallows trailing garbage and json.loads fails on the whole thing,
+    silently dropping a valid result."""
+    start = raw.find("[")
+    if start == -1:
+        return None
+    depth = 0
+    in_string = False
+    escape = False
+    for i in range(start, len(raw)):
+        ch = raw[i]
+        if in_string:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == '"':
+                in_string = False
+            continue
+        if ch == '"':
+            in_string = True
+        elif ch == "[":
+            depth += 1
+        elif ch == "]":
+            depth -= 1
+            if depth == 0:
+                return raw[start : i + 1]
+    return None
 
 
 def _validate_schema(json_text: str) -> list[dict]:

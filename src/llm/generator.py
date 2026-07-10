@@ -30,7 +30,6 @@ class LLMGenerator:
     ) -> None:
         self.context_tokens = context_tokens
         self.max_output_tokens = max_output_tokens
-        self._max_output_tokens = max_output_tokens
         self._temperature = temperature
         try:
             model_path = hf_hub_download(repo_id=model_repo, filename=gguf_file)
@@ -51,7 +50,7 @@ class LLMGenerator:
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
             ],
-            max_tokens=self._max_output_tokens,
+            max_tokens=self.max_output_tokens,
             temperature=self._temperature,
         )
         return out["choices"][0]["message"]["content"] or ""

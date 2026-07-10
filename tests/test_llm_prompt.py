@@ -45,3 +45,23 @@ def test_parse_biases_non_dict_items_are_dropped():
     )
     result = parse_biases(raw, VALID_IDS)
     assert [c.bias_id for c in result] == ["sunk_cost_fallacy"]
+
+
+def test_parse_biases_trailing_bracket_text_does_not_swallow_valid_json():
+    # A naive greedy `\[.*\]` regex matches from the first '[' to the LAST ']' in
+    # the whole response, including this trailing commentary — producing invalid
+    # JSON ("Extra data") and silently dropping the valid, well-formed array.
+    raw = (
+        '[{"bias_id": "confirmation_bias", "confidence": 0.9, "evidence": "quote"}]\n'
+        'Note: consider [context] when reviewing this further.'
+    )
+    result = parse_biases(raw, VALID_IDS)
+    assert [c.bias_id for c in result] == ["confirmation_bias"]
+
+
+def test_parse_biases_bracket_inside_string_value_does_not_break_extraction():
+    raw = '[{"bias_id": "confirmation_bias", "confidence": 0.9, "evidence": "see [1]"}]'
+    result = parse_biases(raw, VALID_IDS)
+    assert result == [
+        BiasCandidate(bias_id="confirmation_bias", confidence=0.9, evidence="see [1]")
+    ]
