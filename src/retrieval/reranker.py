@@ -5,19 +5,24 @@ def rerank(
     candidates: list[CandidateChunk],
     threshold: float,
     return_top_k: int,
+    admitted_ids: set[str] | None = None,
+    score_override: dict[str, float] | None = None,
 ) -> list[RetrievedBias]:
     """Collapse raw candidate chunks into deduplicated, ranked RetrievedBias objects.
 
     Pipeline:
-      1. Drop chunks below similarity_threshold.
+      1. Drop chunks below similarity_threshold (or outside admitted_ids when provided).
       2. Group remaining chunks by bias_id.
       3. For each bias, take the highest-scoring chunk (max collapse).
       4. Build RetrievedBias from the winning chunk's full_document + collect all sources.
       5. Sort descending by retrieval_score.
       6. Return top return_top_k results.
     """
-    # Step 1: threshold filter
-    surviving = [c for c in candidates if c.retrieval_score >= threshold]
+    # Step 1: threshold filter (or strategy-admitted set)
+    if admitted_ids is not None:
+        surviving = [c for c in candidates if c.bias_id in admitted_ids]
+    else:
+        surviving = [c for c in candidates if c.retrieval_score >= threshold]
     if not surviving:
         return []
 
@@ -50,6 +55,9 @@ def rerank(
             )
         )
 
-    # Step 5 & 6: sort descending, trim to top_k
-    results.sort(key=lambda r: r.retrieval_score, reverse=True)
+    # Step 5 & 6: sort descending by combined score (when provided) then trim to top_k
+    results.sort(
+        key=lambda r: score_override[r.bias_id] if score_override and r.bias_id in score_override else r.retrieval_score,
+        reverse=True,
+    )
     return results[:return_top_k]

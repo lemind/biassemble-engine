@@ -1,11 +1,15 @@
 import asyncio
+import json
 import os
+import time
+import uuid
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
 from typing import Any
 
 import asyncpg
+import structlog
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
@@ -15,6 +19,7 @@ from src.evaluation.evaluate import run_evaluation
 from src.providers.base import EmbeddingProvider
 from src.retrieval import retriever
 from src.retrieval.retriever import IndexNotFoundError
+from src.selection.vector_only import VectorOnlyStrategy
 from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest
 from src.schemas.response import BiasResult, RetrieveResponse
@@ -59,7 +64,7 @@ async def retrieve_biases(
 
     try:
         biases, meta = await asyncio.wait_for(
-            retriever.retrieve(body, provider, pool),
+            retriever.retrieve(body, provider, pool, request.app.state.selection_strategy),
             timeout=settings.request_timeout_ms / 1000,
         )
     except asyncio.TimeoutError:
@@ -159,19 +164,49 @@ async def stats(request: Request) -> dict[str, Any]:
     }
 
 
-@router.post("/evaluate")
-async def evaluate(
+# In-memory job store — single-process uvicorn on HF Space, no multiprocessing needed.
+_eval_jobs: dict[str, dict[str, Any]] = {}
+_JOBS_DIR = Path("/tmp/eval_jobs")
+
+
+def _persist_job(job_id: str, result: dict) -> None:
+    try:
+        _JOBS_DIR.mkdir(exist_ok=True)
+        (_JOBS_DIR / f"{job_id}.json").write_text(json.dumps(result))
+    except Exception:
+        pass
+
+
+def _load_job(job_id: str) -> dict | None:
+    try:
+        p = _JOBS_DIR / f"{job_id}.json"
+        if p.exists():
+            return {"status": "done", "result": json.loads(p.read_text())}
+    except Exception:
+        pass
+    return None
+
+
+@router.post("/evaluate", status_code=202)
+async def evaluate_start(
     request: Request,
     _: None = Depends(_verify_token),
+    strategy: str | None = None,
+    groups: str | None = None,
 ) -> dict[str, Any]:
-    """Run the full evaluation suite and return an EvalRun JSON.
+    """Start evaluation in the background and return a job_id immediately.
 
-    Runs on the deployed service where the asyncpg pool has direct Supabase
-    access (no proxy). The caller saves the result locally and handles --promote.
-    Evaluation scenarios are read from evaluations/ baked into the Docker image.
+    HF Space's proxy hard-kills connections after ~90 s, making synchronous or
+    streaming long-running responses unreliable. Instead: POST returns 202 with
+    a job_id; the client polls GET /evaluate/{job_id} every 10 s with short
+    timeouts until the result arrives.
+
+    strategy: override the server's SELECTION_STRATEGY env var for this run.
+    Use ?strategy=vector for a quick smoke test (no NLI inference).
     """
     provider: EmbeddingProvider = request.app.state.provider
     pool: asyncpg.Pool | None = request.app.state.pool
+    log = structlog.get_logger()
 
     if pool is None:
         raise HTTPException(status_code=503, detail={"error": "database_unavailable"})
@@ -180,24 +215,85 @@ async def evaluate(
     if not eval_dir.exists():
         raise HTTPException(status_code=503, detail={"error": "eval_dir_not_found"})
 
-    try:
-        run = await asyncio.wait_for(
-            run_evaluation(
-                provider=provider,
-                pool=pool,
-                eval_dir=eval_dir,
-                baselines_dir=eval_dir / "baselines",
-                run_date=date.today().isoformat(),
-                taxonomy_version=settings.taxonomy_version,
-            ),
-            timeout=120.0,
-        )
-    except asyncio.TimeoutError:
-        raise HTTPException(status_code=503, detail={"error": "evaluation_timeout"})
-    except Exception as exc:
-        raise HTTPException(
-            status_code=500,
-            detail={"error": "evaluation_failed", "detail": str(exc)},
-        ) from exc
+    job_id = str(uuid.uuid4())
+    _eval_jobs[job_id] = {"status": "running", "partial": [], "scenarios_done": 0, "scenarios_total": 0}
+    if strategy == "vector":
+        resolved_strategy = VectorOnlyStrategy(provider, pool)
+    else:
+        resolved_strategy = request.app.state.selection_strategy
+    only_groups = set(groups.split(",")) if groups else None
 
-    return asdict(run)
+    from dataclasses import asdict as _asdict
+
+    def _on_scenario_done(sr, done: int, total: int) -> None:
+        job = _eval_jobs.get(job_id)
+        if job and job.get("status") == "running":
+            partial = job.get("partial", []) + [_asdict(sr)]
+            job["partial"] = partial
+            job["scenarios_done"] = done
+            job["scenarios_total"] = total
+            _persist_job(job_id, {"status": "partial", "partial": partial, "scenarios_done": done, "scenarios_total": total})
+
+    async def _run() -> None:
+        log.info("evaluate_started", job_id=job_id, strategy=settings.selection_strategy)
+        t0 = time.monotonic()
+        try:
+            run = await asyncio.wait_for(
+                run_evaluation(
+                    provider=provider,
+                    pool=pool,
+                    eval_dir=eval_dir,
+                    baselines_dir=eval_dir / "baselines",
+                    run_date=date.today().isoformat(),
+                    taxonomy_version=settings.taxonomy_version,
+                    strategy=resolved_strategy,
+                    on_scenario_done=_on_scenario_done,
+                    only_groups=only_groups,
+                ),
+                timeout=float(settings.evaluate_timeout_s),
+            )
+            elapsed = round(time.monotonic() - t0)
+            gm = {g: m for g, m in (asdict(run).get("group_metrics") or {}).items()}
+            log.info(
+                "evaluate_complete",
+                job_id=job_id,
+                elapsed_s=elapsed,
+                pos_r5=round(gm.get("positive", {}).get("recall_at_k", 0), 3),
+                neg_empty=round(gm.get("negative", {}).get("empty_rate", 0), 3),
+                adv_r5=round(gm.get("adversarial", {}).get("recall_at_k", 0), 3),
+                edge_r5=round(gm.get("edge", {}).get("recall_at_k", 0), 3),
+            )
+            result = asdict(run)
+            _eval_jobs[job_id] = {"status": "done", "result": result}
+            _persist_job(job_id, result)
+        except asyncio.TimeoutError:
+            log.error("evaluate_timeout", job_id=job_id, elapsed_s=round(time.monotonic() - t0))
+            _eval_jobs[job_id] = {"status": "failed", "error": "evaluation_timeout"}
+        except Exception as exc:
+            log.error("evaluate_failed", job_id=job_id, error=str(exc), elapsed_s=round(time.monotonic() - t0))
+            _eval_jobs[job_id] = {"status": "failed", "error": str(exc)}
+
+    asyncio.create_task(_run())
+    return {"job_id": job_id, "status": "running"}
+
+
+@router.get("/evaluate/{job_id}")
+async def evaluate_result(
+    job_id: str,
+    _: None = Depends(_verify_token),
+) -> dict[str, Any]:
+    """Poll for evaluation result. Returns {"status": "running"} while in progress,
+    the full EvalRun JSON when done, or 404 if the job_id is unknown."""
+    job = _eval_jobs.get(job_id) or _load_job(job_id)
+    if job is None:
+        raise HTTPException(status_code=404, detail={"error": "job_not_found"})
+    if job["status"] in ("running", "partial"):
+        return {
+            "status": job["status"],
+            "scenarios_done": job.get("scenarios_done", 0),
+            "scenarios_total": job.get("scenarios_total", 0),
+            "partial": job.get("partial", []),
+        }
+    if job["status"] == "failed":
+        raise HTTPException(status_code=500, detail={"error": job["error"]})
+    return job["result"]

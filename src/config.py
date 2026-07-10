@@ -16,9 +16,20 @@ class Settings(BaseSettings):
     rerank_strategy: str = "max"
     index_batch_size: int = 32
     request_timeout_ms: int = 450
+    evaluate_timeout_s: int = 1800
     log_level: str = "INFO"
     psql_search: bool = False
     engine_url: str | None = None
+
+    selection_strategy: str = "vector_only"
+    nli_model: str = "MoritzLaurer/deberta-v3-base-zeroshot-v2.0"
+    w_nli: float = 0.7
+    w_vec: float = 0.3
+    nli_gate: float = 0.80
+    vec_gate: float = 0.35
+    combined_threshold: float = 0.60
+    sentence_mode: bool = False
+    hypotheses_path: str = "hypotheses/v1.yaml"
 
 
 settings = Settings()

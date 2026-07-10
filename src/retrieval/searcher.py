@@ -13,10 +13,10 @@ from src.db.queries import TABLE, fmt_vector
 from src.schemas.internal import CandidateChunk, FullBiasDocument
 
 
-def _row_to_candidate(row: asyncpg.Record) -> CandidateChunk:
-    fd = row["full_document"]
-    doc_data: dict = json.loads(fd) if isinstance(fd, str) else fd
-    full_doc = FullBiasDocument(
+def _parse_full_document(raw) -> FullBiasDocument:
+    """Build FullBiasDocument from a JSON string or already-parsed dict."""
+    doc_data: dict = json.loads(raw) if isinstance(raw, str) else raw
+    return FullBiasDocument(
         name=doc_data["name"],
         definition=doc_data["definition"],
         examples=doc_data["examples"],
@@ -24,34 +24,17 @@ def _row_to_candidate(row: asyncpg.Record) -> CandidateChunk:
         false_positives=doc_data["false_positives"],
         related_biases=doc_data["related_biases"],
     )
+
+
+def _row_to_candidate(row) -> CandidateChunk:
+    """Convert an asyncpg.Record or CSV dict row to a CandidateChunk."""
     return CandidateChunk(
         bias_id=row["bias_id"],
         chunk_type=row["chunk_type"],
         source_section=row["source_section"],
         source=row["source"],
         chunk_text=row["chunk_text"],
-        full_document=full_doc,
-        retrieval_score=float(row["retrieval_score"]),
-    )
-
-
-def _row_to_candidate_csv(row: dict) -> CandidateChunk:
-    doc_data = json.loads(row["full_document"])
-    full_doc = FullBiasDocument(
-        name=doc_data["name"],
-        definition=doc_data["definition"],
-        examples=doc_data["examples"],
-        indicators=doc_data["indicators"],
-        false_positives=doc_data["false_positives"],
-        related_biases=doc_data["related_biases"],
-    )
-    return CandidateChunk(
-        bias_id=row["bias_id"],
-        chunk_type=row["chunk_type"],
-        source_section=row["source_section"],
-        source=row["source"],
-        chunk_text=row["chunk_text"],
-        full_document=full_doc,
+        full_document=_parse_full_document(row["full_document"]),
         retrieval_score=float(row["retrieval_score"]),
     )
 
@@ -150,7 +133,7 @@ async def _search_psql(embedding: list[float], taxonomy_version: str, top_k: int
     if proc.returncode != 0:
         raise RuntimeError(f"psql search failed: {stderr.decode().strip()}")
     rows = list(csv.DictReader(io.StringIO(stdout.decode())))
-    return [_row_to_candidate_csv(r) for r in rows]
+    return [_row_to_candidate(r) for r in rows]
 
 
 async def _search_asyncpg(
@@ -159,6 +142,9 @@ async def _search_asyncpg(
     taxonomy_version: str,
     top_k: int,
 ) -> list[CandidateChunk]:
+    import time
+    import structlog
+    log = structlog.get_logger()
     assert pool is not None, "pool must not be None when psql_search=False"
     vec = fmt_vector(embedding)
     # $1::text::vector: asyncpg sends $1 as text (known type), PostgreSQL casts to
@@ -171,8 +157,15 @@ async def _search_asyncpg(
         f" ORDER BY embedding <=> $1::text::vector"
         f" LIMIT {top_k}"
     )
-    async with pool.acquire() as conn:
-        rows = await conn.fetch(query, vec, taxonomy_version)
+    t0 = time.monotonic()
+    log.debug("asyncpg_query_start", taxonomy_version=taxonomy_version)
+    try:
+        async with pool.acquire() as conn:
+            rows = await conn.fetch(query, vec, taxonomy_version)
+        log.info("asyncpg_query_ok", rows=len(rows), latency_ms=round((time.monotonic() - t0) * 1000))
+    except Exception as exc:
+        log.error("asyncpg_query_failed", error=str(exc), latency_ms=round((time.monotonic() - t0) * 1000))
+        raise
     return [_row_to_candidate(r) for r in rows]
 
 
