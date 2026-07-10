@@ -7,19 +7,20 @@ import structlog
 from src.config import settings
 from src.observability import (
     EVT_COMPLETED,
-    EVT_QUERY_EMBEDDED,
     EVT_RERANKED,
     EVT_RETRIEVAL_STARTED,
     EVT_VECTOR_SEARCH,
     KEY_REQUEST_ID,
     TimingContext,
 )
+from src.db.queries import FETCH_BY_BIAS_IDS
 from src.providers.base import EmbeddingProvider
-from src.retrieval.query_builder import get_query_strategy
 from src.retrieval.reranker import rerank
-from src.retrieval.searcher import search_chunks
-from src.schemas.internal import RetrievalMetadata, RetrievedBias
+from src.retrieval.searcher import _row_to_candidate
+from src.schemas.internal import CandidateChunk, RetrievalMetadata, RetrievedBias
 from src.schemas.request import RetrieveRequest
+from src.selection.base import SelectionStrategy
+from src.selection.vector_only import VectorOnlyStrategy
 
 log = structlog.get_logger()
 
@@ -32,11 +33,12 @@ async def retrieve(
     request: RetrieveRequest,
     provider: EmbeddingProvider,
     pool: asyncpg.Pool | None,
+    strategy: SelectionStrategy | None = None,
 ) -> tuple[list[RetrievedBias], RetrievalMetadata]:
-    """Full retrieval pipeline: build query → embed → vector search → rerank.
+    """Full retrieval pipeline: strategy.select() → rerank → metadata.
 
-    Returns the ranked biases and metadata about every step of the pipeline.
-    Raises IndexNotFoundError if no chunks are indexed for the active taxonomy_version.
+    Strategy owns embed + vector search (and NLI when nli_union). Defaults to
+    VectorOnlyStrategy so callers without an app.state (e.g. eval scripts) still work.
     """
     request_id = request.request_id or str(uuid4())
     # clear_contextvars first — asyncio can reuse task contexts under some middleware,
@@ -47,53 +49,73 @@ async def retrieve(
 
     t_total = time.monotonic()
 
-    strategy = get_query_strategy(settings.query_strategy)
-    query_text = strategy.build(request.story, request.story_analysis)
-
-    # NOTE: embed_query is synchronous (SentenceTransformer runs in-process).
-    # asyncio.wait_for at the route level cannot interrupt it — the timeout only
-    # kicks in at the next await point (search_chunks). If you swap in a remote
-    # embedding provider, wrap embed_query in loop.run_in_executor() to make it
-    # cancellable.
-    with TimingContext() as embed_t:
-        embedding = provider.embed_query(query_text)
-    log.info(EVT_QUERY_EMBEDDED, latency_ms=embed_t.elapsed_ms, query_length=len(query_text))
+    if strategy is None:
+        strategy = VectorOnlyStrategy(provider, pool)
 
     with TimingContext() as search_t:
-        candidates = await search_chunks(
-            embedding, pool, settings.taxonomy_version, settings.search_top_k
-        )
+        scores, candidates, strategy_meta = await strategy.select(request.story, request.story_analysis)
     log.info(EVT_VECTOR_SEARCH, latency_ms=search_t.elapsed_ms, candidates=len(candidates))
 
     if not candidates:
         raise IndexNotFoundError(settings.taxonomy_version)
 
+    admitted_ids = set(scores.keys())
+
+    # NLI-admitted biases with no vector chunk won't survive the reranker's candidate
+    # filter. Fetch one definition chunk per missing bias so they can be hydrated.
+    candidate_bias_ids = {c.bias_id for c in candidates}
+    missing_ids = admitted_ids - candidate_bias_ids
+    if missing_ids and pool is not None:
+        async with pool.acquire() as conn:
+            rows = await conn.fetch(FETCH_BY_BIAS_IDS, settings.taxonomy_version, list(missing_ids))
+        if rows:
+            hydrated: list[CandidateChunk] = []
+            for r in rows:
+                c = _row_to_candidate(r)
+                hydrated.append(CandidateChunk(
+                    bias_id=c.bias_id,
+                    chunk_type=c.chunk_type,
+                    source_section=c.source_section,
+                    source=c.source,
+                    chunk_text=c.chunk_text,
+                    full_document=c.full_document,
+                    retrieval_score=scores.get(c.bias_id, 0.0),
+                ))
+            candidates = list(candidates) + hydrated
+            log.info("nli_only_admits_hydrated", count=len(rows), bias_ids=sorted(missing_ids))
+
     with TimingContext() as rerank_t:
-        biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k)
+        biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k, admitted_ids=admitted_ids, score_override=scores or None)
     log.info(EVT_RERANKED, latency_ms=rerank_t.elapsed_ms, returned=len(biases))
 
     total_ms = int((time.monotonic() - t_total) * 1000)
     log.info(EVT_COMPLETED, latency_ms=total_ms)
 
-    scores = [b.retrieval_score for b in biases]
-    surviving = len([c for c in candidates if c.retrieval_score >= settings.similarity_threshold])
+    bias_scores = [b.retrieval_score for b in biases]
 
     meta = RetrievalMetadata(
         retrieval_id=request_id,
         embedding_model=provider.model_name,
         taxonomy_version=settings.taxonomy_version,
         query_strategy=settings.query_strategy,
-        query_length=len(query_text),
-        embedding_latency_ms=embed_t.elapsed_ms,
+        query_length=len(request.story),
+        embedding_latency_ms=0,
         search_latency_ms=search_t.elapsed_ms,
         rerank_latency_ms=rerank_t.elapsed_ms,
         total_latency_ms=total_ms,
         candidate_chunks=len(candidates),
-        surviving_chunks=surviving,
+        surviving_chunks=len(admitted_ids),
         returned_biases=len(biases),
-        top_retrieval_score=max(scores) if scores else None,
-        avg_retrieval_score=sum(scores) / len(scores) if scores else None,
+        top_retrieval_score=max(bias_scores) if bias_scores else None,
+        avg_retrieval_score=sum(bias_scores) / len(bias_scores) if bias_scores else None,
         threshold_used=settings.similarity_threshold,
+        selection_strategy=strategy_meta.selection_strategy,
+        hypotheses_version=strategy_meta.hypotheses_version,
+        nli_latency_ms=strategy_meta.nli_latency_ms,
+        truncated_premise=strategy_meta.truncated_premise,
+        nli_scores=strategy_meta.nli_scores,
+        vector_scores=strategy_meta.vector_scores,
+        combined_scores=strategy_meta.combined_scores,
     )
 
     return biases, meta

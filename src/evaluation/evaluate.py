@@ -15,15 +15,18 @@ import io
 import json
 import math
 import subprocess
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
 import asyncpg
+import structlog
 
 from src.config import settings
 from src.db.queries import fmt_vector
 from src.providers.base import EmbeddingProvider
 from src.retrieval.query_builder import get_query_strategy
+from src.nli.combiner import combine
 from src.retrieval.retriever import IndexNotFoundError, retrieve
 from src.retrieval.searcher import _dedup_bias_rows, _diagnostics_search_query, _lightweight_search_query
 from src.schemas.internal import RetrievedBias
@@ -57,6 +60,11 @@ class ScenarioResult:
     ndcg_at_k: float
     error: str | None = None
     retrieved_with_diagnostics: list[dict] | None = None
+    nli_scores: dict[str, float] | None = None
+    vector_scores: dict[str, float] | None = None
+    combined_scores: dict[str, float] | None = None
+    admitted_by: dict[str, list[str]] | None = None
+    missed_by: dict[str, list[str]] | None = None
 
 
 @dataclass
@@ -79,6 +87,9 @@ class EvalRun:
     scenario_results: list[ScenarioResult]
     group_metrics: dict[str, GroupMetrics]
     deltas: dict[str, dict[str, float]] | None   # None when no baseline exists
+    selection_strategy: str | None = None
+    hypotheses_version: str | None = None
+    hypotheses: dict[str, str] | None = None     # {bias_id: hypothesis_text} snapshot
 
 
 # ── Metric functions ──────────────────────────────────────────────────────────
@@ -128,11 +139,13 @@ def ndcg_at_k(retrieved: list[str], expected: list[str]) -> float:
 
 # ── I/O helpers ───────────────────────────────────────────────────────────────
 
-def load_scenarios(eval_dir: Path) -> list[Scenario]:
-    """Load all scenario JSON files, skipping non-scored groups."""
+def load_scenarios(eval_dir: Path, only_groups: set[str] | None = None) -> list[Scenario]:
+    """Load scenario JSON files. Pass only_groups to restrict to specific groups."""
     scenarios: list[Scenario] = []
     for group_dir in sorted(eval_dir.iterdir()):
         if not group_dir.is_dir() or group_dir.name in _SKIP_GROUPS:
+            continue
+        if only_groups and group_dir.name not in only_groups:
             continue
         for f in sorted(group_dir.glob("*.json")):
             data = json.loads(f.read_text())
@@ -194,6 +207,117 @@ def compute_deltas(
     return deltas
 
 
+# ── NLI helpers ──────────────────────────────────────────────────────────────
+
+def _psql_query(sql: str, scenario_id: str = "?") -> list[dict]:
+    """Run a SQL query via psql subprocess with retry on timeout.
+
+    Proxy vars are restored into os.environ by main_sync() before this is called.
+    Retries up to 3 times with 5s backoff — proxy connections drop between
+    sequential queries and re-establishing them adds latency.
+    Raises RuntimeError on persistent failure.
+    """
+    for attempt in range(3):
+        try:
+            result = subprocess.run(
+                ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
+                capture_output=True, text=True, timeout=120,
+            )
+            if result.returncode != 0:
+                raise RuntimeError(f"psql error: {result.stderr.strip()}")
+            return list(csv.DictReader(io.StringIO(result.stdout)))
+        except subprocess.TimeoutExpired:
+            if attempt < 2:
+                print(f"\n  timeout for {scenario_id}, retrying in 5s...", flush=True)
+                time.sleep(5)
+            else:
+                raise RuntimeError(f"psql timed out for {scenario_id} after 3 attempts")
+    return []  # unreachable
+
+
+def _compute_missed_by(
+    expected: list[str],
+    admitted_set: set[str],
+    nli_scores: dict[str, float],
+    vec_raw: dict[str, float],
+    vec_norm: dict[str, float],
+    combined_scores: dict[str, float],
+    config,
+) -> dict[str, list[str]]:
+    """For each expected bias not admitted, list which gates failed to fire.
+
+    VECTOR gate uses two labels: "VECTOR:absent" (bias not returned by vector
+    search at all) vs "VECTOR:below" (returned but normalized score < vec_gate).
+    This distinguishes a missing-from-index failure from a scoring failure.
+    """
+    missed: dict[str, list[str]] = {}
+    for bid in expected:
+        if bid not in admitted_set:
+            gates: list[str] = []
+            if nli_scores.get(bid, 0.0) < config.nli_gate:
+                gates.append("NLI")
+            if bid not in vec_raw:
+                gates.append("VECTOR:absent")
+            elif vec_norm.get(bid, 0.0) < config.vec_gate:
+                gates.append("VECTOR:below")
+            if combined_scores.get(bid, 0.0) < config.combined_threshold:
+                gates.append("COMBINED")
+            missed[bid] = gates
+    return missed
+
+
+def _retrieve_sync_nli(
+    scenario: "Scenario",
+    provider: EmbeddingProvider,
+    nli_classifier,
+    hypotheses: list[tuple[str, str]],
+    combiner_config,
+) -> tuple[list[str], dict | None, str | None]:
+    """NLI eval path: psql vector fetch + NLI classify + combiner.
+
+    Returns (admitted_ids, nli_meta, error).
+    nli_meta carries nli_scores, vector_scores (normalized), combined_scores,
+    admitted_by, and missed_by for diagnostic logging.
+    """
+    try:
+        strategy = get_query_strategy(settings.query_strategy)
+        analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
+        req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
+        query_text = strategy.build(req.story, req.story_analysis)
+        embedding = provider.embed_query(query_text)
+
+        sql = _lightweight_search_query(fmt_vector(embedding), settings.taxonomy_version, settings.search_top_k)
+        rows = _psql_query(sql, scenario.scenario_id)
+
+        # Mirror production path: apply similarity_threshold so normalization
+        # uses the same set of biases as NLIUnionStrategy → VectorOnlyStrategy.
+        vec_raw: dict[str, float] = {}
+        for row in rows:
+            bid = row["bias_id"]
+            score = float(row["retrieval_score"])
+            if score >= settings.similarity_threshold and (bid not in vec_raw or score > vec_raw[bid]):
+                vec_raw[bid] = score
+
+        nli_result = nli_classifier.classify(scenario.story, hypotheses)
+        output = combine(nli_result.scores, vec_raw, combiner_config)
+        admitted_ids = output.admitted[:K]
+
+        nli_meta = {
+            "nli_scores": nli_result.scores,
+            "vector_scores": output.vector_scores,
+            "combined_scores": output.combined_scores,
+            "admitted_by": output.admitted_by,
+            "missed_by": _compute_missed_by(
+                scenario.expected_bias_ids, set(output.admitted),
+                nli_result.scores, vec_raw, output.vector_scores, output.combined_scores,
+                combiner_config,
+            ),
+        }
+        return admitted_ids, nli_meta, None
+    except Exception as exc:
+        return [], None, str(exc)
+
+
 # ── Main pipeline ─────────────────────────────────────────────────────────────
 
 def _retrieve_sync(
@@ -219,14 +343,7 @@ def _retrieve_sync(
             sql = _diagnostics_search_query(vec, settings.taxonomy_version, settings.search_top_k)
         else:
             sql = _lightweight_search_query(vec, settings.taxonomy_version, settings.search_top_k)
-        result = subprocess.run(
-            ["psql", settings.database_url, "--no-psqlrc", "--csv", "-c", sql],
-            capture_output=True, text=True, timeout=60,
-        )
-        if result.returncode != 0:
-            return [], None, f"psql error: {result.stderr.strip()}"
-
-        rows = list(csv.DictReader(io.StringIO(result.stdout)))
+        rows = _psql_query(sql, scenario.scenario_id)
         if not rows:
             return [], None, "index_not_found"
 
@@ -253,18 +370,34 @@ def run_evaluation_sync(
     run_date: str,
     taxonomy_version: str,
     diagnostics: bool = False,
+    nli_classifier=None,
+    hypotheses: list[tuple[str, str]] | None = None,
+    hypotheses_version: str | None = None,
+    combiner_config=None,
+    hypotheses_snapshot: dict[str, str] | None = None,
+    selection_strategy: str = "vector_only",
 ) -> EvalRun:
     """Fully synchronous evaluation — used locally when psql_search=True.
 
-    No event loop, no asyncio subprocess, no thread pool. Each scenario calls
-    psql directly via subprocess.run. Avoids asyncio conflicts with loky/joblib
-    semaphores left by SentenceTransformer on Python 3.14.
+    When nli_classifier + hypotheses + combiner_config are provided, runs the NLI
+    path (_retrieve_sync_nli) instead of the vector-only psql path. NLI diagnostic
+    fields (nli_scores, vector_scores, combined_scores, admitted_by, missed_by) are
+    populated on every ScenarioResult in NLI mode.
     """
+    use_nli = nli_classifier is not None and hypotheses is not None and combiner_config is not None
     scenarios = load_scenarios(eval_dir)
     results: list[ScenarioResult] = []
 
     for scenario in scenarios:
-        retrieved_ids, diag_rows, error = _retrieve_sync(scenario, provider, diagnostics=diagnostics)
+        diag_rows: list[dict] | None = None
+        nli_meta: dict | None = None
+        if use_nli:
+            retrieved_ids, nli_meta, error = _retrieve_sync_nli(
+                scenario, provider, nli_classifier, hypotheses, combiner_config
+            )
+        else:
+            retrieved_ids, diag_rows, error = _retrieve_sync(scenario, provider, diagnostics=diagnostics)
+
         top_k = retrieved_ids[:K]
         expected = scenario.expected_bias_ids
         results.append(ScenarioResult(
@@ -278,6 +411,11 @@ def run_evaluation_sync(
             ndcg_at_k=ndcg_at_k(top_k, expected),
             error=error,
             retrieved_with_diagnostics=diag_rows,
+            nli_scores=nli_meta["nli_scores"] if nli_meta else None,
+            vector_scores=nli_meta["vector_scores"] if nli_meta else None,
+            combined_scores=nli_meta["combined_scores"] if nli_meta else None,
+            admitted_by=nli_meta["admitted_by"] if nli_meta else None,
+            missed_by=nli_meta["missed_by"] if nli_meta else None,
         ))
 
     group_metrics = _aggregate(results)
@@ -292,6 +430,9 @@ def run_evaluation_sync(
         scenario_results=results,
         group_metrics=group_metrics,
         deltas=deltas,
+        selection_strategy=selection_strategy,
+        hypotheses_version=hypotheses_version,
+        hypotheses=hypotheses_snapshot,
     )
 
 
@@ -302,6 +443,9 @@ async def run_evaluation(
     baselines_dir: Path,
     run_date: str,
     taxonomy_version: str,
+    strategy=None,
+    on_scenario_done=None,
+    only_groups: set[str] | None = None,
 ) -> EvalRun:
     """Run all scored scenarios and return a fully populated EvalRun.
 
@@ -311,29 +455,43 @@ async def run_evaluation(
     if pool is None and not settings.psql_search:
         raise ValueError("pool is required when psql_search=False")
 
-    scenarios = load_scenarios(eval_dir)
+    log = structlog.get_logger()
+    scenarios = load_scenarios(eval_dir, only_groups=only_groups)
+    total = len(scenarios)
     results: list[ScenarioResult] = []
 
-    for scenario in scenarios:
+    for i, scenario in enumerate(scenarios):
+        t_scenario = time.monotonic()
+        log.info("scenario_start", n=f"{i+1}/{total}", scenario_id=scenario.scenario_id, group=scenario.group)
+        nli_meta: dict | None = None
         if settings.psql_search:
             retrieved_ids, _, error = await asyncio.to_thread(_retrieve_sync, scenario, provider)
         else:
             try:
                 analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
                 req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
-                biases, _ = await retrieve(req, provider, pool)
+                biases, meta = await retrieve(req, provider, pool, strategy)
                 retrieved_ids = [b.bias_id for b in biases]
                 error = None
+                if meta.nli_scores is not None:
+                    nli_meta = {
+                        "nli_scores": meta.nli_scores,
+                        "vector_scores": meta.vector_scores,
+                        "combined_scores": meta.combined_scores,
+                        "admitted_by": None,
+                        "missed_by": None,
+                    }
             except IndexNotFoundError:
                 retrieved_ids = []
                 error = "index_not_found"
             except Exception as exc:
                 retrieved_ids = []
                 error = str(exc)
+        log.info("scenario_done", n=f"{i+1}/{total}", scenario_id=scenario.scenario_id, latency_ms=round((time.monotonic() - t_scenario) * 1000))
 
         top_k = retrieved_ids[:K]
         expected = scenario.expected_bias_ids
-        results.append(ScenarioResult(
+        sr = ScenarioResult(
             scenario_id=scenario.scenario_id,
             group=scenario.group,
             expected=expected,
@@ -343,7 +501,15 @@ async def run_evaluation(
             mrr=mrr(retrieved_ids, expected),
             ndcg_at_k=ndcg_at_k(top_k, expected),
             error=error,
-        ))
+            nli_scores=nli_meta["nli_scores"] if nli_meta else None,
+            vector_scores=nli_meta["vector_scores"] if nli_meta else None,
+            combined_scores=nli_meta["combined_scores"] if nli_meta else None,
+            admitted_by=nli_meta["admitted_by"] if nli_meta else None,
+            missed_by=nli_meta["missed_by"] if nli_meta else None,
+        )
+        results.append(sr)
+        if on_scenario_done is not None:
+            on_scenario_done(sr, i + 1, total)
 
     group_metrics = _aggregate(results)
     baseline = load_baseline(baselines_dir)

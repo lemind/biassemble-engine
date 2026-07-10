@@ -13,6 +13,7 @@ dependencies = [
     "asyncpg>=0.29.0",
     "pgvector>=0.3.0",
     "structlog>=24.0.0",
+    "transformers[sentencepiece]>=5.12.1",
 ]
 
 [project.optional-dependencies]

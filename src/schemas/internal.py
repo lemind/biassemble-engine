@@ -61,3 +61,11 @@ class RetrievalMetadata:
     top_retrieval_score: float | None
     avg_retrieval_score: float | None
     threshold_used: float
+    # NLI fields — None for vector_only strategy
+    selection_strategy: str | None = None
+    hypotheses_version: str | None = None
+    nli_latency_ms: float | None = None
+    truncated_premise: bool | None = None
+    nli_scores: dict[str, float] | None = None
+    vector_scores: dict[str, float] | None = None
+    combined_scores: dict[str, float] | None = None
