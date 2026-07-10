@@ -68,8 +68,8 @@ Per ADR-003 §2 (falsifiability) and spec FR-008/SC-001: **T003 (the spike) bloc
 
 **Independent Test**: run each `SELECTION_STRATEGY` value → valid result; `vector_only`/`nli_union` unchanged; bogus value errors.
 
-- [ ] T011 [US2] Validate `selection_strategy` in `src/config.py` (or at `src/api/app.py` startup) against the allowed set `{vector_only, nli_union, llm_union}`; unknown → raise at startup, never silently default (FR-004).
-- [ ] T012 [P] [US2] Integration test `tests/test_strategy_switch.py` — `vector_only` and `nli_union` responses are unchanged by this feature (no `source` field, identical shape); `llm_union` produces a valid result; an unknown flag value raises.
+- [x] T011 [US2] Added a pydantic `field_validator` on `Settings.selection_strategy` in `src/config.py` against `VALID_SELECTION_STRATEGIES = {vector_only, nli_union, llm_union}`; raises `ValidationError` at `Settings()` construction (import-time startup), never silently falls through to `app.py`'s `else` branch (which previously treated any unrecognized value as `vector_only` — that silent-default gap is what FR-004 closes).
+- [x] T012 [P] [US2] `tests/test_strategy_switch.py` — 4 tests via the existing fake-lifespan `TestClient` pattern: `vector_only` and `nli_union` response shape unchanged (asserts exact key set, no `source` field); `llm_union` produces a valid admitted result with a mocked generator; `Settings(selection_strategy="not_a_real_strategy")` raises `ValidationError`. All pass.
 
 **Checkpoint**: Reversible — one env var flips between all three; existing paths provably untouched.
 
