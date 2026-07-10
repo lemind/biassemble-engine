@@ -28,6 +28,8 @@ class LLMGenerator:
         max_output_tokens: int,
         temperature: float,
     ) -> None:
+        self.context_tokens = context_tokens
+        self.max_output_tokens = max_output_tokens
         self._max_output_tokens = max_output_tokens
         self._temperature = temperature
         try:
@@ -53,3 +55,12 @@ class LLMGenerator:
             temperature=self._temperature,
         )
         return out["choices"][0]["message"]["content"] or ""
+
+    def count_tokens(self, text: str) -> int:
+        return len(self._llm.tokenize(text.encode("utf-8"), add_bos=False))
+
+    def truncate_to_tokens(self, text: str, max_tokens: int) -> str:
+        tokens = self._llm.tokenize(text.encode("utf-8"), add_bos=False)
+        if len(tokens) <= max_tokens:
+            return text
+        return self._llm.detokenize(tokens[:max_tokens]).decode("utf-8", errors="ignore")

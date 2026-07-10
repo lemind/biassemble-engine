@@ -63,6 +63,26 @@ def build_user_message(story: str, catalog: list[tuple[str, str, list[str]]]) ->
     return "\n".join(lines)
 
 
+# Margin for chat-template special tokens the raw tokenizer count doesn't see.
+_PROMPT_OVERHEAD_TOKENS = 100
+
+
+def fit_story_to_budget(
+    generator, story: str, catalog: list[tuple[str, str, list[str]]]
+) -> tuple[str, bool]:
+    """Truncate `story` (never the catalog) so system + catalog + story + output fits
+    `generator.context_tokens`. Real-world usage measured well inside budget
+    (research.md "Spike result": 2666/4096) — this is a defensive cap, not the
+    common case. Returns (possibly-truncated story, was_truncated)."""
+    budget = generator.context_tokens - generator.max_output_tokens - _PROMPT_OVERHEAD_TOKENS
+    empty_user_msg = build_user_message("", catalog)
+    fixed_tokens = generator.count_tokens(SYSTEM) + generator.count_tokens(empty_user_msg)
+    story_budget = budget - fixed_tokens
+    if story_budget <= 0 or generator.count_tokens(story) <= story_budget:
+        return story, False
+    return generator.truncate_to_tokens(story, story_budget), True
+
+
 # ── Staged parse pipeline (research R4) — each stage logs in/out counts so a
 # failure is attributable to a specific stage, not a mystery empty list. Never
 # raises; any stage failure falls through to an empty candidate list (FR-007). ──

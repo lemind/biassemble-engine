@@ -5,6 +5,7 @@ import asyncpg
 import structlog
 
 from src.config import settings
+from src.db.queries import FETCH_BY_BIAS_IDS
 from src.observability import (
     EVT_COMPLETED,
     EVT_RERANKED,
@@ -13,7 +14,6 @@ from src.observability import (
     KEY_REQUEST_ID,
     TimingContext,
 )
-from src.db.queries import FETCH_BY_BIAS_IDS
 from src.providers.base import EmbeddingProvider
 from src.retrieval.reranker import rerank
 from src.retrieval.searcher import _row_to_candidate
@@ -116,6 +116,10 @@ async def retrieve(
         nli_scores=strategy_meta.nli_scores,
         vector_scores=strategy_meta.vector_scores,
         combined_scores=strategy_meta.combined_scores,
+        llm_scores=strategy_meta.llm_scores,
+        sources=strategy_meta.sources,
+        llm_latency_ms=strategy_meta.llm_latency_ms,
+        truncated_story=strategy_meta.truncated_story,
     )
 
     return biases, meta

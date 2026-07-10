@@ -19,10 +19,10 @@ from src.evaluation.evaluate import run_evaluation
 from src.providers.base import EmbeddingProvider
 from src.retrieval import retriever
 from src.retrieval.retriever import IndexNotFoundError
-from src.selection.vector_only import VectorOnlyStrategy
 from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest
 from src.schemas.response import BiasResult, RetrieveResponse
+from src.selection.vector_only import VectorOnlyStrategy
 
 router = APIRouter()
 _bearer = HTTPBearer(auto_error=False)
@@ -37,7 +37,7 @@ def _verify_token(
         raise HTTPException(status_code=401, detail={"error": "unauthorized"})
 
 
-def _to_bias_result(b: RetrievedBias) -> BiasResult:
+def _to_bias_result(b: RetrievedBias, sources: dict[str, str] | None) -> BiasResult:
     return BiasResult(
         id=b.bias_id,
         name=b.name,
@@ -47,7 +47,12 @@ def _to_bias_result(b: RetrievedBias) -> BiasResult:
         indicators=b.indicators,
         false_positives=b.false_positives,
         related_biases=b.related_biases,
+        source=sources.get(b.bias_id) if sources else None,
     )
+
+
+def _llm_model_display_name() -> str:
+    return settings.llm_model_repo.split("/")[-1].removesuffix("-GGUF")
 
 
 @router.post("/retrieve-biases", response_model=RetrieveResponse)
@@ -80,13 +85,21 @@ async def retrieve_biases(
             detail={"error": "retrieval_failed", "detail": str(exc)},
         ) from exc
 
-    biases_out = [_to_bias_result(b) for b in biases] if biases else request.app.state.roster
+    biases_out = (
+        [_to_bias_result(b, meta.sources) for b in biases] if biases else request.app.state.roster
+    )
+    is_llm_union = meta.selection_strategy == "llm_union"
     return RetrieveResponse(
         biases=biases_out,
         retrieved_chunks=meta.candidate_chunks,
         taxonomy_version=meta.taxonomy_version,
         embedding_model=meta.embedding_model,
         request_id=meta.retrieval_id,
+        llm_model=_llm_model_display_name() if is_llm_union else None,
+        llm_latency_ms=meta.llm_latency_ms if is_llm_union else None,
+        truncated_story=meta.truncated_story if is_llm_union else None,
+        llm_scores=meta.llm_scores if is_llm_union else None,
+        vector_scores=meta.vector_scores if is_llm_union else None,
     )
 
 
