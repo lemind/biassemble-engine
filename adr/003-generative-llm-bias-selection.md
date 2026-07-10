@@ -73,6 +73,8 @@ Every admitted bias is logged with **which method surfaced it**: `{"bias_id": ..
 
 Pre-gate (task 1, blocks everything): **smoke test** — 2–3 known-bias stories, model names plausible catalog biases. Binary go/no-go.
 
+**Numbering note:** the SC-00N labels below follow the spec-003 gate tradition and do **not** match spec-004's SC numbers. Mapping: ADR SC-001..005 (recall/regression) = **spec SC-005** (recall gates, as a group) + **spec SC-004** (regression); ADR SC-006 (precision) = **spec SC-006**; ADR SC-007 (latency) = **spec SC-002**. tasks.md uses spec numbering throughout — defer to it.
+
 Merge gates (same SC discipline as spec-003, re-run on the new strategy):
 - SC-001 positive Recall@5 ≥ 0.85
 - SC-002 negative empty_rate ≥ 0.90
