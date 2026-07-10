@@ -61,8 +61,9 @@ async def retrieve(
 
     admitted_ids = set(scores.keys())
 
-    # NLI-admitted biases with no vector chunk won't survive the reranker's candidate
-    # filter. Fetch one definition chunk per missing bias so they can be hydrated.
+    # Strategy-admitted biases with no vector chunk (NLI- or LLM-named) won't survive
+    # the reranker's candidate filter. Fetch one definition chunk per missing bias so
+    # they can be hydrated.
     candidate_bias_ids = {c.bias_id for c in candidates}
     missing_ids = admitted_ids - candidate_bias_ids
     if missing_ids and pool is not None:
@@ -82,7 +83,12 @@ async def retrieve(
                     retrieval_score=scores.get(c.bias_id, 0.0),
                 ))
             candidates = list(candidates) + hydrated
-            log.info("nli_only_admits_hydrated", count=len(rows), bias_ids=sorted(missing_ids))
+            log.info(
+                "strategy_only_admits_hydrated",
+                strategy=strategy_meta.selection_strategy,
+                count=len(rows),
+                bias_ids=sorted(missing_ids),
+            )
 
     with TimingContext() as rerank_t:
         biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k, admitted_ids=admitted_ids, score_override=scores or None)
