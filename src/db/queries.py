@@ -77,3 +77,18 @@ ROSTER_QUERY = f"""
       AND chunk_type = 'semantic_definition'
     ORDER BY bias_id, chunk_index
 """
+
+# spec-004: full catalog (bias_id, name, indicators) for the LLM prompt — loaded once
+# at startup (mirrors hypotheses loading for nli_union). This is the "existing
+# catalog/roster provider" research R4 requires the prompt builder to use, instead of
+# hardcoding the taxonomy or re-parsing knowledge/*.md at runtime.
+CATALOG_QUERY = f"""
+    SELECT DISTINCT ON (bias_id)
+        bias_id,
+        full_document->>'name'       AS name,
+        full_document->>'indicators' AS indicators
+    FROM {TABLE}
+    WHERE taxonomy_version = $1
+      AND chunk_type = 'semantic_definition'
+    ORDER BY bias_id, chunk_index
+"""
