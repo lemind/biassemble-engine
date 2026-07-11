@@ -2,13 +2,16 @@ name: Build llama-cpp-python wheel
 
 # ONE-TIME (re-runnable) job: compile a portable prebuilt wheel of llama-cpp-python
 # and commit it to vendor/wheels/. The HF Space Docker build then INSTALLS that wheel
-# in seconds instead of compiling from source — which OOM-kills on HF's build machine
-# (too many parallel g++ for its RAM). GitHub's runners have ~16GB RAM, so the compile
-# succeeds here comfortably.
+# in seconds instead of compiling from source — which OOM-kills on HF's build machine.
+# GitHub's runners have ~16GB RAM, so the compile succeeds here comfortably.
 #
-# Run it from the Actions tab → "Build llama-cpp-python wheel" → Run workflow.
-# When it finishes, `git pull origin` to get the committed wheel, then finalize
-# pyproject/uv.lock/Dockerfile to install from it.
+# Runs on ubuntu-22.04 (glibc 2.35) — modern enough for GitHub's Node-24 tooling, and
+# <= the deploy image's glibc (Debian bookworm, 2.36), so the resulting wheel loads
+# there. auditwheel then bundles any shared libs and tags it manylinux for portability.
+# (Running inside an old manylinux container instead breaks GitHub's Node runner —
+# its glibc 2.17 is too old for Node 24.)
+#
+# Run from the Actions tab -> "Build llama-cpp-python wheel" -> Run workflow.
 
 on:
   workflow_dispatch:
@@ -23,28 +26,26 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    # manylinux2014 = glibc 2.17 — maximally portable; a wheel built here runs on the
-    # deploy image (Debian bookworm, glibc 2.36) since glibc is backward-compatible.
-    container: quay.io/pypa/manylinux2014_x86_64
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build the wheel from source
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build the wheel from source, then repair to manylinux
         env:
-          # Same flags the Dockerfile used: portable build (runtime SIMD dispatch, no
-          # -march=native → no SIGILL when it runs on a different CPU), no curl support.
+          # Portable build (runtime SIMD dispatch, no -march=native -> no SIGILL when it
+          # runs on a different CPU), no curl support (models fetched via huggingface_hub).
           CMAKE_ARGS: "-DGGML_NATIVE=OFF -DLLAMA_CURL=OFF"
         run: |
           set -eux
-          PYBIN=/opt/python/cp311-cp311/bin
-          "$PYBIN/pip" install --upgrade pip cmake ninja auditwheel
-          "$PYBIN/pip" wheel "llama-cpp-python==${{ github.event.inputs.version }}" \
+          python -m pip install --upgrade pip cmake ninja auditwheel patchelf
+          python -m pip wheel "llama-cpp-python==${{ github.event.inputs.version }}" \
             --no-binary llama-cpp-python -w /tmp/raw
-
-      - name: Repair into a portable manylinux wheel
-        run: |
-          set -eux
+          # auditwheel bundles external .so deps and stamps the lowest compatible
+          # manylinux tag based on the glibc symbols actually used.
           auditwheel repair /tmp/raw/llama_cpp_python-*.whl -w vendor/wheels
           rm -f vendor/wheels/.gitkeep
           ls -la vendor/wheels
@@ -58,7 +59,6 @@ jobs:
       - name: Commit the wheel to the repo
         run: |
           set -eux
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f vendor/wheels/*.whl
