@@ -12,7 +12,10 @@ class BiasResult(BaseModel):
     indicators: str
     false_positives: str
     related_biases: str
-    source: Literal["vector", "llm", "both"] | None = None
+    # Which methods surfaced this bias, e.g. ["vector"], ["llm"], ["vector","llm"].
+    # None/absent for vector_only/nli_union (back-compat). Array, not a "both" string,
+    # so a consumer sees each contributing signal.
+    source: list[Literal["vector", "llm"]] | None = None
 
 
 class RetrieveResponse(BaseModel):

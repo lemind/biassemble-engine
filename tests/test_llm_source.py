@@ -3,9 +3,9 @@
 Stub vector strategy returns candidate chunks for all three biases (so no DB
 hydration path is exercised — that's retriever.py's job, out of scope here) but
 only admits two of them via `scores`, isolating the three source categories:
-confirmation_bias (vector-admitted + LLM-named) → both
-anchoring_bias    (vector-admitted only)        → vector
-sunk_cost_fallacy (LLM-named only)              → llm
+confirmation_bias (vector-admitted + LLM-named) → ["vector", "llm"]
+anchoring_bias    (vector-admitted only)        → ["vector"]
+sunk_cost_fallacy (LLM-named only)              → ["llm"]
 """
 from contextlib import asynccontextmanager
 from unittest.mock import MagicMock
@@ -87,9 +87,9 @@ def test_source_tags_correct_for_vector_llm_and_both(monkeypatch):
     data = resp.json()
     by_id = {b["id"]: b for b in data["biases"]}
 
-    assert by_id["confirmation_bias"]["source"] == "both"
-    assert by_id["anchoring_bias"]["source"] == "vector"
-    assert by_id["sunk_cost_fallacy"]["source"] == "llm"
+    assert by_id["confirmation_bias"]["source"] == ["vector", "llm"]
+    assert by_id["anchoring_bias"]["source"] == ["vector"]
+    assert by_id["sunk_cost_fallacy"]["source"] == ["llm"]
 
 
 def test_llm_and_vector_scores_reported_separately_not_blended(monkeypatch):

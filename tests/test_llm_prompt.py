@@ -38,13 +38,22 @@ def test_parse_biases_missing_confidence_defaults():
     assert result[0].confidence == 0.5
 
 
-def test_parse_biases_non_dict_items_are_dropped():
+def test_parse_biases_bare_string_array_is_the_production_format():
+    # Bare list of bias_id strings — the current production output format. Each string
+    # is a valid candidate (confidence defaults). Mixed with an object form still works.
     raw = (
         '["confirmation_bias", '
         '{"bias_id": "sunk_cost_fallacy", "confidence": 0.6, "evidence": "e"}]'
     )
     result = parse_biases(raw, VALID_IDS)
-    assert [c.bias_id for c in result] == ["sunk_cost_fallacy"]
+    assert [c.bias_id for c in result] == ["confirmation_bias", "sunk_cost_fallacy"]
+    assert result[0].confidence == 0.5  # bare string -> default confidence
+
+
+def test_parse_biases_non_string_non_dict_items_dropped():
+    raw = '[42, null, "confirmation_bias"]'
+    result = parse_biases(raw, VALID_IDS)
+    assert [c.bias_id for c in result] == ["confirmation_bias"]
 
 
 def test_parse_biases_trailing_bracket_text_does_not_swallow_valid_json():

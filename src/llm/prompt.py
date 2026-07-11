@@ -16,13 +16,34 @@ _INDICATORS_PER_BIAS = 3
 
 _BULLET_RE = re.compile(r"^[-*]\s*")
 
+# The LLM is shown ALL bias_ids every request (no vector narrowing) so it can name a
+# bias even in a domain vector search is blind to — proven to carry novel domains
+# (space/deep-sea/archaeology) where vector returned nothing. Bare-list output (ids
+# only, no confidence/evidence) was the fastest AND best-scoring format in eval
+# (research.md "Format + model selection"). See ADR-003.
 SYSTEM = (
-    "You are a cognitive-bias detector. Given a story, identify which of the catalog "
-    "biases the narrator exhibits. Choose ONLY from the catalog, using the exact bias_id. "
-    'Respond with STRICT JSON only: a JSON array of objects '
-    '{"bias_id": "...", "confidence": 0.0-1.0, "evidence": "short quote from the story"}. '
-    "Return [] if the story shows no clear cognitive bias. Output nothing but the JSON array."
+    "You are a cognitive-bias detector helping build a candidate list for a later, more "
+    "careful review. Read the story and identify every bias that PLAUSIBLY applies — err on "
+    "the side of including a bias if there is a reasonable case for it. Choose ONLY from the "
+    "provided list of bias_ids, using the exact id. "
+    'Respond with STRICT JSON only: an array of bias_id strings, e.g. '
+    '["anchoring_bias", "sunk_cost_fallacy"]. No objects, no other fields. '
+    "Return [] only if truly nothing in the list plausibly applies. "
+    "Output nothing but the JSON array."
 )
+
+_EXAMPLE = (
+    "\n\nEXAMPLE:\n"
+    "bias_ids: sunk_cost_fallacy, anchoring_bias, loss_aversion\n"
+    "STORY: Despite losing money every month, Maria keeps the failing shop open because she "
+    "already spent her savings renovating it.\n"
+    'Correct output: ["sunk_cost_fallacy"]\n'
+)
+
+# Bare-list output carries no per-bias confidence; use a neutral placeholder so the
+# BiasCandidate/score interface stays intact. Ranking among LLM-only biases then falls
+# to the deterministic bias_id tiebreak (rank_and_trim), which is fine.
+_LLM_DEFAULT_CONFIDENCE = 0.5
 
 
 @dataclass
@@ -55,12 +76,15 @@ async def load_catalog(
 
 
 def build_user_message(story: str, catalog: list[tuple[str, str, list[str]]]) -> str:
-    lines = ["CATALOG (bias_id — indicators):"]
-    for bias_id, name, indicators in catalog:
-        ind = "; ".join(indicators)
-        lines.append(f"- {bias_id} ({name}): {ind}")
-    lines += ["", "STORY:", story, "", "Return the JSON array now."]
-    return "\n".join(lines)
+    """ids-only prompt: the full list of bias_ids (no definitions/indicators) + the
+    story. All 38 ids are shown every request — NOT narrowed by vector — so the LLM
+    can name a bias vector missed. The id list is short (~330 tokens for 38, scales to
+    ~900 for 200+), which is why this stays fast without needing narrowing."""
+    ids = ", ".join(bias_id for bias_id, _, _ in catalog)
+    return (
+        f"{_EXAMPLE}\nNOW YOUR TURN.\nbias_ids: {ids}\n\n"
+        f"STORY:\n{story}\n\nReturn the JSON array of bias_id strings now."
+    )
 
 
 # Margin for chat-template special tokens the raw tokenizer count doesn't see.
@@ -122,10 +146,19 @@ def _extract_json(raw: str) -> str | None:
 
 
 def _validate_schema(json_text: str) -> list[dict]:
+    """Accept either the bare-list form (["bias_id", ...] — the production format) or
+    the legacy object form ([{"bias_id": ..., "confidence": ...}]). Bare strings are
+    normalized to {"bias_id": s} so _validate_catalog handles both uniformly."""
     data = json.loads(json_text)
     if not isinstance(data, list):
         data = [data] if isinstance(data, dict) else []
-    return [d for d in data if isinstance(d, dict) and "bias_id" in d]
+    out: list[dict] = []
+    for item in data:
+        if isinstance(item, str):
+            out.append({"bias_id": item})
+        elif isinstance(item, dict) and "bias_id" in item:
+            out.append(item)
+    return out
 
 
 def _validate_catalog(items: list[dict], valid_ids: set[str]) -> list[BiasCandidate]:
@@ -135,9 +168,9 @@ def _validate_catalog(items: list[dict], valid_ids: set[str]) -> list[BiasCandid
         if bid not in valid_ids:
             continue
         try:
-            confidence = float(d.get("confidence", 0.5))
+            confidence = float(d.get("confidence", _LLM_DEFAULT_CONFIDENCE))
         except (TypeError, ValueError):
-            confidence = 0.5
+            confidence = _LLM_DEFAULT_CONFIDENCE
         kept.append(
             BiasCandidate(bias_id=bid, confidence=confidence, evidence=str(d.get("evidence", "")))
         )

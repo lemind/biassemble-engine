@@ -24,12 +24,15 @@ import structlog
 
 from src.config import settings
 from src.db.queries import fmt_vector
+from src.nli.combiner import combine
 from src.providers.base import EmbeddingProvider
 from src.retrieval.query_builder import get_query_strategy
-from src.nli.combiner import combine
 from src.retrieval.retriever import IndexNotFoundError, retrieve
-from src.retrieval.searcher import _dedup_bias_rows, _diagnostics_search_query, _lightweight_search_query
-from src.schemas.internal import RetrievedBias
+from src.retrieval.searcher import (
+    _dedup_bias_rows,
+    _diagnostics_search_query,
+    _lightweight_search_query,
+)
 from src.schemas.request import RetrieveRequest, StoryAnalysis
 
 K = 5
@@ -65,6 +68,7 @@ class ScenarioResult:
     combined_scores: dict[str, float] | None = None
     admitted_by: dict[str, list[str]] | None = None
     missed_by: dict[str, list[str]] | None = None
+    llm_scores: dict[str, float] | None = None
 
 
 @dataclass
@@ -318,6 +322,54 @@ def _retrieve_sync_nli(
         return [], None, str(exc)
 
 
+def _retrieve_sync_llm(
+    scenario: "Scenario",
+    provider: EmbeddingProvider,
+    generator,
+    catalog: list[tuple[str, str, list[str]]],
+) -> tuple[list[str], dict | None, str | None]:
+    """llm_union eval path: psql vector fetch + real LLM generate over the FULL catalog
+    (no narrowing) + the same rank_and_trim() production uses (no reimplemented ranking
+    logic — eval must reflect what ships). Returns (admitted_ids, llm_meta, error)."""
+    from src.llm.prompt import SYSTEM, build_user_message, fit_story_to_budget, parse_biases
+    from src.selection.llm_union import rank_and_trim
+
+    try:
+        strategy = get_query_strategy(settings.query_strategy)
+        analysis = StoryAnalysis(**scenario.story_analysis) if scenario.story_analysis else None
+        req = RetrieveRequest(story=scenario.story, story_analysis=analysis)
+        query_text = strategy.build(req.story, req.story_analysis)
+        embedding = provider.embed_query(query_text)
+
+        sql = _lightweight_search_query(
+            fmt_vector(embedding), settings.taxonomy_version, settings.search_top_k
+        )
+        rows = _psql_query(sql, scenario.scenario_id)
+
+        vec_raw: dict[str, float] = {}
+        for row in rows:
+            bid = row["bias_id"]
+            score = float(row["retrieval_score"])
+            is_new_best = bid not in vec_raw or score > vec_raw[bid]
+            if score >= settings.similarity_threshold and is_new_best:
+                vec_raw[bid] = score
+
+        valid_ids = {bid for bid, _, _ in catalog}
+        fitted_story, _truncated = fit_story_to_budget(generator, scenario.story, catalog)
+        user = build_user_message(fitted_story, catalog)
+        raw = generator.generate(SYSTEM, user)
+        llm_candidates = parse_biases(raw, valid_ids)
+        llm_map = {c.bias_id: c.confidence for c in llm_candidates}
+
+        # Rank at eval K (=5) so metrics stay comparable to existing baselines, even
+        # though production returns up to llm_union_top_k (=10).
+        admitted_ids, sources = rank_and_trim(llm_map, vec_raw, K)
+        llm_meta = {"llm_scores": llm_map, "vector_scores": vec_raw, "sources": sources}
+        return admitted_ids, llm_meta, None
+    except Exception as exc:
+        return [], None, str(exc)
+
+
 # ── Main pipeline ─────────────────────────────────────────────────────────────
 
 def _retrieve_sync(
@@ -376,22 +428,31 @@ def run_evaluation_sync(
     combiner_config=None,
     hypotheses_snapshot: dict[str, str] | None = None,
     selection_strategy: str = "vector_only",
+    llm_generator=None,
+    llm_catalog: list[tuple[str, str, list[str]]] | None = None,
 ) -> EvalRun:
     """Fully synchronous evaluation — used locally when psql_search=True.
 
     When nli_classifier + hypotheses + combiner_config are provided, runs the NLI
     path (_retrieve_sync_nli) instead of the vector-only psql path. NLI diagnostic
     fields (nli_scores, vector_scores, combined_scores, admitted_by, missed_by) are
-    populated on every ScenarioResult in NLI mode.
+    populated on every ScenarioResult in NLI mode. When llm_generator + llm_catalog
+    are provided, runs the llm_union path (_retrieve_sync_llm) instead.
     """
     use_nli = nli_classifier is not None and hypotheses is not None and combiner_config is not None
+    use_llm = llm_generator is not None and llm_catalog is not None
     scenarios = load_scenarios(eval_dir)
     results: list[ScenarioResult] = []
 
     for scenario in scenarios:
         diag_rows: list[dict] | None = None
         nli_meta: dict | None = None
-        if use_nli:
+        llm_meta: dict | None = None
+        if use_llm:
+            retrieved_ids, llm_meta, error = _retrieve_sync_llm(
+                scenario, provider, llm_generator, llm_catalog
+            )
+        elif use_nli:
             retrieved_ids, nli_meta, error = _retrieve_sync_nli(
                 scenario, provider, nli_classifier, hypotheses, combiner_config
             )
@@ -400,6 +461,7 @@ def run_evaluation_sync(
 
         top_k = retrieved_ids[:K]
         expected = scenario.expected_bias_ids
+        vec_meta = nli_meta or llm_meta
         results.append(ScenarioResult(
             scenario_id=scenario.scenario_id,
             group=scenario.group,
@@ -412,10 +474,11 @@ def run_evaluation_sync(
             error=error,
             retrieved_with_diagnostics=diag_rows,
             nli_scores=nli_meta["nli_scores"] if nli_meta else None,
-            vector_scores=nli_meta["vector_scores"] if nli_meta else None,
+            vector_scores=vec_meta["vector_scores"] if vec_meta else None,
             combined_scores=nli_meta["combined_scores"] if nli_meta else None,
             admitted_by=nli_meta["admitted_by"] if nli_meta else None,
             missed_by=nli_meta["missed_by"] if nli_meta else None,
+            llm_scores=llm_meta["llm_scores"] if llm_meta else None,
         ))
 
     group_metrics = _aggregate(results)
