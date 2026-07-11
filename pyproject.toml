@@ -58,14 +58,18 @@ ignore_missing_imports = true
 asyncio_mode = "auto"
 testpaths = ["tests"]
 
+# llama-cpp-python has no usable prebuilt wheel on PyPI (sdist only) and the abetlen
+# linux wheel is musl-linked (fails on glibc). Compiling from source OOM-kills on HF's
+# build machine. So we vendor a portable manylinux wheel built once in GitHub Actions
+# (.github/workflows/build-llama-wheel.yml) and put it in vendor/wheels/. find-links
+# makes uv prefer that prebuilt wheel over the sdist — no compile on deploy.
+[tool.uv]
+find-links = ["vendor/wheels"]
+
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
 explicit = true
-
-# NOTE: no llama-cpp index — its only prebuilt linux wheel (abetlen) is musl-linked and
-# fails on the glibc base image (T003 spike). llama-cpp-python builds from PyPI sdist;
-# the Dockerfile provides build-essential + cmake.
 
 [tool.uv.sources]
 torch = [{ index = "pytorch-cpu" }]

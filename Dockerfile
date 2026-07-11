@@ -27,6 +27,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #     (AVX2 etc. still used at runtime via dispatch).
 #   LLAMA_CURL=OFF — skip building curl support; we fetch models via huggingface_hub.
 ENV CMAKE_ARGS="-DGGML_NATIVE=OFF -DLLAMA_CURL=OFF"
+# Cap the compile to ONE job. HF's build host reports many cores, so the default
+# parallel compile spawns many g++ processes that blow the RAM-limited build container
+# and OOM-thrash — which is why two prior builds froze at "Building llama-cpp-python"
+# for 40+ min and never completed. Single-job compile fits in memory and actually
+# finishes (slower, but it completes — correctness over speed).
+ENV CMAKE_BUILD_PARALLEL_LEVEL=1
 
 # Install deps first — this layer is cached until pyproject.toml or uv.lock changes
 COPY pyproject.toml uv.lock ./

@@ -20,6 +20,10 @@ parts/
 sdist/
 var/
 wheels/
+# ...but DO track our vendored prebuilt llama-cpp wheel (built by CI, installed at
+# deploy time so HF never compiles from source). See .github/workflows/build-llama-wheel.yml
+!vendor/wheels/
+!vendor/wheels/*.whl
 share/python-wheels/
 *.egg-info/
 .installed.cfg
