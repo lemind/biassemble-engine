@@ -154,3 +154,36 @@ Largest positive-recall movement in the project: +0.208. Three weeks of content 
 - Subtle/indirect biases (edge group) unmoved at 0.583 across all configs — NLI with strongly-worded hypotheses doesn't help stories where the bias signal is indirect
 - `combined_threshold` parameter can be removed or ignored; it never fires
 - Confident declarative prose can trigger overconfidence_bias NLI even without cognitive content — benign given LLM-in-the-loop architecture
+
+---
+
+## llm_union — generative LLM + vector (2026-07-11, spec 004)
+
+New `SELECTION_STRATEGY=llm_union`: a small local generative model and vector search run concurrently across all 38 biases, results unioned, each bias tagged `source: ["vector"] | ["llm"] | ["vector","llm"]`. Vector-only / nli_union unchanged.
+
+**Model + prompt search (full detail in `specs/004-add-llm-model/research.md`):**
+- **Model:** `Qwen2.5-1.5B` → **Gemma-3-4B-it (GGUF Q4_K_M, llama-cpp-python, CPU)**. Qwen-1.5B couldn't emit valid structured output or pick the right bias even from 8 options; Gemma-4B can. Still `cpu-basic`-sized, still LoRA-fine-tunable later.
+- **Prompt:** ids-only bare list — the LLM is shown all 38 bias_ids (~330 tokens, no definitions, **not** a vector-narrowed subset) and returns a bare JSON array of ids. Fastest AND best-aligned format tested (~8s vs ~48s for full-catalog object schema). Scales to 200+ (ids stay short); full definitions would not.
+- **No narrowing, no neutral-gate.** Both filter the LLM through vector's output, which destroys the LLM's whole value: on novel-domain stories vector returns *nothing*, so narrowing/​gating would blind the LLM exactly where it's needed. "Vector found nothing" = "not a domain vector covers," not "no bias." Neutral rejection is delegated downstream to biassemble-core's assessment LLM.
+
+**llm_union config (Gemma-3-4B, ids-only, union@5, 2026-07-11):**
+
+| Group | Recall@5 | empty_rate | Gate | Status |
+|-------|----------|------------|------|--------|
+| positive (N=4) | **0.729** | — | ≥ 0.85 | ✗ (fine-tune gap) |
+| negative (N=5) | — | **20%** | ≥ 0.90 | ✗ by design¹ |
+| edge (N=2) | **0.750** | — | ≥ 0.583 | ✓ |
+| adversarial (N=2) | **0.333** | — | ≥ 0.333 | ✓ |
+
+¹ No neutral-gate at the engine (would blind novel domains); the engine over-generates candidates and core's assessment LLM makes the final neutral call. Engine `negative` empty-rate is expected to fail standalone.
+
+**Novel-domain generalization** (5 stories far from indexed example text — space mission, deep-sea sub, wine tasting, archaeology, beekeeping): LLM caught **5/5**, vector **2/5**, **3 LLM-only saves** where vector returned nothing. This is the capability that motivated the strategy: vector search is blind on domains it hasn't indexed; the LLM reasons about the pattern regardless of surface vocabulary.
+
+**Latency** (dev machine; `cpu-basic` will be slower, unverified): ~8–17s warm. Bare-list output (no confidence/evidence fields) cut latency ~3× vs the object schema.
+
+**Ranking note:** in the top-K union trim, `["vector","llm"]` > `["vector"]` > `["llm"]` — vector's confident hits are kept first; the LLM's extra guesses fill remaining slots. Ranking llm-only first silently dropped vector's correct hits on ordinary stories (caught in the confirmation run: positive 0.729 → 0.500). Returns up to `LLM_UNION_TOP_K`=10.
+
+**Known limits:**
+- pos_r@5=0.729 on N=4 — still short of the 0.85 gate; deferred to the planned fine-tune (the provenance-logging in biassemble-core D015 is the training-data pump)
+- All metrics on 13 scenarios — ±0.25 per positive/edge/adversarial story; directional, not precise
+- Neutral hallucination (engine names biases on genuinely neutral stories) is accepted here and pushed to core — do not re-add a vector-based gate to "fix" it
