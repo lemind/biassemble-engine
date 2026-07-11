@@ -5,20 +5,24 @@ colorFrom: blue
 colorTo: purple
 sdk: docker
 app_port: 7860
-short_description: Semantic bias retrieval microservice
+short_description: Bias retrieval — vector + local-LLM search
 pinned: false
 ---
 
 # biassemble-engine
 
-Semantic RAG microservice. Receives a story and structured analysis from biassemble-core, embeds the query, searches a pgvector index of bias knowledge chunks, and returns the top matching biases with retrieval scores.
+Bias retrieval microservice. Receives a story from biassemble-core and returns the cognitive biases it likely exhibits. **Two search methods run concurrently and their results are unioned:**
 
-**Pure retriever. No LLM calls. No business logic.**
+- **Vector search** — embeds the story and searches a pgvector index of the bias catalog. Fast and precise on domains it has indexed; blind on domains it hasn't.
+- **LLM search** — a small local model (**Gemma-3-4B-it**, GGUF Q4_K_M, via `llama-cpp-python`, CPU) reads the story against all bias ids and names those that apply. Catches biases vector search misses in unfamiliar domains (space, deep-sea, etc.).
+
+Each returned bias is tagged with which method(s) found it — `source: ["vector"] | ["llm"] | ["vector","llm"]`. The search method is selectable via `SELECTION_STRATEGY`: `vector_only` (pure retriever), `nli_union` (DeBERTa NLI + vector), or `llm_union` (Gemma + vector, the above).
 
 ## Stack
 
 - FastAPI + Pydantic v2
-- sentence-transformers (`all-MiniLM-L6-v2`)
+- sentence-transformers (`all-MiniLM-L6-v2`) — vector search
+- **Gemma-3-4B-it (GGUF Q4_K_M) via llama-cpp-python — LLM search (`llm_union`)**
 - pgvector (Supabase)
 - asyncpg
 - uv
