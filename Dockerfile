@@ -10,31 +10,14 @@ WORKDIR /app
 # miss → the "bake" re-downloads at startup, defeating its purpose.
 ENV HF_HOME=/app/.cache/huggingface
 
-# Build tools for compiling llama-cpp-python from source (spec-004): the only prebuilt
-# linux wheel is musl-linked and won't load on this glibc image, and PyPI ships sdist
-# only — so it must compile. cmake + a C/C++ toolchain are required at install time.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential cmake \
-    && rm -rf /var/lib/apt/lists/*
+# No C/C++ build tools needed: llama-cpp-python is installed from a prebuilt manylinux
+# wheel vendored in vendor/wheels/ (built once in GitHub Actions — see uv.lock's path
+# source + .github/workflows/build-llama-wheel.yml). Compiling it here from source
+# OOM-killed HF's build machine (40+ min, never completed); the wheel installs in
+# seconds. Copy the wheel BEFORE uv sync so the lock's path source resolves.
+COPY vendor/wheels/ ./vendor/wheels/
 
-# llama-cpp-python has no usable glibc wheel (the abetlen linux_x86_64 wheel is
-# musl-linked), so it compiles from source here. These are the known-good flags from
-# the original source-build — without them the compile used cmake defaults, which is
-# why the build hung/crawled:
-#   GGML_NATIVE=OFF — portable build with RUNTIME SIMD dispatch. Much faster to compile
-#     than the default -march=native codegen, AND avoids a SIGILL crash from building on
-#     HF's build CPU then running on a different cpu-basic CPU. Inference speed is kept
-#     (AVX2 etc. still used at runtime via dispatch).
-#   LLAMA_CURL=OFF — skip building curl support; we fetch models via huggingface_hub.
-ENV CMAKE_ARGS="-DGGML_NATIVE=OFF -DLLAMA_CURL=OFF"
-# Cap the compile to ONE job. HF's build host reports many cores, so the default
-# parallel compile spawns many g++ processes that blow the RAM-limited build container
-# and OOM-thrash — which is why two prior builds froze at "Building llama-cpp-python"
-# for 40+ min and never completed. Single-job compile fits in memory and actually
-# finishes (slower, but it completes — correctness over speed).
-ENV CMAKE_BUILD_PARALLEL_LEVEL=1
-
-# Install deps first — this layer is cached until pyproject.toml or uv.lock changes
+# Install deps first — this layer is cached until pyproject.toml / uv.lock / the wheel changes
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
 
