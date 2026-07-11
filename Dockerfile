@@ -17,6 +17,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential cmake \
     && rm -rf /var/lib/apt/lists/*
 
+# llama-cpp-python has no usable glibc wheel (the abetlen linux_x86_64 wheel is
+# musl-linked), so it compiles from source here. These are the known-good flags from
+# the original source-build — without them the compile used cmake defaults, which is
+# why the build hung/crawled:
+#   GGML_NATIVE=OFF — portable build with RUNTIME SIMD dispatch. Much faster to compile
+#     than the default -march=native codegen, AND avoids a SIGILL crash from building on
+#     HF's build CPU then running on a different cpu-basic CPU. Inference speed is kept
+#     (AVX2 etc. still used at runtime via dispatch).
+#   LLAMA_CURL=OFF — skip building curl support; we fetch models via huggingface_hub.
+ENV CMAKE_ARGS="-DGGML_NATIVE=OFF -DLLAMA_CURL=OFF"
+
 # Install deps first — this layer is cached until pyproject.toml or uv.lock changes
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
