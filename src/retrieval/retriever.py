@@ -90,8 +90,17 @@ async def retrieve(
                 bias_ids=sorted(missing_ids),
             )
 
+    # llm_union returns up to llm_union_top_k (vector ∪ llm); other strategies use return_top_k.
+    top_k = (
+        settings.llm_union_top_k
+        if strategy_meta.selection_strategy == "llm_union"
+        else settings.return_top_k
+    )
     with TimingContext() as rerank_t:
-        biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k, admitted_ids=admitted_ids, score_override=scores or None)
+        biases = rerank(
+            candidates, settings.similarity_threshold, top_k,
+            admitted_ids=admitted_ids, score_override=scores or None,
+        )
     log.info(EVT_RERANKED, latency_ms=rerank_t.elapsed_ms, returned=len(biases))
 
     total_ms = int((time.monotonic() - t_total) * 1000)

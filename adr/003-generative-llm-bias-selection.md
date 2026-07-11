@@ -43,9 +43,20 @@ story
   │     · structured JSON out · staged parse (generation→JSON→schema→catalog)
   └─► QueryStrategy: vector search ──────► {bias_id: max_chunk_cosine, source:"vector"}
                     │                        (concurrent, unchanged)
+                    │  COVERAGE NOW: vector search only matches against the biases and
+                    │  example text currently indexed — the 38-bias taxonomy, whose
+                    │  examples skew to common finance/workplace/everyday domains. On a
+                    │  story in a domain far from that indexed text (space, deep-sea,
+                    │  archaeology…) vector search returns *nothing* even when a real bias
+                    │  is present. This blind spot in current coverage is exactly why the
+                    │  LLM (which sees all 38 ids and reasons about the pattern, not the
+                    │  surface words) runs alongside it — and why we do NOT gate/narrow the
+                    │  LLM by vector's output. As the catalog and its example domains grow,
+                    │  vector coverage widens and this gap shrinks.
             UNION COMBINER (provenance-tagging)
   bias admitted if llm names it OR vec(b) ≥ vec_gate.
-  per-bias `source` ∈ {"vector","llm","both"} — recorded on the result AND logged.
+  per-bias `source` = array of contributing methods, ["vector"] | ["llm"] | ["vector","llm"]
+  (NOT a collapsed "both" string) — recorded on the result AND logged. See §11 (2026-07-11).
   llm score = model-reported confidence (or fixed prior if model gives none);
   vector score = existing max-chunk cosine. No cross-scale mixing (D-006 lesson from ADR-002).
 ```
@@ -113,3 +124,12 @@ Merge gates (same SC discipline as spec-003, re-run on the new strategy):
 ## 11. Execution log
 
 - 2026-07-10 — Proposed. Latency evidence gathered from live Space; model/runtime verified available and ungated; free-tier GGUF pattern confirmed running on `cpu-basic`.
+- 2026-07-11 — **Model + prompt-shape decided by eval (the §7 spike/gate work).** Full findings in `research.md` "Format + model selection". Summary of what shipped, superseding the "candidate" framing in §2:
+  - **Model: `Qwen2.5-1.5B` → `bartowski/google_gemma-3-4b-it-GGUF` (Q4_K_M).** Qwen-1.5B could not reliably emit valid structured output or pick the right bias even from a narrowed 8-item list (schema drift, wrong picks). Gemma-3-4B handles it; still fits `cpu-basic`, still LoRA-fine-tunable later (§10 unchanged).
+  - **Prompt shape: ids-only bare list, no narrowing.** The LLM is shown ALL bias_ids (just the ids, ~330 tokens — not the full definitions, not a vector-narrowed subset) and returns a bare JSON array of id strings (no per-bias confidence/evidence). This was both the fastest (~8s vs ~48s full-catalog-object) and best-aligned format. It scales to the 200+ future (200 ids ≈ ~900 tokens); the full-definition catalog would not.
+  - **No neutral-gate; no vector-narrowing.** Both were rejected after the novel-domain test: on space/deep-sea/archaeology stories the LLM correctly named the bias while vector returned *nothing*. Anything that filters the LLM through vector's output (a gate that skips the LLM when vector is empty, or narrowing the LLM's menu to vector's top-N) destroys exactly these saves — "vector found nothing" means "not a domain vector covers," not "no bias." The engine is a recall-oriented candidate generator; the final neutral call belongs to biassemble-core's assessment LLM (its D012 no-bias detection). Consequence: the engine's own `negative` empty-rate gate is expected to fail standalone — that is by design, not a regression.
+  - **`source` is an array** (`["vector"]` / `["llm"]` / `["vector","llm"]`), not a collapsed `"both"` string, so each contributing signal is visible to consumers (feeds biassemble-core D015 provenance).
+  - **`llm_union` returns up to `LLM_UNION_TOP_K` (=10)** biases (vs `RETURN_TOP_K`=5 for other strategies) — more candidates for the downstream assessment step.
+  - Eval (13 scenarios, union@5): positive R 0.667, adversarial R 0.333, edge R 0.583 — passes SC-005 recall gates on adversarial/edge; positive (0.85 target) is the remaining gap, deferred to the planned fine-tune (§10). Novel-domain generalization: LLM caught 5/5, vector 2/5, 3 LLM-only saves where vector was blind.
+
+### Status update: PROPOSED → ACCEPTED (pending the deploy step T022 on the live Space).

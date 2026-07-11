@@ -71,6 +71,6 @@ class RetrievalMetadata:
     combined_scores: dict[str, float] | None = None
     # llm_union fields (spec-004) — None for vector_only/nli_union.
     llm_scores: dict[str, float] | None = None
-    sources: dict[str, str] | None = None
+    sources: dict[str, list[str]] | None = None
     llm_latency_ms: float | None = None
     truncated_story: bool | None = None
