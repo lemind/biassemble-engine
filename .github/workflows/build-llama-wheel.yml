@@ -1,0 +1,66 @@
+name: Build llama-cpp-python wheel
+
+# ONE-TIME (re-runnable) job: compile a portable prebuilt wheel of llama-cpp-python
+# and commit it to vendor/wheels/. The HF Space Docker build then INSTALLS that wheel
+# in seconds instead of compiling from source — which OOM-kills on HF's build machine
+# (too many parallel g++ for its RAM). GitHub's runners have ~16GB RAM, so the compile
+# succeeds here comfortably.
+#
+# Run it from the Actions tab → "Build llama-cpp-python wheel" → Run workflow.
+# When it finishes, `git pull origin` to get the committed wheel, then finalize
+# pyproject/uv.lock/Dockerfile to install from it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "llama-cpp-python version to build"
+        default: "0.3.19"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # manylinux2014 = glibc 2.17 — maximally portable; a wheel built here runs on the
+    # deploy image (Debian bookworm, glibc 2.36) since glibc is backward-compatible.
+    container: quay.io/pypa/manylinux2014_x86_64
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the wheel from source
+        env:
+          # Same flags the Dockerfile used: portable build (runtime SIMD dispatch, no
+          # -march=native → no SIGILL when it runs on a different CPU), no curl support.
+          CMAKE_ARGS: "-DGGML_NATIVE=OFF -DLLAMA_CURL=OFF"
+        run: |
+          set -eux
+          PYBIN=/opt/python/cp311-cp311/bin
+          "$PYBIN/pip" install --upgrade pip cmake ninja auditwheel
+          "$PYBIN/pip" wheel "llama-cpp-python==${{ github.event.inputs.version }}" \
+            --no-binary llama-cpp-python -w /tmp/raw
+
+      - name: Repair into a portable manylinux wheel
+        run: |
+          set -eux
+          auditwheel repair /tmp/raw/llama_cpp_python-*.whl -w vendor/wheels
+          rm -f vendor/wheels/.gitkeep
+          ls -la vendor/wheels
+
+      - name: Upload wheel as artifact (backup)
+        uses: actions/upload-artifact@v4
+        with:
+          name: llama-cpp-python-wheel
+          path: vendor/wheels/*.whl
+
+      - name: Commit the wheel to the repo
+        run: |
+          set -eux
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f vendor/wheels/*.whl
+          git commit -m "chore: vendor prebuilt llama-cpp-python manylinux wheel" || { echo "no changes"; exit 0; }
+          git push
