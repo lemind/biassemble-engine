@@ -22,6 +22,8 @@ from src.retrieval.retriever import IndexNotFoundError
 from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest
 from src.schemas.response import BiasResult, RetrieveResponse
+from src.selection.llm_union import LLMUnionStrategy
+from src.selection.nli_union import NLIUnionStrategy
 from src.selection.vector_only import VectorOnlyStrategy
 
 router = APIRouter()
@@ -122,12 +124,25 @@ async def health(request: Request) -> dict[str, Any]:
         except Exception:
             pass
 
+    # Report the ACTUAL selection model that's live — not a hardcoded flag. Startup
+    # aborts if a model fails to load, so a live LLMUnion/NLIUnion strategy object means
+    # that model is genuinely up. Only the field for the active strategy is populated.
+    strategy = request.app.state.selection_strategy
+    llm_loaded = isinstance(strategy, LLMUnionStrategy)
+    nli_loaded = isinstance(strategy, NLIUnionStrategy)
+
     return {
         "status": "ok",
-        "model_loaded": True,
+        "selection_strategy": settings.selection_strategy,
         "embedding_model": provider.model_name,
         "embedding_dimension": settings.embedding_dimension,
         "provider_dimension": provider.dimension,
+        "llm_model": _llm_model_display_name() if llm_loaded else None,
+        "llm_loaded": llm_loaded,
+        "nli_model": settings.nli_model if nli_loaded else None,
+        "nli_loaded": nli_loaded,
+        # back-compat: true iff the active strategy's model is actually loaded (not hardcoded)
+        "model_loaded": llm_loaded or nli_loaded or settings.selection_strategy == "vector_only",
         "taxonomy_version": settings.taxonomy_version,
         "rows_indexed": rows_indexed,
         "last_indexed_at": last_indexed_at,
