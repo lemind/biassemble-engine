@@ -28,6 +28,7 @@ from src.selection.vector_only import VectorOnlyStrategy
 
 router = APIRouter()
 _bearer = HTTPBearer(auto_error=False)
+log = structlog.get_logger()
 
 
 def _verify_token(
@@ -67,6 +68,11 @@ async def retrieve_biases(
     pool: asyncpg.Pool | None = request.app.state.pool
 
     if pool is None:
+        # "rag_retrieve_error" matches the event name biassemble-core's engine-client.ts logs
+        # on the client side for any non-success outcome — same string, greppable across both
+        # services' logs for one request. request_id is client-supplied (RetrieveRequest.request_id,
+        # optional) so it may be None; still logged as-is for whatever correlation is available.
+        log.error("rag_retrieve_error", error="database_unavailable", request_id=body.request_id)
         raise HTTPException(status_code=503, detail={"error": "database_unavailable"})
 
     try:
@@ -75,13 +81,22 @@ async def retrieve_biases(
             timeout=settings.request_timeout_ms / 1000,
         )
     except asyncio.TimeoutError:
+        log.error(
+            "rag_retrieve_error", error="request_timeout",
+            request_id=body.request_id, timeout_ms=settings.request_timeout_ms,
+        )
         raise HTTPException(status_code=503, detail={"error": "request_timeout"})
     except IndexNotFoundError:
+        log.error(
+            "rag_retrieve_error", error="index_not_found",
+            request_id=body.request_id, taxonomy_version=settings.taxonomy_version,
+        )
         raise HTTPException(
             status_code=503,
             detail={"error": "index_not_found", "taxonomy_version": settings.taxonomy_version},
         )
     except Exception as exc:
+        log.error("rag_retrieve_error", error="retrieval_failed", request_id=body.request_id, detail=str(exc))
         raise HTTPException(
             status_code=500,
             detail={"error": "retrieval_failed", "detail": str(exc)},
