@@ -54,10 +54,7 @@ def _make_generator() -> MagicMock:
     generator.context_tokens = 4096
     generator.max_output_tokens = 512
     generator.count_tokens.return_value = 10
-    generator.generate.return_value = (
-        '[{"bias_id": "sunk_cost_fallacy", "confidence": 0.9, "evidence": "e"},'
-        ' {"bias_id": "confirmation_bias", "confidence": 0.7, "evidence": "e"}]'
-    )
+    generator.generate.return_value = '["sunk_cost_fallacy", "confirmation_bias"]'
     return generator
 
 
@@ -99,5 +96,5 @@ def test_llm_and_vector_scores_reported_separately_not_blended(monkeypatch):
 
     data = resp.json()
     # Raw per-signal maps are separate top-level fields — never merged onto one scale.
-    assert data["llm_scores"] == {"sunk_cost_fallacy": 0.9, "confirmation_bias": 0.7}
+    assert data["llm_scores"] == {"sunk_cost_fallacy": 0.5, "confirmation_bias": 0.5}
     assert data["vector_scores"] == {"confirmation_bias": 0.8, "anchoring_bias": 0.55}

@@ -50,7 +50,6 @@ _LLM_DEFAULT_CONFIDENCE = 0.5
 class BiasCandidate:
     bias_id: str
     confidence: float
-    evidence: str
 
 
 def _split_indicators(raw: str | None) -> list[str]:
@@ -145,36 +144,25 @@ def _extract_json(raw: str) -> str | None:
     return None
 
 
-def _validate_schema(json_text: str) -> list[dict]:
-    """Accept either the bare-list form (["bias_id", ...] — the production format) or
-    the legacy object form ([{"bias_id": ..., "confidence": ...}]). Bare strings are
-    normalized to {"bias_id": s} so _validate_catalog handles both uniformly."""
+def _validate_schema(json_text: str) -> list[str]:
+    """Production format is a bare JSON array of bias_id strings — SYSTEM asks for
+    nothing else. No object-form fallback: that tolerance was carried over from a
+    different model's different bug (research.md#L101, Qwen raw-completion garbage,
+    fixed by switching to the chat template) and was never observed with the
+    deployed model/prompt. Removed 2026-07-13 rather than kept as unverified
+    insurance — see CLAUDE.md "Hack tagging" convention."""
     data = json.loads(json_text)
     if not isinstance(data, list):
-        data = [data] if isinstance(data, dict) else []
-    out: list[dict] = []
-    for item in data:
-        if isinstance(item, str):
-            out.append({"bias_id": item})
-        elif isinstance(item, dict) and "bias_id" in item:
-            out.append(item)
-    return out
+        return []
+    return [item for item in data if isinstance(item, str)]
 
 
-def _validate_catalog(items: list[dict], valid_ids: set[str]) -> list[BiasCandidate]:
-    kept = []
-    for d in items:
-        bid = d.get("bias_id")
-        if bid not in valid_ids:
-            continue
-        try:
-            confidence = float(d.get("confidence", _LLM_DEFAULT_CONFIDENCE))
-        except (TypeError, ValueError):
-            confidence = _LLM_DEFAULT_CONFIDENCE
-        kept.append(
-            BiasCandidate(bias_id=bid, confidence=confidence, evidence=str(d.get("evidence", "")))
-        )
-    return kept
+def _validate_catalog(bias_ids: list[str], valid_ids: set[str]) -> list[BiasCandidate]:
+    return [
+        BiasCandidate(bias_id=bid, confidence=_LLM_DEFAULT_CONFIDENCE)
+        for bid in bias_ids
+        if bid in valid_ids
+    ]
 
 
 def parse_biases(raw: str, valid_ids: set[str]) -> list[BiasCandidate]:

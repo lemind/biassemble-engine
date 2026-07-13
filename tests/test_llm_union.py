@@ -54,14 +54,12 @@ def _make_generator(response_json: str) -> MagicMock:
 
 
 async def test_llm_union_admits_known_bias():
-    generator = _make_generator(
-        '[{"bias_id": "sunk_cost_fallacy", "confidence": 0.9, "evidence": "quote"}]'
-    )
+    generator = _make_generator('["sunk_cost_fallacy"]')
     strategy = LLMUnionStrategy(generator, CATALOG, _StubVectorStrategy())
 
     scores, candidates, meta = await strategy.select("a story about sunk cost")
 
-    assert scores == {"sunk_cost_fallacy": 0.9}
+    assert scores == {"sunk_cost_fallacy": 0.5}
     assert meta.selection_strategy == "llm_union"
     generator.generate.assert_called_once()
 
@@ -89,18 +87,16 @@ async def test_llm_union_generator_exception_degrades_to_empty_not_raise():
 
 
 async def test_llm_union_combines_with_vector_scores():
-    generator = _make_generator(
-        '[{"bias_id": "sunk_cost_fallacy", "confidence": 0.8, "evidence": "e"}]'
-    )
+    generator = _make_generator('["sunk_cost_fallacy"]')
     strategy = LLMUnionStrategy(generator, CATALOG, _VectorWithHit())
 
     scores, candidates, meta = await strategy.select("story")
 
-    assert scores == {"confirmation_bias": 0.6, "sunk_cost_fallacy": 0.8}
+    assert scores == {"confirmation_bias": 0.6, "sunk_cost_fallacy": 0.5}
 
 
 async def test_llm_union_non_catalog_bias_id_dropped():
-    generator = _make_generator('[{"bias_id": "made_up_bias", "confidence": 0.9, "evidence": "e"}]')
+    generator = _make_generator('["made_up_bias"]')
     strategy = LLMUnionStrategy(generator, CATALOG, _StubVectorStrategy())
 
     scores, candidates, meta = await strategy.select("story")

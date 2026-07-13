@@ -22,3 +22,14 @@ Supporting artifacts:
 
 **Commit messages**: `feat|fix|chore(T0XX): <short description>`. Omit the task ref when there is no associated task.
 
+**Hack tagging**: code whose existence is justified by a specific model/environment quirk (not general correctness) must be tagged inline, right above it:
+
+```
+# HACK(<scope>): <OBSERVED w/ citation, or SPECULATIVE — say which>. See <doc path>.
+# REVISIT: <condition that should trigger re-checking or deleting this>.
+```
+
+Before swapping the model behind any `SELECTION_STRATEGY` (ADR-003) or otherwise changing runtime model/environment assumptions, `grep -rn "HACK(" src/` and re-validate every hit against the new reality — delete anything whose REVISIT condition fired with no evidence to back it up.
+
+Do not keep unverified defensive code around as "cheap insurance" without this tag — untagged speculative branches accumulate silently and nobody re-checks them when the thing they were guarding against changes. Example: `src/llm/prompt.py`'s `_validate_schema` used to accept a legacy `{"bias_id": ..., "confidence": ...}` object form "in case the model drifts from the requested bare-array format." That tolerance was actually carried over from a *different* model's *different* bug (Qwen raw-completion garbage, fixed by switching to the chat template — research.md#L101) and was never observed with the deployed model/prompt. Removed 2026-07-13 rather than relabeled, once traced back to zero supporting evidence.
+

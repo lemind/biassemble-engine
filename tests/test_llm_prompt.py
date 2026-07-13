@@ -4,13 +4,13 @@ VALID_IDS = {"confirmation_bias", "sunk_cost_fallacy", "overconfidence_bias"}
 
 
 def test_parse_biases_valid_json():
-    raw = '[{"bias_id": "confirmation_bias", "confidence": 0.9, "evidence": "quote"}]'
+    raw = '["confirmation_bias"]'
     result = parse_biases(raw, VALID_IDS)
-    assert result == [BiasCandidate(bias_id="confirmation_bias", confidence=0.9, evidence="quote")]
+    assert result == [BiasCandidate(bias_id="confirmation_bias", confidence=0.5)]
 
 
 def test_parse_biases_drops_non_catalog_ids():
-    raw = '[{"bias_id": "not_a_real_bias", "confidence": 0.8, "evidence": "x"}]'
+    raw = '["not_a_real_bias"]'
     assert parse_biases(raw, VALID_IDS) == []
 
 
@@ -21,7 +21,7 @@ def test_parse_biases_empty_array_is_valid():
 def test_parse_biases_repairs_prose_around_json():
     raw = (
         'Sure, here is the analysis:\n'
-        '[{"bias_id": "sunk_cost_fallacy", "confidence": 0.7, "evidence": "e"}]\n'
+        '["sunk_cost_fallacy"]\n'
         'Hope that helps!'
     )
     result = parse_biases(raw, VALID_IDS)
@@ -32,26 +32,15 @@ def test_parse_biases_garbage_returns_empty_without_raising():
     assert parse_biases("not json at all { broken", VALID_IDS) == []
 
 
-def test_parse_biases_missing_confidence_defaults():
-    raw = '[{"bias_id": "overconfidence_bias", "evidence": "e"}]'
-    result = parse_biases(raw, VALID_IDS)
-    assert result[0].confidence == 0.5
-
-
-def test_parse_biases_bare_string_array_is_the_production_format():
-    # Bare list of bias_id strings — the current production output format. Each string
-    # is a valid candidate (confidence defaults). Mixed with an object form still works.
-    raw = (
-        '["confirmation_bias", '
-        '{"bias_id": "sunk_cost_fallacy", "confidence": 0.6, "evidence": "e"}]'
-    )
+def test_parse_biases_multiple_ids():
+    raw = '["confirmation_bias", "sunk_cost_fallacy"]'
     result = parse_biases(raw, VALID_IDS)
     assert [c.bias_id for c in result] == ["confirmation_bias", "sunk_cost_fallacy"]
-    assert result[0].confidence == 0.5  # bare string -> default confidence
+    assert all(c.confidence == 0.5 for c in result)
 
 
-def test_parse_biases_non_string_non_dict_items_dropped():
-    raw = '[42, null, "confirmation_bias"]'
+def test_parse_biases_non_string_items_dropped():
+    raw = '[42, null, "confirmation_bias", {"bias_id": "sunk_cost_fallacy"}]'
     result = parse_biases(raw, VALID_IDS)
     assert [c.bias_id for c in result] == ["confirmation_bias"]
 
@@ -61,7 +50,7 @@ def test_parse_biases_trailing_bracket_text_does_not_swallow_valid_json():
     # the whole response, including this trailing commentary — producing invalid
     # JSON ("Extra data") and silently dropping the valid, well-formed array.
     raw = (
-        '[{"bias_id": "confirmation_bias", "confidence": 0.9, "evidence": "quote"}]\n'
+        '["confirmation_bias"]\n'
         'Note: consider [context] when reviewing this further.'
     )
     result = parse_biases(raw, VALID_IDS)
@@ -69,8 +58,9 @@ def test_parse_biases_trailing_bracket_text_does_not_swallow_valid_json():
 
 
 def test_parse_biases_bracket_inside_string_value_does_not_break_extraction():
-    raw = '[{"bias_id": "confirmation_bias", "confidence": 0.9, "evidence": "see [1]"}]'
+    raw = '["confirmation_bias", "see [1] sunk_cost_fallacy"]'
     result = parse_biases(raw, VALID_IDS)
-    assert result == [
-        BiasCandidate(bias_id="confirmation_bias", confidence=0.9, evidence="see [1]")
-    ]
+    # second entry isn't a valid catalog id (it's a stray string containing a
+    # bracket), so it's dropped by _validate_catalog — but extraction must not
+    # choke on the embedded bracket while scanning for the array's true end.
+    assert [c.bias_id for c in result] == ["confirmation_bias"]
