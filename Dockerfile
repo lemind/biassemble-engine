@@ -51,7 +51,7 @@ RUN uv run python -c "from huggingface_hub import hf_hub_download; hf_hub_downlo
 # The LLM takes seconds — the old 450ms default would 503 every request. Space env
 # vars override these.
 ENV SELECTION_STRATEGY=llm_union
-ENV REQUEST_TIMEOUT_MS=60000
+ENV REQUEST_TIMEOUT_MS=120000
 
 RUN adduser --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
