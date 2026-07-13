@@ -189,3 +189,20 @@ Local dev runs earlier measured positive up to 0.729; the live-server number (0.
 - pos_r@5=0.562 on the live server (N=4) — short of the 0.85 gate; deferred to the planned fine-tune (the provenance-logging in biassemble-core D015 is the training-data pump)
 - All metrics on 13 scenarios — ±0.25 per positive/edge/adversarial story; directional, not precise
 - Neutral hallucination (engine names biases on genuinely neutral stories) is accepted here and pushed to core — do not re-add a vector-based gate to "fix" it
+
+---
+
+## Blind-spot batch — in-field vs out-of-field domain axis (2026-07-13, staged, not yet promoted)
+
+Ran 80 DeepSeek-generated stories (8 batches × 10, half in-field domains — legal/medical/financial/etc — half deliberately out-of-field — mycology/bonsai/paleontology/etc) through the live `llm_union` engine. Full results + per-story table: `evaluations/staging/blind_spot_eval_2026-07-13.json` / `..._SUMMARY.md`. **Staged only** — pending spot-check before promotion into `evaluations/<group>/`.
+
+| Group | out-of-field avg recall | in-field avg recall |
+|---|---|---|
+| positive | 0.300 | 0.450 |
+| adversarial | 0.700 | 0.800 |
+| edge | 0.500 | 0.500 (tie — N too small to trust) |
+| negative | 100% false-positive both buckets (re-confirms known no-neutral-gate limit, not a new finding) |
+
+Out-of-field recall is lower than in-field in both `positive` and `adversarial` — first direct evidence of a domain-familiarity blind spot, not just an aggregate recall number. `positive`/`edge` (subtle reasoning-error biases) show a bigger in-field/out-of-field gap than `adversarial` (surface manipulation tactics like authority/bandwagon framing, which transfer across domains more easily).
+
+Data-quality flag: one proposed label (`scarcity_bias` in `adv_005`, mycology/adversarial) is not in the 38-id catalog — excluded from scoring, needs a decision (map to an existing id or drop).

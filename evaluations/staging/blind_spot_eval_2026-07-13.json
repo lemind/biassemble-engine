@@ -1,0 +1,3988 @@
+[
+  {
+    "scenario_id": "neg_006",
+    "group": "negative",
+    "domain": "astronomy",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "narrative_fallacy",
+      "status_quo_bias"
+    ],
+    "retrieved_sources": {
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "status_quo_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 12122.49,
+    "request_elapsed_s": 13.23,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_007",
+    "group": "negative",
+    "domain": "mycology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "affect_heuristic",
+      "ambiguity_effect",
+      "anchoring_bias",
+      "authority_bias",
+      "availability_heuristic",
+      "bandwagon_effect",
+      "base_rate_neglect",
+      "choice_supportive_bias",
+      "confirmation_bias",
+      "curse_of_knowledge",
+      "decoy_effect",
+      "dunning_kruger_effect",
+      "escalation_of_commitment",
+      "framing_effect",
+      "fundamental_attribution_error",
+      "gamblers_fallacy",
+      "halo_effect",
+      "hindsight_bias",
+      "hot_hand_fallacy",
+      "illusion_of_control",
+      "in_group_bias",
+      "loss_aversion",
+      "narrative_fallacy",
+      "negativity_bias",
+      "omission_bias",
+      "optimism_bias",
+      "overconfidence_bias",
+      "planning_fallacy",
+      "projection_bias",
+      "recency_bias",
+      "representativeness_heuristic",
+      "self_serving_bias",
+      "spotlight_effect",
+      "status_quo_bias",
+      "stereotyping_bias",
+      "sunk_cost_fallacy",
+      "survivorship_bias",
+      "zero_risk_bias"
+    ],
+    "retrieved_sources": {
+      "affect_heuristic": null,
+      "ambiguity_effect": null,
+      "anchoring_bias": null,
+      "authority_bias": null,
+      "availability_heuristic": null,
+      "bandwagon_effect": null,
+      "base_rate_neglect": null,
+      "choice_supportive_bias": null,
+      "confirmation_bias": null,
+      "curse_of_knowledge": null,
+      "decoy_effect": null,
+      "dunning_kruger_effect": null,
+      "escalation_of_commitment": null,
+      "framing_effect": null,
+      "fundamental_attribution_error": null,
+      "gamblers_fallacy": null,
+      "halo_effect": null,
+      "hindsight_bias": null,
+      "hot_hand_fallacy": null,
+      "illusion_of_control": null,
+      "in_group_bias": null,
+      "loss_aversion": null,
+      "narrative_fallacy": null,
+      "negativity_bias": null,
+      "omission_bias": null,
+      "optimism_bias": null,
+      "overconfidence_bias": null,
+      "planning_fallacy": null,
+      "projection_bias": null,
+      "recency_bias": null,
+      "representativeness_heuristic": null,
+      "self_serving_bias": null,
+      "spotlight_effect": null,
+      "status_quo_bias": null,
+      "stereotyping_bias": null,
+      "sunk_cost_fallacy": null,
+      "survivorship_bias": null,
+      "zero_risk_bias": null
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 9346.030820976011,
+    "request_elapsed_s": 10.81,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_008",
+    "group": "negative",
+    "domain": "woodworking",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "representativeness_heuristic",
+      "status_quo_bias"
+    ],
+    "retrieved_sources": {
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "status_quo_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 10695.48177701654,
+    "request_elapsed_s": 11.64,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_009",
+    "group": "negative",
+    "domain": "competitive_sailing",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "narrative_fallacy",
+      "status_quo_bias"
+    ],
+    "retrieved_sources": {
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "status_quo_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 11159.750833990984,
+    "request_elapsed_s": 12.04,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_010",
+    "group": "negative",
+    "domain": "bird_banding",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "affect_heuristic",
+      "ambiguity_effect",
+      "anchoring_bias",
+      "authority_bias",
+      "availability_heuristic",
+      "bandwagon_effect",
+      "base_rate_neglect",
+      "choice_supportive_bias",
+      "confirmation_bias",
+      "curse_of_knowledge",
+      "decoy_effect",
+      "dunning_kruger_effect",
+      "escalation_of_commitment",
+      "framing_effect",
+      "fundamental_attribution_error",
+      "gamblers_fallacy",
+      "halo_effect",
+      "hindsight_bias",
+      "hot_hand_fallacy",
+      "illusion_of_control",
+      "in_group_bias",
+      "loss_aversion",
+      "narrative_fallacy",
+      "negativity_bias",
+      "omission_bias",
+      "optimism_bias",
+      "overconfidence_bias",
+      "planning_fallacy",
+      "projection_bias",
+      "recency_bias",
+      "representativeness_heuristic",
+      "self_serving_bias",
+      "spotlight_effect",
+      "status_quo_bias",
+      "stereotyping_bias",
+      "sunk_cost_fallacy",
+      "survivorship_bias",
+      "zero_risk_bias"
+    ],
+    "retrieved_sources": {
+      "affect_heuristic": null,
+      "ambiguity_effect": null,
+      "anchoring_bias": null,
+      "authority_bias": null,
+      "availability_heuristic": null,
+      "bandwagon_effect": null,
+      "base_rate_neglect": null,
+      "choice_supportive_bias": null,
+      "confirmation_bias": null,
+      "curse_of_knowledge": null,
+      "decoy_effect": null,
+      "dunning_kruger_effect": null,
+      "escalation_of_commitment": null,
+      "framing_effect": null,
+      "fundamental_attribution_error": null,
+      "gamblers_fallacy": null,
+      "halo_effect": null,
+      "hindsight_bias": null,
+      "hot_hand_fallacy": null,
+      "illusion_of_control": null,
+      "in_group_bias": null,
+      "loss_aversion": null,
+      "narrative_fallacy": null,
+      "negativity_bias": null,
+      "omission_bias": null,
+      "optimism_bias": null,
+      "overconfidence_bias": null,
+      "planning_fallacy": null,
+      "projection_bias": null,
+      "recency_bias": null,
+      "representativeness_heuristic": null,
+      "self_serving_bias": null,
+      "spotlight_effect": null,
+      "status_quo_bias": null,
+      "stereotyping_bias": null,
+      "sunk_cost_fallacy": null,
+      "survivorship_bias": null,
+      "zero_risk_bias": null
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 9318.951084045693,
+    "request_elapsed_s": 9.96,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_011",
+    "group": "negative",
+    "domain": "aquarium_keeping",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "affect_heuristic",
+      "ambiguity_effect",
+      "anchoring_bias",
+      "authority_bias",
+      "availability_heuristic",
+      "bandwagon_effect",
+      "base_rate_neglect",
+      "choice_supportive_bias",
+      "confirmation_bias",
+      "curse_of_knowledge",
+      "decoy_effect",
+      "dunning_kruger_effect",
+      "escalation_of_commitment",
+      "framing_effect",
+      "fundamental_attribution_error",
+      "gamblers_fallacy",
+      "halo_effect",
+      "hindsight_bias",
+      "hot_hand_fallacy",
+      "illusion_of_control",
+      "in_group_bias",
+      "loss_aversion",
+      "narrative_fallacy",
+      "negativity_bias",
+      "omission_bias",
+      "optimism_bias",
+      "overconfidence_bias",
+      "planning_fallacy",
+      "projection_bias",
+      "recency_bias",
+      "representativeness_heuristic",
+      "self_serving_bias",
+      "spotlight_effect",
+      "status_quo_bias",
+      "stereotyping_bias",
+      "sunk_cost_fallacy",
+      "survivorship_bias",
+      "zero_risk_bias"
+    ],
+    "retrieved_sources": {
+      "affect_heuristic": null,
+      "ambiguity_effect": null,
+      "anchoring_bias": null,
+      "authority_bias": null,
+      "availability_heuristic": null,
+      "bandwagon_effect": null,
+      "base_rate_neglect": null,
+      "choice_supportive_bias": null,
+      "confirmation_bias": null,
+      "curse_of_knowledge": null,
+      "decoy_effect": null,
+      "dunning_kruger_effect": null,
+      "escalation_of_commitment": null,
+      "framing_effect": null,
+      "fundamental_attribution_error": null,
+      "gamblers_fallacy": null,
+      "halo_effect": null,
+      "hindsight_bias": null,
+      "hot_hand_fallacy": null,
+      "illusion_of_control": null,
+      "in_group_bias": null,
+      "loss_aversion": null,
+      "narrative_fallacy": null,
+      "negativity_bias": null,
+      "omission_bias": null,
+      "optimism_bias": null,
+      "overconfidence_bias": null,
+      "planning_fallacy": null,
+      "projection_bias": null,
+      "recency_bias": null,
+      "representativeness_heuristic": null,
+      "self_serving_bias": null,
+      "spotlight_effect": null,
+      "status_quo_bias": null,
+      "stereotyping_bias": null,
+      "sunk_cost_fallacy": null,
+      "survivorship_bias": null,
+      "zero_risk_bias": null
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 10573.861829005182,
+    "request_elapsed_s": 11.5,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_012",
+    "group": "negative",
+    "domain": "textile_conservation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "planning_fallacy",
+      "base_rate_neglect"
+    ],
+    "retrieved_sources": {
+      "planning_fallacy": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 10232.713214994874,
+    "request_elapsed_s": 11.59,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_013",
+    "group": "negative",
+    "domain": "historical_linguistics",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "representativeness_heuristic",
+      "base_rate_neglect"
+    ],
+    "retrieved_sources": {
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 10841.889180999715,
+    "request_elapsed_s": 11.76,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_014",
+    "group": "negative",
+    "domain": "bonsai_cultivation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "status_quo_bias"
+    ],
+    "retrieved_sources": {
+      "status_quo_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 9741.424236970488,
+    "request_elapsed_s": 10.61,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_015",
+    "group": "negative",
+    "domain": "paleontology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "99e66a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "narrative_fallacy",
+      "status_quo_bias"
+    ],
+    "retrieved_sources": {
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "status_quo_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 10199.432336026803,
+    "request_elapsed_s": 10.8,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_016",
+    "group": "negative",
+    "domain": "technical",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "recency_bias",
+      "optimism_bias",
+      "planning_fallacy",
+      "escalation_of_commitment",
+      "sunk_cost_fallacy",
+      "anchoring_bias",
+      "gamblers_fallacy",
+      "ambiguity_effect",
+      "status_quo_bias",
+      "loss_aversion"
+    ],
+    "retrieved_sources": {
+      "recency_bias": [
+        "vector",
+        "llm"
+      ],
+      "optimism_bias": [
+        "vector",
+        "llm"
+      ],
+      "planning_fallacy": [
+        "vector"
+      ],
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "sunk_cost_fallacy": [
+        "vector"
+      ],
+      "anchoring_bias": [
+        "vector"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ],
+      "ambiguity_effect": [
+        "vector"
+      ],
+      "status_quo_bias": [
+        "vector"
+      ],
+      "loss_aversion": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 13767.974416026846,
+    "request_elapsed_s": 14.46,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_017",
+    "group": "negative",
+    "domain": "educational",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "planning_fallacy",
+      "status_quo_bias",
+      "overconfidence_bias",
+      "ambiguity_effect",
+      "optimism_bias",
+      "escalation_of_commitment",
+      "loss_aversion",
+      "stereotyping_bias",
+      "self_serving_bias"
+    ],
+    "retrieved_sources": {
+      "planning_fallacy": [
+        "vector",
+        "llm"
+      ],
+      "status_quo_bias": [
+        "vector",
+        "llm"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "ambiguity_effect": [
+        "vector"
+      ],
+      "optimism_bias": [
+        "vector"
+      ],
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "loss_aversion": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 13410.625157004688,
+    "request_elapsed_s": 14.15,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_018",
+    "group": "negative",
+    "domain": "financial",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "framing_effect",
+      "base_rate_neglect",
+      "status_quo_bias",
+      "self_serving_bias",
+      "choice_supportive_bias",
+      "hot_hand_fallacy",
+      "affect_heuristic"
+    ],
+    "retrieved_sources": {
+      "framing_effect": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "status_quo_bias": [
+        "llm"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ],
+      "choice_supportive_bias": [
+        "vector"
+      ],
+      "hot_hand_fallacy": [
+        "vector"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 14124.944794049952,
+    "request_elapsed_s": 15.4,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_019",
+    "group": "negative",
+    "domain": "medical",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "recency_bias",
+      "availability_heuristic",
+      "framing_effect",
+      "overconfidence_bias"
+    ],
+    "retrieved_sources": {
+      "recency_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 13252.528431999963,
+    "request_elapsed_s": 14.19,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_020",
+    "group": "negative",
+    "domain": "management",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "status_quo_bias",
+      "narrative_fallacy",
+      "zero_risk_bias"
+    ],
+    "retrieved_sources": {
+      "status_quo_bias": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "zero_risk_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 11930.205571989063,
+    "request_elapsed_s": 12.81,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_021",
+    "group": "negative",
+    "domain": "legal",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "representativeness_heuristic",
+      "confirmation_bias",
+      "curse_of_knowledge",
+      "status_quo_bias",
+      "base_rate_neglect",
+      "ambiguity_effect",
+      "omission_bias",
+      "bandwagon_effect",
+      "stereotyping_bias",
+      "authority_bias"
+    ],
+    "retrieved_sources": {
+      "representativeness_heuristic": [
+        "vector"
+      ],
+      "confirmation_bias": [
+        "vector"
+      ],
+      "curse_of_knowledge": [
+        "vector"
+      ],
+      "status_quo_bias": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "ambiguity_effect": [
+        "vector"
+      ],
+      "omission_bias": [
+        "vector"
+      ],
+      "bandwagon_effect": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "authority_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 13310.701326990966,
+    "request_elapsed_s": 14.03,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_022",
+    "group": "negative",
+    "domain": "social",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "planning_fallacy",
+      "status_quo_bias",
+      "escalation_of_commitment",
+      "decoy_effect"
+    ],
+    "retrieved_sources": {
+      "planning_fallacy": [
+        "vector",
+        "llm"
+      ],
+      "status_quo_bias": [
+        "llm"
+      ],
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "decoy_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 12335.136177018285,
+    "request_elapsed_s": 13.09,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_023",
+    "group": "negative",
+    "domain": "consumer",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "availability_heuristic",
+      "framing_effect",
+      "optimism_bias",
+      "gamblers_fallacy",
+      "loss_aversion",
+      "halo_effect",
+      "anchoring_bias",
+      "zero_risk_bias",
+      "dunning_kruger_effect"
+    ],
+    "retrieved_sources": {
+      "availability_heuristic": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "optimism_bias": [
+        "llm"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ],
+      "loss_aversion": [
+        "vector"
+      ],
+      "halo_effect": [
+        "vector"
+      ],
+      "anchoring_bias": [
+        "vector"
+      ],
+      "zero_risk_bias": [
+        "vector"
+      ],
+      "dunning_kruger_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 13180.332062998787,
+    "request_elapsed_s": 14.21,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_024",
+    "group": "negative",
+    "domain": "political",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "status_quo_bias",
+      "framing_effect",
+      "availability_heuristic",
+      "representativeness_heuristic",
+      "zero_risk_bias",
+      "survivorship_bias"
+    ],
+    "retrieved_sources": {
+      "status_quo_bias": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "zero_risk_bias": [
+        "vector"
+      ],
+      "survivorship_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 14294.969416980166,
+    "request_elapsed_s": 15.4,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "neg_025",
+    "group": "negative",
+    "domain": "family",
+    "domain_familiarity": "in_field",
+    "source_file": "c5c14a",
+    "expected_bias_ids": [],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "overconfidence_bias",
+      "negativity_bias",
+      "spotlight_effect",
+      "narrative_fallacy",
+      "optimism_bias"
+    ],
+    "retrieved_sources": {
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "negativity_bias": [
+        "vector"
+      ],
+      "spotlight_effect": [
+        "vector"
+      ],
+      "narrative_fallacy": [
+        "vector"
+      ],
+      "optimism_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 10828.632645017933,
+    "request_elapsed_s": 11.65,
+    "http_status": "200",
+    "verdict": "false_positive",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_004",
+    "group": "adversarial",
+    "domain": "astronomy",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "authority_bias",
+      "representativeness_heuristic",
+      "recency_bias",
+      "narrative_fallacy"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 17513.591887021903,
+    "request_elapsed_s": 18.24,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_005",
+    "group": "adversarial",
+    "domain": "mycology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "bandwagon_effect",
+      "scarcity_bias"
+    ],
+    "invalid_expected_ids": [
+      "scarcity_bias"
+    ],
+    "retrieved_bias_ids": [
+      "availability_heuristic",
+      "bandwagon_effect",
+      "framing_effect",
+      "confirmation_bias",
+      "in_group_bias",
+      "recency_bias"
+    ],
+    "retrieved_sources": {
+      "availability_heuristic": [
+        "llm"
+      ],
+      "bandwagon_effect": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19319.69539297279,
+    "request_elapsed_s": 20.33,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_006",
+    "group": "adversarial",
+    "domain": "woodworking",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "recency_bias",
+      "authority_bias",
+      "narrative_fallacy",
+      "availability_heuristic",
+      "in_group_bias"
+    ],
+    "retrieved_sources": {
+      "recency_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 17517.74584595114,
+    "request_elapsed_s": 18.45,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_007",
+    "group": "adversarial",
+    "domain": "competitive_sailing",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "bandwagon_effect",
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "authority_bias",
+      "availability_heuristic",
+      "bandwagon_effect",
+      "framing_effect",
+      "recency_bias",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "authority_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "bandwagon_effect": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19195.53441304015,
+    "request_elapsed_s": 20.31,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_008",
+    "group": "adversarial",
+    "domain": "bird_banding",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "recency_bias",
+      "fundamental_attribution_error"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "authority_bias",
+      "availability_heuristic",
+      "recency_bias",
+      "in_group_bias",
+      "narrative_fallacy"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19496.701656025834,
+    "request_elapsed_s": 20.52,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_009",
+    "group": "adversarial",
+    "domain": "aquarium_keeping",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "authority_bias",
+      "bandwagon_effect"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "bandwagon_effect",
+      "availability_heuristic",
+      "framing_effect",
+      "recency_bias",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "llm"
+      ],
+      "bandwagon_effect": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 20397.203190019354,
+    "request_elapsed_s": 21.51,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_010",
+    "group": "adversarial",
+    "domain": "textile_conservation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "representativeness_heuristic",
+      "authority_bias",
+      "confirmation_bias",
+      "framing_effect"
+    ],
+    "retrieved_sources": {
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 17003.415849001613,
+    "request_elapsed_s": 18.02,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_011",
+    "group": "adversarial",
+    "domain": "historical_linguistics",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "authority_bias",
+      "availability_heuristic",
+      "confirmation_bias",
+      "negativity_bias",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "authority_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18196.633474959526,
+    "request_elapsed_s": 19.34,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_012",
+    "group": "adversarial",
+    "domain": "bonsai_cultivation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "authority_bias",
+      "bandwagon_effect"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "framing_effect",
+      "narrative_fallacy",
+      "recency_bias",
+      "confirmation_bias",
+      "availability_heuristic",
+      "representativeness_heuristic",
+      "sunk_cost_fallacy"
+    ],
+    "retrieved_sources": {
+      "framing_effect": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "sunk_cost_fallacy": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19166.069646016695,
+    "request_elapsed_s": 20.27,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_013",
+    "group": "adversarial",
+    "domain": "paleontology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "8c4f45",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "fundamental_attribution_error"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "fundamental_attribution_error",
+      "hindsight_bias",
+      "negativity_bias"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16574.16540099075,
+    "request_elapsed_s": 17.45,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_014",
+    "group": "adversarial",
+    "domain": "legal",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "fundamental_attribution_error"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "halo_effect",
+      "fundamental_attribution_error",
+      "availability_heuristic",
+      "narrative_fallacy",
+      "negativity_bias",
+      "affect_heuristic",
+      "representativeness_heuristic",
+      "base_rate_neglect",
+      "stereotyping_bias"
+    ],
+    "retrieved_sources": {
+      "halo_effect": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ],
+      "representativeness_heuristic": [
+        "vector"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19738.123210030608,
+    "request_elapsed_s": 20.88,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_015",
+    "group": "adversarial",
+    "domain": "consumer",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "authority_bias",
+      "bandwagon_effect"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "representativeness_heuristic",
+      "authority_bias",
+      "availability_heuristic",
+      "framing_effect",
+      "narrative_fallacy"
+    ],
+    "retrieved_sources": {
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18598.203508008737,
+    "request_elapsed_s": 19.67,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_016",
+    "group": "adversarial",
+    "domain": "political",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "framing_effect"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "fundamental_attribution_error",
+      "framing_effect",
+      "confirmation_bias",
+      "negativity_bias",
+      "affect_heuristic",
+      "escalation_of_commitment",
+      "loss_aversion",
+      "hindsight_bias",
+      "base_rate_neglect",
+      "optimism_bias"
+    ],
+    "retrieved_sources": {
+      "fundamental_attribution_error": [
+        "vector",
+        "llm"
+      ],
+      "framing_effect": [
+        "vector",
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ],
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "loss_aversion": [
+        "vector"
+      ],
+      "hindsight_bias": [
+        "vector"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "optimism_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18066.348463995382,
+    "request_elapsed_s": 19.01,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_017",
+    "group": "adversarial",
+    "domain": "management",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "authority_bias",
+      "fundamental_attribution_error",
+      "framing_effect",
+      "confirmation_bias",
+      "narrative_fallacy",
+      "omission_bias",
+      "curse_of_knowledge",
+      "base_rate_neglect",
+      "in_group_bias",
+      "dunning_kruger_effect"
+    ],
+    "retrieved_sources": {
+      "authority_bias": [
+        "vector",
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "vector",
+        "llm"
+      ],
+      "framing_effect": [
+        "vector",
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "llm"
+      ],
+      "omission_bias": [
+        "vector"
+      ],
+      "curse_of_knowledge": [
+        "vector"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "in_group_bias": [
+        "vector"
+      ],
+      "dunning_kruger_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 21941.044523962773,
+    "request_elapsed_s": 22.69,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_018",
+    "group": "adversarial",
+    "domain": "financial",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "bandwagon_effect",
+      "recency_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "bandwagon_effect",
+      "authority_bias",
+      "representativeness_heuristic",
+      "self_serving_bias",
+      "escalation_of_commitment",
+      "choice_supportive_bias",
+      "dunning_kruger_effect",
+      "gamblers_fallacy",
+      "narrative_fallacy",
+      "hindsight_bias"
+    ],
+    "retrieved_sources": {
+      "bandwagon_effect": [
+        "vector",
+        "llm"
+      ],
+      "authority_bias": [
+        "vector",
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "vector"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ],
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "choice_supportive_bias": [
+        "vector"
+      ],
+      "dunning_kruger_effect": [
+        "vector"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ],
+      "narrative_fallacy": [
+        "vector"
+      ],
+      "hindsight_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 22559.836541011464,
+    "request_elapsed_s": 23.39,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_019",
+    "group": "adversarial",
+    "domain": "educational",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "negativity_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "escalation_of_commitment",
+      "affect_heuristic",
+      "framing_effect",
+      "confirmation_bias",
+      "availability_heuristic",
+      "base_rate_neglect",
+      "negativity_bias"
+    ],
+    "retrieved_sources": {
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 20931.879968033172,
+    "request_elapsed_s": 21.95,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_020",
+    "group": "adversarial",
+    "domain": "social",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "negativity_bias",
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "authority_bias",
+      "confirmation_bias",
+      "representativeness_heuristic",
+      "base_rate_neglect",
+      "availability_heuristic",
+      "framing_effect",
+      "ambiguity_effect",
+      "survivorship_bias",
+      "fundamental_attribution_error",
+      "stereotyping_bias"
+    ],
+    "retrieved_sources": {
+      "authority_bias": [
+        "vector"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "availability_heuristic": [
+        "vector",
+        "llm"
+      ],
+      "framing_effect": [
+        "vector",
+        "llm"
+      ],
+      "ambiguity_effect": [
+        "vector"
+      ],
+      "survivorship_bias": [
+        "vector"
+      ],
+      "fundamental_attribution_error": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 21475.410336977802,
+    "request_elapsed_s": 22.27,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_021",
+    "group": "adversarial",
+    "domain": "medical",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "framing_effect",
+      "base_rate_neglect",
+      "curse_of_knowledge",
+      "authority_bias",
+      "confirmation_bias",
+      "stereotyping_bias",
+      "anchoring_bias",
+      "zero_risk_bias",
+      "affect_heuristic"
+    ],
+    "retrieved_sources": {
+      "framing_effect": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "anchoring_bias": [
+        "vector"
+      ],
+      "zero_risk_bias": [
+        "vector"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19266.582211013883,
+    "request_elapsed_s": 20.27,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_022",
+    "group": "adversarial",
+    "domain": "technical",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "bandwagon_effect",
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "narrative_fallacy",
+      "sunk_cost_fallacy",
+      "authority_bias",
+      "representativeness_heuristic",
+      "bandwagon_effect",
+      "ambiguity_effect",
+      "escalation_of_commitment",
+      "survivorship_bias",
+      "affect_heuristic",
+      "status_quo_bias"
+    ],
+    "retrieved_sources": {
+      "narrative_fallacy": [
+        "vector"
+      ],
+      "sunk_cost_fallacy": [
+        "vector"
+      ],
+      "authority_bias": [
+        "vector",
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "vector",
+        "llm"
+      ],
+      "bandwagon_effect": [
+        "vector",
+        "llm"
+      ],
+      "ambiguity_effect": [
+        "vector"
+      ],
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "survivorship_bias": [
+        "vector"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ],
+      "status_quo_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18223.391907988116,
+    "request_elapsed_s": 18.95,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "adv_023",
+    "group": "adversarial",
+    "domain": "family",
+    "domain_familiarity": "in_field",
+    "source_file": "bb12d7(1)",
+    "expected_bias_ids": [
+      "hindsight_bias",
+      "projection_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "base_rate_neglect",
+      "hindsight_bias",
+      "confirmation_bias",
+      "self_serving_bias"
+    ],
+    "retrieved_sources": {
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "self_serving_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 20455.576971988194,
+    "request_elapsed_s": 21.47,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_003",
+    "group": "edge",
+    "domain": "astronomy",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "overconfidence_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "base_rate_neglect",
+      "confirmation_bias",
+      "curse_of_knowledge",
+      "planning_fallacy",
+      "recency_bias",
+      "hindsight_bias"
+    ],
+    "retrieved_sources": {
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "planning_fallacy": [
+        "llm"
+      ],
+      "recency_bias": [
+        "vector"
+      ],
+      "hindsight_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 14260.29040699359,
+    "request_elapsed_s": 15.37,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_004",
+    "group": "edge",
+    "domain": "mycology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "status_quo_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "negativity_bias",
+      "confirmation_bias",
+      "planning_fallacy"
+    ],
+    "retrieved_sources": {
+      "negativity_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "planning_fallacy": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 12228.362851950806,
+    "request_elapsed_s": 13.15,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_005",
+    "group": "edge",
+    "domain": "woodworking",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "overconfidence_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "planning_fallacy",
+      "confirmation_bias",
+      "recency_bias",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "planning_fallacy": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 13354.600743972696,
+    "request_elapsed_s": 14.23,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_006",
+    "group": "edge",
+    "domain": "competitive_sailing",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "recency_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "hindsight_bias",
+      "base_rate_neglect",
+      "confirmation_bias"
+    ],
+    "retrieved_sources": {
+      "hindsight_bias": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 13134.272116003558,
+    "request_elapsed_s": 13.8,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_007",
+    "group": "edge",
+    "domain": "bird_banding",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "curse_of_knowledge",
+      "fundamental_attribution_error",
+      "base_rate_neglect",
+      "overconfidence_bias",
+      "stereotyping_bias"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "llm"
+      ],
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 12143.439589999616,
+    "request_elapsed_s": 13.15,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_008",
+    "group": "edge",
+    "domain": "aquarium_keeping",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "availability_heuristic",
+      "representativeness_heuristic",
+      "base_rate_neglect"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 12726.586250006221,
+    "request_elapsed_s": 13.43,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_009",
+    "group": "edge",
+    "domain": "textile_conservation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "fundamental_attribution_error",
+      "availability_heuristic",
+      "confirmation_bias"
+    ],
+    "retrieved_sources": {
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 11195.514410035685,
+    "request_elapsed_s": 12.2,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_010",
+    "group": "edge",
+    "domain": "historical_linguistics",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "representativeness_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "base_rate_neglect",
+      "confirmation_bias",
+      "representativeness_heuristic",
+      "stereotyping_bias"
+    ],
+    "retrieved_sources": {
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 11157.87986095529,
+    "request_elapsed_s": 12.15,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_011",
+    "group": "edge",
+    "domain": "bonsai_cultivation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "representativeness_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "representativeness_heuristic",
+      "base_rate_neglect",
+      "confirmation_bias"
+    ],
+    "retrieved_sources": {
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 12383.611052006017,
+    "request_elapsed_s": 13.32,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_012",
+    "group": "edge",
+    "domain": "paleontology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "7da4ba",
+    "expected_bias_ids": [
+      "representativeness_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "base_rate_neglect",
+      "representativeness_heuristic",
+      "confirmation_bias"
+    ],
+    "retrieved_sources": {
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 11913.391356996726,
+    "request_elapsed_s": 12.57,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_013",
+    "group": "edge",
+    "domain": "political",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "base_rate_neglect",
+      "representativeness_heuristic",
+      "authority_bias",
+      "in_group_bias",
+      "availability_heuristic",
+      "negativity_bias",
+      "fundamental_attribution_error",
+      "bandwagon_effect"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "vector"
+      ],
+      "bandwagon_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19417.924617999233,
+    "request_elapsed_s": 20.36,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_014",
+    "group": "edge",
+    "domain": "educational",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "halo_effect"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "recency_bias",
+      "in_group_bias",
+      "authority_bias",
+      "confirmation_bias",
+      "base_rate_neglect",
+      "representativeness_heuristic",
+      "halo_effect"
+    ],
+    "retrieved_sources": {
+      "recency_bias": [
+        "vector",
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "representativeness_heuristic": [
+        "vector"
+      ],
+      "halo_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16398.903557972517,
+    "request_elapsed_s": 17.4,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_015",
+    "group": "edge",
+    "domain": "financial",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "recency_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "curse_of_knowledge",
+      "framing_effect",
+      "status_quo_bias",
+      "halo_effect",
+      "loss_aversion",
+      "self_serving_bias",
+      "decoy_effect",
+      "recency_bias",
+      "negativity_bias",
+      "survivorship_bias"
+    ],
+    "retrieved_sources": {
+      "curse_of_knowledge": [
+        "vector",
+        "llm"
+      ],
+      "framing_effect": [
+        "vector",
+        "llm"
+      ],
+      "status_quo_bias": [
+        "vector"
+      ],
+      "halo_effect": [
+        "vector"
+      ],
+      "loss_aversion": [
+        "vector"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ],
+      "decoy_effect": [
+        "vector"
+      ],
+      "recency_bias": [
+        "vector"
+      ],
+      "negativity_bias": [
+        "vector"
+      ],
+      "survivorship_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 17954.954443033785,
+    "request_elapsed_s": 18.69,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_016",
+    "group": "edge",
+    "domain": "medical",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "status_quo_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "fundamental_attribution_error",
+      "confirmation_bias",
+      "authority_bias",
+      "negativity_bias",
+      "stereotyping_bias",
+      "overconfidence_bias",
+      "dunning_kruger_effect",
+      "availability_heuristic",
+      "base_rate_neglect",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "dunning_kruger_effect": [
+        "vector"
+      ],
+      "availability_heuristic": [
+        "vector"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "representativeness_heuristic": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16143.783199950121,
+    "request_elapsed_s": 17.26,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_017",
+    "group": "edge",
+    "domain": "social",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "availability_heuristic",
+      "confirmation_bias",
+      "hindsight_bias",
+      "recency_bias",
+      "representativeness_heuristic",
+      "overconfidence_bias",
+      "planning_fallacy",
+      "narrative_fallacy",
+      "status_quo_bias",
+      "negativity_bias"
+    ],
+    "retrieved_sources": {
+      "availability_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "planning_fallacy": [
+        "vector"
+      ],
+      "narrative_fallacy": [
+        "vector"
+      ],
+      "status_quo_bias": [
+        "vector"
+      ],
+      "negativity_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16069.66487900354,
+    "request_elapsed_s": 17.2,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_018",
+    "group": "edge",
+    "domain": "technical",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "planning_fallacy"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "choice_supportive_bias",
+      "overconfidence_bias",
+      "representativeness_heuristic",
+      "confirmation_bias",
+      "authority_bias",
+      "dunning_kruger_effect",
+      "ambiguity_effect"
+    ],
+    "retrieved_sources": {
+      "choice_supportive_bias": [
+        "vector"
+      ],
+      "overconfidence_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "vector"
+      ],
+      "dunning_kruger_effect": [
+        "vector"
+      ],
+      "ambiguity_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 14342.25788997719,
+    "request_elapsed_s": 15.28,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_019",
+    "group": "edge",
+    "domain": "management",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "base_rate_neglect"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "availability_heuristic",
+      "confirmation_bias",
+      "planning_fallacy",
+      "framing_effect",
+      "overconfidence_bias",
+      "gamblers_fallacy",
+      "anchoring_bias",
+      "base_rate_neglect",
+      "loss_aversion",
+      "stereotyping_bias"
+    ],
+    "retrieved_sources": {
+      "availability_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "planning_fallacy": [
+        "llm"
+      ],
+      "framing_effect": [
+        "vector"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ],
+      "anchoring_bias": [
+        "vector"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "loss_aversion": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 14745.417757018004,
+    "request_elapsed_s": 15.73,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_020",
+    "group": "edge",
+    "domain": "legal",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "base_rate_neglect"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "curse_of_knowledge",
+      "representativeness_heuristic",
+      "confirmation_bias",
+      "availability_heuristic",
+      "stereotyping_bias",
+      "hindsight_bias",
+      "halo_effect",
+      "affect_heuristic",
+      "anchoring_bias",
+      "fundamental_attribution_error"
+    ],
+    "retrieved_sources": {
+      "curse_of_knowledge": [
+        "vector"
+      ],
+      "representativeness_heuristic": [
+        "vector",
+        "llm"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "availability_heuristic": [
+        "vector",
+        "llm"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "hindsight_bias": [
+        "vector"
+      ],
+      "halo_effect": [
+        "vector"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ],
+      "anchoring_bias": [
+        "vector"
+      ],
+      "fundamental_attribution_error": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 15640.376308001578,
+    "request_elapsed_s": 16.37,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_021",
+    "group": "edge",
+    "domain": "consumer",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "authority_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "availability_heuristic",
+      "optimism_bias",
+      "confirmation_bias",
+      "representativeness_heuristic",
+      "projection_bias",
+      "in_group_bias",
+      "negativity_bias",
+      "recency_bias",
+      "self_serving_bias"
+    ],
+    "retrieved_sources": {
+      "availability_heuristic": [
+        "llm"
+      ],
+      "optimism_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ],
+      "projection_bias": [
+        "vector"
+      ],
+      "in_group_bias": [
+        "vector"
+      ],
+      "negativity_bias": [
+        "vector"
+      ],
+      "recency_bias": [
+        "vector"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 14992.948247003369,
+    "request_elapsed_s": 16.04,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "edge_022",
+    "group": "edge",
+    "domain": "family",
+    "domain_familiarity": "in_field",
+    "source_file": "7e1b94",
+    "expected_bias_ids": [
+      "projection_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "authority_bias",
+      "confirmation_bias",
+      "status_quo_bias",
+      "stereotyping_bias"
+    ],
+    "retrieved_sources": {
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "status_quo_bias": [
+        "llm"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 14354.447024990804,
+    "request_elapsed_s": 15.46,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_005",
+    "group": "positive",
+    "domain": "mycology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "availability_heuristic",
+      "confirmation_bias",
+      "hindsight_bias",
+      "base_rate_neglect",
+      "curse_of_knowledge",
+      "negativity_bias"
+    ],
+    "retrieved_sources": {
+      "availability_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18705.03936399473,
+    "request_elapsed_s": 19.69,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_006",
+    "group": "positive",
+    "domain": "bird_banding",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "recency_bias",
+      "overconfidence_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "recency_bias",
+      "fundamental_attribution_error",
+      "confirmation_bias",
+      "in_group_bias",
+      "planning_fallacy"
+    ],
+    "retrieved_sources": {
+      "recency_bias": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ],
+      "planning_fallacy": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16645.400115987286,
+    "request_elapsed_s": 17.77,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_007",
+    "group": "positive",
+    "domain": "aquarium_keeping",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "availability_heuristic",
+      "sunk_cost_fallacy"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "curse_of_knowledge",
+      "authority_bias",
+      "confirmation_bias",
+      "escalation_of_commitment",
+      "planning_fallacy"
+    ],
+    "retrieved_sources": {
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "escalation_of_commitment": [
+        "llm"
+      ],
+      "planning_fallacy": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18273.890398966614,
+    "request_elapsed_s": 19.28,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_008",
+    "group": "positive",
+    "domain": "woodworking",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "sunk_cost_fallacy",
+      "confirmation_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "availability_heuristic",
+      "confirmation_bias",
+      "escalation_of_commitment",
+      "in_group_bias"
+    ],
+    "retrieved_sources": {
+      "availability_heuristic": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "escalation_of_commitment": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16612.717818992678,
+    "request_elapsed_s": 17.76,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_009",
+    "group": "positive",
+    "domain": "competitive_sailing",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "hindsight_bias",
+      "confirmation_bias",
+      "availability_heuristic",
+      "fundamental_attribution_error",
+      "in_group_bias",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "hindsight_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18418.039453972597,
+    "request_elapsed_s": 19.48,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_010",
+    "group": "positive",
+    "domain": "historical_linguistics",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "confirmation_bias",
+      "overconfidence_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "base_rate_neglect",
+      "confirmation_bias",
+      "authority_bias",
+      "framing_effect",
+      "in_group_bias",
+      "negativity_bias",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "authority_bias": [
+        "vector",
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 17438.073404016905,
+    "request_elapsed_s": 18.45,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_011",
+    "group": "positive",
+    "domain": "textile_conservation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "availability_heuristic",
+      "overconfidence_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "authority_bias",
+      "curse_of_knowledge",
+      "confirmation_bias",
+      "hindsight_bias"
+    ],
+    "retrieved_sources": {
+      "authority_bias": [
+        "llm"
+      ],
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16112.099391000811,
+    "request_elapsed_s": 17.18,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_012",
+    "group": "positive",
+    "domain": "bonsai_cultivation",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "status_quo_bias",
+      "projection_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "hindsight_bias",
+      "authority_bias",
+      "confirmation_bias",
+      "negativity_bias"
+    ],
+    "retrieved_sources": {
+      "hindsight_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16765.34216996515,
+    "request_elapsed_s": 17.65,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_013",
+    "group": "positive",
+    "domain": "astronomy",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "confirmation_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "confirmation_bias",
+      "fundamental_attribution_error",
+      "negativity_bias",
+      "hindsight_bias",
+      "spotlight_effect",
+      "base_rate_neglect",
+      "illusion_of_control",
+      "ambiguity_effect",
+      "availability_heuristic",
+      "gamblers_fallacy"
+    ],
+    "retrieved_sources": {
+      "confirmation_bias": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "vector"
+      ],
+      "spotlight_effect": [
+        "vector"
+      ],
+      "base_rate_neglect": [
+        "vector"
+      ],
+      "illusion_of_control": [
+        "vector"
+      ],
+      "ambiguity_effect": [
+        "vector"
+      ],
+      "availability_heuristic": [
+        "vector"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 16790.200228977483,
+    "request_elapsed_s": 17.83,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_014",
+    "group": "positive",
+    "domain": "paleontology",
+    "domain_familiarity": "out_of_field",
+    "source_file": "ace574",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "representativeness_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "hindsight_bias",
+      "fundamental_attribution_error",
+      "authority_bias",
+      "confirmation_bias"
+    ],
+    "retrieved_sources": {
+      "hindsight_bias": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 15284.97342002811,
+    "request_elapsed_s": 16.32,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_015",
+    "group": "positive",
+    "domain": "financial",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "loss_aversion",
+      "confirmation_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "loss_aversion",
+      "escalation_of_commitment",
+      "negativity_bias",
+      "sunk_cost_fallacy",
+      "gamblers_fallacy",
+      "anchoring_bias",
+      "self_serving_bias",
+      "survivorship_bias",
+      "choice_supportive_bias",
+      "omission_bias"
+    ],
+    "retrieved_sources": {
+      "loss_aversion": [
+        "vector"
+      ],
+      "escalation_of_commitment": [
+        "vector",
+        "llm"
+      ],
+      "negativity_bias": [
+        "vector",
+        "llm"
+      ],
+      "sunk_cost_fallacy": [
+        "vector"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ],
+      "anchoring_bias": [
+        "vector"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ],
+      "survivorship_bias": [
+        "vector"
+      ],
+      "choice_supportive_bias": [
+        "vector"
+      ],
+      "omission_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 20387.762564991135,
+    "request_elapsed_s": 21.2,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_016",
+    "group": "positive",
+    "domain": "medical",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "confirmation_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "framing_effect",
+      "authority_bias",
+      "base_rate_neglect",
+      "curse_of_knowledge",
+      "stereotyping_bias",
+      "overconfidence_bias",
+      "representativeness_heuristic",
+      "halo_effect",
+      "survivorship_bias",
+      "gamblers_fallacy"
+    ],
+    "retrieved_sources": {
+      "framing_effect": [
+        "vector"
+      ],
+      "authority_bias": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "curse_of_knowledge": [
+        "vector",
+        "llm"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "representativeness_heuristic": [
+        "vector"
+      ],
+      "halo_effect": [
+        "vector"
+      ],
+      "survivorship_bias": [
+        "vector"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 20107.578827010002,
+    "request_elapsed_s": 20.83,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_017",
+    "group": "positive",
+    "domain": "management",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "sunk_cost_fallacy",
+      "status_quo_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "escalation_of_commitment",
+      "confirmation_bias",
+      "optimism_bias",
+      "narrative_fallacy",
+      "framing_effect",
+      "self_serving_bias",
+      "planning_fallacy",
+      "sunk_cost_fallacy",
+      "overconfidence_bias",
+      "projection_bias"
+    ],
+    "retrieved_sources": {
+      "escalation_of_commitment": [
+        "vector",
+        "llm"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "optimism_bias": [
+        "vector",
+        "llm"
+      ],
+      "narrative_fallacy": [
+        "vector",
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ],
+      "planning_fallacy": [
+        "vector"
+      ],
+      "sunk_cost_fallacy": [
+        "vector"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "projection_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18595.42937000515,
+    "request_elapsed_s": 19.6,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_018",
+    "group": "positive",
+    "domain": "legal",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "representativeness_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "halo_effect",
+      "gamblers_fallacy",
+      "stereotyping_bias",
+      "affect_heuristic",
+      "overconfidence_bias",
+      "authority_bias",
+      "base_rate_neglect",
+      "in_group_bias",
+      "confirmation_bias",
+      "representativeness_heuristic"
+    ],
+    "retrieved_sources": {
+      "halo_effect": [
+        "vector"
+      ],
+      "gamblers_fallacy": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ],
+      "overconfidence_bias": [
+        "vector"
+      ],
+      "authority_bias": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "in_group_bias": [
+        "vector",
+        "llm"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "representativeness_heuristic": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18621.650215995032,
+    "request_elapsed_s": 19.27,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_019",
+    "group": "positive",
+    "domain": "social",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "overconfidence_bias",
+      "hindsight_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "hindsight_bias",
+      "self_serving_bias",
+      "authority_bias",
+      "confirmation_bias",
+      "curse_of_knowledge",
+      "in_group_bias"
+    ],
+    "retrieved_sources": {
+      "hindsight_bias": [
+        "llm"
+      ],
+      "self_serving_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "in_group_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18104.70017703483,
+    "request_elapsed_s": 19.04,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_020",
+    "group": "positive",
+    "domain": "political",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "confirmation_bias",
+      "availability_heuristic"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "escalation_of_commitment",
+      "confirmation_bias",
+      "base_rate_neglect",
+      "in_group_bias",
+      "authority_bias",
+      "negativity_bias",
+      "fundamental_attribution_error",
+      "survivorship_bias",
+      "affect_heuristic",
+      "halo_effect"
+    ],
+    "retrieved_sources": {
+      "escalation_of_commitment": [
+        "vector"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "vector",
+        "llm"
+      ],
+      "in_group_bias": [
+        "vector",
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "fundamental_attribution_error": [
+        "vector"
+      ],
+      "survivorship_bias": [
+        "vector"
+      ],
+      "affect_heuristic": [
+        "vector"
+      ],
+      "halo_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 20473.988994024694,
+    "request_elapsed_s": 21.52,
+    "http_status": "200",
+    "verdict": "partial",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_021",
+    "group": "positive",
+    "domain": "consumer",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "choice_supportive_bias",
+      "confirmation_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "negativity_bias",
+      "base_rate_neglect",
+      "confirmation_bias",
+      "overconfidence_bias",
+      "availability_heuristic",
+      "framing_effect",
+      "choice_supportive_bias",
+      "zero_risk_bias",
+      "bandwagon_effect"
+    ],
+    "retrieved_sources": {
+      "negativity_bias": [
+        "vector",
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "overconfidence_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "framing_effect": [
+        "llm"
+      ],
+      "choice_supportive_bias": [
+        "vector"
+      ],
+      "zero_risk_bias": [
+        "vector"
+      ],
+      "bandwagon_effect": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 18335.105721023865,
+    "request_elapsed_s": 19.35,
+    "http_status": "200",
+    "verdict": "hit",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_022",
+    "group": "positive",
+    "domain": "educational",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "status_quo_bias",
+      "overconfidence_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "authority_bias",
+      "confirmation_bias",
+      "dunning_kruger_effect",
+      "self_serving_bias",
+      "stereotyping_bias",
+      "framing_effect",
+      "fundamental_attribution_error",
+      "halo_effect",
+      "recency_bias",
+      "loss_aversion"
+    ],
+    "retrieved_sources": {
+      "authority_bias": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "dunning_kruger_effect": [
+        "vector"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ],
+      "stereotyping_bias": [
+        "vector"
+      ],
+      "framing_effect": [
+        "vector"
+      ],
+      "fundamental_attribution_error": [
+        "vector"
+      ],
+      "halo_effect": [
+        "vector"
+      ],
+      "recency_bias": [
+        "vector"
+      ],
+      "loss_aversion": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 17312.972330022603,
+    "request_elapsed_s": 18.31,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_023",
+    "group": "positive",
+    "domain": "family",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "status_quo_bias",
+      "projection_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "curse_of_knowledge",
+      "confirmation_bias",
+      "availability_heuristic",
+      "negativity_bias",
+      "base_rate_neglect",
+      "hindsight_bias"
+    ],
+    "retrieved_sources": {
+      "curse_of_knowledge": [
+        "llm"
+      ],
+      "confirmation_bias": [
+        "llm"
+      ],
+      "availability_heuristic": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "llm"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 19869.6828460088,
+    "request_elapsed_s": 20.81,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  },
+  {
+    "scenario_id": "pos_024",
+    "group": "positive",
+    "domain": "technical",
+    "domain_familiarity": "in_field",
+    "source_file": "6a25e8",
+    "expected_bias_ids": [
+      "availability_heuristic",
+      "overconfidence_bias"
+    ],
+    "invalid_expected_ids": [],
+    "retrieved_bias_ids": [
+      "fundamental_attribution_error",
+      "confirmation_bias",
+      "recency_bias",
+      "authority_bias",
+      "base_rate_neglect",
+      "negativity_bias",
+      "hindsight_bias",
+      "self_serving_bias"
+    ],
+    "retrieved_sources": {
+      "fundamental_attribution_error": [
+        "vector"
+      ],
+      "confirmation_bias": [
+        "vector",
+        "llm"
+      ],
+      "recency_bias": [
+        "llm"
+      ],
+      "authority_bias": [
+        "llm"
+      ],
+      "base_rate_neglect": [
+        "llm"
+      ],
+      "negativity_bias": [
+        "llm"
+      ],
+      "hindsight_bias": [
+        "vector"
+      ],
+      "self_serving_bias": [
+        "vector"
+      ]
+    },
+    "selection_strategy": "llm_union",
+    "llm_model": "google_gemma-3-4b-it",
+    "llm_latency_ms": 17950.3440670087,
+    "request_elapsed_s": 18.95,
+    "http_status": "200",
+    "verdict": "miss",
+    "error": null
+  }
+]
