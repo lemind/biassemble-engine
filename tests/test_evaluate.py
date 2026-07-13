@@ -1,11 +1,9 @@
 import json
 import pytest
-from pathlib import Path
 
 from src.evaluation.evaluate import (
     K,
     GroupMetrics,
-    Scenario,
     ScenarioResult,
     _aggregate,
     compute_deltas,

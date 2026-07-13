@@ -6,7 +6,7 @@ where needed so these tests only verify routing, auth, error mapping, and
 response shape — not retrieval correctness.
 """
 from contextlib import asynccontextmanager
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import MagicMock
 
 import pytest
 from fastapi.testclient import TestClient

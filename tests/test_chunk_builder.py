@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import pytest
 
 from src.indexing.chunk_builder import _group_indicator_bullets, build_chunks
 from src.indexing.sources.base import RawDocument

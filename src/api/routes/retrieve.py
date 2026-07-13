@@ -6,7 +6,7 @@ import uuid
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, cast
 
 import asyncpg
 import structlog
@@ -40,7 +40,12 @@ def _verify_token(
         raise HTTPException(status_code=401, detail={"error": "unauthorized"})
 
 
-def _to_bias_result(b: RetrievedBias, sources: dict[str, str] | None) -> BiasResult:
+def _to_bias_result(b: RetrievedBias, sources: dict[str, list[str]] | None) -> BiasResult:
+    # sources is internally list[str] (unconstrained — see StrategyMetadata.sources) but
+    # every entry is constructed by rank_and_trim() from only "vector"/"llm" (llm_union.py
+    # _source_rank), so this narrowing to the response schema's Literal is safe by
+    # construction, not just wishful typing.
+    source = cast("list[Literal['vector', 'llm']] | None", sources.get(b.bias_id) if sources else None)
     return BiasResult(
         id=b.bias_id,
         name=b.name,
@@ -50,7 +55,7 @@ def _to_bias_result(b: RetrievedBias, sources: dict[str, str] | None) -> BiasRes
         indicators=b.indicators,
         false_positives=b.false_positives,
         related_biases=b.related_biases,
-        source=sources.get(b.bias_id) if sources else None,
+        source=source,
     )
 
 
