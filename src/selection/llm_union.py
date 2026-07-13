@@ -92,9 +92,14 @@ class LLMUnionStrategy:
         try:
             fitted_story, truncated = fit_story_to_budget(self._generator, story, self._catalog)
             user = build_user_message(fitted_story, self._catalog)
+            log.info("llm_call_started")
             raw = self._generator.generate(SYSTEM, user)
+            log.info("llm_call_finished", latency_ms=round((time.monotonic() - t0) * 1000, 1))
         except Exception as exc:
-            log.warning("llm_generate_failed", error=str(exc))
+            log.warning(
+                "llm_generate_failed", error=str(exc),
+                latency_ms=round((time.monotonic() - t0) * 1000, 1),
+            )
             return [], False, (time.monotonic() - t0) * 1000
         if settings.llm_log_raw:
             log.debug("llm_raw_output", raw=raw)
@@ -103,13 +108,17 @@ class LLMUnionStrategy:
     async def select(
         self, story: str, story_analysis=None
     ) -> tuple[dict[str, float], list[CandidateChunk], StrategyMetadata]:
-        loop = asyncio.get_running_loop()
-
         # LLM (CPU-bound, thread pool) and vector search run concurrently — neither
         # depends on the other's output now that narrowing is gone (nli_union.py:46
         # pattern). Do NOT call self._run_llm() directly in this async path.
+        # asyncio.to_thread (not raw run_in_executor) so structlog's request_id
+        # contextvar — bound in retriever.retrieve()'s task — propagates into this
+        # worker thread; a plain run_in_executor call starts with an empty context
+        # and every log line from _run_llm/generate/parse_biases would be
+        # uncorrelated to the request (this was happening — see llm_parse_stage
+        # logs with no request_id before this fix).
         llm_result, vector_result = await asyncio.gather(
-            loop.run_in_executor(None, self._run_llm, story),
+            asyncio.to_thread(self._run_llm, story),
             self._vector_strategy.select(story, story_analysis),
         )
         llm_candidates, truncated_story, llm_latency_ms = llm_result
