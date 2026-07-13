@@ -97,6 +97,7 @@ async def retrieve_biases(
         taxonomy_version=meta.taxonomy_version,
         embedding_model=meta.embedding_model,
         request_id=meta.retrieval_id,
+        selection_strategy=meta.selection_strategy if is_llm_union else None,
         llm_model=_llm_model_display_name() if is_llm_union else None,
         llm_latency_ms=meta.llm_latency_ms if is_llm_union else None,
         truncated_story=meta.truncated_story if is_llm_union else None,

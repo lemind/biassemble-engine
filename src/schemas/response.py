@@ -25,6 +25,7 @@ class RetrieveResponse(BaseModel):
     embedding_model: str
     request_id: str
     # llm_union-only additive fields (contract v3) — absent/None for vector_only/nli_union.
+    selection_strategy: str | None = None
     llm_model: str | None = None
     llm_latency_ms: float | None = None
     truncated_story: bool | None = None
