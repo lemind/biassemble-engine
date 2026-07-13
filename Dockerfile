@@ -47,9 +47,13 @@ ENV LLM_MODEL_REPO=${LLM_MODEL_REPO}
 ENV LLM_GGUF_FILE=${LLM_GGUF_FILE}
 RUN uv run python -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='${LLM_MODEL_REPO}', filename='${LLM_GGUF_FILE}')"
 
-# Deploy defaults: llm_union, with a request timeout large enough for CPU LLM inference.
-# The LLM takes seconds — the old 450ms default would 503 every request. Space env
-# vars override these.
+# Fallback defaults ONLY — for a non-Space docker run (local/CI) with nothing else
+# set. On the actual deployed HF Space, these two ALWAYS lose to the Space's
+# "Variables" (Docker -e beats a baked-in ENV) — the real, authoritative values live
+# in space-vars.env (git-tracked) and are pushed with `uv run scripts/sync_space_vars.py`.
+# Keep these two in sync with space-vars.env by hand; they're a safety net, not the
+# source of truth. (SELECTION_STRATEGY=vector_only's 450ms default 503s every
+# request under llm_union — that's why these exist at all.)
 ENV SELECTION_STRATEGY=llm_union
 ENV REQUEST_TIMEOUT_MS=120000
 
