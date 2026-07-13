@@ -72,10 +72,12 @@ Returns biases array with `retrieval_score`, `definition`, `examples`, `indicato
 
 ## Environment Variables
 
-| Variable | Default | Description |
+Defaults below are the bare `src/config.py` fallbacks (used for local dev / a non-Space docker run with nothing else set). **The deployed HF Space does not use these** — its actual live values live in [`space-vars.env`](space-vars.env), git-tracked, pushed with `.venv/bin/python scripts/sync_space_vars.py`. HF Space Variables always override the Dockerfile's `ENV` lines, so editing the Space's web UI directly causes silent drift from git — that already happened once (`REQUEST_TIMEOUT_MS` stuck at 60000 in production while everything in git said 120000). Change deployed config in `space-vars.env`, not the web UI.
+
+| Variable | Local default | Description |
 |----------|---------|-------------|
-| `DATABASE_URL` | — | Supabase PostgreSQL connection string |
-| `RAG_API_KEY` | — | Shared Bearer secret with biassemble-core |
+| `DATABASE_URL` | — | Supabase PostgreSQL connection string (Space Secret, not in space-vars.env) |
+| `RAG_API_KEY` | — | Shared Bearer secret with biassemble-core (Space Secret) |
 | `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | Sentence-transformer model name |
 | `EMBEDDING_DIMENSION` | `384` | Must match model output dimension |
 | `TAXONOMY_VERSION` | `2026-06-28` | Active knowledge version; must match seeded rows |
@@ -85,7 +87,8 @@ Returns biases array with `retrieval_score`, `definition`, `examples`, `indicato
 | `QUERY_STRATEGY` | `repeated_story` | Query construction strategy |
 | `RERANK_STRATEGY` | `max` | Score collapse strategy per bias |
 | `INDEX_BATCH_SIZE` | `32` | Embedding batch size during indexing |
-| `REQUEST_TIMEOUT_MS` | `450` | Per-request timeout (must be < caller's 500ms deadline) |
+| `SELECTION_STRATEGY` | `vector_only` | `vector_only` \| `nli_union` \| `llm_union` — deployed Space runs `llm_union` |
+| `REQUEST_TIMEOUT_MS` | `450` | Per-request timeout; deployed Space runs `120000` (CPU LLM inference is seconds, not ms — see space-vars.env) |
 | `LOG_LEVEL` | `INFO` | structlog minimum level |
 | `GIT_SHA` | — | Set at build time; surfaced in `/stats` |
 
@@ -258,8 +261,8 @@ Baseline files live in `evaluations/baselines/`. The most recent one is used aut
 
 ## Deploy (HF Spaces)
 
-1. Push to the `main` branch — HF Spaces builds from the Dockerfile automatically
-2. Set all env vars in the Space settings (including `RAG_TIMEOUT_MS=5000` for NLI latency)
+1. Push to the `main` branch (`git push hf HEAD:main`) — HF Spaces builds from the Dockerfile automatically
+2. Config lives in [`space-vars.env`](space-vars.env), not the web UI — run `.venv/bin/python scripts/sync_space_vars.py` (add `--dry-run` to preview) to push any changes
 3. After deploy: `GET /health` should show `database_connected: true`
 
 ## Spec
