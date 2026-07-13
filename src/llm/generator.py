@@ -1,3 +1,5 @@
+import threading
+
 import structlog
 from huggingface_hub import hf_hub_download
 from llama_cpp import Llama
@@ -31,6 +33,16 @@ class LLMGenerator:
         self.context_tokens = context_tokens
         self.max_output_tokens = max_output_tokens
         self._temperature = temperature
+        # llama.cpp's Llama context is not safe for concurrent calls from multiple threads
+        # (no internal locking — see llama_cpp/llama.py). Every call here already runs inside
+        # llm_union's run_in_executor worker thread, never the event loop thread, so a plain
+        # threading.Lock (not asyncio.Lock) is correct and won't block the loop. This matters
+        # because asyncio.wait_for's timeout cancels the *awaiting* task but cannot stop this
+        # worker thread once inference has started — a timed-out request's call keeps running
+        # in the background and, without this lock, could race a subsequent request's call on
+        # the same shared context (observed in production: a 60s timeout followed by
+        # llm_parse_stage logs ~21s later, from the abandoned call finishing unsupervised).
+        self._lock = threading.Lock()
         try:
             model_path = hf_hub_download(repo_id=model_repo, filename=gguf_file)
             self._llm = Llama(
@@ -45,21 +57,24 @@ class LLMGenerator:
     def generate(self, system: str, user: str) -> str:
         """Run one chat-completion turn. Raises on inference failure — the caller
         (llm_union's executor dispatch) is responsible for catching and degrading."""
-        out = self._llm.create_chat_completion(
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            max_tokens=self.max_output_tokens,
-            temperature=self._temperature,
-        )
+        with self._lock:
+            out = self._llm.create_chat_completion(
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                max_tokens=self.max_output_tokens,
+                temperature=self._temperature,
+            )
         return out["choices"][0]["message"]["content"] or ""
 
     def count_tokens(self, text: str) -> int:
-        return len(self._llm.tokenize(text.encode("utf-8"), add_bos=False))
+        with self._lock:
+            return len(self._llm.tokenize(text.encode("utf-8"), add_bos=False))
 
     def truncate_to_tokens(self, text: str, max_tokens: int) -> str:
-        tokens = self._llm.tokenize(text.encode("utf-8"), add_bos=False)
-        if len(tokens) <= max_tokens:
-            return text
-        return self._llm.detokenize(tokens[:max_tokens]).decode("utf-8", errors="ignore")
+        with self._lock:
+            tokens = self._llm.tokenize(text.encode("utf-8"), add_bos=False)
+            if len(tokens) <= max_tokens:
+                return text
+            return self._llm.detokenize(tokens[:max_tokens]).decode("utf-8", errors="ignore")
