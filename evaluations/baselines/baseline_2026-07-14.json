@@ -1,0 +1,503 @@
+{
+  "run_date": "2026-07-14",
+  "taxonomy_version": "2026-07-06.1",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "k": 5,
+  "scenario_results": [
+    {
+      "scenario_id": "adv_003",
+      "group": "adversarial",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic",
+        "framing_effect"
+      ],
+      "retrieved": [
+        "choice_supportive_bias",
+        "bandwagon_effect",
+        "base_rate_neglect",
+        "escalation_of_commitment",
+        "availability_heuristic"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "ndcg_at_k": 0.18154179253735267,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "choice_supportive_bias": 0.421870699151841,
+        "bandwagon_effect": 0.412967760916684,
+        "base_rate_neglect": 0.406128097311034,
+        "escalation_of_commitment": 0.404089320193451
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "negativity_bias": 0.5,
+        "hindsight_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_001",
+      "group": "adversarial",
+      "expected": [
+        "confirmation_bias",
+        "framing_effect",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "recency_bias",
+        "confirmation_bias",
+        "narrative_fallacy",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.2,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_k": 0.23463936301137822,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "availability_heuristic": 0.436719298362732,
+        "recency_bias": 0.413338840007782
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "narrative_fallacy": 0.5,
+        "optimism_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_002",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "loss_aversion",
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "loss_aversion",
+        "status_quo_bias",
+        "dunning_kruger_effect",
+        "availability_heuristic",
+        "base_rate_neglect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9674679834891693,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "loss_aversion": 0.698741039596231,
+        "status_quo_bias": 0.478450000286102,
+        "dunning_kruger_effect": 0.401108002596617
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "base_rate_neglect": 0.5,
+        "negativity_bias": 0.5,
+        "availability_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_001",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "omission_bias",
+        "hindsight_bias",
+        "in_group_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "availability_heuristic": 0.565241506568328,
+        "omission_bias": 0.50108399993682
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "hindsight_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "negativity_bias": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_003",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {}
+    },
+    {
+      "scenario_id": "neg_005",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "narrative_fallacy",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "narrative_fallacy": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_004",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "availability_heuristic",
+        "framing_effect",
+        "recency_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "recency_bias": 0.5,
+        "availability_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_002",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "availability_heuristic",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_001",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "availability_heuristic",
+        "framing_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "framing_effect": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_004",
+      "group": "positive",
+      "expected": [
+        "hot_hand_fallacy",
+        "illusion_of_control",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "gamblers_fallacy",
+        "hot_hand_fallacy",
+        "illusion_of_control",
+        "availability_heuristic",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "precision_at_k": 0.4,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.5307212739772434,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "gamblers_fallacy": 0.563011987119558,
+        "hot_hand_fallacy": 0.428778397179295,
+        "illusion_of_control": 0.424939627941825
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "representativeness_heuristic": 0.5,
+        "optimism_bias": 0.5,
+        "confirmation_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_001",
+      "group": "positive",
+      "expected": [
+        "anchoring_bias",
+        "sunk_cost_fallacy",
+        "confirmation_bias",
+        "loss_aversion"
+      ],
+      "retrieved": [
+        "anchoring_bias",
+        "escalation_of_commitment",
+        "hot_hand_fallacy",
+        "loss_aversion",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.6,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7095272044910244,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "hot_hand_fallacy": 0.516948967161837,
+        "loss_aversion": 0.470708384236944,
+        "anchoring_bias": 0.46431827545166,
+        "escalation_of_commitment": 0.446247849092017,
+        "sunk_cost_fallacy": 0.44110847834076
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "escalation_of_commitment": 0.5,
+        "anchoring_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_003",
+      "group": "positive",
+      "expected": [
+        "planning_fallacy",
+        "sunk_cost_fallacy",
+        "escalation_of_commitment",
+        "optimism_bias"
+      ],
+      "retrieved": [
+        "planning_fallacy",
+        "optimism_bias",
+        "escalation_of_commitment",
+        "overconfidence_bias",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.8,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9828920819566879,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "planning_fallacy": 0.588094592094421,
+        "overconfidence_bias": 0.49981677531104,
+        "sunk_cost_fallacy": 0.498710751533508,
+        "survivorship_bias": 0.485035508871078,
+        "optimism_bias": 0.481788396835327,
+        "availability_heuristic": 0.481318145990372,
+        "narrative_fallacy": 0.479290722566291,
+        "escalation_of_commitment": 0.473510205745697,
+        "decoy_effect": 0.46524730117603,
+        "anchoring_bias": 0.455189675092697,
+        "choice_supportive_bias": 0.448519763262259
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "escalation_of_commitment": 0.5,
+        "optimism_bias": 0.5,
+        "hindsight_bias": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_002",
+      "group": "positive",
+      "expected": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "framing_effect",
+        "base_rate_neglect",
+        "authority_bias",
+        "stereotyping_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "authority_bias": 0.606360650441686,
+        "stereotyping_bias": 0.501782462160212,
+        "confirmation_bias": 0.482185363769535,
+        "framing_effect": 0.481918482894808,
+        "base_rate_neglect": 0.470413653279165,
+        "dunning_kruger_effect": 0.449906733626529,
+        "self_serving_bias": 0.415079379980528,
+        "ambiguity_effect": 0.411699021559896,
+        "overconfidence_bias": 0.407156169414523
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "recency_bias": 0.5,
+        "framing_effect": 0.5
+      }
+    }
+  ],
+  "group_metrics": {
+    "adversarial": {
+      "group": "adversarial",
+      "count": 2,
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.2,
+      "mrr": 0.26666666666666666,
+      "ndcg_at_k": 0.20809057777436546,
+      "empty_rate": 0.0
+    },
+    "edge": {
+      "group": "edge",
+      "count": 2,
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7903075881273138,
+      "empty_rate": 0.0
+    },
+    "negative": {
+      "group": "negative",
+      "count": 5,
+      "recall_at_k": 0.2,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.2,
+      "empty_rate": 0.2
+    },
+    "positive": {
+      "group": "positive",
+      "count": 4,
+      "recall_at_k": 0.7291666666666666,
+      "precision_at_k": 0.5,
+      "mrr": 0.875,
+      "ndcg_at_k": 0.7090719382976035,
+      "empty_rate": 0.0
+    }
+  },
+  "deltas": {
+    "adversarial": {
+      "recall_at_k": 0.0,
+      "precision_at_k": -0.06666666666666665,
+      "mrr": -0.024999999999999967,
+      "ndcg_at_k": -0.010282776981597436,
+      "empty_rate": 0.0
+    },
+    "edge": {
+      "recall_at_k": -0.08333333333333326,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": -0.05223312494109078,
+      "empty_rate": 0.0
+    },
+    "negative": {
+      "recall_at_k": -0.8,
+      "precision_at_k": -0.8,
+      "mrr": 0.0,
+      "ndcg_at_k": -0.8,
+      "empty_rate": -0.8
+    },
+    "positive": {
+      "recall_at_k": -0.14583333333333337,
+      "precision_at_k": -0.08750000000000002,
+      "mrr": -0.125,
+      "ndcg_at_k": -0.15225824804549382,
+      "empty_rate": 0.0
+    }
+  },
+  "selection_strategy": "llm_union",
+  "hypotheses_version": null,
+  "hypotheses": null
+}

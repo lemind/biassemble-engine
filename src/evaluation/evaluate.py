@@ -6,7 +6,10 @@ Compares against the latest baseline if one exists.
 
 Groups included in scoring: positive, negative, adversarial, edge.
 Groups skipped: capability_probes (tests capabilities the retriever doesn't have),
-                regression (populated on-demand after bug fixes).
+                regression (populated on-demand after bug fixes),
+                staging (batches pending spot-check before promotion into a real
+                group — result-shaped JSON, not scenario-shaped, would crash
+                load_scenarios() otherwise).
 """
 
 import asyncio
@@ -37,7 +40,7 @@ from src.schemas.request import RetrieveRequest, StoryAnalysis
 
 K = 5
 
-_SKIP_GROUPS = {"capability_probes", "regression", "runs", "baselines", "diagnostics"}
+_SKIP_GROUPS = {"capability_probes", "regression", "runs", "baselines", "diagnostics", "staging"}
 
 
 # ── Data structures ───────────────────────────────────────────────────────────

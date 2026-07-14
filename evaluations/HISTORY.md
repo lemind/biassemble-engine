@@ -206,3 +206,18 @@ Ran 80 DeepSeek-generated stories (8 batches × 10, half in-field domains — le
 Out-of-field recall is lower than in-field in both `positive` and `adversarial` — first direct evidence of a domain-familiarity blind spot, not just an aggregate recall number. `positive`/`edge` (subtle reasoning-error biases) show a bigger in-field/out-of-field gap than `adversarial` (surface manipulation tactics like authority/bandwagon framing, which transfer across domains more easily).
 
 Data-quality flag: one proposed label (`scarcity_bias` in `adv_005`, mycology/adversarial) is not in the 38-id catalog — excluded from scoring, needs a decision (map to an existing id or drop).
+
+## Baseline promoted — 2026-07-14, first llm_union-era baseline
+
+The previous promoted baseline (`baseline_2026-07-09.json`) predated `llm_union` becoming the production default (2026-07-11) — it was captured under an earlier, gated strategy. Building the CI regression gate (`specs/005-ci-metrics-gate`, `adr/004-ci-metrics-gate.md`) surfaced that mismatch directly: comparing a fresh live `llm_union` run against the stale baseline showed `negative`'s `empty_rate` "regressing" `1.000 → 0.200` — not a real regression, just the already-documented no-neutral-gate limitation (see the `llm_union` section above) finally being measured against a baseline that never had that limitation.
+
+Promoted `evaluations/runs/run_2026-07-14.json` → `baseline_2026-07-14.json` (same eval run quoted in the table below) so future comparisons are against `llm_union`'s actual current behavior, not a pre-`llm_union` baseline.
+
+| Group | Recall@5 | Precision@5 | empty_rate |
+|---|---|---|---|
+| positive (N=4) | 0.729 | 0.500 | 0% |
+| negative (N=5) | 0.200 | 0.200 | 20% |
+| edge (N=2) | 0.750 | 0.400 | 0% |
+| adversarial (N=2) | 0.333 | 0.200 | 0% |
+
+Side effect worth noting: under the new baseline, `negative`'s own tolerance (`1/5=0.200`) sits exactly at its baseline value (`0.200`), so the CI gate's per-`(group, metric)` eligibility rule automatically makes `negative` non-blocking — no hardcoded carve-out needed, it falls out of the same formula every other group uses.
