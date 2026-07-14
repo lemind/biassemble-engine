@@ -261,22 +261,15 @@ Baseline files live in `evaluations/baselines/`. The most recent one is used aut
 
 ## CI
 
-Three GitHub Actions workflows implement the two-tier eval gate from [adr/004-ci-metrics-gate.md](adr/004-ci-metrics-gate.md):
+Three GitHub Actions workflows implement the two-tier eval gate from [adr/004-ci-metrics-gate.md](adr/004-ci-metrics-gate.md) — real retrieval-quality regression checking, not just "did the tests pass":
 
 - `pytest.yml` — full test suite on every push/PR. No secrets needed.
-- `retrieval-gate.yml` — real retrieval eval against a PR's own code, on PRs touching `src/retrieval/**`, `src/nli/**`, `src/llm/**`, `src/selection/**`, `src/evaluation/**`, `evaluations/**`, `hypotheses/**`. Blocks merge on a per-`(group, metric)` regression vs. the latest promoted baseline (see the ADR for the exact tolerance/eligibility rule).
-- `production-drift.yml` — same regression check, weekly + on-demand, against the deployed HF Space. Never blocks a merge — reports drift only.
+- `retrieval-gate.yml` — real retrieval eval against a PR's own code, on PRs touching `src/retrieval/**`, `src/nli/**`, `src/llm/**`, `src/selection/**`, `src/evaluation/**`, `evaluations/**`, `hypotheses/**`. Blocks merge on a per-`(group, metric)` regression vs. the latest promoted baseline (see the ADR for the exact tolerance/eligibility rule — `scripts/check_regression.py` is the shared logic both this and the drift monitor use).
+- `production-drift.yml` — same regression check, weekly (Mondays) + on-demand, against the deployed HF Space directly. Never blocks a merge — it has no `pull_request` trigger at all, by design, so it can only report drift, not gate anything.
 
-**Required GitHub Actions secrets/variables — none of these exist in this repo yet.** `retrieval-gate.yml` and `production-drift.yml` cannot succeed in CI until a repo admin adds them (Settings → Secrets and variables → Actions):
+**Status**: all four required secrets/variables (`DATABASE_URL`, `RAG_API_KEY`, `HF_TOKEN`, `ENGINE_URL`) are provisioned in this repo's GitHub Actions settings and confirmed working — `pytest.yml` and `retrieval-gate.yml` have both passed for real against live Supabase. Currently live on PR #12 (`005-metrics-gate`), not yet merged to `main`. `production-drift.yml` can't be dispatched or scheduled until after that merge — GitHub only registers `workflow_dispatch`/`schedule` workflows once their file exists on the default branch; its logic has been validated manually in the meantime (a real call to the deployed Space, not just a unit test).
 
-| Name | Type | Used by | Purpose |
-|---|---|---|---|
-| `DATABASE_URL` | Secret | `retrieval-gate.yml` | Direct Supabase connection for the PR's own eval run |
-| `RAG_API_KEY` | Secret | `production-drift.yml` | Auth header for the deployed Space's `/evaluate` endpoint |
-| `HF_TOKEN` (or equivalent Bearer token) | Secret | `production-drift.yml` | Bearer auth — the Space is private |
-| `ENGINE_URL` | Variable (not secret) | `production-drift.yml` | Deployed Space's base URL |
-
-Until these are provisioned, `pytest.yml` is the only one of the three that can actually pass in CI — the other two will exist as workflow files but fail at the connection step. Flipping branch protection to require these checks is a separate, manual, later step (not part of the CI gate build itself) — see [specs/005-ci-metrics-gate/quickstart.md](specs/005-ci-metrics-gate/quickstart.md)'s final step.
+**Not done yet, deliberately**: branch protection isn't configured — the gate exists and reports, but nothing is *required* to merge yet. That's an intentional, separate, manual step taken only after a few real runs on `main` prove the gate isn't flaky (see [specs/005-ci-metrics-gate/quickstart.md](specs/005-ci-metrics-gate/quickstart.md)'s final step) — not something any workflow here does automatically.
 
 ## Deploy (HF Spaces)
 
