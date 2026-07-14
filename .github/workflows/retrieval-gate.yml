@@ -1,0 +1,80 @@
+name: Retrieval Regression Gate
+
+# Tier 2a (adr/004-ci-metrics-gate.md) — PRs touching retrieval-critical code only.
+# Runs the real eval harness against THIS PR's own checked-out code, over live
+# Supabase, and blocks merge on a per-(group, metric) regression vs. the latest
+# promoted baseline (scripts/check_regression.py — adr/004 §4's exact formula).
+#
+# Requires DATABASE_URL as a repo secret (does not exist yet — see README.md's
+# "## CI" section / adr/004 §5). Every run fails at the connection step until
+# a repo admin provisions it.
+
+on:
+  pull_request:
+    paths:
+      - "src/retrieval/**"
+      - "src/nli/**"
+      - "src/llm/**"
+      - "src/selection/**"
+      - "src/evaluation/**"
+      - "evaluations/**"
+      - "hypotheses/**"
+
+jobs:
+  eval:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          python-version: "3.11"
+
+      - run: uv sync
+
+      - name: Install prebuilt llama-cpp-python wheel
+        run: uv pip install vendor/wheels/llama_cpp_python-0.3.19-cp311-cp311-manylinux_2_34_x86_64.whl
+
+      - name: Install psql client (PSQL_SEARCH=true path needs the psql binary)
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      # llm_union (this PR's default strategy, per space-vars.env) loads a ~2.5GB
+      # Gemma-3-4B GGUF from Hugging Face at runtime. Cache it so only the first
+      # run after a cache-miss pays that download; every PR after that is fast.
+      - name: Cache Hugging Face model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-gguf-google_gemma-3-4b-it-Q4_K_M
+
+      # HACK(retrieval-gate.yml): PSQL_SEARCH=true spawns a `psql` subprocess that
+      # connects directly to Supabase — this path exists in scripts/run_evaluation.py
+      # to dodge a LOCAL DEV outbound SOCKS proxy (see that script's own comments).
+      # GitHub-hosted runners have no such proxy, so this should just work, but that
+      # is SPECULATIVE — never verified against a real GitHub Actions run yet.
+      # REVISIT: if this step fails at the DB-connection stage (not auth, not
+      # missing-secret), check whether Supabase's network restrictions or GitHub's
+      # runner IP ranges are the actual blocker before assuming the code is wrong.
+      - name: Run evaluation against this PR's code
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PSQL_SEARCH: "true"
+        run: uv run python scripts/run_evaluation.py --strategy llm_union
+
+      - name: Compare against latest promoted baseline
+        run: |
+          set -euo pipefail
+          RUN_JSON=$(ls -1t evaluations/runs/run_*.json | head -1)
+          BASELINE_JSON=$(ls -1 evaluations/baselines/baseline_*.json | sort | tail -1)
+          echo "run=$RUN_JSON baseline=$BASELINE_JSON"
+          set +e
+          uv run python scripts/check_regression.py --run "$RUN_JSON" --baseline "$BASELINE_JSON"
+          code=$?
+          set -e
+          if [ "$code" -eq 1 ]; then
+            echo "::error::Retrieval quality regressed vs. the latest promoted baseline (see table above)."
+            exit 1
+          elif [ "$code" -eq 2 ]; then
+            echo "::error::check_regression.py could not evaluate the run — infrastructure error, not a quality finding."
+            exit 2
+          fi
