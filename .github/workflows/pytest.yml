@@ -23,8 +23,6 @@ jobs:
           lfs: true
 
       - uses: astral-sh/setup-uv@v3
-        with:
-          python-version: "3.11"
 
       # pytest lives under [project.optional-dependencies] "dev" (setuptools-style
       # extras) — a different mechanism from [dependency-groups] "dev" (PEP 735,

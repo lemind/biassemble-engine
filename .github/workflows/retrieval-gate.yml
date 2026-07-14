@@ -33,8 +33,6 @@ jobs:
           lfs: true
 
       - uses: astral-sh/setup-uv@v3
-        with:
-          python-version: "3.11"
 
       # uv sync alone installs llama-cpp-python from vendor/wheels/*.whl now that
       # LFS content is present — pyproject.toml's [tool.uv.sources] already points
