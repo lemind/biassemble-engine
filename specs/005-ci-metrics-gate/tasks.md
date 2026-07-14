@@ -28,8 +28,8 @@ Single project (per plan.md's Structure Decision) — `.github/workflows/`, `scr
 
 **Purpose**: Surface the one thing no task in this list can actually "complete" by writing code, and do the cheap sanity check that later phases assume.
 
-- [ ] T001 [P] Document the required GitHub Actions secrets/variables as a **blocking, human, out-of-band prerequisite** for US2 and US3: `DATABASE_URL` (Supabase), `RAG_API_KEY` + an HF Bearer token (deployed Space auth), `ENGINE_URL` (Space base URL, plain repo variable). Add this list to `README.md` or `CONTRIBUTING.md` (per ADR §5/plan.md Constraints) so it's visible to whoever sets up branch protection. **This task's own completion is "the list is documented"** — provisioning the actual secret values in GitHub's repo settings is not something any task here can do; T007/T009's workflows will exist but cannot succeed in CI until a human does this separately.
-- [ ] T002 [P] Confirm `vendor/wheels/llama_cpp_python-0.3.19-cp311-cp311-manylinux_2_34_x86_64.whl` is present and its version matches the `llama-cpp-python==0.3.19` pin in `pyproject.toml` — sanity check before T007's workflow references it (research.md's wheel-vs-source-build decision).
+- [x] T001 [P] Documented in README.md's new "## CI" section: table of `DATABASE_URL`, `RAG_API_KEY`, `HF_TOKEN`, `ENGINE_URL` (name/type/used-by/purpose), plus an explicit note that none exist yet and `pytest.yml` is the only one of the three workflows that can pass in CI until they're provisioned. Secret values themselves are not provisioned — that's the human step this task deliberately can't complete.
+- [x] T002 [P] Confirmed: `vendor/wheels/llama_cpp_python-0.3.19-cp311-cp311-manylinux_2_34_x86_64.whl` exists (12.5MB), and its internal `METADATA` (`Name: llama_cpp_python`, `Version: 0.3.19`) matches both the filename tag and the `pyproject.toml` pin exactly. No mismatch, no action needed beyond verification.
 
 ---
 

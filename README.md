@@ -259,6 +259,25 @@ GEMINI_API_KEY=<key> .venv/bin/python scripts/generate_story_patterns.py --bias 
 
 Baseline files live in `evaluations/baselines/`. The most recent one is used automatically as the comparison target when you run any eval. Run with `--promote` to set a new baseline after a verified improvement.
 
+## CI
+
+Three GitHub Actions workflows implement the two-tier eval gate from [adr/004-ci-metrics-gate.md](adr/004-ci-metrics-gate.md):
+
+- `pytest.yml` — full test suite on every push/PR. No secrets needed.
+- `retrieval-gate.yml` — real retrieval eval against a PR's own code, on PRs touching `src/retrieval/**`, `src/nli/**`, `src/llm/**`, `src/selection/**`, `src/evaluation/**`, `evaluations/**`, `hypotheses/**`. Blocks merge on a per-`(group, metric)` regression vs. the latest promoted baseline (see the ADR for the exact tolerance/eligibility rule).
+- `production-drift.yml` — same regression check, weekly + on-demand, against the deployed HF Space. Never blocks a merge — reports drift only.
+
+**Required GitHub Actions secrets/variables — none of these exist in this repo yet.** `retrieval-gate.yml` and `production-drift.yml` cannot succeed in CI until a repo admin adds them (Settings → Secrets and variables → Actions):
+
+| Name | Type | Used by | Purpose |
+|---|---|---|---|
+| `DATABASE_URL` | Secret | `retrieval-gate.yml` | Direct Supabase connection for the PR's own eval run |
+| `RAG_API_KEY` | Secret | `production-drift.yml` | Auth header for the deployed Space's `/evaluate` endpoint |
+| `HF_TOKEN` (or equivalent Bearer token) | Secret | `production-drift.yml` | Bearer auth — the Space is private |
+| `ENGINE_URL` | Variable (not secret) | `production-drift.yml` | Deployed Space's base URL |
+
+Until these are provisioned, `pytest.yml` is the only one of the three that can actually pass in CI — the other two will exist as workflow files but fail at the connection step. Flipping branch protection to require these checks is a separate, manual, later step (not part of the CI gate build itself) — see [specs/005-ci-metrics-gate/quickstart.md](specs/005-ci-metrics-gate/quickstart.md)'s final step.
+
 ## Deploy (HF Spaces)
 
 1. Push to the `main` branch (`git push hf HEAD:main`) — HF Spaces builds from the Dockerfile automatically
