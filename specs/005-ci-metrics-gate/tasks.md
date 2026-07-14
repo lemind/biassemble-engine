@@ -54,8 +54,8 @@ Single project (per plan.md's Structure Decision) — `.github/workflows/`, `scr
 
 ### Implementation for User Story 1
 
-- [ ] T005 [US1] Create `.github/workflows/pytest.yml`: triggers on `push` (all branches) and `pull_request` (no path filter — per spec.md FR-001, this is the one tier that runs on *everything*); Python 3.11 via `astral-sh/setup-uv` (or the repo's existing uv convention — check `build-llama-wheel.yml` / local dev docs for the established action), `uv sync`, `uv run pytest tests/ -v`. No secrets, no network calls, no services required — must be able to pass with zero GitHub Actions configuration beyond the workflow file itself.
-- [ ] T006 [US1] Validate per quickstart.md Step 1: push a throwaway commit/PR, confirm `pytest.yml` triggers automatically and its result is visible on the commit/PR without any manual step (spec.md SC-001).
+- [x] T005 [US1] Created `.github/workflows/pytest.yml`: `on: push` + `on: pull_request`, no path filter, no `paths:` key at all (confirmed via YAML parse — both triggers resolve to unrestricted). `astral-sh/setup-uv@v3` (no prior uv-in-CI convention existed in this repo to match, so used the standard action), `uv sync`, `uv run pytest tests/ -v`. No secrets/network/services referenced anywhere in the file.
+- [x] T006 [US1] **Partially validated — flagging the gap rather than overclaiming.** Confirmed locally: YAML parses correctly, `on:` resolves to `{push, pull_request}` with no path restriction, and the exact command the workflow runs (`uv sync && uv run pytest tests/ -v`) passes (130/130) when run directly on this machine. **Not validated**: an actual GitHub-hosted run triggering on a real push/PR — this loop's commit authorization doesn't extend to `git push`, so the workflow has never executed on GitHub's infrastructure yet. That first real trigger (quickstart.md Step 1) is still an open verification step for whoever pushes this branch.
 
 **Checkpoint**: US1 fully functional independently — this alone converts "zero automated coverage" into "every commit tested," the floor this feature exists to fix, deployable/demoable without Phase 2, 4, or 5.
 

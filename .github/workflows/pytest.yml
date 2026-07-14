@@ -1,0 +1,24 @@
+name: Pytest
+
+# Tier 1 (adr/004-ci-metrics-gate.md) — every push, every PR, no path filter.
+# Free, deterministic, no network/DB/model download: tests/ has zero DB fixtures
+# and no conftest.py (verified in specs/005-ci-metrics-gate/research.md), so this
+# closes the actual gap — today NOTHING runs automatically on this repo.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          python-version: "3.11"
+
+      - run: uv sync
+
+      - run: uv run pytest tests/ -v
