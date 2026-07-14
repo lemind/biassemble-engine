@@ -9,16 +9,16 @@ name: Retrieval Regression Gate
 # "## CI" section / adr/004 §5). Every run fails at the connection step until
 # a repo admin provisions it.
 
+# No path filter on the trigger itself — this job is a REQUIRED branch-protection
+# check (adr/004 §9 / T012), and a required check that never fires because its
+# trigger's `paths:` didn't match blocks merge FOREVER (GitHub shows "Expected —
+# waiting for status", not "not applicable" — confirmed directly: a PR touching
+# only specs/*.md sat BLOCKED with no `eval` check in its rollup at all, even
+# though the old path-filtered trigger correctly never ran it). Fix: always
+# trigger, but skip the real work via dorny/paths-filter below when nothing
+# retrieval-critical changed — the job still always reports a real conclusion.
 on:
   pull_request:
-    paths:
-      - "src/retrieval/**"
-      - "src/nli/**"
-      - "src/llm/**"
-      - "src/selection/**"
-      - "src/evaluation/**"
-      - "evaluations/**"
-      - "hypotheses/**"
 
 jobs:
   eval:
@@ -32,20 +32,41 @@ jobs:
         with:
           lfs: true
 
-      - uses: astral-sh/setup-uv@v3
+      - name: Check whether retrieval-critical paths changed
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            retrieval:
+              - "src/retrieval/**"
+              - "src/nli/**"
+              - "src/llm/**"
+              - "src/selection/**"
+              - "src/evaluation/**"
+              - "evaluations/**"
+              - "hypotheses/**"
+
+      - if: steps.filter.outputs.retrieval != 'true'
+        run: echo "No retrieval-critical paths changed — skipping the real eval, reporting success."
+
+      - if: steps.filter.outputs.retrieval == 'true'
+        uses: astral-sh/setup-uv@v3
 
       # uv sync alone installs llama-cpp-python from vendor/wheels/*.whl now that
       # LFS content is present — pyproject.toml's [tool.uv.sources] already points
       # there, so a separate explicit `uv pip install` step would be redundant.
-      - run: uv sync
+      - if: steps.filter.outputs.retrieval == 'true'
+        run: uv sync
 
       - name: Install psql client (PSQL_SEARCH=true path needs the psql binary)
+        if: steps.filter.outputs.retrieval == 'true'
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
 
       # llm_union (this PR's default strategy, per space-vars.env) loads a ~2.5GB
       # Gemma-3-4B GGUF from Hugging Face at runtime. Cache it so only the first
       # run after a cache-miss pays that download; every PR after that is fast.
       - name: Cache Hugging Face model cache
+        if: steps.filter.outputs.retrieval == 'true'
         uses: actions/cache@v4
         with:
           path: ~/.cache/huggingface
@@ -64,6 +85,7 @@ jobs:
       # no default — omitting it fails before the eval even starts (caught via
       # a real failed run: "Field required" on rag_api_key).
       - name: Run evaluation against this PR's code
+        if: steps.filter.outputs.retrieval == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
@@ -71,6 +93,7 @@ jobs:
         run: uv run python scripts/run_evaluation.py --strategy llm_union
 
       - name: Compare against latest promoted baseline
+        if: steps.filter.outputs.retrieval == 'true'
         run: |
           set -euo pipefail
           RUN_JSON=$(ls -1t evaluations/runs/run_*.json | head -1)
