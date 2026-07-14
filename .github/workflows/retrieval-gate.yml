@@ -61,9 +61,14 @@ jobs:
       # REVISIT: if this step fails at the DB-connection stage (not auth, not
       # missing-secret), check whether Supabase's network restrictions or GitHub's
       # runner IP ranges are the actual blocker before assuming the code is wrong.
+      # RAG_API_KEY isn't used by this script's own logic, but src/config.py's
+      # Settings() is instantiated eagerly at import time and requires it with
+      # no default — omitting it fails before the eval even starts (caught via
+      # a real failed run: "Field required" on rag_api_key).
       - name: Run evaluation against this PR's code
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
           PSQL_SEARCH: "true"
         run: uv run python scripts/run_evaluation.py --strategy llm_union
 
