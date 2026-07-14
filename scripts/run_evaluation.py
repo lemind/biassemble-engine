@@ -109,6 +109,41 @@ async def main(promote: bool) -> None:
         print(f"Promoted → {baseline_path}")
 
 
+async def _load_catalog_once():
+    """One-off asyncpg connection for the llm_union eval catalog — separate from
+    the psql-subprocess path the rest of this sync eval loop uses."""
+    import asyncpg
+
+    from src.llm.prompt import load_catalog
+
+    conn = await asyncio.wait_for(
+        asyncpg.connect(settings.database_url, statement_cache_size=0), timeout=10
+    )
+    try:
+        pool_like = _SingleConnPool(conn)
+        return await load_catalog(pool_like, settings.taxonomy_version)
+    finally:
+        await conn.close()
+
+
+class _SingleConnPool:
+    """Wraps a single asyncpg connection with the `.acquire()` async-context-manager
+    interface load_catalog() expects from a real pool — avoids opening a full pool
+    for one query."""
+
+    def __init__(self, conn) -> None:
+        self._conn = conn
+
+    def acquire(self):
+        return self
+
+    async def __aenter__(self):
+        return self._conn
+
+    async def __aexit__(self, *exc) -> None:
+        return None
+
+
 def main_sync(promote: bool, diagnostics: bool = False, strategy: str = "vector_only") -> None:
     """Fully synchronous path — used locally when PSQL_SEARCH=true.
 
@@ -163,6 +198,33 @@ def main_sync(promote: bool, diagnostics: bool = False, strategy: str = "vector_
             selection_strategy=strategy,
         )
 
+    llm_kwargs: dict = {}
+    if strategy == "llm_union":
+        from src.llm.generator import LLMGenerator
+
+        # Catalog load is the only asyncpg use on this sync path — a single
+        # short-lived connection just for one lightweight query, not the bulk
+        # vector-search pattern that hangs through the local SOCKS proxy.
+        print("Loading bias catalog (asyncpg, one-off) ...")
+        catalog = asyncio.run(_load_catalog_once())
+        print(f"Catalog loaded: {len(catalog)} biases")
+
+        print("Loading GGUF model (first run downloads + ~1s load) ...")
+        generator = LLMGenerator(
+            model_repo=settings.llm_model_repo,
+            gguf_file=settings.llm_gguf_file,
+            context_tokens=settings.llm_context_tokens,
+            threads=settings.llm_threads,
+            max_output_tokens=settings.llm_max_output_tokens,
+            temperature=settings.llm_temperature,
+        )
+        print(f"LLM model loaded: {settings.llm_model_repo}/{settings.llm_gguf_file}")
+        llm_kwargs = dict(
+            llm_generator=generator,
+            llm_catalog=catalog,
+            selection_strategy=strategy,
+        )
+
     run = run_evaluation_sync(
         provider=provider,
         eval_dir=EVAL_DIR,
@@ -171,6 +233,7 @@ def main_sync(promote: bool, diagnostics: bool = False, strategy: str = "vector_
         taxonomy_version=settings.taxonomy_version,
         diagnostics=diagnostics,
         **nli_kwargs,
+        **llm_kwargs,
     )
 
     _print_run(run)
@@ -350,21 +413,35 @@ if __name__ == "__main__":
     parser.add_argument("--diagnostics", action="store_true", help="Fetch chunk metadata per scenario and write diagnostics JSON")
     parser.add_argument(
         "--strategy",
-        choices=["vector_only", "nli_only", "nli_union"],
+        choices=["vector_only", "nli_only", "nli_union", "llm_union"],
         default="vector_only",
-        help="Selection strategy: nli_only (W_VEC=0), nli_union (weighted), vector_only (default)",
+        help="Selection strategy: nli_only (W_VEC=0), nli_union (weighted), "
+        "llm_union (generative LLM), vector_only (default)",
     )
     args = parser.parse_args()
 
     if args.diagnostics and args.strategy != "vector_only":
-        print("ERROR: --diagnostics is only supported with --strategy vector_only; NLI paths do not produce chunk-level diagnostics")
+        print(
+            "ERROR: --diagnostics is only supported with --strategy vector_only; "
+            "NLI/LLM paths do not produce chunk-level diagnostics"
+        )
         raise SystemExit(1)
 
     if args.diagnostics and (settings.engine_url or not settings.psql_search):
         print("WARNING: --diagnostics is only supported with PSQL_SEARCH=true and ENGINE_URL unset; flag ignored")
 
     if args.strategy != "vector_only" and not settings.psql_search:
-        print("ERROR: --strategy nli_only/nli_union requires PSQL_SEARCH=true for local NLI evaluation")
+        print(
+            "ERROR: --strategy nli_only/nli_union/llm_union requires "
+            "PSQL_SEARCH=true for local evaluation"
+        )
+        raise SystemExit(1)
+
+    if args.strategy != "vector_only" and settings.engine_url:
+        print(
+            "ERROR: unset ENGINE_URL for local nli_only/nli_union/llm_union evaluation "
+            "(e.g. ENGINE_URL= .venv/bin/python scripts/run_evaluation.py --strategy ...)"
+        )
         raise SystemExit(1)
 
     if settings.engine_url:

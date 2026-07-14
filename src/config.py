@@ -1,4 +1,7 @@
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+VALID_SELECTION_STRATEGIES = {"vector_only", "nli_union", "llm_union"}
 
 
 class Settings(BaseSettings):
@@ -30,6 +33,28 @@ class Settings(BaseSettings):
     combined_threshold: float = 0.60
     sentence_mode: bool = False
     hypotheses_path: str = "hypotheses/v1.yaml"
+
+    # spec-004 (ADR-003): generative LLM bias selection (SELECTION_STRATEGY=llm_union).
+    # Model swapped Qwen2.5-1.5B -> Gemma-3-4B-it after real-eval comparison (both full
+    # 38-bias catalog and narrowed-candidate runs) showed Qwen too weak at structured
+    # JSON output over even 8 options — see specs/004-add-llm-model/research.md.
+    llm_model_repo: str = "bartowski/google_gemma-3-4b-it-GGUF"
+    llm_gguf_file: str = "google_gemma-3-4b-it-Q4_K_M.gguf"
+    llm_context_tokens: int = 4096
+    llm_max_output_tokens: int = 512
+    llm_temperature: float = 0.0  # greedy → reproducible eval runs (FR-011)
+    llm_threads: int = 2  # match cpu-basic vCPUs; override via LLM_THREADS env (e.g. 4 on cpu-upgrade)
+    llm_log_raw: bool = False  # debug only — log raw model output (too large for prod)
+    llm_union_top_k: int = 10  # max biases the llm_union path returns (vector ∪ llm)
+
+    @field_validator("selection_strategy")
+    @classmethod
+    def _validate_selection_strategy(cls, v: str) -> str:
+        if v not in VALID_SELECTION_STRATEGIES:
+            raise ValueError(
+                f"selection_strategy={v!r} is not one of {sorted(VALID_SELECTION_STRATEGIES)}"
+            )
+        return v
 
 
 settings = Settings()

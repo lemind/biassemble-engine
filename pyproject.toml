@@ -14,6 +14,17 @@ dependencies = [
     "pgvector>=0.3.0",
     "structlog>=24.0.0",
     "transformers[sentencepiece]>=5.12.1",
+    # spec-004 (ADR-003): local generative LLM bias selection.
+    # BUILT FROM SOURCE (PyPI sdist), not a prebuilt wheel. The T003 spike proved the
+    # only prebuilt CPU wheel (abetlen index, `linux_x86_64`) is musl-linked and will
+    # NOT load on the glibc base image (python:3.11-slim / Debian) — it needs
+    # libc.musl-x86_64.so.1. PyPI ships sdist only. So llama-cpp-python compiles from
+    # source at build time; the Dockerfile installs `build-essential cmake` for this.
+    # Exact pin so the compiled version is reproducible. Fallback if a build ever breaks:
+    # raw `transformers` generation (slower, but wheel-installable). Verified building on
+    # glibc locally (~2m) and loading + running the Qwen GGUF (spike, research.md).
+    "llama-cpp-python==0.3.19",
+    "huggingface-hub>=0.26.0",
 ]
 
 [project.optional-dependencies]
@@ -52,10 +63,16 @@ name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
 explicit = true
 
+# llama-cpp-python has no usable prebuilt wheel on PyPI (sdist only) and the abetlen
+# linux wheel is musl-linked (fails on glibc). Compiling from source OOM-kills on HF's
+# build machine. So we vendor a portable manylinux wheel, built once in GitHub Actions
+# (.github/workflows/build-llama-wheel.yml), and pin the dependency straight to that
+# file — uv installs it directly, no compile on deploy.
 [tool.uv.sources]
 torch = [{ index = "pytorch-cpu" }]
 torchvision = [{ index = "pytorch-cpu" }]
 torchaudio = [{ index = "pytorch-cpu" }]
+llama-cpp-python = { path = "vendor/wheels/llama_cpp_python-0.3.19-cp311-cp311-manylinux_2_34_x86_64.whl" }
 
 [dependency-groups]
 dev = [

@@ -6,7 +6,7 @@ where needed so these tests only verify routing, auth, error mapping, and
 response shape — not retrieval correctness.
 """
 from contextlib import asynccontextmanager
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import MagicMock
 
 import pytest
 from fastapi.testclient import TestClient
@@ -250,3 +250,41 @@ def test_200_roster_fallback_when_nothing_retrieved(monkeypatch):
     assert data["biases"][0]["retrieval_score"] == 0.0
 
     client.__exit__(None, None, None)
+
+
+# ── llm_union additive fields (contract v3) ────────────────────────────────────
+
+def test_200_selection_strategy_present_when_llm_union(client, monkeypatch):
+    """Regression test: selection_strategy was computed internally (meta.selection_strategy,
+    used to gate llm_model/llm_scores/etc.) but never forwarded to the response body — the
+    RetrieveResponse(...) call in routes/retrieve.py simply never set it, and the field
+    didn't even exist on the schema. Both llm_model and selection_strategy come from the
+    same is_llm_union-gated block; only llm_model was actually being sent."""
+    meta = _mock_meta()
+    meta.selection_strategy = "llm_union"
+
+    async def fake_retrieve(req, provider, pool, strategy):
+        return [_mock_bias()], meta
+
+    monkeypatch.setattr("src.api.routes.retrieve.retriever.retrieve", fake_retrieve)
+    monkeypatch.setattr("src.api.routes.retrieve._llm_model_display_name", lambda: "test-model")
+
+    resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["selection_strategy"] == "llm_union"
+    assert data["llm_model"] == "test-model"
+
+
+def test_200_selection_strategy_absent_when_not_llm_union(client, monkeypatch):
+    """vector_only/nli_union must keep getting None/absent here — same as llm_model already did."""
+    async def fake_retrieve(req, provider, pool, strategy):
+        return [_mock_bias()], _mock_meta()  # selection_strategy defaults to None
+
+    monkeypatch.setattr("src.api.routes.retrieve.retriever.retrieve", fake_retrieve)
+
+    resp = client.post("/retrieve-biases", headers=HEADERS, json=STORY_PAYLOAD)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["selection_strategy"] is None
+    assert data["llm_model"] is None

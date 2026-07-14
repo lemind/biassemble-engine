@@ -6,7 +6,7 @@ import uuid
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, cast
 
 import asyncpg
 import structlog
@@ -19,13 +19,16 @@ from src.evaluation.evaluate import run_evaluation
 from src.providers.base import EmbeddingProvider
 from src.retrieval import retriever
 from src.retrieval.retriever import IndexNotFoundError
-from src.selection.vector_only import VectorOnlyStrategy
 from src.schemas.internal import RetrievedBias
 from src.schemas.request import RetrieveRequest
 from src.schemas.response import BiasResult, RetrieveResponse
+from src.selection.llm_union import LLMUnionStrategy
+from src.selection.nli_union import NLIUnionStrategy
+from src.selection.vector_only import VectorOnlyStrategy
 
 router = APIRouter()
 _bearer = HTTPBearer(auto_error=False)
+log = structlog.get_logger()
 
 
 def _verify_token(
@@ -37,7 +40,12 @@ def _verify_token(
         raise HTTPException(status_code=401, detail={"error": "unauthorized"})
 
 
-def _to_bias_result(b: RetrievedBias) -> BiasResult:
+def _to_bias_result(b: RetrievedBias, sources: dict[str, list[str]] | None) -> BiasResult:
+    # sources is internally list[str] (unconstrained — see StrategyMetadata.sources) but
+    # every entry is constructed by rank_and_trim() from only "vector"/"llm" (llm_union.py
+    # _source_rank), so this narrowing to the response schema's Literal is safe by
+    # construction, not just wishful typing.
+    source = cast("list[Literal['vector', 'llm']] | None", sources.get(b.bias_id) if sources else None)
     return BiasResult(
         id=b.bias_id,
         name=b.name,
@@ -47,7 +55,12 @@ def _to_bias_result(b: RetrievedBias) -> BiasResult:
         indicators=b.indicators,
         false_positives=b.false_positives,
         related_biases=b.related_biases,
+        source=source,
     )
+
+
+def _llm_model_display_name() -> str:
+    return settings.llm_model_repo.split("/")[-1].removesuffix("-GGUF")
 
 
 @router.post("/retrieve-biases", response_model=RetrieveResponse)
@@ -60,6 +73,11 @@ async def retrieve_biases(
     pool: asyncpg.Pool | None = request.app.state.pool
 
     if pool is None:
+        # "rag_retrieve_error" matches the event name biassemble-core's engine-client.ts logs
+        # on the client side for any non-success outcome — same string, greppable across both
+        # services' logs for one request. request_id is client-supplied (RetrieveRequest.request_id,
+        # optional) so it may be None; still logged as-is for whatever correlation is available.
+        log.error("rag_retrieve_error", error="database_unavailable", request_id=body.request_id)
         raise HTTPException(status_code=503, detail={"error": "database_unavailable"})
 
     try:
@@ -68,25 +86,43 @@ async def retrieve_biases(
             timeout=settings.request_timeout_ms / 1000,
         )
     except asyncio.TimeoutError:
+        log.error(
+            "rag_retrieve_error", error="request_timeout",
+            request_id=body.request_id, timeout_ms=settings.request_timeout_ms,
+        )
         raise HTTPException(status_code=503, detail={"error": "request_timeout"})
     except IndexNotFoundError:
+        log.error(
+            "rag_retrieve_error", error="index_not_found",
+            request_id=body.request_id, taxonomy_version=settings.taxonomy_version,
+        )
         raise HTTPException(
             status_code=503,
             detail={"error": "index_not_found", "taxonomy_version": settings.taxonomy_version},
         )
     except Exception as exc:
+        log.error("rag_retrieve_error", error="retrieval_failed", request_id=body.request_id, detail=str(exc))
         raise HTTPException(
             status_code=500,
             detail={"error": "retrieval_failed", "detail": str(exc)},
         ) from exc
 
-    biases_out = [_to_bias_result(b) for b in biases] if biases else request.app.state.roster
+    biases_out = (
+        [_to_bias_result(b, meta.sources) for b in biases] if biases else request.app.state.roster
+    )
+    is_llm_union = meta.selection_strategy == "llm_union"
     return RetrieveResponse(
         biases=biases_out,
         retrieved_chunks=meta.candidate_chunks,
         taxonomy_version=meta.taxonomy_version,
         embedding_model=meta.embedding_model,
         request_id=meta.retrieval_id,
+        selection_strategy=meta.selection_strategy if is_llm_union else None,
+        llm_model=_llm_model_display_name() if is_llm_union else None,
+        llm_latency_ms=meta.llm_latency_ms if is_llm_union else None,
+        truncated_story=meta.truncated_story if is_llm_union else None,
+        llm_scores=meta.llm_scores if is_llm_union else None,
+        vector_scores=meta.vector_scores if is_llm_union else None,
     )
 
 
@@ -109,12 +145,25 @@ async def health(request: Request) -> dict[str, Any]:
         except Exception:
             pass
 
+    # Report the ACTUAL selection model that's live — not a hardcoded flag. Startup
+    # aborts if a model fails to load, so a live LLMUnion/NLIUnion strategy object means
+    # that model is genuinely up. Only the field for the active strategy is populated.
+    strategy = request.app.state.selection_strategy
+    llm_loaded = isinstance(strategy, LLMUnionStrategy)
+    nli_loaded = isinstance(strategy, NLIUnionStrategy)
+
     return {
         "status": "ok",
-        "model_loaded": True,
+        "selection_strategy": settings.selection_strategy,
         "embedding_model": provider.model_name,
         "embedding_dimension": settings.embedding_dimension,
         "provider_dimension": provider.dimension,
+        "llm_model": _llm_model_display_name() if llm_loaded else None,
+        "llm_loaded": llm_loaded,
+        "nli_model": settings.nli_model if nli_loaded else None,
+        "nli_loaded": nli_loaded,
+        # back-compat: true iff the active strategy's model is actually loaded (not hardcoded)
+        "model_loaded": llm_loaded or nli_loaded or settings.selection_strategy == "vector_only",
         "taxonomy_version": settings.taxonomy_version,
         "rows_indexed": rows_indexed,
         "last_indexed_at": last_indexed_at,

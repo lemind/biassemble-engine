@@ -1,4 +1,3 @@
-import pytest
 
 from src.schemas.internal import CandidateChunk, FullBiasDocument
 from src.retrieval.reranker import rerank

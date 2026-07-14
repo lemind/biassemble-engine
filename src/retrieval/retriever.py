@@ -5,6 +5,7 @@ import asyncpg
 import structlog
 
 from src.config import settings
+from src.db.queries import FETCH_BY_BIAS_IDS
 from src.observability import (
     EVT_COMPLETED,
     EVT_RERANKED,
@@ -13,7 +14,6 @@ from src.observability import (
     KEY_REQUEST_ID,
     TimingContext,
 )
-from src.db.queries import FETCH_BY_BIAS_IDS
 from src.providers.base import EmbeddingProvider
 from src.retrieval.reranker import rerank
 from src.retrieval.searcher import _row_to_candidate
@@ -61,8 +61,9 @@ async def retrieve(
 
     admitted_ids = set(scores.keys())
 
-    # NLI-admitted biases with no vector chunk won't survive the reranker's candidate
-    # filter. Fetch one definition chunk per missing bias so they can be hydrated.
+    # Strategy-admitted biases with no vector chunk (NLI- or LLM-named) won't survive
+    # the reranker's candidate filter. Fetch one definition chunk per missing bias so
+    # they can be hydrated.
     candidate_bias_ids = {c.bias_id for c in candidates}
     missing_ids = admitted_ids - candidate_bias_ids
     if missing_ids and pool is not None:
@@ -82,10 +83,24 @@ async def retrieve(
                     retrieval_score=scores.get(c.bias_id, 0.0),
                 ))
             candidates = list(candidates) + hydrated
-            log.info("nli_only_admits_hydrated", count=len(rows), bias_ids=sorted(missing_ids))
+            log.info(
+                "strategy_only_admits_hydrated",
+                strategy=strategy_meta.selection_strategy,
+                count=len(rows),
+                bias_ids=sorted(missing_ids),
+            )
 
+    # llm_union returns up to llm_union_top_k (vector ∪ llm); other strategies use return_top_k.
+    top_k = (
+        settings.llm_union_top_k
+        if strategy_meta.selection_strategy == "llm_union"
+        else settings.return_top_k
+    )
     with TimingContext() as rerank_t:
-        biases = rerank(candidates, settings.similarity_threshold, settings.return_top_k, admitted_ids=admitted_ids, score_override=scores or None)
+        biases = rerank(
+            candidates, settings.similarity_threshold, top_k,
+            admitted_ids=admitted_ids, score_override=scores or None,
+        )
     log.info(EVT_RERANKED, latency_ms=rerank_t.elapsed_ms, returned=len(biases))
 
     total_ms = int((time.monotonic() - t_total) * 1000)
@@ -116,6 +131,10 @@ async def retrieve(
         nli_scores=strategy_meta.nli_scores,
         vector_scores=strategy_meta.vector_scores,
         combined_scores=strategy_meta.combined_scores,
+        llm_scores=strategy_meta.llm_scores,
+        sources=strategy_meta.sources,
+        llm_latency_ms=strategy_meta.llm_latency_ms,
+        truncated_story=strategy_meta.truncated_story,
     )
 
     return biases, meta
