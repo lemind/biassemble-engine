@@ -16,7 +16,13 @@ jobs:
   drift-check:
     runs-on: ubuntu-22.04
     steps:
+      # lfs: true is required — pyproject.toml's [tool.uv.sources] unconditionally
+      # pins llama-cpp-python to a Git LFS-tracked wheel path, so `uv sync` fails
+      # below without this even though this workflow never calls llama-cpp-python
+      # directly (it only talks to the deployed Space over HTTP).
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - uses: astral-sh/setup-uv@v3
         with:

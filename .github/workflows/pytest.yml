@@ -13,7 +13,14 @@ jobs:
   pytest:
     runs-on: ubuntu-22.04
     steps:
+      # lfs: true is required — pyproject.toml's [tool.uv.sources] pins
+      # llama-cpp-python to vendor/wheels/*.whl (Git LFS-tracked). Without this,
+      # checkout leaves only the LFS pointer file and `uv sync` fails trying to
+      # unzip it ("Invalid zip file structure") — this bit every one of the
+      # three CI workflows the first time they actually ran on GitHub Actions.
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - uses: astral-sh/setup-uv@v3
         with:

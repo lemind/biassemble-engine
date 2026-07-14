@@ -24,16 +24,22 @@ jobs:
   eval:
     runs-on: ubuntu-22.04
     steps:
+      # lfs: true is required — pyproject.toml's [tool.uv.sources] pins
+      # llama-cpp-python to this exact path, which is Git LFS-tracked. Without
+      # this, checkout leaves only the LFS pointer file and `uv sync` fails
+      # trying to unzip it (caught via a real failed run on this PR).
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - uses: astral-sh/setup-uv@v3
         with:
           python-version: "3.11"
 
+      # uv sync alone installs llama-cpp-python from vendor/wheels/*.whl now that
+      # LFS content is present — pyproject.toml's [tool.uv.sources] already points
+      # there, so a separate explicit `uv pip install` step would be redundant.
       - run: uv sync
-
-      - name: Install prebuilt llama-cpp-python wheel
-        run: uv pip install vendor/wheels/llama_cpp_python-0.3.19-cp311-cp311-manylinux_2_34_x86_64.whl
 
       - name: Install psql client (PSQL_SEARCH=true path needs the psql binary)
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
