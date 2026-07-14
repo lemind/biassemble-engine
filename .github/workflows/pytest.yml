@@ -33,4 +33,13 @@ jobs:
       # installed (caught via a real failed run: "Failed to spawn: pytest").
       - run: uv sync --extra dev
 
+      # Settings.database_url/rag_api_key (src/config.py) are required fields with
+      # no default — merely importing the app (several test modules do) fails
+      # pydantic validation without *some* value. No test in tests/ makes a real
+      # DB/API call (verified: zero asyncpg/create_pool usage), so placeholders
+      # satisfy validation without needing a real secret — caught via a real
+      # failed run ("Field required" on database_url/rag_api_key at collection).
       - run: uv run pytest tests/ -v
+        env:
+          DATABASE_URL: "postgresql://ci:ci@localhost/ci"
+          RAG_API_KEY: "ci-placeholder"
