@@ -1,0 +1,98 @@
+name: Production Drift Monitor
+
+# Tier 2b (adr/004-ci-metrics-gate.md) — weekly + on-demand, against the DEPLOYED
+# HF Space, not any PR's code. Never blocks a merge — there is no pull_request
+# trigger here, by construction (spec.md FR-010), not by convention.
+#
+# Requires RAG_API_KEY, an HF Bearer token, and ENGINE_URL as repo
+# secrets/variables (does not exist yet — see README.md's "## CI" section).
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  drift-check:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          python-version: "3.11"
+
+      - run: uv sync
+
+      - name: Start evaluation on the deployed Space
+        id: start
+        env:
+          ENGINE_URL: ${{ vars.ENGINE_URL }}
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -euo pipefail
+          resp=$(curl -sS -X POST "$ENGINE_URL/evaluate" \
+            -H "X-RAG-Key: $RAG_API_KEY" \
+            -H "Authorization: Bearer $HF_TOKEN")
+          echo "$resp"
+          job_id=$(echo "$resp" | python3 -c "import json,sys; print(json.load(sys.stdin)['job_id'])")
+          echo "job_id=$job_id" >> "$GITHUB_OUTPUT"
+
+      # GET /evaluate/{job_id} returns {"status": "running"|"partial", ...} while in
+      # progress, but on completion returns the raw EvalRun dict directly — no
+      # "status" wrapper at all (src/api/routes/retrieve.py's evaluate_result:
+      # `return job["result"]`). Detect "done" by the PRESENCE of "group_metrics"
+      # (an EvalRun field), not by looking for status=="done", which never appears.
+      - name: Poll for completion
+        id: poll
+        env:
+          ENGINE_URL: ${{ vars.ENGINE_URL }}
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -euo pipefail
+          job_id="${{ steps.start.outputs.job_id }}"
+          for i in $(seq 1 180); do  # ~30 min at 10s intervals, matching EVALUATE_TIMEOUT_S
+            http_code=$(curl -sS -o /tmp/poll_resp.json -w '%{http_code}' "$ENGINE_URL/evaluate/$job_id" \
+              -H "X-RAG-Key: $RAG_API_KEY" \
+              -H "Authorization: Bearer $HF_TOKEN")
+            if [ "$http_code" = "500" ]; then
+              echo "::error::Evaluation job failed on the deployed Space — could not evaluate, not a quality finding."
+              cat /tmp/poll_resp.json
+              exit 2
+            fi
+            if [ "$http_code" != "200" ]; then
+              echo "::error::Unexpected HTTP $http_code polling for evaluation result."
+              cat /tmp/poll_resp.json
+              exit 2
+            fi
+            is_done=$(python3 -c "import json; d=json.load(open('/tmp/poll_resp.json')); print('yes' if 'group_metrics' in d else 'no')")
+            echo "poll $i: done=$is_done"
+            if [ "$is_done" = "yes" ]; then
+              cp /tmp/poll_resp.json /tmp/drift_run.json
+              break
+            fi
+            sleep 10
+          done
+          if [ ! -f /tmp/drift_run.json ]; then
+            echo "::error::Evaluation did not complete within the poll window — could not evaluate, not a quality finding."
+            exit 2
+          fi
+
+      - name: Compare against latest promoted baseline
+        run: |
+          set -euo pipefail
+          BASELINE_JSON=$(ls -1 evaluations/baselines/baseline_*.json | sort | tail -1)
+          echo "baseline=$BASELINE_JSON"
+          set +e
+          uv run python scripts/check_regression.py --run /tmp/drift_run.json --baseline "$BASELINE_JSON"
+          code=$?
+          set -e
+          if [ "$code" -eq 1 ]; then
+            echo "::error::Production quality has drifted below the latest promoted baseline (see table above)."
+            exit 1
+          elif [ "$code" -eq 2 ]; then
+            echo "::error::check_regression.py could not evaluate the drift run — infrastructure error, not a quality finding."
+            exit 2
+          fi
