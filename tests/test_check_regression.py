@@ -13,7 +13,13 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from scripts.check_regression import compute_finding, compute_findings, metrics_for_group
+from scripts.check_regression import (
+    MissingGroupsError,
+    _extract_group_metrics,
+    compute_finding,
+    compute_findings,
+    metrics_for_group,
+)
 
 SCRIPT = Path(__file__).parent.parent / "scripts" / "check_regression.py"
 
@@ -134,6 +140,35 @@ def test_no_regression_exits_0(tmp_path):
     assert result.returncode == 0
 
 
+def test_run_missing_a_baseline_group_exits_2_via_cli(tmp_path):
+    baseline_gm = {
+        "positive": {"count": 4, "recall_at_k": 0.875, "precision_at_k": 0.5875},
+        "negative": {"count": 5, "empty_rate": 1.0},
+    }
+    run_gm = {"positive": baseline_gm["positive"]}  # negative missing entirely
+    run = tmp_path / "run.json"
+    run.write_text(json.dumps({"group_metrics": run_gm}))
+    baseline = tmp_path / "baseline.json"
+    baseline.write_text(json.dumps({"group_metrics": baseline_gm}))
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), "--run", str(run), "--baseline", str(baseline)],
+        capture_output=True, text=True,
+    )
+    assert result.returncode == 2
+
+
+def test_run_file_is_a_json_list_exits_2_via_cli(tmp_path):
+    run = tmp_path / "run.json"
+    run.write_text(json.dumps([{"scenario_id": "not_a_result_file"}]))
+    baseline = tmp_path / "baseline.json"
+    baseline.write_text(json.dumps({"group_metrics": {}}))
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), "--run", str(run), "--baseline", str(baseline)],
+        capture_output=True, text=True,
+    )
+    assert result.returncode == 2
+
+
 # ── (e) per-metric eligibility split — the real `edge` shape ──────────────────
 
 def test_per_metric_eligibility_split_edge_shape():
@@ -165,8 +200,22 @@ def test_compute_findings_produces_two_rows_for_non_negative_one_for_negative():
     assert {f.metric for f in negative_findings} == {"empty_rate"}
 
 
-def test_compute_findings_skips_group_missing_from_run():
+def test_compute_findings_raises_on_group_missing_from_run():
+    """A group present in baseline but absent from the run must be a hard
+    error, not a silent skip — silently skipping it would let a run that lost
+    an entire group (e.g. a load_scenarios path bug) report zero findings for
+    it and exit 0, indistinguishable from a clean pass."""
     baseline_gm = {"positive": {"count": 4, "recall_at_k": 0.875, "precision_at_k": 0.5875}}
-    run_gm: dict = {}  # PR run didn't include this group (e.g. --groups filter)
-    findings = compute_findings(run_gm, baseline_gm)
-    assert findings == []
+    run_gm: dict = {}
+    with pytest.raises(MissingGroupsError):
+        compute_findings(run_gm, baseline_gm)
+
+
+def test_extract_group_metrics_non_dict_root_exits_2_not_attributeerror():
+    """A JSON root that isn't a dict (e.g. a list) must not raise an uncaught
+    AttributeError from calling .get() on it — that used to escape uncaught,
+    exit 1 (Python's default), and get misread as 'regression found' instead
+    of 'could not evaluate'."""
+    with pytest.raises(SystemExit) as exc_info:
+        _extract_group_metrics([1, 2, 3], "run")
+    assert exc_info.value.code == 2

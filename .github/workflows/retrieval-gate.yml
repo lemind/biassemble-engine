@@ -88,4 +88,11 @@ jobs:
           elif [ "$code" -eq 2 ]; then
             echo "::error::check_regression.py could not evaluate the run — infrastructure error, not a quality finding."
             exit 2
+          elif [ "$code" -ne 0 ]; then
+            # Fail closed, not open: an unrecognized exit code must not silently
+            # fall through to a clean pass (this code has only ever returned
+            # 0/1/2, but a future change adding a new code — or an unforeseen
+            # crash — must not be misread as success here).
+            echo "::error::check_regression.py exited with unrecognized code $code."
+            exit "$code"
           fi

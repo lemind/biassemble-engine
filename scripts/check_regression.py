@@ -65,16 +65,27 @@ def compute_finding(group: str, metric: str, baseline_gm: dict, current_gm: dict
     )
 
 
+class MissingGroupsError(Exception):
+    """Raised when the run is missing one or more groups the baseline has.
+
+    Silently skipping these (as an earlier version did) means a run that lost
+    an entire group — e.g. a load_scenarios path mismatch, the exact class of
+    bug this feature's own staging-skip fix was — reports zero findings for
+    it and the gate exits 0, indistinguishable from a clean pass. That must be
+    an error (exit 2), not a silent skip.
+    """
+
+
 def compute_findings(run_group_metrics: dict, baseline_group_metrics: dict) -> list[RegressionFinding]:
     """One finding per (group, metric) pair, iterating over the baseline's own
-    groups (the agreed-good reference) — a group missing from the run entirely
-    is skipped rather than crashing, same tolerance compute_deltas() already has
-    for baseline/run group-set mismatches in evaluate.py."""
+    groups (the agreed-good reference)."""
+    missing = set(baseline_group_metrics) - set(run_group_metrics)
+    if missing:
+        raise MissingGroupsError(f"run is missing group(s) present in baseline: {sorted(missing)}")
+
     findings: list[RegressionFinding] = []
     for group, baseline_gm in baseline_group_metrics.items():
-        current_gm = run_group_metrics.get(group)
-        if current_gm is None:
-            continue
+        current_gm = run_group_metrics[group]
         for metric in metrics_for_group(group):
             findings.append(compute_finding(group, metric, baseline_gm, current_gm))
     return findings
@@ -91,8 +102,13 @@ def _load_json(path: str, label: str) -> dict:
         sys.exit(2)
 
 
-def _extract_group_metrics(data: dict, label: str) -> dict:
-    gm = data.get("group_metrics")
+def _extract_group_metrics(data, label: str) -> dict:
+    # data is whatever json.load() returned — could be a list, str, int, etc.,
+    # not necessarily a dict. Check before calling .get(), which only exists on
+    # dict — a non-dict root used to raise an uncaught AttributeError here,
+    # exiting 1 (Python's default) and getting misread as "regression found"
+    # instead of "could not evaluate".
+    gm = data.get("group_metrics") if isinstance(data, dict) else None
     if not isinstance(gm, dict):
         print(f"error: {label} file has no 'group_metrics' object", file=sys.stderr)
         sys.exit(2)
@@ -137,7 +153,7 @@ def main() -> None:
 
     try:
         findings = compute_findings(run_gm, baseline_gm)
-    except (KeyError, TypeError, ZeroDivisionError) as exc:
+    except (KeyError, TypeError, ZeroDivisionError, AttributeError, MissingGroupsError) as exc:
         print(f"error: malformed group_metrics entry: {exc}", file=sys.stderr)
         sys.exit(2)
 

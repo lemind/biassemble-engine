@@ -68,6 +68,16 @@ jobs:
               cat /tmp/poll_resp.json
               exit 2
             fi
+            # 502/503/504 are the typical codes during a free-tier HF Space
+            # cold-restart/idle-wake — transient, not a real failure. Retry
+            # within the existing ~30min poll budget instead of aborting the
+            # whole weekly check over one bad poll (the next scheduled run
+            # would otherwise be 7 days away for no real reason).
+            if [ "$http_code" = "502" ] || [ "$http_code" = "503" ] || [ "$http_code" = "504" ]; then
+              echo "poll $i: transient HTTP $http_code (likely Space restart), retrying..."
+              sleep 10
+              continue
+            fi
             if [ "$http_code" != "200" ]; then
               echo "::error::Unexpected HTTP $http_code polling for evaluation result."
               cat /tmp/poll_resp.json
@@ -101,4 +111,8 @@ jobs:
           elif [ "$code" -eq 2 ]; then
             echo "::error::check_regression.py could not evaluate the drift run — infrastructure error, not a quality finding."
             exit 2
+          elif [ "$code" -ne 0 ]; then
+            # Fail closed, not open — see the identical comment in retrieval-gate.yml.
+            echo "::error::check_regression.py exited with unrecognized code $code."
+            exit "$code"
           fi
