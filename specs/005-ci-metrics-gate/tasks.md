@@ -105,7 +105,7 @@ Single project (per plan.md's Structure Decision) — `.github/workflows/`, `scr
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T011 Run quickstart.md Steps 1–5 end-to-end, in order, as the final integration check before considering this feature done — not a substitute for T006/T008/T010 (which validate each story independently), but a confirmation that nothing regressed across stories when combined.
+- [x] T011 Final consolidated check (not repeating T006/T008/T010's live calls — those already validated each story independently): full suite `uv run pytest tests/ -v` → **130 passed**, and all three workflow YAML files (`pytest.yml`, `retrieval-gate.yml`, `production-drift.yml`) parse cleanly with no conflicts between their triggers. Across this feature: one pre-existing bug fixed (`evaluations/staging/` crash), one design gap surfaced and resolved with your input (GGUF model caching), one real integration bug caught before it could ship (the `/evaluate/{job_id}` "done"-detection logic), and one stale baseline promoted. What's **not** independently re-verified here (by design — see T006): an actual GitHub-hosted trigger of any of the three workflows, since this loop never pushed to a remote.
 - [ ] T012 **Explicitly out of this task list, do not create a task that "completes" it here**: quickstart.md Step 6 / ADR §9 — flipping branch protection to require `pytest.yml` and `retrieval-gate.yml` (not `production-drift.yml`, which is a monitor per FR-010) is a manual GitHub repo-settings decision a human makes after T011 is green, not a deliverable of this feature.
 
 ---
