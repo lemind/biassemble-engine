@@ -1,16 +1,19 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-specs/005-ci-metrics-gate/plan.md
+specs/006-fine-tune-llm/plan.md
 
 Supporting artifacts:
-- specs/005-ci-metrics-gate/spec.md — feature specification
-- specs/005-ci-metrics-gate/research.md — implementation-level decisions (script boundaries, wheel vs. source build, test placement)
-- specs/005-ci-metrics-gate/data-model.md — JSON shapes crossing the CI boundary (no DB changes)
-- specs/005-ci-metrics-gate/contracts/check-regression-cli.md — scripts/check_regression.py CLI contract (args, output, exit codes)
-- specs/005-ci-metrics-gate/quickstart.md — §6 validation sequence from adr/004, made runnable
-- adr/004-ci-metrics-gate.md — accepted decision record (two-tier gate: pytest every push/PR, retrieval-regression gate on PR, weekly production-drift monitor)
-- adr/003-generative-llm-bias-selection.md — prior decision (LLM selection; unaffected by this feature)
+- specs/006-fine-tune-llm/spec.md — feature specification
+- specs/006-fine-tune-llm/research.md — implementation-level decisions (blind-spot story reconstruction, test boundary, training/ directory placement)
+- specs/006-fine-tune-llm/data-model.md — new file-based data shapes (weak-supervision pairs, SFT dataset rows, fine-tune manifest)
+- specs/006-fine-tune-llm/contracts/sft-dataset-schema.md — evaluations/sft/sft_dataset.jsonl row contract
+- specs/006-fine-tune-llm/contracts/finetune-manifest-schema.md — training/manifests/<candidate_id>.json contract
+- specs/006-fine-tune-llm/quickstart.md — ADR-005 §7 task list, made runnable
+- adr/005-fine-tune-engine-llm.md — accepted-pending decision record (LoRA fine-tune of llm_union's Gemma-3-4B cartridge)
+- specs/005-ci-metrics-gate/plan.md — prior feature's plan (CI regression gate this feature's ship decision reuses unchanged)
+- adr/004-ci-metrics-gate.md — prior decision (two-tier CI gate; check_regression.py reused as-is by this feature)
+- adr/003-generative-llm-bias-selection.md — prior decision (LLM selection; llm_union is the strategy being fine-tuned)
 - adr/002-nli-zero-shot-shortlist.md — prior decision (NLI; superseded as production default by ADR-003)
 - adr/001-vector-search-retrieval.md — baseline decision record (retroactive)
 - specs/004-add-llm-model/plan.md — prior feature's plan (LLM selection strategy; unaffected by this feature)
