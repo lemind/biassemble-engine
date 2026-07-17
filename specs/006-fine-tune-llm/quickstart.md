@@ -2,17 +2,21 @@
 
 Feature `006-fine-tune-llm`. This is ADR-005's task list (§7) made runnable, in dependency order. **Do not skip ahead — Steps 1 and 2 must both complete before Step 3 generates a single synthetic story (spec.md User Story 1's ordering requirement is load-bearing, not incidental).**
 
-## Step 0 — Prerequisite credentials exist (blocks Steps 3–4)
+## Step 0 — Prerequisite credentials exist (verified present, need wiring into this repo)
 
-Not currently configured anywhere in this repo:
+**Not actually missing** — verified directly in `biassemble-core`'s `.env` (not `biassemble-engine`'s, which is why an earlier pass wrongly assumed these were unprovisioned):
 
 ```
-GEMINI_API_KEY          # synthetic labeling (single consistent teacher, ADR-005 §2)
-<generation providers>  # whichever additional LLM providers are chosen for story generation —
-                         # must be genuinely different from Gemini (different provider/family/template)
+GEMINI_API_KEY   # real, already the production key biassemble-core uses for its own labeling
+                 # pipeline — exactly the teacher model ADR-005 §2 calls for, not a new credential
+<DeepSeek/OpenAI/Qwen/OpenRouter keys>  # also present in biassemble-core's .env (commented out
+                 # there, not wired into that app's own config, but valid) — pick whichever
+                 # genuinely-different-provider(s) for generation per ADR-005 §2
 ```
 
-`biassemble-core`'s Supabase read access (Step 1) and the raw DeepSeek export files (Step 2) already exist / are already accessible — no new credentials needed for those two steps.
+What's actually needed before Step 3 can run: surface `GEMINI_API_KEY` (and whichever generation-provider key gets chosen) into `biassemble-engine`'s own `.env`/config once `scripts/generate_sft_stories.py`/`scripts/label_sft_stories.py` (T012/T013) exist to consume them — a small wiring step, not a provisioning blocker. Both `.env` files are gitignored, no exposure risk in git history.
+
+`biassemble-core`'s Supabase read access (Step 1) and the raw DeepSeek export files (Step 2) already exist / are already accessible — no new credentials needed for those two steps either.
 
 ## Step 1 — Reconstruct the 28 weak-supervision pairs
 
