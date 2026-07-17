@@ -26,7 +26,7 @@ Close the gap between `llm_union`'s current `positive` Recall@5 (0.729, currentl
 
 **Performance Goals**: Not applicable in the runtime sense — this is an offline training pipeline, not a request-serving path. The relevant constraint is fitting every step inside free-tier compute/storage quotas (ADR-005 §5), not latency or throughput.
 
-**Constraints**: Free-tier-only compute (no paid GPU spend, per ADR-005 §8). Disk: peak usage during the merge/quantize step is additive, not just the largest single artifact — the downloaded HF base checkpoint (~7-8GB), the merged bf16 checkpoint (~7-8GB), and the GGUF conversion output (~2.5GB) can coexist on disk simultaneously, a plausible ~18GB peak against free-tier platforms that may only offer ~12-15GB (ADR-005 §5). Default to clearing the HF download cache before merging and quantizing directly from the merged checkpoint without a separate full bf16 save, rather than treating this as a contingency for only if space is tight. The training-dataset generation/labeling scripts depend on external LLM API keys (Gemini, plus whichever additional generation providers are chosen) that are not currently configured anywhere in this repo's secrets — provisioning them is a manual, human, out-of-band step this plan documents as a prerequisite but does not perform. **Newly confirmed while writing this plan**: the promoted held-out group's raw story text is not recoverable from anything committed to this repo — `evaluations/staging/blind_spot_eval_2026-07-13.json` is an eval-*results* file (scenario_id/domain/expected_bias_ids/retrieved_bias_ids/verdict) with no `story` field at all. The actual story text for all 80 scenarios exists only in 8 raw DeepSeek export files currently sitting untracked on local disk (`~/Downloads/deepseek_json_20260713_*.json`), verified joinable back to the results file by matching `(group, domain)` in list order (confirmed directly: index 0 of the `99e66a` batch is `neg_006`/astronomy, matching exactly). This is a real, load-bearing prerequisite for User Story 1 — see research.md and the new `reconstruct_blind_spot_stories.py` task.
+**Constraints**: Free-tier-only compute (no paid GPU spend, per ADR-005 §8). Disk: peak usage during the merge/quantize step is additive, not just the largest single artifact — the downloaded HF base checkpoint (~7-8GB), the merged bf16 checkpoint (~7-8GB), and the GGUF conversion output (~2.5GB) can coexist on disk simultaneously, a plausible ~18GB peak against free-tier platforms that may only offer ~12-15GB (ADR-005 §5). Default to clearing the HF download cache *after* the merge completes (the merge itself needs the base checkpoint from that cache; clearing it earlier forces a mid-procedure re-download) and *before* quantization, and quantizing directly from the merged checkpoint without a separate full bf16 save — the correct order is train → merge → clear HF cache → quantize, treated as the default, not a contingency for only if space is tight. The training-dataset generation/labeling scripts depend on external LLM API keys (Gemini, plus whichever additional generation providers are chosen) that are not currently configured anywhere in this repo's secrets — provisioning them is a manual, human, out-of-band step this plan documents as a prerequisite but does not perform. **Newly confirmed while writing this plan**: the promoted held-out group's raw story text is not recoverable from anything committed to this repo — `evaluations/staging/blind_spot_eval_2026-07-13.json` is an eval-*results* file (scenario_id/domain/expected_bias_ids/retrieved_bias_ids/verdict) with no `story` field at all. The actual story text for all 80 scenarios exists only in 8 raw DeepSeek export files currently sitting untracked on local disk (`~/Downloads/deepseek_json_20260713_*.json`), verified joinable back to the results file by matching `(group, domain)` in list order (confirmed directly: index 0 of the `99e66a` batch is `neg_006`/astronomy, matching exactly). This is a real, load-bearing prerequisite for User Story 1 — see research.md and the new `reconstruct_blind_spot_stories.py` task.
 
 **Scale/Scope**: ≥300 synthetic stories + 28 reconstructed weak-supervision pairs feeding one LoRA training run producing one candidate GGUF per attempt; the held-out evaluation group adds 80 scenarios (pending the raw-story reconstruction above) to the existing ~13-scenario harness.
 
@@ -94,20 +94,36 @@ training/                             # NEW top-level dir — notebook-executed,
 │                                      #   exact base model, LoRA config, validation-split/checkpoint
 │                                      #   rule, and merge/quantize steps from ADR-005 §5
 └── manifests/                        # one JSON manifest per fine-tuned candidate produced (§9's
-                                       #   record — dataset version, LoRA hyperparameters, base model
-                                       #   revision, quantization command, eval result)
+                                       #   record — dataset version, LoRA hyperparameters (incl.
+                                       #   resolved target_modules), base model revision, quantization
+                                       #   command, eval result), plus a sibling
+                                       #   <candidate_id>_predictions.json per candidate archiving
+                                       #   raw per-scenario outputs from its trial evaluation run —
+                                       #   aggregate recall/precision alone can't answer "which
+                                       #   specific stories changed" later (tasks.md)
 
 evaluations/
 ├── blind_spot/                       # NEW — the promoted held-out group (was only results in
 │                                      #   evaluations/staging/, never scored as a real group before
-│                                      #   this feature)
+│                                      #   this feature). Every file's "group" key MUST read
+│                                      #   "blind_spot" literally, NOT the batch's original
+│                                      #   positive/negative/edge/adversarial label — verified
+│                                      #   against src/evaluation/evaluate.py: load_scenarios groups
+│                                      #   by that JSON field, not the directory name, so reusing the
+│                                      #   original labels would silently merge into the 4 existing
+│                                      #   groups instead of forming a distinct one (research.md)
 │   └── *.json                        # 80 scenario files, real story text (see
 │                                      #   reconstruct_blind_spot_stories.py above)
 ├── staging/                          # existing — blind_spot_eval_2026-07-13.json stays here as the
 │                                      #   original results record, not deleted; evaluations/blind_spot/
 │                                      #   is the promoted, story-bearing version actually used for scoring
-├── sft/                              # NEW — sft_dataset.jsonl (assembled training data) and its
-│                                      #   coverage report; deliberately NOT under
+├── sft/                              # NEW — sft_dataset.jsonl (assembled training data,
+│                                      #   IMMUTABLE once its coverage_report.json shows "pass": true
+│                                      #   — later expansions get a new versioned file, never an
+│                                      #   in-place edit, tasks.md T017) and coverage_report.json
+│                                      #   (per-bias counts, negative fraction, group/source counts,
+│                                      #   pass/fail — a required output file, not console-only);
+│                                      #   deliberately NOT under
 │                                      #   evaluations/{positive,negative,edge,adversarial,blind_spot}/
 │                                      #   since it is training data, never scenario data. NOTE, checked
 │                                      #   directly against src/evaluation/evaluate.py: `_SKIP_GROUPS` does

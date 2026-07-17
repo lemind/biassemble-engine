@@ -27,9 +27,13 @@
   },
   "base_model_revision": "google/gemma-3-4b-it@<commit-sha>",
   "quantization_command": "python llama.cpp/convert_hf_to_gguf.py ... --outtype q4_k_m",
-  "eval_result": {"...": "full check_regression.py output, see specs/005-ci-metrics-gate/data-model.md's RegressionFinding"}
+  "eval_result": [
+    {"group": "positive", "metric": "recall_at_k", "baseline_value": 0.729, "current_value": 0.875, "delta": 0.146, "tolerance": 0.25, "eligible": true, "regressed": false}
+  ]
 }
 ```
+
+**`eval_result` is a JSON array, not an object** — one entry per `(group, metric)` finding, matching `scripts/check_regression.py`'s `compute_findings()` return shape exactly (`list[RegressionFinding]`, see specs/005-ci-metrics-gate/data-model.md). The single-entry example above is illustrative; a real manifest's `eval_result` has one entry per gated `(group, metric)` pair across every scored group, same as the CLI's printed table.
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
@@ -40,7 +44,7 @@
 | `lora_hyperparameters.target_modules` | list[str] | yes | The **resolved** module names actually trained, verified against the base model's real module names — not merely the requested config. Must include both attention (`q_proj`/`k_proj`/`v_proj`/`o_proj`) and MLP (`gate_proj`/`up_proj`/`down_proj`) projections (ADR-005 §5); an empty or attention-only list is a strong signal the adapter trained on close to zero effective parameters even if training completed without error. |
 | `base_model_revision` | str | yes | Must be specific enough to re-pull the exact same base weights later (a commit SHA, not just a repo name). |
 | `quantization_command` | str | yes | Verbatim, copy-pasteable. |
-| `eval_result` | object | yes | The complete `check_regression.py` output for this candidate, produced by importing and calling `compute_findings()` directly (data-model.md) rather than parsing the CLI's printed table — not a summary, so a later reviewer never has to re-run evaluation just to see what happened. If the promoted baseline used for this comparison predates `blind_spot`'s promotion, this object will not contain `blind_spot` findings — see data-model.md's `ShipGateResult` note; do not read their absence as "no regression." |
+| `eval_result` | **array** (not object) | yes | The complete `check_regression.py` output for this candidate — `[dataclasses.asdict(f) for f in compute_findings(...)]`, imported and called directly (data-model.md) rather than parsed from the CLI's printed table. `json.dumps` on the raw dataclass list fails without the `asdict` conversion — not a summary, so a later reviewer never has to re-run evaluation just to see what happened. If the promoted baseline used for this comparison predates `blind_spot`'s promotion, this array will contain no `blind_spot` entries — see data-model.md's `ShipGateResult` note; do not read their absence as "no regression." |
 
 ## Validation rules
 
