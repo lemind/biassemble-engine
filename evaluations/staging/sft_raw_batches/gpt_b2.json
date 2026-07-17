@@ -1,0 +1,92 @@
+[
+  {
+    "id": "b2_pos_001",
+    "story": "My first weekend leading an orienteering club ended with our team finishing near the top. I started planning a regional event immediately because I felt I'd clearly figured out what experienced organizers had been doing for years. When someone suggested I shadow another coordinator first, I brushed it aside because things had already gone well once.",
+    "group": "positive",
+    "domain": "orienteering",
+    "target_bias_ids": ["dunning_kruger_effect"],
+    "style_tags": ["diary"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_pos_002",
+    "story": "Several hives produced excellent honey this spring, so I expanded the apiary faster than planned. I expected every new colony to perform just as strongly because the recent harvest made it feel like I'd finally discovered the perfect routine. The weather forecast and forage reports barely influenced my decision.",
+    "group": "positive",
+    "domain": "beekeeping",
+    "target_bias_ids": ["hot_hand_fallacy"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_pos_003",
+    "story": "A friend ignored my messages for two days after our discussion about local politics. I became convinced the silence meant resentment because that's exactly how I would react if I were upset after an argument. When the reply finally came, it simply mentioned a broken phone.",
+    "group": "positive",
+    "domain": "social",
+    "target_bias_ids": ["projection_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b2_pos_004",
+    "story": "Work on cataloging fungal samples always seems to take less time in my head than it does on the bench. Every season I promise the museum I'll finish the labels over one long weekend, and every season I'm still sorting specimens well into the following week because drying, photographing, and checking references keep taking longer than I expect.",
+    "group": "positive",
+    "domain": "mycology",
+    "target_bias_ids": ["planning_fallacy"],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b2_pos_005",
+    "story": "The software rollout failed during my shift, but I immediately focused on the vague specification the previous team had written instead of the shortcuts I'd taken while deploying it. By the end of the meeting I was still convinced the documentation had caused most of the trouble, even though my own checklist was incomplete.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": ["self_serving_bias"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b2_pos_006",
+    "story": "Our historical linguistics seminar received applications from several exchange students. Without looking closely at the writing samples, I caught myself assuming one applicant would struggle with detailed grammatical reconstruction simply because of where they came from. I spent much longer searching that file for weaknesses than I did with the others.",
+    "group": "positive",
+    "domain": "historical_linguistics",
+    "target_bias_ids": ["stereotyping_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_pos_007",
+    "story": "While restoring a nineteenth-century textile, one loose thread snapped during cleaning. That tiny mistake stayed in my mind for the rest of the afternoon, making me feel as though the entire conservation lab would notice it immediately. Even after the supervisor discussed humidity records for most of the meeting, I kept expecting questions about that single thread.",
+    "group": "positive",
+    "domain": "textile_conservation",
+    "target_bias_ids": ["spotlight_effect"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["anxious"]
+  },
+  {
+    "id": "b2_pos_008",
+    "story": "Excavating a fossil bed is slow enough that every promising fragment feels meaningful. After uncovering two unusually complete specimens in adjacent squares, I became convinced the next trench would contain another exceptional find simply because the morning had gone so well. I reassigned volunteers there instead of following the original survey plan.",
+    "group": "positive",
+    "domain": "paleontology",
+    "target_bias_ids": ["gamblers_fallacy"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_pos_009",
+    "story": "Our neighborhood committee debated adding another pedestrian crossing near the school. Accident reports covering the past decade showed very few incidents, but one frightening collision from last month dominated every conversation in my mind. I supported an expensive redesign because I couldn't stop picturing that single event.",
+    "group": "positive",
+    "domain": "political",
+    "target_bias_ids": ["affect_heuristic"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b2_pos_010",
+    "story": "My cousin insisted his child had almost no chance of developing the same inherited condition that affected several close relatives because nobody in their immediate household had shown symptoms yet. Family records covering multiple generations seemed less convincing than his own recent experience, so he postponed the recommended screening.",
+    "group": "positive",
+    "domain": "family",
+    "target_bias_ids": ["base_rate_neglect"],
+    "style_tags": ["witness_statement"],
+    "tone_tags": ["clinical"]
+  }
+]

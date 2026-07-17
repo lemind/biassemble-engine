@@ -1,0 +1,594 @@
+[
+  {
+    "id": "b4_pos_001",
+    "story": "I won three hands of blackjack in a row at the casino last night, and I am convinced I have finally cracked the dealer's pattern. The cards just felt right, and I knew exactly when to hit and when to stay. I am going back tomorrow with my entire paycheck because I can feel that this lucky streak is going to continue. I have a system that works.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": [
+      "gamblers_fallacy",
+      "illusion_of_control"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b4_pos_002",
+    "story": "We changed the deployment process two weeks ago, and the server has not crashed since, which is clear proof that the previous team was just incompetent. The new script I wrote is obviously the reason everything is stable now. We should adopt it for all our projects immediately, and I expect full credit for this fix during the next review.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "self_serving_bias",
+      "recency_bias"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b4_pos_003",
+    "story": "I have watched every single video on this chess channel, so I am pretty sure I can beat my friend who has been playing for decades. The grandmaster in the videos always explains the moves so clearly that it seems really simple. I do not need to practice much because I understand the theory perfectly. I will win in under twenty moves.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "dunning_kruger_effect"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "overconfident"
+    ]
+  },
+  {
+    "id": "b4_pos_004",
+    "story": "My sister and I both inherited the same amount of money, but I spent mine on a vintage car that is now worth triple what I paid. She bought safe bonds and hardly made any profit. That is why my decision was smarter, and she should have taken a risk like I did. I am clearly better with money than she is.",
+    "group": "positive",
+    "domain": "family",
+    "target_bias_ids": [
+      "self_serving_bias",
+      "survivorship_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "smug"
+    ]
+  },
+  {
+    "id": "b4_pos_005",
+    "story": "I have been following this stock for two years, and I can tell you exactly when it is going to bounce back. The chart patterns are repeating from last summer, and my technical analysis says it will hit fifty dollars by the end of the month. I am putting my entire savings into it now, because I am certain it will not fail.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": [
+      "illusion_of_control",
+      "overconfidence_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b4_pos_006",
+    "story": "I started taking a new herbal supplement that my friend recommended, and I have not had a headache in three days. It must be working incredibly well, because I used to get them all the time. I told my neighbor she should buy some too, because I know it will help her just as much. My headaches are clearly gone for good.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": [
+      "confirmation_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b4_pos_007",
+    "story": "Our star pitcher has struck out ten batters in each of the last three games, so I am starting him again in the championship even though he is exhausted. He has a perfect record recently, so there is no way he will lose. I know the stats say he is overworked, but he is a fighter, and he will win this game for us.",
+    "group": "positive",
+    "domain": "community_theater",
+    "target_bias_ids": [
+      "gamblers_fallacy"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "determined"
+    ]
+  },
+  {
+    "id": "b4_pos_008",
+    "story": "I have been building websites for five years, so I know exactly what the user needs without even looking at the analytics. My designer keeps showing me these fancy mockups, but they are all wrong. I know the users better than anyone because I have been doing this for so long, and I am not going to change the layout just because of some test results.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "dunning_kruger_effect",
+      "overconfidence_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "arrogant"
+    ]
+  },
+  {
+    "id": "b4_pos_009",
+    "story": "My manager said we should use the new cloud platform, but I have read a lot about the old one, and I am certain it is still the best choice. I have spent hours reading forums and white papers, so I know more than he does about this. We should keep the old system because I have already mastered all its quirks.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "authority_bias",
+      "confirmation_bias"
+    ],
+    "style_tags": [
+      "lecture_notes"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b4_pos_010",
+    "story": "I have already spent six months training this rescue parrot to talk, and I cannot stop now even though my partner says he is too stressed. We are so close to getting him to say a full sentence, and if we give up now, it will all be wasted. I know the bird will come around if I just keep pushing him a little more.",
+    "group": "positive",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "sunk_cost_fallacy",
+      "escalation_of_commitment"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "stubborn"
+    ]
+  },
+  {
+    "id": "b4_edge_001",
+    "story": "I saw this actor in a local play last month, and they were fantastic, so I think they will be a great fit for our big production even though they are not very experienced. I just have a good feeling about them, and my instincts are usually correct. Their performance in that one small role was enough for me to form a solid opinion.",
+    "group": "edge",
+    "domain": "community_theater",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "optimistic"
+    ]
+  },
+  {
+    "id": "b4_edge_002",
+    "story": "We have used the same washing machine for fifteen years, and it still works fine, so I do not see why we should replace it. The new models are expensive and have too many complicated settings. We already know how this one works, and it has not broken down yet, so why take the risk?",
+    "group": "edge",
+    "domain": "family",
+    "target_bias_ids": [
+      "status_quo_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "practical"
+    ]
+  },
+  {
+    "id": "b4_edge_003",
+    "story": "My neighbor bought a new electric car and said it saved them a lot on gas, so I am planning to get one too. I have not actually checked the charging costs or range for myself, but they seem really happy with it. If it is good enough for them, it is probably good enough for me, even though we have different commuting habits.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "impulsive"
+    ]
+  },
+  {
+    "id": "b4_edge_004",
+    "story": "I missed the turn on our hike because I was distracted by the birds, but I was sure I knew a shortcut back to the trail. I did not check the map because I have been here before, but we ended up in a completely different valley. I just wanted to get us back on track without admitting I was confused.",
+    "group": "edge",
+    "domain": "orienteering",
+    "target_bias_ids": [
+      "overconfidence_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "embarrassed"
+    ]
+  },
+  {
+    "id": "b4_edge_005",
+    "story": "I had a great experience with a particular brand of hiking boots, so I recommended them to my friend even though they need a different kind of ankle support. They have always worked for me on rocky trails, so I am sure they will be fine for them too. My experience is probably universal.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "helpful"
+    ]
+  },
+  {
+    "id": "b4_edge_006",
+    "story": "I read a news story about a bear attack in the state park, and now I am terrified every time I go camping there, even though it is incredibly rare. I know the statistics, but that one article really stuck with me. I cannot help but think about it every time I hear a noise in the woods, even if it is just a deer.",
+    "group": "edge",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "recency_bias",
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "anxious"
+    ]
+  },
+  {
+    "id": "b4_edge_007",
+    "story": "I prepared a long presentation for the board, but my laptop crashed right before I started, so I had to improvise. The board did not seem to mind, but I keep thinking that if I had prepared better, the meeting would have been more effective. Their feedback was positive, but the technical failure made me look unprepared.",
+    "group": "edge",
+    "domain": "technical",
+    "target_bias_ids": [
+      "fundamental_attribution_error"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b4_edge_008",
+    "story": "My doctor says I need surgery, but I saw a video online of a woman who cured her condition with a special diet, so I am going to try that first. I will reconsider surgery if the diet does not work, but I really want to avoid going under the knife. It just seems like a better option for now.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": [
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "hopeful"
+    ]
+  },
+  {
+    "id": "b4_edge_009",
+    "story": "I always pot my bonsai trees in the same ceramic pot that my mentor used, even though I know modern plastic pots have better drainage. I just feel like the tree responds better to the traditional method. I am not completely sure it makes a difference, but I am not willing to change my process.",
+    "group": "edge",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "status_quo_bias"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "traditional"
+    ]
+  },
+  {
+    "id": "b4_edge_010",
+    "story": "My cousin said his new phone has a much better camera than mine, so I decided to buy the same one. I did not compare the specs or read any reviews because I trust his judgment. I figured if he likes it, I will probably like it too, even though we take very different types of photos.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "bandwagon_effect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "impulsive"
+    ]
+  },
+  {
+    "id": "b4_adv_001",
+    "story": "Our app is used by over ten million people globally, and the CEO of a major tech company just called it revolutionary. You would be making a mistake if you did not invest today, because everyone who has joined early has seen incredible returns. The founders are former executives from a top-tier university, and their track record is flawless. Do not miss out on this exclusive opportunity.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": [
+      "authority_bias",
+      "bandwagon_effect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "persuasive"
+    ]
+  },
+  {
+    "id": "b4_adv_002",
+    "story": "We are building the tallest skyscraper in the region, and we have brought in the world's leading architects from London and New York to design it. Their work has won multiple awards, so you can be absolutely certain the building will be flawless. Supporting this project means you are backing a group of unparalleled experts. Trust their vision, and we will all succeed.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "authority_bias"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "grandiose"
+    ]
+  },
+  {
+    "id": "b4_adv_003",
+    "story": "Every major financial institution has already adopted our security protocol, so you should too if you want to stay safe. Industry leaders have been raving about our software, and we have the certifications to prove it is the best. Do not let your competitors get ahead; this is the standard everyone will use next year. Join the winning team now.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": [
+      "bandwagon_effect",
+      "authority_bias"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b4_adv_004",
+    "story": "Remember how the market crashed last month? That was caused by people ignoring the warning signs. I am telling you now, the same thing is happening again, and you need to act before it is too late. I have been analyzing this data for twenty years, and I know what I am talking about. Do not make the same mistake twice.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "alarmist"
+    ]
+  },
+  {
+    "id": "b4_adv_005",
+    "story": "This new electric truck is built by the same company that made the most reliable car of the decade. Everyone who owns one says it is the best vehicle they have ever driven, and industry awards are pouring in. You do not want to be the only person on the block without this incredible machine. It is a statement of success.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "halo_effect",
+      "bandwagon_effect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "flashy"
+    ]
+  },
+  {
+    "id": "b4_adv_006",
+    "story": "Think back to what happened to the last company that refused to pivot during a market shift. They went bankrupt, and their former employees are still struggling. The writing is on the wall, and we need to make changes now or risk the same fate. Do not let our history repeat itself; we need to adapt and learn from their failure.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": [
+      "recency_bias",
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "cautionary"
+    ]
+  },
+  {
+    "id": "b4_adv_007",
+    "story": "I have spent my entire career studying social policy, and I can tell you that this new legislation will create more harm than good. I have seen similar laws fail in other countries, and I know exactly what the outcome will be. You need to oppose this bill because I, as an expert, can see the dangers that you cannot.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": [
+      "overconfidence_bias"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "authoritative"
+    ]
+  },
+  {
+    "id": "b4_adv_008",
+    "story": "Everyone on the board has already approved this new marketing campaign, and the early focus groups are extremely positive. The numbers are incredibly strong, and we are confident this will be our most successful launch yet. You should trust the collective wisdom of this team; we have a track record of winning.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "bandwagon_effect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "convincing"
+    ]
+  },
+  {
+    "id": "b4_adv_009",
+    "story": "My grandfather built this company from nothing by always doing things the old-fashioned way, and I am not about to change that. We have been using this same method for seventy years, and it has never let us down. Why would we abandon a proven formula for some flashy new trend? We should stick with what works.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "status_quo_bias"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "traditional"
+    ]
+  },
+  {
+    "id": "b4_adv_010",
+    "story": "We have all read the headlines about those neighborhoods that were ruined by overdevelopment. The traffic is a nightmare, schools are overcrowded, and property values have plummeted. Do you want that to happen to our community? We must stop this new project before it is too late. I have seen the pictures.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": [
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "fearful"
+    ]
+  },
+  {
+    "id": "b4_neg_001",
+    "story": "The gardening workshop begins at 10 AM on Saturday at the community center. The instructor will demonstrate proper pruning techniques and soil preparation for vegetable gardens. Participants should wear comfortable clothes and bring their own gardening gloves. Coffee and light refreshments will be provided during the break.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b4_neg_002",
+    "story": "A routine security audit was completed on the main server cluster at 3 AM. The audit found three minor configuration warnings, which were resolved automatically. The system was rebooted at 4 AM and is currently stable. All services are online and responding to requests normally.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b4_neg_003",
+    "story": "The honey harvest at the Green Valley Apiary yielded approximately 300 pounds of wildflower honey this season. The extraction was completed over the weekend using a four-frame spinner. The honey was filtered, bottled, and labeled for sale. The remaining wax will be processed for candles later in the year.",
+    "group": "negative",
+    "domain": "beekeeping",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b4_neg_004",
+    "story": "The city park will officially open at 6:00 AM and close at 9:00 PM daily, with the exception of December 25th. The picnic pavilion and restrooms are available for use. The playground equipment has been inspected and is safe for children. Parking is available on a first-come, first-served basis.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b4_neg_005",
+    "story": "The patient was admitted to the emergency room at 8:45 AM with a compound fracture of the left forearm. X-rays confirmed the fracture. The patient was stabilized and scheduled for surgery at 2 PM. The surgeon will be Dr. Richards.",
+    "group": "negative",
+    "domain": "medical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b4_neg_006",
+    "story": "Our community theater will host a three-night run of a classic play starting on Friday. The curtains rise at 7:30 PM each evening. Tickets are on sale through the box office and online. The running time is approximately two hours, including one intermission.",
+    "group": "negative",
+    "domain": "community_theater",
+    "target_bias_ids": [],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b4_neg_007",
+    "story": "The orienteering course is 8.2 kilometers long and features a total of 14 control points. The terrain includes both open fields and dense forest areas. Participants should carry a whistle and at least one liter of water. The weather forecast predicts a clear day with temperatures around 18 degrees Celsius.",
+    "group": "negative",
+    "domain": "orienteering",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b4_neg_008",
+    "story": "The client signed the construction contract on Tuesday afternoon. The agreed-upon terms include a down payment of 30 percent upon signing. The project is expected to begin in the spring and last approximately six months. The final payment is due upon project completion.",
+    "group": "negative",
+    "domain": "finance",
+    "target_bias_ids": [],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b4_neg_009",
+    "story": "The ceramic glaze recipe consists of 50 percent silica, 25 percent feldspar, and 25 percent whiting. The glaze is mixed with water to a cream-like consistency. It is applied to bisqueware by dipping or spraying. The kiln should be fired to cone 6 for optimal results.",
+    "group": "negative",
+    "domain": "ceramics",
+    "target_bias_ids": [],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b4_neg_010",
+    "story": "The team meeting will be held in the main conference room at 3 PM. The agenda includes a project status update, a budget review, and a discussion of the new marketing materials. The presentation will be projected on the main screen. Please bring your notes and questions.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  }
+]

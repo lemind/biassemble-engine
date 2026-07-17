@@ -1,0 +1,362 @@
+[
+{
+"id": "b4_pos_001",
+"story": "We lost a significant amount of capital on our last five consecutive equity investments this quarter, as each stock tanked immediately after we bought in. Because a downward streak of this length is highly unusual for our balanced portfolio, the laws of probability dictate that our next pick is virtually guaranteed to be a major winner to restore the natural average. Consequently, I allocated our remaining discretionary cash reserves into this volatile tech startup today, confident that our run of bad luck has run its course.",
+"group": "positive",
+"domain": "finance",
+"target_bias_ids": ["gamblers_fallacy"],
+"style_tags": ["diary"],
+"tone_tags": ["weary"]
+},
+{
+"id": "b4_pos_002",
+"story": "After completing my very first weekend workshop at the local pottery studio, I can confidently say I have completely mastered the delicate science of wheel throwing and glaze chemistry. The instructor tried to warn me about the complexities of clay shrinkage and kiln schedules, but it honestly felt like simple common sense to me. Potters who spend years practicing must just lack natural artistic intuition, so I am moving forward with signing a commercial lease next week to launch my own high-end gallery.",
+"group": "positive",
+"domain": "ceramics",
+"target_bias_ids": ["dunning_kruger_effect", "overconfidence_bias"],
+"style_tags": ["forum_post"],
+"tone_tags": ["defensive"]
+},
+{
+"id": "b4_pos_003",
+"story": "The heart valve reconstruction went flawlessly yesterday because my suture precision was absolutely textbook, showing why my technique is regarded as the finest in this department. However, the patient's sudden low-grade fever this morning is entirely the fault of the floor nurse, who was clearly distracted by her phone instead of keeping the sterile dressing sealed. If she paid even a fraction of the attention to detail that I bring to every single incision, we wouldn't be facing this minor post-op complication right now.",
+"group": "positive",
+"domain": "medical",
+"target_bias_ids": ["self_serving_bias", "fundamental_attribution_error"],
+"style_tags": ["voice_memo_transcript"],
+"tone_tags": ["defensive"]
+},
+{
+"id": "b4_pos_004",
+"story": "Our hive inspection this afternoon was incredibly calm because I made sure to whistle my favorite folk melody as I gently removed the outer cover. Last week, I forgot to whistle and got stung twice, which proves the bees require this specific auditory cue to recognize me as their peaceful keeper rather than a threat. Even though the local forums claim honeybees are entirely deaf to airborne sounds and only respond to smoke, my calm inspections whenever I sing are all the proof I need.",
+"group": "positive",
+"domain": "beekeeping",
+"target_bias_ids": ["illusion_of_control", "confirmation_bias"],
+"style_tags": ["diary"],
+"tone_tags": ["matter-of-fact"]
+},
+{
+"id": "b4_pos_005",
+"story": "To: Planning Committee\nFrom: Susan and Mark\nSubject: Venue Decision\n\nWe received your list of alternative banquet halls for the family reunion, and while we appreciate the research, we have decided to stick with the Grand Lakeside Manor. Yes, we all agree their initial quote of twelve thousand dollars is incredibly steep and stretched our budget to its absolute breaking point. However, we already paid that non-refundable five hundred dollar booking deposit last November, and letting that hard-earned money go to waste is simply out of the question for us.\n\nEven though the local community center is offering a newer hall with free catering options for only three thousand dollars total, switching would mean completely throwing away our deposit. We must honor the financial commitment we already made to the Manor. It makes the most sense to protect the funds we have already sunk into this reservation rather than walking away empty-handed.",
+"group": "positive",
+"domain": "family",
+"target_bias_ids": ["anchoring_bias", "sunk_cost_fallacy"],
+"style_tags": ["email"],
+"tone_tags": ["weary"]
+},
+{
+"id": "b4_pos_006",
+"story": "My basic map-reading students struggled for two hours to locate the saddle between the eastern peaks on their topographic sheets. I drew the standard contour lines and explained the interval math twice, which is basic geometry. Their inability to instantly see the elevation changes is incredibly frustrating, pointing to a simple lack of effort on their part. To anyone with spatial awareness, these charts practically read themselves, yet this group acts like they are decoding ancient hieroglyphics.",
+"group": "positive",
+"domain": "orienteering",
+"target_bias_ids": ["curse_of_knowledge", "self_serving_bias"],
+"style_tags": ["field_notes"],
+"tone_tags": ["weary"]
+},
+{
+"id": "b4_pos_007",
+"story": "Incident Report: Database Migration Delay\nReporter: Lead Systems Architect\n\nWe scheduled the primary database schema overhaul for a strict four-hour maintenance window last night. My engineering team was highly confident we could execute the entire transfer smoothly within this timeframe because I personally spent two weeks writing a custom automation script to handle the field mapping. Even though our department has attempted three similar legacy migrations over the past year, and each one unexpectedly dragged on for several days due to unmapped database inconsistencies, we assumed this project was entirely different because of our meticulous prep work.\n\nAt exactly 02:00 UTC, the script crashed after encountering thousands of corrupted record blocks that were not present in our staging environment. Resolving these validation errors manually pushed our actual downtime to eighteen hours, which completely disrupted the morning shift's workflow. This delay was entirely unavoidable due to the highly anomalous state of the production data, which no script could have predicted.",
+"group": "positive",
+"domain": "technical",
+"target_bias_ids": ["planning_fallacy", "illusion_of_control"],
+"style_tags": ["incident_report"],
+"tone_tags": ["defensive"]
+},
+{
+"id": "b4_pos_008",
+"story": "We just found the most gorgeous cherry-red roadster listed on the local classifieds, and we are absolutely buying it tonight. The online consumer forums are filled with statistics showing that ninety-two percent of this model year experience catastrophic transmission failure before reaching fifty thousand miles, but this specific car just radiates reliability. As soon as I sat behind the wheel and heard that engine purr, a wave of pure excitement hit me, and I knew deep down that those cold corporate recall numbers don't apply to a machine this beautifully maintained.",
+"group": "positive",
+"domain": "consumer",
+"target_bias_ids": ["base_rate_neglect", "affect_heuristic"],
+"style_tags": ["chat_message"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_pos_009",
+"story": "During our first stage rehearsal this evening, the new lead actor missed his third-act entrance cue and completely threw off our entire pacing. He is a high school physical education teacher and assistant football coach, which explains why he lacks the basic artistic sensitivity and professional discipline required for classical theater. These physical sports types are always incredibly loud and self-absorbed, completely unable to grasp the subtle emotional depth of the script, so this casting choice is clearly turning out to be a massive mistake for our production.",
+"group": "positive",
+"domain": "community_theater",
+"target_bias_ids": ["stereotyping_bias", "fundamental_attribution_error"],
+"style_tags": ["diary"],
+"tone_tags": ["defensive"]
+},
+{
+"id": "b4_pos_010",
+"story": "Subject: Avian Rehabilitation Log - Case #402\nSpecies: Juvenile Barn Owl\nSymptom: Upper Respiratory Congestion\n\nWe received the culture results for the juvenile barn owl in enclosure four, confirming a moderate bacterial infection. Two potential treatment paths are available: the standard, widely documented liquid antibiotic regimen, or a newly released nebulizer compound. The veterinary journal notes that the nebulizer compound has shown promising results in raptor trials, but because it is a novel treatment, the exact probability of minor side effects remains unquantified and vague.\n\nTo protect the patient, I opted to administer the standard liquid antibiotic immediately. The fact that the standard treatment occasionally causes digestive upset in thirty percent of owls is a known, manageable risk. It is far safer to stick to the traditional protocol with clear, established data points rather than risking our recovery timeline on an unfamiliar, ambiguous modern alternative. I have initiated the seven-day oral dose schedule and will monitor the owl's daily weight closely.",
+"group": "positive",
+"domain": "wildlife_rescue",
+"target_bias_ids": ["ambiguity_effect", "confirmation_bias"],
+"style_tags": ["lab_notebook"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_edge_001",
+"story": "The market opened with five consecutive massive downward candles on the index chart this morning, completely wiping out our early gains. After watching such a relentless selling streak, I decided to execute a large long position at the support level because a green reversal candle was highly overdue. The price action was incredibly overextended, and I was confident that the buyers would step in to break this downward momentum before the lunch hour.",
+"group": "edge",
+"domain": "finance",
+"target_bias_ids": ["gamblers_fallacy"],
+"style_tags": ["diary"],
+"tone_tags": ["matter-of-fact"]
+},
+{
+"id": "b4_edge_002",
+"story": "Our local community college opened its new clay studio, and I decided to try throwing a bowl on the pottery wheel yesterday afternoon. It came out absolutely flawless on my very first attempt, with perfectly even walls and a clean, trimmed foot. The process felt incredibly natural and straightforward, and I honestly don't understand why other students in the room were struggling so much with centering their clay.",
+"group": "edge",
+"domain": "ceramics",
+"target_bias_ids": ["dunning_kruger_effect"],
+"style_tags": ["forum_post"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_edge_003",
+"story": "To the Medical Director,\n\nThe patient in ICU bed four has made a complete recovery, which is entirely due to my precise diagnosis and the intensive treatment plan I implemented upon admission. While the initial lab results were severely delayed by the pathology department's inefficient processing procedures, my clinical oversight kept the patient stable. Our successful outcome proves the strength of our critical care team's leadership under pressure, despite the external administrative obstacles we faced.",
+"group": "edge",
+"domain": "medical",
+"target_bias_ids": ["self_serving_bias"],
+"style_tags": ["email"],
+"tone_tags": ["matter-of-fact"]
+},
+{
+"id": "b4_edge_004",
+"story": "I completed the spring hive split this morning, and the colonies were incredibly cooperative throughout the entire process. Making sure to wear my faded green work shirt always seems to keep the guard bees from getting agitated during these major disturbances. Every time I wear this specific shirt, the inspections go incredibly smoothly without a single sting, and it definitely plays a major role in keeping our apiary calm.",
+"group": "edge",
+"domain": "beekeeping",
+"target_bias_ids": ["illusion_of_control"],
+"style_tags": ["voice_memo_transcript"],
+"tone_tags": ["matter-of-fact"]
+},
+{
+"id": "b4_edge_005",
+"story": "The officer asked why we were operating a vehicle with a known engine defect on the interstate yesterday afternoon. I explained to him that our station wagon has been experiencing severe transmission slipping and occasional radiator overheating for the past three weeks. However, we had just purchased and installed a brand-new set of premium all-weather tires last Tuesday, which cost us over eight hundred dollars.\n\nBecause we made that massive financial investment in the vehicle, my husband and I agreed we simply had to keep driving it to get our money's worth. Leaving the car in the garage or trading it in right after spending nearly a thousand dollars on maintenance felt like a total waste of our hard-earned cash. We genuinely believed we could make the hundred-mile trip to my sister's house without the engine failing completely, despite the mechanics warning us that the vehicle was no longer roadworthy.",
+"group": "edge",
+"domain": "family",
+"target_bias_ids": ["sunk_cost_fallacy"],
+"style_tags": ["witness_statement"],
+"tone_tags": ["defensive"]
+},
+{
+"id": "b4_edge_006",
+"story": "The search team spent three hours locating the overdue hikers near the western ridge line this evening. When we found them, they were holding our standard trail map but claimed they couldn't decipher the red dotted lines indicating the switchbacks. The map clearly marks the contour lines and the trail path in bright, bold colors that are impossible to miss. It is highly frustrating that basic navigation tools can be misunderstood by average adults, as the directions are printed in plain sight.",
+"group": "edge",
+"domain": "orienteering",
+"target_bias_ids": ["curse_of_knowledge"],
+"style_tags": ["field_notes"],
+"tone_tags": ["weary"]
+},
+{
+"id": "b4_edge_007",
+"story": "Incident Report: Sprint 14 Delivery Delay\nProject Coordinator: Tech Services Team\n\nOur department planned to deploy the upgraded customer portal during the bi-weekly release cycle on Wednesday night. We scheduled exactly twelve hours for final integration testing and code deployment, confident that this timeline would be more than sufficient. Our engineering team had recently restructured the development process, which we believed would eliminate the testing bottlenecks that delayed our last four consecutive portal releases.\n\nHowever, during the migration phase, the legacy API endpoints threw unexpected timeout errors that required our database administrators to rewrite several queries from scratch. The system did not go live until Friday morning, causing a thirty-six hour delay. This delay was caused by unforeseen architectural conflicts rather than any flaws in our sprint scheduling, and we remain confident that our next release cycle will proceed exactly on schedule.",
+"group": "edge",
+"domain": "technical",
+"target_bias_ids": ["planning_fallacy"],
+"style_tags": ["incident_report"],
+"tone_tags": ["weary"]
+},
+{
+"id": "b4_edge_008",
+"story": "My front door smart lock made a strange double-beeping sound at exactly midnight, and I am absolutely terrified that our home network has been targeted by a sophisticated cyberattack. The user manual indicates that a double beep occasionally signifies a low battery warning, but I am convinced a hacker is trying to bypass our security system. We live in a highly quiet suburban neighborhood, but this single electronic noise makes me feel incredibly vulnerable, and I need your engineering team to audit our device's security logs immediately.",
+"group": "edge",
+"domain": "consumer",
+"target_bias_ids": ["base_rate_neglect"],
+"style_tags": ["support_ticket"],
+"tone_tags": ["anxious"]
+},
+{
+"id": "b4_edge_009",
+"story": "The director cast a corporate consultant as our male lead, and I immediately adjusted our costume fitting schedule to accommodate his rigid professional habits. People from corporate finance backgrounds are typically incredibly stiff and demanding about their personal space, making them difficult to collaborate with in a creative setting. I prepared our dressing room with extra hanging racks and a highly formal layout to ensure he felt comfortable and didn't disrupt our creative workflow.",
+"group": "edge",
+"domain": "community_theater",
+"target_bias_ids": ["stereotyping_bias"],
+"style_tags": ["interview"],
+"tone_tags": ["matter-of-fact"]
+},
+{
+"id": "b4_edge_010",
+"story": "Treatment Protocol: Case #882\nSpecies: Adult Red Fox\nDiagnosis: Sarcoptic Mange\n\nThe veterinary medical team evaluated the adult red fox admitted from the eastern valley reserve. The animal exhibits classic symptoms of advanced sarcoptic mange, including severe hair loss and secondary skin lesions. We have two therapeutic options under consideration: the standard weekly subcutaneous ivermectin injections, or a newly formulated topical cream that has recently entered clinical field trials.\n\nThe field reports indicate that the topical cream has shown high efficacy rates in limited trials, but because it is a novel treatment, the exact probability of potential long-term dermatological side effects remains unquantified and ambiguous. To ensure the animal's stable recovery, I decided to proceed with the standard ivermectin injection protocol. While the standard treatment requires multiple stressful handling sessions over four weeks, the risks and recovery timeline of this traditional method are fully understood. Sticking to the established protocol is the most responsible choice for the patient's long-term health.",
+"group": "edge",
+"domain": "wildlife_rescue",
+"target_bias_ids": ["ambiguity_effect"],
+"style_tags": ["lab_notebook"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_adv_001",
+"story": "Subject: Your guaranteed turnaround is here!\n\nYou have watched the tech index fall for ten consecutive trading sessions, dragging your portfolio into the red. But as any experienced market analyst knows, a prolonged downward streak means a massive green rally is overdue to restore the historic average. Don't let this mathematical certainty pass you by; invest in our recovery fund today and secure your profits before the inevitable rebound begins.",
+"group": "adversarial",
+"domain": "finance",
+"target_bias_ids": ["gamblers_fallacy"],
+"style_tags": ["email"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_adv_002",
+"story": "This luxury espresso machine normally retails for one thousand dollars in high-end department stores worldwide. For this weekend only, we are slashing the price to just two hundred and fifty dollars for our newsletter subscribers. You will save seven hundred and fifty dollars on a professional-grade appliance that makes your kitchen feel like an artisanal Italian cafe. Grab yours before our limited stock sells out completely.",
+"group": "adversarial",
+"domain": "consumer",
+"target_bias_ids": ["anchoring_bias"],
+"style_tags": ["newspaper"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_adv_003",
+"story": "Did you know that microscopic brain shrinkage can begin as early as age thirty, leading to noticeable memory lapses and cognitive decline? Every time you misplace your car keys or forget a colleague's name, your brain cells are actively struggling to communicate. Don't wait until the damage becomes permanent and irreversible; protect your mental agility with our clinically tested NeuroMax formula today.",
+"group": "adversarial",
+"domain": "medical",
+"target_bias_ids": ["base_rate_neglect"],
+"style_tags": ["newspaper"],
+"tone_tags": ["urgent"]
+},
+{
+"id": "b4_adv_004",
+"story": "Are you tired of these modern, over-engineered plastic hives that flood the market with vague promises and unquantified material risks? Our classic cedar beehives have been the gold standard for over a century, providing a fully understood, traditional environment for your colony to thrive. Don't risk your honey harvest on complex, ambiguous synthetic setups with unknown long-term chemical impacts; stick to the timeless wood design that generations of beekeepers have trusted.",
+"group": "adversarial",
+"domain": "beekeeping",
+"target_bias_ids": ["ambiguity_effect"],
+"style_tags": ["forum_post"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_adv_005",
+"story": "Lecture Slides: Raising High Achievers in a Competitive World\nPresenter: Dr. Eleanor Vance\n\nWelcome, parents, to this exclusive seminar on early childhood development. If you look at the recent Ivy League admission profiles, you will notice a highly undeniable trend: every single successful applicant had parents who closely monitored their daily schedules, extracurricular commitments, and social interactions. This evidence clearly proves that highly structured, hands-on parental supervision is the single most critical factor in guaranteeing your child's academic and professional success.\n\nSome critics claim that unsupervised free play is essential for building natural resilience, but we have all seen the tragic stories of children who fell behind because their parents took a hands-off approach. We must focus on the data that supports our protective instincts. By enrolling in our intensive parenting coaching program today, you are choosing to align with the proven path of success, ensuring your child has every single advantage they deserve.",
+"group": "adversarial",
+"domain": "family",
+"target_bias_ids": ["confirmation_bias"],
+"style_tags": ["lecture_notes"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_adv_006",
+"story": "Are you ready to become a master wilderness navigator without spending years studying complex maps and confusing compass formulas? Our revolutionary QuickPath system is designed to teach you the entire science of orienteering in just one short afternoon. You will gain the ultimate confidence to lead any backcountry expedition, bypassing the unnecessary academic jargon that other courses use to make navigation seem difficult.",
+"group": "adversarial",
+"domain": "orienteering",
+"target_bias_ids": ["dunning_kruger_effect"],
+"style_tags": ["forum_post"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_adv_007",
+"story": "To: All Department Heads\nFrom: Enterprise Solutions Group\nSubject: Rapid ERP Deployment\n\nWe are excited to announce our upcoming corporate transition to the SAP system, which will streamline our inventory tracking, payroll processing, and client relations. While traditional software integrations often drag on for months, our selected consulting agency has guaranteed a complete, seamless deployment within exactly three weeks. They have designed a highly streamlined, pre-configured database template that bypasses the standard testing cycles, ensuring our daily operations will face zero disruptions.\n\nSome of our senior engineers have raised concerns about the timeline, pointing to industry reports where similar enterprise-scale overhauls took nearly a year to resolve custom mapping errors. However, our consultants assure us that those historical delays were caused by poor project management rather than the software itself. By adopting this rapid three-week deployment schedule, we will leapfrog our competitors and unlock massive operational efficiencies without the exhausting delays of traditional IT rollouts.",
+"group": "adversarial",
+"domain": "technical",
+"target_bias_ids": ["planning_fallacy"],
+"style_tags": ["email"],
+"tone_tags": ["urgent"]
+},
+{
+"id": "b4_adv_008",
+"story": "Get the ultimate home security protection with our flexible subscription packages starting today. Our Basic plan offers standard motion alerts for just ten dollars a month, while our Premium tier includes full 24/7 video monitoring for thirty dollars. Or, you can choose our Elite plan, which gives you full video monitoring plus premium emergency dispatch support for that exact same thirty-dollar price. Upgrade to Elite now to secure the absolute best value on the market.",
+"group": "adversarial",
+"domain": "consumer",
+"target_bias_ids": ["decoy_effect"],
+"style_tags": ["forum_post"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_adv_009",
+"story": "Welcome back, cast and crew, to the launch of our winter season fundraising drive. As members of the local community theater guild, we share a deep, authentic passion for the arts that you simply cannot find in those cold, sterile commercial productions in the big city. Our local performers bring a unique warmth and genuine talent to every scene, and by supporting our guild, you are helping our close-knit family outshine those overpaid professional troupes.",
+"group": "adversarial",
+"domain": "community_theater",
+"target_bias_ids": ["in_group_bias"],
+"style_tags": ["lecture_notes"],
+"tone_tags": ["enthusiastic"]
+},
+{
+"id": "b4_adv_010",
+"story": "The devastating reality of the coastal chemical spill is visible in the eyes of this helpless, shivering seal pup, her fragile coat completely matted with toxic black sludge. As she struggles to breathe on the rocky shore, she is entirely alone, waiting for someone to wash away the poison that threatens her life. Your immediate donation of just forty-five dollars will buy the medical supplies and specialized cleaning agents needed to save her and dozens of other innocent animals before the sun sets today.\n\nEvery second you hesitate is another painful breath she must endure in the freezing surf. Please don't let administrative details or red tape delay your compassion; our rescue boats are ready to launch right now, but they are completely dependent on your generosity. Open your heart to these defenseless creatures and make your tax-deductible contribution today to bring hope back to our fragile coastline.",
+"group": "adversarial",
+"domain": "wildlife_rescue",
+"target_bias_ids": ["affect_heuristic"],
+"style_tags": ["newspaper"],
+"tone_tags": ["urgent"]
+},
+{
+"id": "b4_neg_001",
+"story": "Database Update Log - Server Stack F12. At 04:00 UTC, the system administrators initiated the scheduled deployment of security patch version 4.2.1. The update modified the encryption protocols for the primary user database. System monitoring verified that transaction processing times returned to the standard baseline of fifteen milliseconds. The maintenance window closed at 04:30 UTC with zero active anomalies reported.",
+"group": "negative",
+"domain": "finance",
+"target_bias_ids": [],
+"style_tags": ["maintenance_log"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_neg_002",
+"story": "Kiln Firing Run #902. The electric kiln was loaded with thirty stoneware cups and programmed for a standard Cone 6 firing profile. The temperature reached one hundred degrees Celsius at 08:00 and was increased at a rate of one hundred and fifty degrees per hour. Peak temperature of twelve hundred degrees Celsius was recorded at 16:30. The kiln was powered down and left to cool to room temperature overnight.",
+"group": "negative",
+"domain": "ceramics",
+"target_bias_ids": [],
+"style_tags": ["lab_notebook"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_neg_003",
+"story": "Triage Record - Patient ID #4402. The patient, a fifty-four-year-old male, was admitted to the clinic at 11:15 presenting with moderate pain in the right shoulder. Initial physical examination showed local swelling but no visible lacerations. Vitals were recorded: blood pressure is 130 over 85, heart rate is seventy-five beats per minute, and blood oxygen saturation is ninety-eight percent. The patient was referred to radiology for standard imaging.",
+"group": "negative",
+"domain": "medical",
+"target_bias_ids": [],
+"style_tags": ["field_notes"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_neg_004",
+"story": "Hive Inspection Report - Apiary Block B. At 13:00, the apiary technician inspected Hive #4 under clear skies and a temperature of twenty-four degrees Celsius. The colony occupied eight frames in the deep brood box. The queen was located on frame three, and active egg-laying was observed in the central cells. Honey reserves were estimated at ten kilograms, and the mite board showed a count of two varroa mites over forty-eight hours.",
+"group": "negative",
+"domain": "beekeeping",
+"target_bias_ids": [],
+"style_tags": ["field_notes"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_neg_005",
+"story": "The Oakridge Community Council has scheduled the annual family picnic for next Saturday at Central Park, beginning at 10:00. The event includes a local craft exhibition, a communal barbecue lunch, and a children's obstacle course. Admission is free for all municipal residents, and parking will be available in the north lot. In the event of rain, the activities will be moved to the high school gymnasium.",
+"group": "negative",
+"domain": "family",
+"target_bias_ids": [],
+"style_tags": ["newspaper"],
+"tone_tags": ["matter-of-fact"]
+},
+{
+"id": "b4_neg_006",
+"story": "Event Summary - Orienteering Course Alpha. The regional orienteering meet took place on October 14 at the Pine Hill reserve. A total of forty-two registered participants started the five-kilometer course. The first competitor crossed the finish line at forty-five minutes and twelve seconds, while the average completion time was sixty-two minutes. Three competitors retired from the course prior to reaching the third checkpoint, and no injuries were reported.",
+"group": "negative",
+"domain": "orienteering",
+"target_bias_ids": [],
+"style_tags": ["incident_report"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_neg_007",
+"story": "Hardware Replacement Log - Rack 3. On July 12, technicians replaced the primary solid-state drive in server node Delta-4 due to a write-endurance threshold alert. The old drive was removed and logged for secure physical destruction. The new one-terabyte drive was installed, partition tables were copied from the backup mirror, and the server was re-integrated into the active cluster. System diagnostic checks reported normal operations at 11:45.",
+"group": "negative",
+"domain": "technical",
+"target_bias_ids": [],
+"style_tags": ["maintenance_log"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_neg_008",
+"story": "Support Ticket #89042. The customer reports that the physical start button on microwave model MW-200 failed to respond to pressure during initial setup. The remaining control panel functions, including the digital clock and power level selectors, are operating normally. The unit was purchased on January 10 and remains within the standard warranty period. The technician scheduled a replacement unit delivery for Thursday morning.",
+"group": "negative",
+"domain": "consumer",
+"target_bias_ids": [],
+"style_tags": ["support_ticket"],
+"tone_tags": ["matter-of-fact"]
+},
+{
+"id": "b4_neg_009",
+"story": "Lighting Equipment Inventory - Main Stage. The technical crew conducted a physical audit of the stage lighting fixtures on November 5. Out of forty-five spotlight units, forty-three were verified as operational. Two units were removed from the rigging due to burned-out halogen lamps. Technicians replaced the bulbs and re-installed the fixtures. The control console was updated to verify that all dimmer channels are responding correctly.",
+"group": "negative",
+"domain": "community_theater",
+"target_bias_ids": [],
+"style_tags": ["maintenance_log"],
+"tone_tags": ["clinical"]
+},
+{
+"id": "b4_neg_010",
+"story": "Wildlife Clinic Daily Log - Enclosure 7. The three juvenile eastern gray squirrels admitted on June 10 were weighed at 08:00. Individual weights were recorded at 120 grams, 125 grams, and 130 grams respectively. Each animal received a standard formula feeding of ten milliliters via oral syringe. The physical therapy session for the injured hind leg of the second squirrel was completed as scheduled, and all animals were returned to the holding cage.",
+"group": "negative",
+"domain": "wildlife_rescue",
+"target_bias_ids": [],
+"style_tags": ["field_notes"],
+"tone_tags": ["clinical"]
+}
+]

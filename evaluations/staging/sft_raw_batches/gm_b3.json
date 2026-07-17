@@ -1,0 +1,603 @@
+[
+  {
+    "id": "b3_pos_001",
+    "story": "We woke up to find our entire school of neon tetras floating in the 55-gallon tank. I forgot to clean the mechanical filter intake on Tuesday night, and that single mistake clearly poisoned the water columns overnight. Even though the nitrate levels were slowly creeping up for over a month and my heater was sparking occasionally, it was definitely that one missed Tuesday filter maintenance that destroyed our beautiful setup.",
+    "group": "positive",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "negativity_bias",
+      "recency_bias"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_pos_002",
+    "story": "My beloved shimpaku juniper is showing severe needle browning, but I bought expensive copper wire to style its branches anyway. Having poured three years of painstaking daily misting and root-pruning into this tree, I cannot simply discard it. Spring is just around the corner, and I am certain a double dose of fertilizer will revive the dormant cambium layer by next week.",
+    "group": "positive",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "escalation_of_commitment",
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "hopeful"
+    ]
+  },
+  {
+    "id": "b3_pos_003",
+    "story": "Yesterday's regatta proved my cloud-reading method is infallible, just like our close call during the Fastnet race last summer where I knew exactly when the squall would break before it even hit the radar. The barometer was falling, but I saw the mackerel sky at dawn and immediately adjusted our tack, proving we can outmaneuver any pressure system. Weather routing software is useless compared to checking the horizon myself.",
+    "group": "positive",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "illusion_of_control",
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_pos_004",
+    "story": "The juvenile red-tailed hawk brought in from Sector 4 exhibits magnificent plumage and a fiercely sharp gaze, signaling an incredibly robust constitution. Despite the compound fracture of the left humerus, which typically has a grim ten-percent release rate, this bird's proud posture convinces me we will have him flying within a month. We should skip the standard long-term holding protocols and prepare the release site early.",
+    "group": "positive",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "halo_effect",
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_pos_005",
+    "story": "Our smart refrigerator is making a loud grinding noise and the ice maker jammed again, but the touch-screen interface is absolutely spectacular. I spent six months researching models before selecting this premium appliance, and its high-fidelity integrated speakers make my kitchen feel incredibly modern. A little compressor noise is a tiny price to pay for such a masterfully engineered kitchen hub.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_pos_006",
+    "story": "That man in the leather vest with the skull tattoos on his neck must have started the altercation near the pool tables. He fits the classic profile of a biker gang enforcer who looks for trouble the second he walks into a quiet establishment. Even though I didn't see who threw the first pint glass, there's no doubt his presence initiated the violence.",
+    "group": "positive",
+    "domain": "legal",
+    "target_bias_ids": [
+      "representativeness_heuristic",
+      "stereotyping_bias"
+    ],
+    "style_tags": [
+      "witness_statement"
+    ],
+    "tone_tags": [
+      "earnest"
+    ]
+  },
+  {
+    "id": "b3_pos_007",
+    "story": "We decided to decline the preventative heart valve replacement surgery because we simply cannot accept the five-percent risk of surgical mortality. If the surgeon makes a mistake during the procedure and we lose my mother, we could never live with that active choice. Letting her condition progress naturally feels like the only moral path, even if the cardiologist claims she faces a ninety-percent stroke risk without intervention.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": [
+      "omission_bias",
+      "framing_effect"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "anxious"
+    ]
+  },
+  {
+    "id": "b3_pos_008",
+    "story": "To the Engineering Steering Committee,\n\nWe are proposing another six-month extension for the custom legacy database engine upgrade. While the cloud team insists that migrating to standard AWS instances would resolve our latency immediately, they do not understand the beautiful architecture we pioneered back in 2018. That initial success is what defined our startup's identity and proved our proprietary algorithms were superior.\n\nAbandoning our built-from-scratch foundation now would render our engineering department's history meaningless. Yes, we have missed the last three deployment deadlines and spent half our annual budget on debugging this proprietary code, but we are on the verge of a breakthrough. If we redirect two more developers from the mobile team to help us patch the core memory leaks, our original vision will be fully vindicated. Let's finish what we started.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "escalation_of_commitment",
+      "narrative_fallacy"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_pos_009",
+    "story": "November 8th,\n\nThe precinct data confirmed our historic victory last night, and it is entirely due to the \"Family First\" television commercial I produced for the final week of the campaign. When we aired that ad, we perfectly captured the heart of the district, showing voters exactly who our candidate was. My strategic decision to run those spots on local sports channels was the silver bullet that turned the tide.\n\nSome of our analysts are trying to argue that the sudden drop in opposing voter turnout was caused by the unexpected blizzard on Tuesday, or that the district's boundaries were redrawn last year to include thousands of our registered party members. That is just bureaucratic noise. This victory belongs to the power of our storytelling and my media placement strategy.",
+    "group": "positive",
+    "domain": "political",
+    "target_bias_ids": [
+      "narrative_fallacy",
+      "self_serving_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b3_pos_010",
+    "story": "Station 4, Migratory Banding Log.\n\nToday's mist-net captures are exceptionally encouraging. Over forty warblers were processed this morning, and every single specimen exhibited pristine plumage, zero feather mites, and excellent fat deposits around the wishbone. Based on this flawless sample, we can confidently declare that the recent chemical spill in the southern wetlands had no negative impact on the local avian population's overall vitality.\n\nWe did not find a single weak or injured bird in our nets today, which proves the forest is thriving. This robust data allows us to bypass the scheduled autumn ground surveys of nesting sites. The birds are clearly thriving, and our band recovery rates will undoubtedly break records this season.",
+    "group": "positive",
+    "domain": "bird_banding",
+    "target_bias_ids": [
+      "survivorship_bias",
+      "overconfidence_bias"
+    ],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_edge_001",
+    "story": "Yesterday I repotted my Japanese maple into the organic pine bark blend, and today three lower branches are dropping leaves. This new soil mix is clearly too dense and holds far too much moisture at the root plane. I should have stuck with the pure pumice and akadama formula, because this batch has likely ruined my tree's summer growth cycle.",
+    "group": "edge",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_edge_002",
+    "story": "A tiny puddle formed under our new filtration unit this morning, confirming my fears that these modern canister designs are prone to gasket failures. Even though the water clarity has improved tenfold over the last forty-eight hours, this seal issue makes me regret upgrading from our old reliable hang-on-back filter.",
+    "group": "edge",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "negativity_bias",
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_edge_003",
+    "story": "We altered our course to the outer channel during the third leg to steer clear of the southern shoals. Our competitor took the inner passage and won the race, but their success was pure recklessness. The shallow sandbar would have certainly grounded our deeper draft if we had attempted their trajectory, making our conservative detour the only logical decision.",
+    "group": "edge",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_edge_004",
+    "story": "An orphaned gray squirrel pup was recovered from the base of an oak tree near the park entrance. Because no adult female was visible anywhere in the canopy for over forty-five minutes, the mother was presumed deceased or permanently displaced. We took the pup into immediate quarantine to prevent hypothermia and starvation.",
+    "group": "edge",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "representativeness_heuristic"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_edge_005",
+    "story": "We upgraded to the yearly subscription after your billing email warned us that we were throwing away one hundred and twenty dollars annually on the pay-as-you-go plan. I wanted to keep our options open in case our project wraps up early this spring, but seeing that massive loss listed out on our invoice forced my hand.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "loss_aversion",
+      "framing_effect"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_edge_006",
+    "story": "To the managing partners,\n\nWe should advise our client to accept the prosecution's plea agreement rather than proceeding to a jury trial next Tuesday. The unexpected guilty verdict we received in the Smith trial last Thursday indicates that local juries are currently taking an extremely harsh stance on commercial fraud allegations. Pushing for a full defense verdict right now carries far too much risk.",
+    "group": "edge",
+    "domain": "legal",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_edge_007",
+    "story": "Patient in bed 3B developed a superficial surgical site infection seventy-two hours post-laparoscopy. It is highly probable the patient failed to comply with our strict home-care washing protocols and allowed the dressing to become contaminated. We gave them explicit verbal and written instructions, so this complication points directly to personal negligence on their part.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": [
+      "fundamental_attribution_error"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_edge_008",
+    "story": "Incident Report: Server Stack Delta Outage.\n\nThe catastrophic failure of our primary database node occurred precisely at 04:12 UTC, matching the peak window of the severe geomagnetic storm highlighted in the aerospace bulletin we received earlier. While the automated log trace indicates a standard buffer overflow occurred in our legacy query router, the sheer scale of the simultaneous cluster drops points to external interference. Cosmic radiation frequently disrupts the delicate silicon memory states in older physical servers, presenting exactly like a software error.\n\nGiven the astronomical alignment of these events, we are attributing this downtime to atmospheric disruption. We have closed the ticket and advised the operations team that standard patch deployments would not have prevented this space-weather incident. No internal code adjustments are required.",
+    "group": "edge",
+    "domain": "technical",
+    "target_bias_ids": [
+      "representativeness_heuristic",
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_edge_009",
+    "story": "October 24th,\n\nWe visited Master Kimura's private garden today, and his award-winning white pines left us completely breathless with their perfect foliage balance. During the tour, I noticed he keeps large bags of standard low-grade river silt stored near his workshop. If a true master utilizes this basic, inexpensive silt for his masterpiece trees, then this medium must possess hidden drainage properties that far surpass expensive imported Japanese clays.\n\nI am going to replace the akadama in all forty of my high-end maple projects with local river silt next weekend. If it works for his world-class collection, it will undoubtedly elevate my own backyard benches to professional standards. Our watering schedules and microclimates are slightly different, but the master's choice of materials is the ultimate proof of quality.",
+    "group": "edge",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_edge_010",
+    "story": "To everyone in the local field office,\n\nOur candidate absolutely dominated the debate stage last night during the discussion on municipal zoning. That brilliant, quick-witted response about park funding completely silenced the moderator and proved our platform is incredibly strong. I spent the entire morning reviewing the video clip of that specific exchange, and it is clear we have the intellectual high ground.\n\nSeveral major news networks are publishing polls suggesting our opponent gained a ten-point lead among undecided viewers who watched the full broadcast. Those figures must be heavily skewed or manufactured by biased media outlets. Anyone who actually watched that zoning segment can see our campaign's momentum is unstoppable. We just need to keep sharing that specific clip on our personal feeds to keep the energy up.",
+    "group": "edge",
+    "domain": "political",
+    "target_bias_ids": [
+      "confirmation_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_adv_001",
+    "story": "Your exclusive invitation to the Master Woodworking Seminar is about to expire in less than twelve hours. Only three workbenches remain open, and once they are filled, you will miss your chance to learn these proprietary joinery techniques forever. Do not let this opportunity to elevate your craft slip away while other carpenters secure their competitive advantage.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "loss_aversion",
+      "framing_effect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_002",
+    "story": "Look at the extraordinary health of the centenarians in Okinawa who consume active green tea extracts every single morning. These vibrant seniors are climbing mountains and working fields at age ninety-five, proving that natural botanicals hold the absolute key to human longevity. Incorporating our premium extract into your daily routine is the simplest step to guaranteeing a disease-free future.",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": [
+      "survivorship_bias",
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_adv_003",
+    "story": "This helpless, oil-slicked pelican is struggling to breathe on our northern shores right now, her feathers weighted down by toxic sludge. Our rescue sanctuary needs your immediate donation of fifty dollars today to save her life and wash away the poison. Every second you hesitate is another painful breath she must endure alone.",
+    "group": "adversarial",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "affect_heuristic",
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_004",
+    "story": "You can master the ancient art of pine styling for just one dollar a day, a tiny fraction of what you would spend buying a single finished tree at a nursery. Instead of risking a costly mistake on your own, unlock our complete step-by-step masterclass today. For less than the price of a daily coffee, your benches will soon rival the finest private collections.",
+    "group": "adversarial",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "framing_effect",
+      "anchoring_bias"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_adv_005",
+    "story": "Remember that terrible collision off the coast of Cowes last month during the heavy fog? Our latest marine radar system is the exact technology that allowed the winning crew to navigate safely through that absolute chaos. Don't let your boat be the next high-profile casualty on the evening news; equip your vessel with our system before the weekend regatta.",
+    "group": "adversarial",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "availability_heuristic",
+      "recency_bias"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_adv_006",
+    "story": "True reef-keeping elites understand that cheap tap conditioners have no place in a high-end marine system. Our exclusive online community of dedicated aquarists trusts only the professional-grade salt mixes to maintain our pristine setups. Join the ranks of real experts who protect their fragile coral investments with our certified additives, leaving the basic starter kits to the novices.",
+    "group": "adversarial",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "in_group_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_adv_007",
+    "story": "Our coding bootcamp graduates are currently earning six-figure salaries at tech giants like Google and Meta. You have the raw analytical talent to join them and secure your financial freedom in just twelve short weeks. Enroll in our upcoming cohort today and watch your career trajectory instantly align with the industry's highest earners.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": [
+      "optimism_bias",
+      "survivorship_bias"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_adv_008",
+    "story": "Q: What makes your firm the right choice for this complex patent dispute?\n\nA: Look at our courtroom track record over the past decade. We have secured complete defense verdicts in all twelve of our high-stakes intellectual property cases, showing that our trial methodology is completely bulletproof. When you hire our team, you are securing a guaranteed shield against these baseless competitor claims. \n\nWe are already preparing our opening arguments, and I am highly confident we will have this entire lawsuit dismissed before it even reaches the discovery phase. This litigation is a minor hurdle that will ultimately highlight your company's dominant market position once we secure our swift victory. There is absolutely no reason to consider a costly settlement when our legal team has never lost a trial of this nature. We are ready to protect your innovations.",
+    "group": "adversarial",
+    "domain": "legal",
+    "target_bias_ids": [
+      "survivorship_bias",
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_adv_009",
+    "story": "Excerpt from Keynote Address:\n\nLook at the state of our municipal infrastructure today. Our bridges are crumbling, our local parks are overrun with neglected waste, and our small businesses are closing their doors at an alarming rate. If we do not act immediately to elect a completely new city council, we are choosing to let our historic neighborhood slide into permanent, irreversible decay.\n\nThis election is not a choice between two political platforms; it is a choice between active survival and passive ruin. A vote for the opposition is a direct endorsement of this rising crime and economic stagnation that threatens your family's safety every single night. We must reject this decline and reclaim our city's future before the damage becomes absolute. Your vote is the only shield protecting our community from this impending collapse.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": [
+      "negativity_bias",
+      "framing_effect"
+    ],
+    "style_tags": [
+      "lecture_notes"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_010",
+    "story": "For the serious carpenters on this forum,\n\nWe are launching our custom-milled bench plane series this morning. Our Premium Cast-Iron model is priced at three hundred dollars, offering flawless shaving consistency for a lifetime of cabinetry. For the ultimate collector, we also offer the Hand-Engraved Titanium edition for twelve hundred dollars, which is truly a work of museum-quality art.\n\nHowever, our standard Professional model is only three hundred and fifty dollars and actually includes the upgraded cobalt steel blade that usually costs an extra hundred dollars on its own. It is the exact tool featured in Master Carver Evans' latest workshop videos, where its smooth performance is praised by everyone in the guild. Don't settle for cheap consumer-grade hardware when you can equip your workshop with the exact tool the masters use to achieve perfect results.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "decoy_effect",
+      "halo_effect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_neg_001",
+    "story": "Bonsai Greenhouse Bench 3 Maintenance.\nOn June 15, the automated drip irrigation emitters were inspected and cleared of mineral scale. Soil moisture levels across all forty liquidambar specimens were recorded at forty-five percent. Organic slow-release fertilizer pellets were applied to the surface soil of each container at a rate of ten grams per pot.",
+    "group": "negative",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_002",
+    "story": "Water Chemistry Log - Tank B12.\nThe weekly parameters for the marine reef system were recorded at 08:00. Salinity is 1.025 specific gravity, pH is 8.2, and water temperature is 25.5 degrees Celsius. The protein skimmer collection cup was emptied and rinsed with distilled water. Two liters of top-off water were added to the sump reservoir.",
+    "group": "negative",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_003",
+    "story": "Regatta Incident Report: Hull 47.\nDuring the second lap of the afternoon race, the port shroud on vessel Hull 47 parted under tension. The mast remained upright, and the crew immediately lowered all sails. The vessel was towed to the marina by the safety boat. No injuries were reported, and the hull sustained no contact damage.",
+    "group": "negative",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_004",
+    "story": "Wildlife Intake Record: Case 2026-89.\nAn adult female eastern cottontail was admitted to the facility at 14:30. The animal was found immobile in a residential garden. Initial physical examination revealed no external lacerations or bone fractures. The rabbit was placed in a quiet holding enclosure with fresh clover and water for overnight observation.",
+    "group": "negative",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_005",
+    "story": "Banding Session Summary - Location Creek Side.\nThe mist nets were deployed at 05:30 and closed at 11:30. A total of twelve birds were processed, including eight common yellowthroats and four song sparrows. Each bird was fitted with a standard aluminum leg band, weighed, and released. Wind speed remained below five knots throughout the session.",
+    "group": "negative",
+    "domain": "bird_banding",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_006",
+    "story": "Support Ticket Reference: 89042-X.\nThe user reports that the mobile application crashes when attempting to export transaction history to a CSV file. The issue occurs on software version 4.2.1 using the iOS operating system. The development team has reproduced the crash under laboratory conditions and scheduled a patch release for Thursday morning.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_007",
+    "story": "The County Superior Court has scheduled the civil trial between Apex Development and the City Zoning Board for October 12. The dispute centers on the environmental assessment requirements for the proposed downtown transit hub. Both parties have submitted their final witness lists, and pre-trial motions will be heard next Friday.",
+    "group": "negative",
+    "domain": "legal",
+    "target_bias_ids": [],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_008",
+    "story": "Assay Run 402 - Control Group.\nSerum samples from ten healthy adult donors were processed using the standard ELISA protocol. Optical density values were measured at 450 nanometers. The average concentration of the target protein was calculated at 4.2 micrograms per milliliter, which falls within the expected physiological reference range of 3.5 to 5.0.",
+    "group": "negative",
+    "domain": "medical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_009",
+    "story": "Server Room 2B Maintenance Record.\nTechnicians replaced the backup battery units on UPS Rack 4 this morning. The old batteries were removed and logged for recycling in accordance with disposal regulations. The system self-test was initiated, and the control panel confirmed that all circuits are operating under normal load parameters.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_010",
+    "story": "The Municipal Council has voted six to three to approve the annual budget for the parks department. The new allocation increases funding for playground equipment maintenance by five percent while reducing the administrative travel budget. The approved changes will take effect at the start of the next fiscal quarter on July 1.",
+    "group": "negative",
+    "domain": "political",
+    "target_bias_ids": [],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  }
+]

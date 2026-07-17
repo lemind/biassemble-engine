@@ -1,0 +1,362 @@
+[
+  {
+    "id": "b2_pos_001",
+    "story": "Reading a single beginner field guide, I confidently told the foraging group that the yellow caps we found were definitely golden chanterelles. I completely skipped the mandatory spore print test because the pictures in my book matched perfectly. I assumed my basic visual check was just as reliable as a professional lab analysis, so I urged everyone to harvest them immediately for dinner.",
+    "group": "positive",
+    "domain": "mycology",
+    "target_bias_ids": ["dunning_kruger_effect"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b2_pos_002",
+    "story": "Mapping the ridge trail for tomorrow's competitive run, I confidently estimated a comfortable two-hour completion time. I focused entirely on the horizontal distance displayed on the topographic map. I completely glossed over the dense contour lines indicating a steep, technical ascent that would naturally slow my pace down significantly during the actual physical event. I am certain I can maintain a steady speed.",
+    "group": "positive",
+    "domain": "orienteering",
+    "target_bias_ids": ["planning_fallacy"],
+    "style_tags": ["diary"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_pos_003",
+    "story": "The plaster jacket for the hadrosaur femur failed to set properly this morning, delaying our excavation schedule by a full day. I immediately confronted the lead graduate student, pointing out that his sloppy mixing technique and lack of attention to detail were clearly to blame for this disaster. It never crossed my mind to check the supply manifest, which showed the vendor had delivered a batch of expired, compromised plaster of Paris. I am just frustrated by the younger generation's work ethic and their apparent disregard for precise field methodologies. They simply do not care about the science the way we did. I made sure to document his incompetence in the daily log so the department head understands why we are behind schedule. A true professional would have noticed the texture was off, but he was too busy checking his phone. I expect better from anyone wearing a university badge.",
+    "group": "positive",
+    "domain": "paleontology",
+    "target_bias_ids": ["fundamental_attribution_error"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b2_pos_004",
+    "story": "Inspecting the top bar hive, I found capped brood in the first three frames. Convinced the queen was on a massive laying streak, I stopped checking the remaining frames to avoid disturbing her. I assumed the entire colony was perfectly healthy and productive based solely on that initial positive observation. This logic seemed completely sound to me at the time.",
+    "group": "positive",
+    "domain": "beekeeping",
+    "target_bias_ids": ["hot_hand_fallacy"],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_pos_005",
+    "story": "We have already invested forty hours into stabilizing this frayed eighteenth-century tapestry. Even though the delicate silk threads are actively disintegrating under the tension of our current mounting frame, we cannot stop the process now. We have to keep reinforcing it to justify the massive amount of time and resources we have already sunk into the project. Quitting would mean all that effort was wasted.",
+    "group": "positive",
+    "domain": "textile_conservation",
+    "target_bias_ids": ["escalation_of_commitment"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b2_pos_006",
+    "story": "Our community garden yielded a record harvest of tomatoes this summer, which I attribute entirely to my innovative, carefully planned composting schedule. When the squash vines inevitably succumbed to powdery mildew, I naturally blamed the unseasonable humidity and the other volunteers' complete failure to prune the leaves properly. My agricultural methods are clearly superior to their lazy, uneducated approaches to community gardening. I did everything right, and they ruined the squash. It is frustrating to watch people ignore basic horticultural science, but I remain confident that my techniques are the sole reason for any success we achieved this season. I will definitely be leading the planning committee next year to ensure proper standards.",
+    "group": "positive",
+    "domain": "social",
+    "target_bias_ids": ["self_serving_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b2_pos_007",
+    "story": "My nephew asked to borrow fifty dollars for the weekend. Without asking what it was actually for, I handed him twenty and told him to stop wasting money on mobile game microtransactions. Teenagers always blow their cash on digital junk, so there was no point in even hearing his excuse. I know exactly how his generation operates.",
+    "group": "positive",
+    "domain": "family",
+    "target_bias_ids": ["stereotyping_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_pos_008",
+    "story": "Translating the newly discovered Mercian dialect manuscript, I focused exclusively on finding cognates that supported my theory of a direct Norse migration route. Whenever I encountered irregular verb conjugations or vocabulary that contradicted the established timeline, I dismissed them as later scribal errors or local anomalies. I only highlighted the phonetic shifts that perfectly aligned with my hypothesis, building a robust-looking argument while actively ignoring the linguistic data that proved my migration model was fundamentally flawed. It is frustrating when peers point out these inconsistencies, as they clearly lack the vision to see the broader historical pattern I have uncovered. The evidence speaks for itself if you know how to read it correctly, and I refuse to dilute my groundbreaking theory with irrelevant exceptions.",
+    "group": "positive",
+    "domain": "historical_linguistics",
+    "target_bias_ids": ["confirmation_bias"],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b2_pos_009",
+    "story": "The database cluster keeps timing out during peak load. I noticed that if I manually restart the primary node at exactly 14:02, the queries clear up immediately. I have started scheduling my coffee break for 14:00 so I can be at my desk to perform the restart at the exact right minute. I firmly believe my precise timing controls the system's overall stability.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": ["illusion_of_control"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b2_pos_010",
+    "story": "The mayoral candidate gave an incredibly warm, comforting speech about community values and family traditions. I felt so reassured by his gentle tone and genuine smile that I immediately donated to his campaign. I did not bother to read his actual policy proposals on urban zoning, as his overwhelmingly positive demeanor convinced me he is entirely trustworthy.",
+    "group": "positive",
+    "domain": "political",
+    "target_bias_ids": ["affect_heuristic"],
+    "style_tags": ["email"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_edge_001",
+    "story": "Finding a patch of mushrooms in the deep woods, I ignored the statistical fact that ninety percent of lookalikes in this specific region are highly toxic. I focused entirely on the specific habitat and the one physical trait that matched the rare delicacy, assuming the environment guaranteed its safe identity. I harvested a full basket. The surrounding foliage looked perfect, and the cap color was an exact match to the guidebook illustration. I did not bother with a spore print or consulting a local expert, as the visual cues felt overwhelmingly conclusive to me in that specific moment.",
+    "group": "edge",
+    "domain": "mycology",
+    "target_bias_ids": ["base_rate_neglect"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_edge_002",
+    "story": "A well-dressed tourist approached me with a pristine, unfolded topographic map. Assuming his neat appearance and expensive outdoor gear meant he was an expert navigator, I asked him for the fastest route to the summit. I ignored the possibility that he might just be a wealthy beginner who bought the equipment online yesterday.",
+    "group": "edge",
+    "domain": "orienteering",
+    "target_bias_ids": ["representativeness_heuristic"],
+    "style_tags": ["diary"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b2_edge_003",
+    "story": "Estimating the risk of working in the lower quarry, I calculated a high probability of rockfalls. My reasoning was heavily influenced by a vivid memory of a colleague who suffered a minor injury from a falling shale fragment last month. Even though the geological surveys show the strata are highly stable and the statistical incident rate is less than one percent over a decade, the recent, memorable event skewed my risk assessment entirely. I insisted we halt operations until a secondary review was conducted. The team thought I was overreacting, but I could not shake the image of that accident. It felt like the quarry was inherently dangerous right now, regardless of what the long-term data suggested. I prioritized my immediate emotional response over the objective safety metrics provided by the engineering department.",
+    "group": "edge",
+    "domain": "paleontology",
+    "target_bias_ids": ["availability_heuristic"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b2_edge_004",
+    "story": "Predicting this season's honey yield, I started with last year's total of fifty pounds per hive as my baseline. I adjusted my estimate down slightly to forty-five pounds to account for the spring rains, completely forgetting to factor in the severe summer drought that has dried up the primary nectar sources entirely. My projection remains firmly rooted in that initial number.",
+    "group": "edge",
+    "domain": "beekeeping",
+    "target_bias_ids": ["anchoring_bias"],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_edge_005",
+    "story": "The nineteenth-century silk bodice looks absolutely pristine and beautifully woven on the surface. Because the exterior craftsmanship is so flawless, I assumed the internal structural seams must be chemically stable and completely free of degradation. This assumption led me to delay the necessary microscopic testing for hidden fiber weakness. The visual perfection implies total structural integrity.",
+    "group": "edge",
+    "domain": "textile_conservation",
+    "target_bias_ids": ["halo_effect"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b2_edge_006",
+    "story": "Arguing with a colleague about the etymology of a regional slang term, I kept bringing up modern internet memes as the root cause. The recent examples were fresh in my mind, making them seem like the most logical origin point. I entirely neglected to check the nineteenth-century census records for older, more relevant precedents.",
+    "group": "edge",
+    "domain": "historical_linguistics",
+    "target_bias_ids": ["recency_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b2_edge_007",
+    "story": "All the neighbors on my street signed up for the new municipal composting pickup service. Even though I live in a small apartment and generate very little organic waste, I registered for the weekly bin just to fit in with the rest of the block. I did not want to be the only one opting out of the neighborhood trend.",
+    "group": "edge",
+    "domain": "social",
+    "target_bias_ids": ["bandwagon_effect"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b2_edge_008",
+    "story": "My sister asked for advice on whether to cosign a risky business loan for her partner. I focused heavily on the active harm of giving bad financial advice and the potential guilt if the business failed. Consequently, I told her to just follow her heart, ignoring the passive but severe harm of letting her ruin her credit score by not actively warning her about the partner's poor financial history. I believed that staying neutral was the safest route, as I would not be directly responsible if things went wrong. I did not want to be the one who actively destroyed her relationship or her business dreams. However, by withholding my strong concerns about his past bankruptcies, I allowed her to walk into a financial trap. I convinced myself that silence was a form of respect, rather than a failure to protect her from a predictable disaster.",
+    "group": "edge",
+    "domain": "family",
+    "target_bias_ids": ["omission_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b2_edge_009",
+    "story": "We need to migrate our user database soon. The new cloud provider offers blazing speed, but their documentation on data encryption protocols is incomplete and vague. We decided to stick with our current, much slower on-premise servers because the security parameters are fully documented and predictable. We prefer known limitations over unknown risks in our architecture.",
+    "group": "edge",
+    "domain": "technical",
+    "target_bias_ids": ["ambiguity_effect"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_edge_010",
+    "story": "The city council proposed a new fee for trash collection. When it was presented as a sanitation relief charge, I enthusiastically supported it. When the exact same financial mechanism was previously introduced as a waste management tax hike, I strongly opposed it at the town hall meeting. The wording completely changed my perspective on the issue.",
+    "group": "edge",
+    "domain": "political",
+    "target_bias_ids": ["framing_effect"],
+    "style_tags": ["witness_statement"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b2_adv_001",
+    "story": "Our guided foraging tours haven't found a single morel in this sector for three consecutive days. That means the mycelium is primed, and tomorrow is guaranteed to be a massive, record-breaking haul! Book your spot now before the mushrooms pop! The odds are finally in our favor, so do not miss out.",
+    "group": "adversarial",
+    "domain": "mycology",
+    "target_bias_ids": ["gamblers_fallacy"],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b2_adv_002",
+    "story": "Do not lose your way and waste your entire weekend wandering aimlessly in the woods. Protect your valuable leisure time from the absolute disaster of getting lost. Buy our premium GPS tracker today and secure your perfect outdoor experience before it is completely ruined by poor navigation.",
+    "group": "adversarial",
+    "domain": "orienteering",
+    "target_bias_ids": ["loss_aversion"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b2_adv_003",
+    "story": "Picture this: a lone, battle-scarred T-Rex stalking the floodplains, seeking revenge on the Triceratops herd that drove him away years ago. Our new documentary brings you the dramatic, causal story of this ancient feud, culminating in the epic fossilized clash we uncovered. Forget the boring, complex taphonomic processes and random sedimentary events. This is the thrilling, character-driven narrative of survival and vengeance that truly explains the bone bed! We have connected the dots to give you a satisfying, logical story of prehistoric drama. Nature is not random; it is a stage for epic conflicts, and our film reveals the hidden script. Join us to witness the ultimate showdown that science has finally decoded, providing the clear, dramatic explanation you deserve.",
+    "group": "adversarial",
+    "domain": "paleontology",
+    "target_bias_ids": ["narrative_fallacy"],
+    "style_tags": ["interview"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_adv_004",
+    "story": "Look at my top bar hives thriving in the backyard! They are producing the most beautiful, golden honey. Ignore the ten hives that collapsed last winter; focus entirely on these three successful ones. Buy my beginner kit today to replicate this exact, guaranteed success in your own yard. These three hives prove that my method is foolproof. The winter losses were just bad luck, but these survivors demonstrate the true potential of my system. Do not let the failures distract you from the undeniable proof of concept sitting right in front of you. Purchase the kit and achieve the same beautiful results immediately.",
+    "group": "adversarial",
+    "domain": "beekeeping",
+    "target_bias_ids": ["survivorship_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_adv_005",
+    "story": "Our specialized silk cleaning kit is officially recommended by the Head Curator of the National Textile Museum. If this formula is trusted by the top experts in the country to handle priceless antiquities, it is undoubtedly the only safe choice for your family heirlooms. Trust the professionals and protect your valuables.",
+    "group": "adversarial",
+    "domain": "textile_conservation",
+    "target_bias_ids": ["authority_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b2_adv_006",
+    "story": "Why change the way you have learned vocabulary for years? Stick to the traditional, proven flashcard method that has worked for generations of scholars. Our app simply digitizes the exact same routine you already know, avoiding the confusion of new, untested learning theories. Stay with the familiar, proven path.",
+    "group": "adversarial",
+    "domain": "historical_linguistics",
+    "target_bias_ids": ["status_quo_bias"],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b2_adv_007",
+    "story": "Feel safe and connected again. Our neighborhood watch app brings warmth, comfort, and community spirit right back to your streets. Join today and experience the peace of mind that comes from knowing your neighbors genuinely care about your safety and overall well-being in the community.",
+    "group": "adversarial",
+    "domain": "social",
+    "target_bias_ids": ["affect_heuristic"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_adv_008",
+    "story": "You have already spent thousands of dollars on weekend getaways trying to fix the communication gap in your marriage. Do not let that massive financial investment go to waste. Commit to our intensive, week-long couples retreat today. It is the only way to finally make those past trips worth it and justify the money you have already spent. Walking away now means admitting all those previous vacations were a total loss. Our program builds directly on that foundation, ensuring your previous expenditures were not in vain. You owe it to your past self to see this through. Invest a little more now to salvage the significant resources you have already poured into saving this relationship.",
+    "group": "adversarial",
+    "domain": "family",
+    "target_bias_ids": ["sunk_cost_fallacy"],
+    "style_tags": ["interview"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b2_adv_009",
+    "story": "With our new AI project management tool, your development team will definitely finish every single sprint twenty percent early, no matter how many critical bugs you encounter! Guarantee your success and eliminate all delays today. Nothing can stop your rapid, flawless progress forward.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": ["optimism_bias"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b2_adv_010",
+    "story": "Just look at this one massive, unfilled pothole on Main Street. The mayor completely ignores our crumbling roads while simultaneously raising your property taxes. He cares more about his budget than your car's suspension. Vote him out this November to stop the relentless decay.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": ["negativity_bias"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b2_neg_001",
+    "story": "Lab inventory log for October. Spore prints cataloged: 14 samples of Amanita muscaria, 8 samples of Boletus edulis. All specimens stored in climate-controlled drawer B. Humidity maintained at 45 percent. Temperature logged at 18 degrees Celsius. Inventory check completed by staff at 0900 hours on Tuesday.",
+    "group": "negative",
+    "domain": "mycology",
+    "target_bias_ids": [],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_neg_002",
+    "story": "Map legend and scale explanation for Sector 4. Contour interval is 10 meters. Green shading indicates dense deciduous forest. Blue lines represent perennial streams. Magnetic declination is 12 degrees east. Scale is 1 to 25,000. Grid coordinates use UTM zone 18.",
+    "group": "negative",
+    "domain": "orienteering",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b2_neg_003",
+    "story": "Stratigraphy column description for Trench B. Layer 1 consists of loose topsoil, 0.5 meters deep. Layer 2 is compacted clay, 1.2 meters deep. Layer 3 contains sandstone with fossilized bivalve shells. Total depth excavated is 2.1 meters. Excavation paused for documentation.",
+    "group": "negative",
+    "domain": "paleontology",
+    "target_bias_ids": [],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_neg_004",
+    "story": "Hive inspection checklist for apiary 2. Checked for queen presence, brood pattern, and honey stores. Recorded mite drop counts on the sticky boards. Applied oxalic acid treatment to hives 4 through 8. Inspection completed on October 15 at 1400 hours.",
+    "group": "negative",
+    "domain": "beekeeping",
+    "target_bias_ids": [],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b2_neg_005",
+    "story": "Material safety data sheet summary for the conservation adhesive. Contains 40 percent acrylic resin, 30 percent ethanol, and 30 percent distilled water. Flash point is 18 degrees Celsius. Store in a cool, ventilated area away from direct sunlight and open flames.",
+    "group": "negative",
+    "domain": "textile_conservation",
+    "target_bias_ids": [],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_neg_006",
+    "story": "Phoneme inventory table description for the reconstructed proto-dialect. Includes 15 consonant phonemes and 5 vowel phonemes. Stress is predictably placed on the penultimate syllable. Vowel length is phonemically distinct. Data compiled from 12 primary manuscript sources.",
+    "group": "negative",
+    "domain": "historical_linguistics",
+    "target_bias_ids": [],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b2_neg_007",
+    "story": "Community center room booking schedule for November. Room A is reserved for the knitting club on Tuesdays at 18:00. Room B is available for general public use on Thursdays from 10:00 to 14:00. Bookings require a submitted form.",
+    "group": "negative",
+    "domain": "social",
+    "target_bias_ids": [],
+    "style_tags": ["email"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_neg_008",
+    "story": "Grocery list and meal prep steps. Ingredients: 2 lbs chicken breast, 1 bag spinach, 3 bell peppers. Step 1: Preheat oven to 400 degrees. Step 2: Chop vegetables. Step 3: Bake for 25 minutes. Serve immediately after cooking.",
+    "group": "negative",
+    "domain": "family",
+    "target_bias_ids": [],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b2_neg_009",
+    "story": "Server uptime and patch notes for version 4.2.1. System availability was 99.98 percent last month. Patch includes security fixes for CVE-2023-1145 and performance improvements for the database query cache. Deployment scheduled for midnight UTC tonight.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b2_neg_010",
+    "story": "City council meeting agenda and roll call for October 12. Item 1: Approval of minutes. Item 2: Public comment period. Item 3: Zoning board report. Council members present: Smith, Johnson, Davis, and Miller. Meeting adjourned at 20:00.",
+    "group": "negative",
+    "domain": "political",
+    "target_bias_ids": [],
+    "style_tags": ["witness_statement"],
+    "tone_tags": ["matter-of-fact"]
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "b4_pos_001",
+    "story": "Playing the daily lottery, I noticed the number seven hadn't been drawn in over two months. The machine is due for a correction, so I bought fifty tickets all featuring that specific digit. My logic is completely sound because the universe balances out random distributions over time, making seven the absolute smartest mathematical choice for today's draw.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": ["gamblers_fallacy"],
+    "style_tags": ["diary"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_pos_002",
+    "story": "When my smart home system acts up, I always reboot the router by unplugging it for exactly thirty seconds. I have developed a specific rhythm for pressing the buttons on the control panel afterward. This precise physical routine definitely resets the network properly, as my careful sequence of actions directly commands the hardware to behave.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": ["illusion_of_control"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b4_pos_003",
+    "story": "My teenage nephew asked to borrow my car for the evening. Without even asking where he was going, I immediately said no and handed him twenty bucks for an Uber. Teenagers always drive recklessly and end up scratching the paint, so there was zero point in hearing his specific destination or listening to his excuses.",
+    "group": "positive",
+    "domain": "family",
+    "target_bias_ids": ["stereotyping_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b4_pos_004",
+    "story": "Reading a single beginner topographic map guide, I confidently told the hiking group that the ridge trail was a flat, easy walk. I skipped checking the contour line intervals because the paper map looked simple to me. I assumed my basic visual check was just as reliable as a professional surveyor's detailed elevation analysis.",
+    "group": "positive",
+    "domain": "orienteering",
+    "target_bias_ids": ["dunning_kruger_effect"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b4_pos_005",
+    "story": "Finding a strange mole on my arm, I ignored the statistical fact that ninety percent of skin changes in my age group are completely benign. I focused entirely on the one physical trait that matched a rare melanoma picture online. I assumed the specific visual environment guaranteed its dangerous identity over the general population data.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": ["base_rate_neglect"],
+    "style_tags": ["interview"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b4_pos_006",
+    "story": "Evaluating cloud storage providers, I rejected the cheaper option because their data encryption documentation was slightly vague. I chose the much more expensive legacy server because their security parameters are fully documented and predictable. I prefer known financial costs over the ambiguous risk of an undefined data breach protocol.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": ["ambiguity_effect"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b4_pos_007",
+    "story": "Mapping the stage construction schedule for next month's play, I confidently estimated a comfortable three-day completion time. I focused entirely on the physical dimensions of the wooden platforms. I completely glossed over the dense technical requirements for integrating the lighting rigs and sound equipment into the same structure.",
+    "group": "positive",
+    "domain": "community_theater",
+    "target_bias_ids": ["planning_fallacy"],
+    "style_tags": ["email"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_pos_008",
+    "story": "The rehabilitation enclosure for the injured owl failed to maintain temperature last night, delaying our release schedule by a full day. I immediately confronted the new volunteer, pointing out that his sloppy checking technique and lack of attention to detail were clearly to blame for this disaster. It never crossed my mind to check the maintenance manifest, which showed the vendor had delivered a batch of faulty heating elements that were completely defective out of the box. I am just incredibly frustrated by the younger generation's work ethic and their apparent disregard for precise wildlife care methodologies. They simply do not care about the animals the way we did. I made sure to document his incompetence in the daily log so the director understands why we are behind schedule. A true professional would have noticed the temperature drop immediately, but he was too busy checking his phone. I expect much better from anyone wearing a volunteer badge.",
+    "group": "positive",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": ["fundamental_attribution_error"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b4_pos_009",
+    "story": "Our community pottery studio yielded a record harvest of perfectly fired bowls this summer, which I attribute entirely to my innovative, carefully planned kiln temperature schedule. When the large vases inevitably cracked and succumbed to thermal shock, I naturally blamed the unseasonable humidity in the room and the other volunteers' complete failure to wedge the clay properly. My firing methods are clearly superior to their lazy, uneducated approaches to community ceramics. I did everything right, and they ruined the large pieces. It is incredibly frustrating to watch people ignore basic material science, but I remain confident that my techniques are the sole reason for any success we achieved this season. I will definitely be leading the studio planning committee next year to ensure proper standards are maintained by everyone.",
+    "group": "positive",
+    "domain": "ceramics",
+    "target_bias_ids": ["self_serving_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b4_pos_010",
+    "story": "Inspecting the newly established apiary, I focused exclusively on finding capped brood that supported my theory of a highly productive, disease-free queen. Whenever I encountered irregular larvae or unusual comb structures that contradicted the established health timeline, I dismissed them as minor developmental anomalies or temporary weather effects. I only highlighted the healthy bee clusters that perfectly aligned with my hypothesis, building a robust-looking argument while actively ignoring the biological data that proved my colony management model was fundamentally flawed. It is frustrating when peers point out these inconsistencies, as they clearly lack the vision to see the broader agricultural pattern I have uncovered. The evidence speaks for itself if you know how to read it correctly, and I refuse to dilute my groundbreaking apiary techniques with irrelevant exceptions that might confuse the beginners.",
+    "group": "positive",
+    "domain": "beekeeping",
+    "target_bias_ids": ["confirmation_bias"],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b4_edge_001",
+    "story": "Directing the amateur cast, I posted the complex blocking notes in the group chat. I assumed the spatial coordinates were obvious to anyone who passed the introductory drama class. A few actors are asking for basic stage left explanations, which seems entirely unnecessary. The logic flows naturally if you just look at the script.",
+    "group": "edge",
+    "domain": "community_theater",
+    "target_bias_ids": ["curse_of_knowledge"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b4_edge_002",
+    "story": "We have already invested forty hours into firing and glazing this massive decorative vase. Even though the clay body is actively cracking under the thermal stress of our current kiln cycle, we cannot stop the process now. We have to keep raising the temperature to justify the massive amount of time we already sunk.",
+    "group": "edge",
+    "domain": "ceramics",
+    "target_bias_ids": ["sunk_cost_fallacy"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b4_edge_003",
+    "story": "Navigating the dense forest, I focused exclusively on finding landmarks that supported my theory of being on the correct ridge trail. Whenever I encountered boulders or stream beds that contradicted the established map, I dismissed them as minor seasonal changes. I only highlighted the pine trees that perfectly aligned with my hypothesis.",
+    "group": "edge",
+    "domain": "orienteering",
+    "target_bias_ids": ["confirmation_bias"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_edge_004",
+    "story": "The honey extraction centrifuge keeps vibrating violently during peak load. I noticed that if I manually adjust the release valve at exactly fourteen minutes, the spinning stabilizes immediately. I have started scheduling my coffee break to perform the adjustment at the exact right minute. I firmly believe my precise timing controls the machine.",
+    "group": "edge",
+    "domain": "beekeeping",
+    "target_bias_ids": ["illusion_of_control"],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b4_edge_005",
+    "story": "A well-dressed tourist approached the center with a pristine, expensive camera. Assuming his neat appearance and high-end gear meant he was an expert wildlife photographer, I asked him for the fastest route to the eagle nesting site. I ignored the possibility that he might just be a wealthy beginner who bought the equipment online.",
+    "group": "edge",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": ["stereotyping_bias"],
+    "style_tags": ["witness_statement"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_edge_006",
+    "story": "Evaluating a new cryptocurrency, I ignored the statistical fact that ninety percent of alternative digital coins fail within their first year. I focused entirely on the specific whitepaper and the one physical trait that matched a successful project. I assumed the specific technical environment guaranteed its financial success over the general market data.",
+    "group": "edge",
+    "domain": "finance",
+    "target_bias_ids": ["base_rate_neglect"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b4_edge_007",
+    "story": "We need to migrate our patient records database soon. The new cloud provider offers blazing speed, but their documentation on data encryption protocols is incomplete. We decided to stick with our current, much slower on-premise servers because the security parameters are fully documented and predictable. We prefer known limitations over unknown risks.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": ["ambiguity_effect"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_edge_008",
+    "story": "Estimating the software deployment timeline for the new client portal, I confidently told the stakeholders it would take exactly four hours of system downtime. I assumed the database transfer would be perfectly smooth and completely ignored the historical data showing that legacy systems always encounter unexpected compatibility errors during the initial handshake phase. I focused entirely on the ideal scenario where every script executes perfectly on the first try. The process will definitely be seamless, and I completely dismissed the project manager's concerns about needing a rollback plan. I am certain we can maintain a steady pace and finish well before the morning rush, completely forgetting that the previous three deployments all took double the expected time due to minor configuration mismatches.",
+    "group": "edge",
+    "domain": "technical",
+    "target_bias_ids": ["planning_fallacy"],
+    "style_tags": ["email"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b4_edge_009",
+    "story": "The family road trip van broke down on the highway this morning, delaying our vacation schedule by a full day. I immediately confronted my brother, pointing out that his sloppy driving technique and lack of attention to the dashboard warning lights were clearly to blame for this disaster. It never crossed my mind to check the maintenance log, which showed the rental agency had delivered a vehicle with a completely defective transmission out of the lot. I am just incredibly frustrated by his general laziness and his apparent disregard for our family vacation plans. He simply does not care about the trip the way I do. I made sure to document his negligence in the group chat so the rest of the family understands why we are stuck at this motel. A truly responsible person would have noticed the check engine light immediately.",
+    "group": "edge",
+    "domain": "family",
+    "target_bias_ids": ["fundamental_attribution_error"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b4_edge_010",
+    "story": "Our household yielded a record harvest of homegrown vegetables this summer, which I attribute entirely to my innovative, carefully planned composting schedule and premium seed selection. When the tomato vines inevitably succumbed to blight, I naturally blamed the unseasonable humidity and my partner's complete failure to prune the lower leaves properly. My agricultural methods are clearly superior to their lazy, uneducated approaches to community gardening. I did everything right, and they ruined the harvest. It is incredibly frustrating to watch people ignore basic horticultural science, but I remain confident that my techniques are the sole reason for any success we achieved this season. I will definitely be leading the garden planning committee next year to ensure proper standards are maintained by everyone in the household.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": ["self_serving_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b4_adv_001",
+    "story": "Book our venue for your next corporate event! Our automated scheduling system guarantees a flawless, zero-delay setup. We promise your entire production will be ready for the audience in exactly thirty minutes, completely eliminating any risk of technical headaches or unexpected lighting adjustments. Your event will start perfectly on time!",
+    "group": "adversarial",
+    "domain": "community_theater",
+    "target_bias_ids": ["planning_fallacy"],
+    "style_tags": ["email"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b4_adv_002",
+    "story": "Our premium espresso machine is normally priced at two thousand dollars. But today only, we are offering it for a mere eight hundred dollars! You are saving over a thousand dollars off the original retail value. Do not miss this incredible opportunity to own a luxury appliance at a fraction of the initial cost.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": ["anchoring_bias"],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b4_adv_003",
+    "story": "Download our basic trail map app and conquer the wilderness today! You do not need expensive gear or professional training to navigate the backcountry. Our simple interface makes route finding incredibly easy for anyone. Master the outdoors in just five minutes and prove you are a true wilderness expert without any prior experience.",
+    "group": "adversarial",
+    "domain": "orienteering",
+    "target_bias_ids": ["dunning_kruger_effect"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b4_adv_004",
+    "story": "Our algorithmic trading bot hasn't generated a single winning trade in five consecutive days. That means the market is completely primed for a massive correction, and tomorrow is guaranteed to be a record-breaking winning streak! Invest your capital now before the odds finally balance out in your favor.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": ["gamblers_fallacy"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b4_adv_005",
+    "story": "To understand our new software architecture, you simply need to grasp the underlying differential equations. The derivation is straightforward if you recall your sophomore calculus. We will not spend time reviewing basic integrals, as anyone serious about this platform should already have that foundation. Let us move directly to the advanced applications.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": ["curse_of_knowledge"],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_adv_006",
+    "story": "With our new AI diagnostic tool, your clinic will definitely identify every single rare disease on the very first try, no matter how ambiguous the symptoms appear! Guarantee your medical success and eliminate all misdiagnoses today. Absolutely nothing can stop your rapid, flawless patient outcomes with our revolutionary technology.",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": ["overconfidence_bias"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b4_adv_007",
+    "story": "Feel safe and connected again. Our neighborhood wildlife corridor app brings warmth, comfort, and community spirit right back to your streets. Join today and experience the deep peace of mind that comes from knowing your local animals are thriving and your neighbors genuinely care about the environment.",
+    "group": "adversarial",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": ["affect_heuristic"],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b4_adv_008",
+    "story": "You have already spent thousands of dollars on family vacations trying to build lasting memories with your children. Do not let those massive financial investments fade away into forgotten weekends. Commit to our intensive, week-long family bonding retreat today. It is the only way to finally make those past trips worth it and justify the money you have already spent on travel. Walking away now means admitting all those previous vacations were a total loss and your family is drifting apart. Our program builds directly on that foundation, ensuring your previous expenditures were not in vain. You owe it to your past self to see this through. Invest a little more now to salvage the significant resources you have already poured into saving your family's connection and protecting your children's future happiness from the devastating cost of neglect.",
+    "group": "adversarial",
+    "domain": "family",
+    "target_bias_ids": ["loss_aversion"],
+    "style_tags": ["interview"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b4_adv_009",
+    "story": "Stop worrying about the hidden chemicals in your cleaning products. Our natural surface spray is completely free of artificial dyes and synthetic fragrances, making it the safest choice for your home. We focus entirely on the pure, plant-based ingredients that you can easily recognize and pronounce. By choosing our product, you are actively avoiding the harsh, toxic bleaches that damage your countertops and irritate your skin. We believe that what we leave out of our formula is just as important as what we put in. You can trust our transparent label because we actively omit the confusing, dangerous industrial solvents that other brands hide in their proprietary blends. Protect your family by making the positive choice to leave those harmful chemicals on the store shelf where they belong.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": ["omission_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b4_adv_010",
+    "story": "Protect your family's future with our guaranteed fixed-annuity plan. While other investments gamble with your hard-earned money in volatile markets, our product ensures your principal is completely shielded from any downturn whatsoever. You will never lose a single cent of your initial deposit, no matter what happens to the global economy. Secure absolute financial certainty today and sleep soundly knowing your retirement is entirely immune to the chaos of the stock market. We offer a magical shield against all financial risk, ensuring your money grows in a perfectly safe, predictable environment. Do not expose your life savings to the terrifying unknown of market fluctuations. Choose the absolute safety of our guaranteed returns and eliminate every single possibility of financial loss forever.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": ["zero_risk_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b4_neg_001",
+    "story": "Quarterly financial summary for the third fiscal period. Total revenue reached four million dollars, representing a five percent increase from the previous quarter. Operating expenses were recorded at two point five million dollars. Net profit margin stands at twelve percent. All accounts have been reconciled and the final report is available on the internal server.",
+    "group": "negative",
+    "domain": "finance",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_neg_002",
+    "story": "Product specifications for the model X-200 blender. Motor power is 1200 watts. Container capacity is 64 ounces, made of BPA-free plastic. The unit includes four stainless steel blades and a digital touch panel with five preset speed options. Weight is 12.5 pounds. Dimensions are 8 by 8 by 18 inches.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b4_neg_003",
+    "story": "Patient intake form data for record 4492. Name: John Doe. Date of birth: May 12, 1980. Blood type: O positive. Primary insurance provider: Blue Cross. Current medications include lisinopril 10 mg daily and metformin 500 mg twice daily. No known drug allergies reported in the system. Vitals recorded at 10:00 AM.",
+    "group": "negative",
+    "domain": "medical",
+    "target_bias_ids": [],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_neg_004",
+    "story": "Grocery list and meal prep steps for the week. Ingredients: 2 lbs chicken breast, 1 bag spinach, 3 bell peppers, and 1 cup rice. Step 1: Preheat oven to 400 degrees. Step 2: Chop vegetables into uniform pieces. Step 3: Bake for 25 minutes. Serve immediately after cooking.",
+    "group": "negative",
+    "domain": "family",
+    "target_bias_ids": [],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_neg_005",
+    "story": "System maintenance log for server cluster Alpha. Replaced failed hard drive in slot 4. Rebuilt RAID 5 array, which completed at 14:30. Applied firmware update version 3.2.1 to the network switch. All nodes are currently reporting green status and normal operating temperatures. Next scheduled maintenance is in 30 days.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b4_neg_006",
+    "story": "Map legend and scale explanation for Sector 4. Contour interval is 10 meters. Green shading indicates dense deciduous forest. Blue lines represent perennial streams. Magnetic declination is 12 degrees east. Scale is 1 to 25,000. Grid coordinates use UTM zone 18. All trails are marked with standard wooden posts.",
+    "group": "negative",
+    "domain": "orienteering",
+    "target_bias_ids": [],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_neg_007",
+    "story": "Hive inspection checklist for apiary 2. Checked for queen presence, brood pattern, and honey stores. Recorded mite drop counts on the sticky boards. Applied oxalic acid treatment to hives 4 through 8. Inspection completed on October 15 at 1400 hours. All colonies appear active and foraging normally.",
+    "group": "negative",
+    "domain": "beekeeping",
+    "target_bias_ids": [],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b4_neg_008",
+    "story": "Intake processing log for the rehabilitation center. Animal 101: Red-tailed hawk, found with wing injury. Animal 102: Eastern cottontail rabbit, orphaned. Animal 103: Virginia opossum, hit by vehicle. All animals received initial physical examinations and were placed in designated recovery enclosures. Feeding schedules have been established by the veterinary staff.",
+    "group": "negative",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b4_neg_009",
+    "story": "Kiln firing schedule for cone 6 oxidation. Ramp 1: 100 degrees per hour to 200 degrees, hold for 30 minutes. Ramp 2: 250 degrees per hour to 1000 degrees. Ramp 3: 150 degrees per hour to 2232 degrees. Cool down naturally with the lid closed until the temperature drops below 200 degrees.",
+    "group": "negative",
+    "domain": "ceramics",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b4_neg_010",
+    "story": "Rehearsal schedule for the upcoming spring production. Act one blocking runs from 18:00 to 19:30 in the main hall. Costume fittings are scheduled for 19:30 to 20:30 in the back room. Lighting cues will be tested on Thursday at 17:00. All cast members must arrive ten minutes early.",
+    "group": "negative",
+    "domain": "community_theater",
+    "target_bias_ids": [],
+    "style_tags": ["email"],
+    "tone_tags": ["matter-of-fact"]
+  }
+]
