@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_014",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "The prosecutor stood before the jury and described the defendant as someone who had always gotten away with things. He pointed out that the defendant had purchased a new vehicle three weeks before the warehouse fire. He emphasized that the fire started at two in the morning when no witnesses were present. He said the defendant's alibi came from his brother, who would obviously lie to protect him. He reminded the jury that the defendant had stopped paying insurance premiums six months earlier and then reinstated coverage just sixty days before the fire. 'What kind of honest person,' the prosecutor asked, 'does business with arsonists and attends meetings where fires are discussed?' The jury, swayed by the prosecution's theatrical tone and the repeated references to the defendant's character, didn't notice that every piece of evidence could also be explained as ordinary financial behavior and coincidental timing.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "fundamental_attribution_error"
+  ],
+  "domain": "legal",
+  "domain_familiarity": "in_field"
+}

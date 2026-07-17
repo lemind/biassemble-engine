@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_020",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A paralegal named Karen was organizing discovery documents for a fraud case. She noticed that ninety percent of the documents from the defendant's company were emails related to routine operations, but she found three emails that mentioned a specific client's project in ambiguous terms. Karen flagged these three emails as potential evidence of misconduct and recommended further investigation. She ignored the base rate of documents that were innocuous. She told the attorney, 'These emails seem suspicious to me. It's worth following up on them.' The attorney agreed to spend time investigating the three emails. The inquiry revealed no wrongdoing, but Karen's recommendation was based on her intuition rather than a systematic review of the evidence.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "base_rate_neglect"
+  ],
+  "domain": "legal",
+  "domain_familiarity": "in_field"
+}

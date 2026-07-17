@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_005",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A carpenter named Lin was cutting a series of dovetail joints for a set of drawers. The first three joints fit perfectly, so she used the same technique for the remaining fifteen drawers without checking her alignment. She told her apprentice, 'The process is dialed in.' The twelfth joint was misaligned because the blade had shifted slightly. Lin finished the joint and installed it, noting the fit was tight. She continued with the remaining drawers, not pausing to check her setup, certain the first joints had proven her technique was reliable.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias"
+  ],
+  "domain": "woodworking",
+  "domain_familiarity": "out_of_field"
+}

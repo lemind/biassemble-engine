@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_015",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "PremiumCoat Paint Corporation issued a press release claiming their new acrylic enamel was 'three times more durable than conventional paints' and featured a 'revolutionary nanotechnology formula.' The release quoted a lab director who said the paint was 'the most significant advancement in residential coating in thirty years.' It included an endorsement from a contractor who had used the product on 'over two hundred homes' without a single complaint. The company announced a 'limited-time introductory offer' and described their research as 'unprecedented in the industry.' However, the third-party tests referenced in small print were performed by a subsidiary of PremiumCoat. Many homeowners, persuaded by the enthusiastic language and the sheer volume of claims, purchased the paint without requesting the full technical specifications. The product performance proved indistinguishable from standard acrylic paint.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias",
+    "bandwagon_effect"
+  ],
+  "domain": "consumer",
+  "domain_familiarity": "in_field"
+}

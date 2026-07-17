@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_020",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Councilwoman Helena had served eight years on the city planning board. When a developer proposed a high-rise project in the historic district, she remembered three prior projects that had been denied and formed her opposition immediately. She told fellow council members, 'We always protect this district. Everyone who lives here knows that.' She pointed to a 2015 project that had been approved with conditions and warned that this one would set a similar precedent. Helena also relied on the opinions of two prominent preservationists who had opposed the project, accepting their arguments without independent verification. She dismissed the developer's economic impact study because a study of a similar high-rise project from a neighboring city had been inaccurate. Helena's assistant noticed she consistently selected data that supported her original position.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "confirmation_bias",
+    "availability_heuristic"
+  ],
+  "domain": "political",
+  "domain_familiarity": "in_field"
+}

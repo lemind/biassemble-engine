@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_019",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The radiology department reviewed one hundred and fifty chest X-rays for the month. Fifty-two showed no significant abnormalities. Nineteen were flagged for follow-up CT scans based on protocol criteria. The remainder were classified as normal variants or age-appropriate changes. All reports were sent to the referring physicians within twenty-four hours. The chief radiologist held a weekly conference to review ambiguous cases. A quality assurance audit found documentation compliance at ninety-eight percent. Staff attended a training session on new imaging protocols. Equipment calibration was performed on schedule. Patient volumes were consistent with projections.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "medical",
+  "domain_familiarity": "in_field"
+}

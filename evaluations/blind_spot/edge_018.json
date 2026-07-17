@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_018",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A software engineer named Priya was choosing a database for a new project. She had used PostgreSQL extensively and knew it well. She evaluated the project requirements against PostgreSQL features and concluded it was the right choice. She didn't seriously consider alternative databases because she was confident in her abilities with PostgreSQL. When her architect suggested evaluating a document store, Priya said, 'Relational is fine for this. I can make it work.' She estimated that her team could deliver the project in three sprints with PostgreSQL, though she hadn't considered the complexity of the query patterns or the data shape that the application required. She proceeded with her preferred technology.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "planning_fallacy"
+  ],
+  "domain": "technical",
+  "domain_familiarity": "in_field"
+}

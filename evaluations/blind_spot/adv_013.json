@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_013",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A fossil collector named Donna had found a bone fragment she believed was from a previously unknown dinosaur species. She told a local newspaper, 'This is the most important discovery in the state. Experts have been overlooking this formation for years. I've spent more time in this area than any geologist. They're too focused on their academic theories and they ignore what's in front of them. This bone is different from anything ever found. It will rewrite the history of this region.' She presented her find to a museum, but the bone was identified as a common species. Donna then said the museum was wrong and accused them of suppressing new discoveries to protect existing theories. Her passionate rhetoric attracted attention but lacked scientific justification.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "fundamental_attribution_error"
+  ],
+  "domain": "paleontology",
+  "domain_familiarity": "out_of_field"
+}

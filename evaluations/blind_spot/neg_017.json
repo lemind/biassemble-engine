@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_017",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The curriculum committee met for two hours. They reviewed enrollment data for the fall semester and noted that undergraduate registration had increased by twelve percent compared with the previous year. The group considered three proposed course additions and requested more information about faculty availability and classroom space. A subcommittee was formed to draft new learning objectives for the introductory sequence and circulate them by email. The meeting concluded with a reminder that budget proposals were due to the dean by the end of the quarter. The chair asked everyone to submit their feedback on the draft schedule in writing. No decisions were made about curriculum content. The minutes were recorded and distributed the same day.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "educational",
+  "domain_familiarity": "in_field"
+}

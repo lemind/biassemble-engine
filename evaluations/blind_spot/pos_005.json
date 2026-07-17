@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_005",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Elena had been foraging wild mushrooms for twelve years and believed she could identify any local species with confidence. During a guided walk, she found a patch of brown-capped fungi and announced they were edible chanterelles, dismissing a student's observation that the gills were too widely spaced. Elena recalled finding similar mushrooms three years ago near the same trail and eating them without issue. She convinced the group to harvest three pounds and ignored an app identification that suggested a poisonous lookalike. At the dinner, everyone who ate the mushrooms became ill. The hospital toxicologist confirmed they had eaten false chanterelles, which Elena had misidentified because she had refused to check her field guide, confident her experience was reliable enough for identification.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "availability_heuristic"
+  ],
+  "domain": "mycology",
+  "domain_familiarity": "out_of_field"
+}

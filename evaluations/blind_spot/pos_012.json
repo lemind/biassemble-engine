@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_012",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Hiroshi had cultivated bonsai for three decades and won competitions with his trees. When a young apprentice suggested that his prized juniper needed repotting based on root observation, Hiroshi dismissed the suggestion, saying, 'This tree was repotted four years ago and has thrived since. I know its rhythm.' He continued watering and feeding the tree according to his established schedule, ignoring signs of stunted new growth. The tree's roots became bound and the foliage yellowed. Hiroshi said, 'This is just a seasonal change. I've seen this tree through many seasons.' He attributed the decline to weather rather than his refusal to reassess his care routine, and he advised the apprentice to be more patient with the tree's natural cycle.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "status_quo_bias",
+    "projection_bias"
+  ],
+  "domain": "bonsai_cultivation",
+  "domain_familiarity": "out_of_field"
+}

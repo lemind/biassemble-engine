@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_009",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A conservator named Sandra was inspecting a silk tapestry. She noticed a small area of discoloration near a seam and assumed it was humidity damage because she had seen similar discoloration in other tapestries. She recommended lowering the humidity in the gallery. A curator suggested the discoloration might be from light exposure, but Sandra insisted her assessment was correct. The humidity adjustment had no effect on the discoloration. The cause was identified later as a chemical reaction with the thread dye.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic"
+  ],
+  "domain": "textile_conservation",
+  "domain_familiarity": "out_of_field"
+}

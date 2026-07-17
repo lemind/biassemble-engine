@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_004",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A blogger named Helena claimed on a popular space forum that she had discovered a new planet in our solar system. She pointed to the gravitational anomalies in the orbits of outer planets, stating, 'This is exactly what happened before Neptune was discovered. The anomalies were real and they led to a discovery. This time, the evidence is even stronger because it's consistent across five independent data sources.' She invited readers to examine her calculations, which were based on three years of data she had collected. She did not mention that all five 'independent' data sources were the same raw data processed with the same software and that her calculations had been rejected by two peer-reviewed journals. She emphasized the historical parallel to make her claims seem credible.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias"
+  ],
+  "domain": "astronomy",
+  "domain_familiarity": "out_of_field"
+}

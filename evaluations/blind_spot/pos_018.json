@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_018",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Attorney Park was defending a client accused of embezzlement. He had successfully defended two similar cases in the past using the same argument about procedural violations. When the prosecution presented new digital evidence, Park told his associate, 'This is just like the Henderson case. The evidence was unreliable then and it's unreliable now.' He didn't thoroughly review the new material. During jury selection, he dismissed a potential juror who was a certified fraud examiner, assuming she would be too knowledgeable and would side with the prosecution. Park also told his client that the case was 'practically won' because the witnesses were known to be unreliable, though he'd never cross-examined any of them. His preparation focused on the arguments that had worked before, ignoring the distinct features of the current case.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "representativeness_heuristic"
+  ],
+  "domain": "legal",
+  "domain_familiarity": "in_field"
+}

@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_018",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The finance department reconciled the quarterly accounts. Revenue was reported at $2.3 million, up from $2.1 million in the same quarter last year. Operating expenses increased by six percent. Accounts receivable had a days-sales-outstanding average of forty-two days, consistent with the previous quarter. The CFO reviewed the variance analysis and approved the final report for submission. The audit committee requested additional documentation for three large vendor transactions. All transactions were supported by purchase orders and delivery receipts. The quarterly financial statements were prepared according to GAAP and submitted for external review. The meeting adjourned at noon.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "financial",
+  "domain_familiarity": "in_field"
+}

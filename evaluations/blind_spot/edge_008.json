@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_008",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "An aquarium owner named Kaito noticed a white spot on his clownfish's fin. He remembered that his neighbor's fish had recovered from a similar condition with the addition of garlic to their food. Kaito added garlic to the tank and continued his regular maintenance routine. The spots worsened over two weeks. A specialist later identified the infection as a fungal condition requiring antifungal medication. Kaito acknowledged he hadn't researched the symptom beyond his neighbor's anecdotal experience.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic"
+  ],
+  "domain": "aquarium_keeping",
+  "domain_familiarity": "out_of_field"
+}

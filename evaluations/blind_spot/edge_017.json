@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_017",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A community organizer named DeShawn was planning a neighborhood event. He asked three friends who lived nearby about the best date and they all agreed on a Saturday. DeShawn announced the event date without consulting the broader community mailing list or checking for conflicts with other local events. He later discovered that many working families couldn't attend because it conflicted with a religious holiday he hadn't considered. He said, 'I talked to a few people and they thought Saturday was fine.' He also remembered that last year's event on a Saturday had been well-attended, though that had been a different type of gathering in a different season.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic"
+  ],
+  "domain": "social",
+  "domain_familiarity": "in_field"
+}

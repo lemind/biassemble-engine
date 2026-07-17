@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_011",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Marta was conserving a nineteenth-century quilt that had developed stains. She remembered that a fabric conservator at her previous museum had treated similar stains with hydrogen peroxide and decided to use the same method. She didn't test a small area because she had seen the treatment work before and trusted her memory. When a colleague suggested using enzyme-based cleaning, Marta refused, saying, 'I've been doing this for fifteen years and peroxide has never failed me.' She proceeded with the treatment and the quilt's green dyes began to fade, because peroxide was inappropriate for that particular fabric. Marta told her supervisor the test sample must have been defective and maintained her method was fundamentally sound.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic",
+    "overconfidence_bias"
+  ],
+  "domain": "textile_conservation",
+  "domain_familiarity": "out_of_field"
+}

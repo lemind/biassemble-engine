@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_022",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Professor Watson had taught introductory chemistry for twenty-two years using the same textbook and lecture format. When his university adopted an active learning initiative, Watson watched a demonstration from a colleague in biology but concluded his subject required more direct instruction. He told a graduate student, 'My course evaluations have always been excellent, and my students pass at the same rate as any other department.' He refused to change his exams or incorporate peer instruction. When a junior faculty member shared data showing improved outcomes from a flipped classroom model, Watson noted that the study involved smaller classes and said, 'That wouldn't work with my two-hundred-student sections.' He continued his lecture-based approach, confident his experience outweighed the new research.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "status_quo_bias",
+    "overconfidence_bias"
+  ],
+  "domain": "educational",
+  "domain_familiarity": "in_field"
+}

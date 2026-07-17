@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_019",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "An education reform advocate named Gloria gave a testimony to the school board. She said, 'Our children are falling behind because the teachers are too comfortable with their tenure and their pensions. I've heard from dozens of parents who say the same thing: the curriculum is outdated and the teachers don't care.' She held up a worksheet from her child's classroom that contained a spelling error. 'This is what our tax dollars buy. Teachers who can't spell and administrators who don't care.' She concluded, 'We need to start over. We need to bring in new teachers and new ideas. We can't afford to wait until our children are graduating without skills.' Gloria had strong opinions and relied on emotional parental testimonials, but she hadn't reviewed the district's student outcome data, which showed steadily improving reading scores, or the curriculum reviews that had been conducted by the state, both of which contradicted her narrative.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "negativity_bias"
+  ],
+  "domain": "educational",
+  "domain_familiarity": "in_field"
+}

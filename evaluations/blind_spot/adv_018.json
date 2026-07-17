@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_018",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A financial blogger named Wallace published a post under the headline 'The Big Banks Don't Want You to Know About This Opportunity.' He described a little-known investment vehicle that had 'outperformed the S&P 500 for ten consecutive years' and told readers, 'This is what the wealthy have been using to protect their assets. They don't want you to know about it because they don't want competition.' He included a call to action: 'Don't miss out on the chance to secure your retirement. Thousands of investors have already made the switch. Are you going to be left behind?' He didn't mention that the ten-year performance period conveniently started after a market crash, and he omitted the fund's first five years, which had negative returns. He also referred to 'leading financial analysts' but didn't name them or cite sources. Readers, persuaded by the urgency and the exclusive tone, many of whom were not sophisticated investors, invested without verifying the claims.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "bandwagon_effect",
+    "recency_bias"
+  ],
+  "domain": "financial",
+  "domain_familiarity": "in_field"
+}

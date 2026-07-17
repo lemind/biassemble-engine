@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_023",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A mother named Phyllis was trying to persuade her two adult children to agree on a care plan for her husband. She told them, 'Your father and I have been married for forty-five years. I know what he would have wanted. He always said that if he ever got sick, he would want to stay at home and not be in one of those institutions. I remember it clearly.' She described his past visits to a nursing home for a relative and his negative comments about the facility. She said, 'He hated that place. He would never want to go to one.' One child had found a living will that mentioned considering an assisted living facility if care needs became too great, but Phyllis said, 'That was written before he got sick. I know what he really thought.' She dismissed the document and relied on her memory of his opinions, convincing her children to keep their father at home even though home care had become unmanageable.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "hindsight_bias",
+    "projection_bias"
+  ],
+  "domain": "family",
+  "domain_familiarity": "in_field"
+}

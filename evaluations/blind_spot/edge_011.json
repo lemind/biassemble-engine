@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_011",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A bonsai hobbyist named Yuri was wiring a Japanese maple. He had used the same wiring technique on three other maples and achieved good results. He applied the same technique to this tree, but the trunk was thicker and more brittle. The wire cut into the bark, leaving a scar. Yuri told his club members, 'It usually works. This tree is just unusual.' He didn't adjust his approach based on the specific tree's characteristics, assuming his experience with other maples was transferable.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "representativeness_heuristic"
+  ],
+  "domain": "bonsai_cultivation",
+  "domain_familiarity": "out_of_field"
+}

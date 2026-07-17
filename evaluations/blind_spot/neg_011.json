@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_011",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The aquarium's water parameters were tested at seven AM. The pH was measured at 8.2, ammonia at zero, nitrite at zero, and nitrate at ten parts per million. A partial water change of twenty percent was performed. The sand substrate was vacuumed and the filter media was rinsed with tank water. The lighting timer was set to an eight-hour cycle. The fish were fed a measured amount of flake food. The temperature was maintained at 78 degrees Fahrenheit. The log was updated with the day's readings.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "aquarium_keeping",
+  "domain_familiarity": "out_of_field"
+}

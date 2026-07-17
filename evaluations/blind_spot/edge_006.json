@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_006",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A sailor named Helena was preparing for a club race. The wind forecast predicted shifting breezes from the northeast, but Helena had raced this course five times and always started near the committee boat because that had worked in previous races. She ignored the forecast and positioned herself near the boat. The wind shifted and she was caught off the line, losing ground. She told her crew, 'It never shifts that much here. The forecast must have been wrong.' She continued to argue with the navigator about the wind direction for the rest of the race, distracted from tactical decisions.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "recency_bias"
+  ],
+  "domain": "competitive_sailing",
+  "domain_familiarity": "out_of_field"
+}

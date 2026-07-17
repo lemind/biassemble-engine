@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_005",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A mushroom foraging influencer with a large online following posted, 'I found the best harvesting spot in the state. This place is untouched and loaded with porcini. The mushroom farmers don't want you to know about this spot because they can't compete with wild foraging.' He posted a photo of a basket overflowing with mushrooms and wrote, 'Join my foraging club to get the exact coordinates. Act fast because I will delete this post in 24 hours. There are over 200 members already signed up.' The spot he had photographed was actually a private property and much of the land was leased to commercial foragers. The photo also used forced perspective to make the mushrooms appear larger and more plentiful. Many novice foragers, excited by the urgency and social proof, paid to join the club.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "bandwagon_effect"
+  ],
+  "domain": "mycology",
+  "domain_familiarity": "out_of_field"
+}

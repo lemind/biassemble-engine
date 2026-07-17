@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_012",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "An online seller of bonsai trees claimed, 'This is the fastest-growing bonsai variety in the world. I've grown it from seed to a full tree in three years. Most bonsai growers keep their secrets, but I'm sharing mine with you. I have over a thousand satisfied customers who have achieved success with my trees. This variety usually sells for triple the price in Japan, but I'm offering it at a discount because I want everyone to experience the joy of bonsai.' He told stories of how his method transformed stunted trees into magnificent specimens. He sold hundreds of seeds before buyers realized the seeds were ordinary maple seeds, not a special variety. His persuasive storytelling about his 'secrets' convinced many who didn't verify his claims against basic botanical knowledge.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias",
+    "bandwagon_effect"
+  ],
+  "domain": "bonsai_cultivation",
+  "domain_familiarity": "out_of_field"
+}

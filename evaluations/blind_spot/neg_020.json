@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_020",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The weekly operations meeting covered facility maintenance schedules. The janitorial contract was renewed for another year with the same vendor. A plan was created for replacing the HVAC filters every ninety days. The maintenance log was reviewed and all scheduled preventative work for the previous month was completed. A monthly inventory of supplies was taken and reorder thresholds were adjusted. The facilities manager submitted the budget for repair and maintenance. The meeting concluded with a site walkthrough to inspect recent repairs. No outstanding issues were identified. All staff received the updated emergency contact list.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "management",
+  "domain_familiarity": "in_field"
+}

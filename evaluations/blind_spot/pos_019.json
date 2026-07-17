@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_019",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Omar had been a recreational soccer referee for eight years. During a championship match, he awarded a controversial penalty against the visiting team based on his angle, which wasn't ideal. Replays later showed the contact was incidental, but Omar reviewed the footage with an assistant and insisted, 'From where I stood, the defender tripped him intentionally.' The decision cost the visitors the title. After the match, Omar told the assessing referee, 'I knew I made the right call immediately. I saw the whole play develop.' When shown additional camera angles that contradicted his view, he said, 'Those cameras capture things differently. Trust me\u2014I was there.' He maintained that his experience made him reliable and told the visiting coach their players needed more discipline.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "hindsight_bias"
+  ],
+  "domain": "social",
+  "domain_familiarity": "in_field"
+}

@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_024",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The city council received a report on public transit ridership. Ridership increased by seven percent in the first quarter. Bus on-time performance was reported at eighty-eight percent. A public survey was conducted and the results indicated a satisfaction rating of seventy-three percent. The council approved funding for two new electric buses. The transportation director presented the maintenance schedule for the existing fleet. The meeting lasted ninety minutes and concluded with all agenda items being addressed. The minutes were approved from the previous meeting. The public comment period was held at the end of the agenda.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "political",
+  "domain_familiarity": "in_field"
+}

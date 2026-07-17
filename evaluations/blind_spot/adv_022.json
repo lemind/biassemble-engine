@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_022",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A project manager named Ethan was explaining to his team why they should adopt a new CI/CD pipeline. He said, 'Every leading tech company is using this architecture. Apple, Google, Microsoft\u2014they all use similar pipelines. If we don't adopt this, we're going to be left behind. The industry is moving in this direction and we need to move with it.' He also said, 'This pipeline uses microservices, which is what everyone is doing now. Monolithic architectures are dead.' His team members were convinced by the market pressure argument. They didn't realize Ethan was citing a blog post from a technology vendor that sold services related to the architecture he was recommending, and that most of the companies he mentioned used a variety of architectures and hadn't adopted the vendor-specific pattern Ethan was proposing.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "bandwagon_effect",
+    "authority_bias"
+  ],
+  "domain": "technical",
+  "domain_familiarity": "in_field"
+}

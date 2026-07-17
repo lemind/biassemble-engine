@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_013",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "An amateur astronomer named Yuki had observed a variable star for three years. She noticed its brightness fluctuating on a pattern that matched her earlier observations and predicted a major dimming event in three months. When colleagues using more precise instruments found no evidence of the predicted dimming, Yuki attributed their equipment to miscalibration. She calculated a new event date and presented her findings at a meeting, saying, 'If you watch closely, you'll see the pattern I'm observing. It's too subtle for automated detection.' She spent six more months collecting data that confirmed her predictions, but other observatories continued to show normal brightness. Yuki concluded the scientific community had overlooked her discovery because they were too reliant on technology.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "confirmation_bias"
+  ],
+  "domain": "astronomy",
+  "domain_familiarity": "out_of_field"
+}

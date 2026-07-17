@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_022",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The community center held a planning meeting for the summer youth program. Two staff members and three volunteers attended. They discussed scheduling, activity options, and supply needs. The program was planned for eight weeks, with thirty participants expected daily. A budget of twenty-three hundred dollars was allocated for activities, meals, and transportation. The meeting produced a draft schedule that included sports, arts, and field trips. The draft was distributed for feedback from the center's director. A follow-up meeting was scheduled to finalize the plan after comments were returned.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "social",
+  "domain_familiarity": "in_field"
+}

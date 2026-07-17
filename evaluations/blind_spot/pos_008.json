@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_008",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Greta was building a dining table from reclaimed oak. She had constructed furniture for a decade and had a successful Etsy shop. After cutting the legs twelve inches too short, she decided to adjust the tabletop size rather than replace the wood. She told a customer who visited her workshop, 'This table is unique now\u2014it's actually more modern this way.' She ignored her measuring tape and relied on her experience, insisting the shorter legs made the design elegant. She also posted photos online and received supportive comments, which she interpreted as validation of her decision. When a friend suggested she rebuild the legs, Greta said, 'I've already spent forty hours on this and it's too late to change direction.'",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "sunk_cost_fallacy",
+    "confirmation_bias"
+  ],
+  "domain": "woodworking",
+  "domain_familiarity": "out_of_field"
+}

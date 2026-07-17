@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_014",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Dr. Martinez was leading an excavation in the badlands and unearthed a bone fragment. He immediately recognized it as belonging to a rare ceratopsian species he had studied earlier in his career. He directed the team to excavate around the area based on his assumption of where the rest of the skeleton would be, ignoring a junior paleontologist who suggested the fragment could be from a different geological layer. After three weeks of digging, no additional bones were found, and the fragment was identified as belonging to a common hadrosaur. Dr. Martinez said the dating was wrong and requested further analysis, unwilling to accept that his initial identification had been incorrect.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "representativeness_heuristic"
+  ],
+  "domain": "paleontology",
+  "domain_familiarity": "out_of_field"
+}

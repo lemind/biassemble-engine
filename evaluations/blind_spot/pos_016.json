@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_016",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Dr. Chen had treated hypertension for twenty-three years using the same beta-blocker protocol. When a new study suggested calcium channel blockers were more effective for elderly patients, he skimmed the abstract and noted the methodology flaws he expected to see. At a conference, a colleague presented similar findings, but Dr. Chen questioned the sample size and referenced his own success rate, which he estimated at eighty-five percent, though he hadn't tracked outcomes systematically. When his resident asked about updating their clinic's guidelines, Dr. Chen said, 'I've seen thousands of patients with my approach. These new drugs have only been studied for a few years.' He continued prescribing beta-blockers, telling patients the older medication was proven and reliable, dismissing newer alternatives as experimental.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "confirmation_bias"
+  ],
+  "domain": "medical",
+  "domain_familiarity": "in_field"
+}

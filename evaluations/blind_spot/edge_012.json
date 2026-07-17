@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_012",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A paleontologist named Fiona was mapping a fossil site. She identified a cluster of bones as belonging to a juvenile specimen because juvenile fossils had been found at similar sites in the same geological formation. A colleague suggested the cluster might be a separate species based on the bone shape, but Fiona dismissed this, saying, 'The formation's age and the site characteristics point toward the juvenile interpretation.' She continued mapping the site using the juvenile framework, which influenced how she excavated around the cluster.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "representativeness_heuristic"
+  ],
+  "domain": "paleontology",
+  "domain_familiarity": "out_of_field"
+}

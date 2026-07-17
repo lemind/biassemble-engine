@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_008",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A local bird club received a presentation from a prominent birder who had been leading trips for thirty years. He told the club, 'The official migration data is completely wrong. I've been out here for three decades and the birds are coming a month early. This is climate change in action. Scientists are missing it because they're sitting in labs while we're out in the field.' He showed photographs of species he had seen on dates earlier than the historical average and said, 'Every birder I know is seeing this. We've been reporting this to the authorities but they won't listen to citizen scientists.' Club members, who respected his authority, accepted his conclusion. He had not collected systematic data and his early sightings were not representative, but his emotional appeal convinced the audience.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "recency_bias",
+    "fundamental_attribution_error"
+  ],
+  "domain": "bird_banding",
+  "domain_familiarity": "out_of_field"
+}

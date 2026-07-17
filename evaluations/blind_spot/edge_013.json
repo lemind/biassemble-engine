@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_013",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "The city council was debating whether to reopen the downtown farmers market on Sundays. Councilwoman Helena had collected petitions and spoken to vendors who all supported the proposal. She noticed the vendors who responded were mostly the same merchants who had complained last year about Saturday competition. Helena mentioned at the meeting, 'Everyone I've talked to wants this.' She didn't consider that vendors with no strong opinion hadn't signed her petition, and she hadn't spoken to downtown shop owners who were concerned about parking. She also recalled that a nearby city had done something similar successfully, though she couldn't remember whether the market size or parking situation was comparable. Helena told a reporter the data was clear and the community was united.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic"
+  ],
+  "domain": "political",
+  "domain_familiarity": "in_field"
+}

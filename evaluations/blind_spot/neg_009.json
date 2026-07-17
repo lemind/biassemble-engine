@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_009",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The regatta committee posted the race schedule and course maps. Each boat was inspected for compliance with safety regulations. The wind speed was measured at an average of twelve knots. The start sequence commenced on time. Boats followed the designated course without incident. The race committee recorded each boat's finishing position. Protest forms were available if needed. No protests were filed after the race. Results were calculated using the club's handicap system. Trophies were distributed at the award ceremony.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "competitive_sailing",
+  "domain_familiarity": "out_of_field"
+}

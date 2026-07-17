@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_021",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A pharmaceutical sales representative named Lisa was presenting a new pain management drug to a group of physicians. She said, 'This drug has been shown to reduce chronic pain in ninety percent of patients in a large-scale clinical trial. The trial was conducted by leading researchers at major medical centers and published in a respected journal. The drug is already the standard of care in several European countries.' She showed graphs of pain reduction and gave the physicians branded pens and note pads. She did not mention that the trial was funded by her company, that the ninety-percent figure included patients who reported even minimal improvement, and that side effects included significant cardiovascular risks in the trial. Several physicians prescribed the drug based on her confident presentation, viewing it as an authoritative recommendation from a credible source, without reviewing the trial details.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias"
+  ],
+  "domain": "medical",
+  "domain_familiarity": "in_field"
+}

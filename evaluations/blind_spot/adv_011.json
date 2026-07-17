@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_011",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A museum guide named Simon was leading a tour of an ancient language exhibit. He pointed to a tablet and said, 'This inscription proves that this civilization invented writing before the Sumerians. I've been studying this script for fifteen years and I'm the only one who's figured out the phonetic values. The established linguists have ignored my work because it challenges their theories. They claim the script is undeciphered, but I've translated dozens of passages. The text describes a ritual that matches a practice still performed in this region today. This is a breakthrough that's being suppressed by the academic establishment.' He cited no peer-reviewed sources and had not published his findings. Several visitors, impressed by his confidence, accepted his claims without questioning the lack of supporting evidence.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "authority_bias"
+  ],
+  "domain": "historical_linguistics",
+  "domain_familiarity": "out_of_field"
+}

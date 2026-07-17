@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_006",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The observatory's telescope was scheduled for maintenance. The maintenance technician calibrated the mount, cleaned the primary mirror, and checked the alignment. The sky conditions were clear with low humidity and minimal light pollution. The observatory recorded data on seven known variable stars and submitted the measurements to the international database. The log entries were timestamped and included the filter settings and exposure times. A backup of the data was made to external storage. All systems reported within normal operating parameters.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "astronomy",
+  "domain_familiarity": "out_of_field"
+}

@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_021",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A shopper named Rosa was looking for a new coffee maker and remembered that her friend's recommendation was usually reliable. Her friend had recently purchased a specific brand and praised its durability, so Rosa bought that model without comparing alternatives. She told her partner, 'This is the one. Sarah said it was the best and she's never steered me wrong.' Rosa didn't read independent reviews or consider her own preferences for temperature or brew time. After a week of use, she found the coffee maker produced coffee that was too weak for her taste. She continued using it, saying, 'Maybe I'm just not used to it yet.'",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias"
+  ],
+  "domain": "consumer",
+  "domain_familiarity": "in_field"
+}
