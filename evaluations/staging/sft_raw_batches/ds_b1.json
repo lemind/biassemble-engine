@@ -1,0 +1,362 @@
+[
+  {
+    "id": "b1_pos_001",
+    "story": "I've been buying the same brand of running shoes for the past eight years. I know they're not the most comfortable anymore, and my knees have started aching after long runs, but switching feels like admitting I wasted all that money on gear that wasn't perfect. When the salesperson showed me a new model with better cushioning, I told him I'd stick with what I know. I couldn't bring myself to try something different after investing so much loyalty.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": ["sunk_cost_fallacy", "status_quo_bias"],
+    "style_tags": ["diary"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_pos_002",
+    "story": "My team spent three months building a feature that nobody on the product team actually asked for. We presented it yesterday and our manager said, 'This is interesting, but we're prioritizing something else right now.' I told the team we'd find a way to make it work — we'd already put in the hours, and I couldn't stomach the idea of deleting that much work. I've been brainstorming uses for the feature ever since, ignoring the possibility that it might just be the wrong direction.",
+    "group": "positive",
+    "domain": "management",
+    "target_bias_ids": ["sunk_cost_fallacy", "escalation_of_commitment"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b1_pos_003",
+    "story": "When I first started investing, a friend told me that technology stocks always outperform the market over the long term. I've repeated that advice to everyone who asks me about investing. Last quarter, I moved more money into a tech-heavy fund because the pattern was obvious — I'd seen so many articles about AI companies, and I'd made decent returns the previous year. When my advisor suggested diversifying into bonds, I told her I was comfortable with my strategy. It's worked so far.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": ["availability_heuristic", "recency_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["confident"]
+  },
+  {
+    "id": "b1_pos_004",
+    "story": "Two of the hikers in my group were arguing about which path to take down the mountain. I'd been on this trail three times before, and I remembered we always took the left fork. I told them to follow me — I knew the way. The right path looked shorter on the map, but I dismissed it because I'd never taken it before. Halfway down, we hit a collapsed section of the trail and had to scramble back up. I didn't admit that the right path might have been safer. I just said I'd never seen that collapse before.",
+    "group": "positive",
+    "domain": "recreation",
+    "target_bias_ids": ["overconfidence_bias", "status_quo_bias"],
+    "style_tags": ["diary"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_pos_005",
+    "story": "My brother-in-law told me about a diet that had worked for him — he'd lost fifteen pounds in two months following a specific meal plan. I started the plan the next week, and after my first weigh-in, I lost three pounds. I've been telling everyone at work about the diet and recommending they try it. I read an article pointing out the study it was based on was flawed, but I skimmed it and concluded the criticisms were exaggerated. I'd already lost weight, so the plan had to be working.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": ["confirmation_bias", "optimism_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_pos_006",
+    "story": "For the past six years, I've been documenting the behavior of red-tailed hawks in this valley. Last spring, a pair nested in the same tree they'd used for three consecutive years. I was certain they'd return again because I'd seen them there so consistently. When a colleague suggested they might have moved due to the new construction nearby, I laughed and told her they were creatures of habit. I never checked the nest until August, and by then it was empty. It had been abandoned months earlier.",
+    "group": "positive",
+    "domain": "bird_banding",
+    "target_bias_ids": ["overconfidence_bias", "status_quo_bias"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_pos_007",
+    "story": "I checked the weather report this morning and it said only a thirty percent chance of rain. I decided not to bring an umbrella because I was sure the forecasters were wrong — they always overestimated the chance of precipitation. I went for a walk and felt a few drops, but I told myself it would stop. It didn't stop, and I got soaked. I didn't think to check the radar or wait an hour to see if the forecast changed. I'd made up my mind based on my own assessment of the clouds.",
+    "group": "positive",
+    "domain": "recreation",
+    "target_bias_ids": ["overconfidence_bias", "optimism_bias"],
+    "style_tags": ["diary"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b1_pos_008",
+    "story": "My dentist recommended a special toothpaste for my sensitivity, but the brand she recommended was more than double the price of what I usually buy. I found a cheaper option that claimed similar benefits and bought that one instead. After two weeks, the sensitivity was worse, but I convinced myself it was because I wasn't brushing long enough. I started timing my brushing to be more thorough rather than switching to the toothpaste she'd suggested. I hated admitting the expensive option might have been better all along.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": ["omission_bias", "status_quo_bias"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_pos_009",
+    "story": "My family has been using the same accountant for twenty-two years. He's always done our taxes and never caused any issues. When my wife suggested we try a new accountant who specializes in freelancers — since I'd been doing freelance work for the past two years — I told her we should stick with who we know. The old accountant missed a deduction last year that the specialist might have caught, but I said that was fine, we'd do better next year. I couldn't imagine someone else knowing our financial history as well.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": ["status_quo_bias", "loss_aversion"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_pos_010",
+    "story": "The new hire in our ceramics studio made a teapot with a handle that looked strange to me — it was too high and too far back. I told her the handle placement was wrong and offered to show her the traditional approach I'd used for fifteen years. When she demonstrated that her handle actually poured better, I said it was a fluke and that the traditional way was more reliable. She kept her handle design, and I spent the rest of the session quietly re-making mine to match the old pattern.",
+    "group": "positive",
+    "domain": "ceramics",
+    "target_bias_ids": ["status_quo_bias", "curse_of_knowledge"],
+    "style_tags": ["diary"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_edge_001",
+    "story": "I didn't apply for the promotion at work even though I was qualified. My colleague who got the position had a similar background, and I couldn't help feeling that the hiring manager just didn't see me as the right fit. It was easier to stay in my current role than to put myself forward and risk rejection. I told myself I'd apply next year.",
+    "group": "edge",
+    "domain": "management",
+    "target_bias_ids": ["omission_bias"],
+    "style_tags": ["diary"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b1_edge_002",
+    "story": "I noticed my neighbor's daughter received a scholarship to the same university I attended. I told her that the engineering program there had been excellent when I was a student, and that she should definitely consider it. She mentioned she was leaning toward a different school with a stronger design program, but I kept emphasizing how much I'd learned from my professors and how the campus felt like home. I hoped she'd reconsider.",
+    "group": "edge",
+    "domain": "education",
+    "target_bias_ids": ["projection_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_edge_003",
+    "story": "My team was choosing a new project management tool, and one option had a clean interface that reminded me of a tool I'd used successfully at my previous job. I recommended that one to the group, explaining that it worked well for me in the past. Two of my colleagues pointed out that another tool had better reporting features, but I said reporting wasn't our priority and that my recommended tool would be easier for everyone to learn based on my experience.",
+    "group": "edge",
+    "domain": "management",
+    "target_bias_ids": ["projection_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_edge_004",
+    "story": "A patient described chest pain that was sharp and worse with movement. I remembered a case from my training that had similar symptoms and turned out to be nothing serious — just a muscle strain. I reassured the patient it was probably musculoskeletal and told them to rest. I didn't think to order an EKG because the pattern seemed so familiar.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": ["representativeness_heuristic"],
+    "style_tags": ["witness_statement"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_edge_005",
+    "story": "I was shopping for a new phone and found a model on sale at a local electronics store. I'd seen some positive reviews online, and one of my friends had recommended the brand. I bought the phone without comparing it to other models. Later, I noticed the battery life was worse than what I'd expected, but I'd already spent the money and didn't want to go through the hassle of returning it.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": ["choice_supportive_bias"],
+    "style_tags": ["diary"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b1_edge_006",
+    "story": "I volunteered to help a friend with a fundraising campaign. The organization I'd worked with before had a successful model, so I suggested we follow the same approach — sending personalized emails to donors and following up with phone calls. A new volunteer proposed using social media instead, but I said our traditional approach was proven and the safe choice. I didn't evaluate whether the audience had shifted since my earlier campaign.",
+    "group": "edge",
+    "domain": "management",
+    "target_bias_ids": ["status_quo_bias"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_edge_007",
+    "story": "I was considering a ceramic teapot at a craft fair. The price was high for the size, but I noticed a smaller cup next to it at a much lower cost. The contrast made the teapot seem more reasonable to me — I bought it thinking I was getting a good deal compared to the larger pieces elsewhere. Later, I saw an identical teapot at another stall for half the price I'd paid.",
+    "group": "edge",
+    "domain": "ceramics",
+    "target_bias_ids": ["decoy_effect"],
+    "style_tags": ["diary"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b1_edge_008",
+    "story": "My manager announced a change to our quarterly review process. The new system seemed more complicated than what we'd been using, and I kept thinking about how the old system was simpler and just as effective. At the meeting, I said that the existing process had worked well for years and that the new system would cause confusion. I didn't have data to support my claim — I just felt like the old way was reliable.",
+    "group": "edge",
+    "domain": "management",
+    "target_bias_ids": ["status_quo_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_edge_009",
+    "story": "I was leading a woodworking class, and a student asked me why I was using a particular joinery technique. I explained that it was the most reliable method for the piece they were building. Another student suggested a simpler approach, but I dismissed it because I'd always used the technique and it had never failed me. I didn't test the simpler method or even consider whether it might be more appropriate for their skill level.",
+    "group": "edge",
+    "domain": "woodworking",
+    "target_bias_ids": ["curse_of_knowledge"],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_edge_010",
+    "story": "We were assessing the safety of a pedestrian crossing. The engineering team presented data showing that average vehicle speeds had decreased over the past six months. I proposed a new crossing design, pointing out that the existing design had been modified three times already. A junior engineer asked why the existing design didn't work if speeds were down. I said it was because the crossing was still confusing for drivers — I'd seen a driver go the wrong way recently.",
+    "group": "edge",
+    "domain": "legal",
+    "target_bias_ids": ["recency_bias"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_adv_001",
+    "story": "You've been going to the same gym for years, but have you ever asked yourself if you're really getting the results you want? Our new program was designed by trainers who have worked with Olympic athletes. We've helped hundreds of clients transform their bodies in just twelve weeks. I'm hosting a free workshop tomorrow, and I guarantee you'll leave with a plan that works for you. Spaces are limited — don't wait to make the change you've been putting off.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": ["authority_bias", "bandwagon_effect"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["persuasive"]
+  },
+  {
+    "id": "b1_adv_002",
+    "story": "We all know AI is the future — every major company is investing heavily in it, and we have to stay ahead. Our new platform uses the same technology as the biggest players, but at a fraction of the cost. Industry analysts are calling it a game-changer. If you don't adopt it now, you'll be left behind. There's still time to be one of the early adopters, but not much. Join the hundreds of companies already using our platform.",
+    "group": "adversarial",
+    "domain": "management",
+    "target_bias_ids": ["bandwagon_effect", "authority_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b1_adv_003",
+    "story": "You deserve a car that reflects your success. This model is the safest vehicle on the road — it's been rated five stars in every category by the leading automotive safety organization. Our sales team has won more awards than any competitor in the region, and our customers consistently rate us the best dealership in the state. Drive it today and see for yourself why it's the top-selling SUV in its class.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": ["authority_bias", "bandwagon_effect"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["persuasive"]
+  },
+  {
+    "id": "b1_adv_004",
+    "story": "Every successful investor I know has already moved to the new model — the old strategies are outdated, and the market is shifting. This fund uses proprietary algorithms that have outperformed the S&P 500 for the past ten years. Financial analysts are recommending it, and we've already hit our target for the year. There's a minimum investment, but we're waiving it for the first hundred applicants. You don't want to be the one who missed this opportunity.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": ["bandwagon_effect", "authority_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b1_adv_005",
+    "story": "I'm going to be honest with you — other firms will tell you they can get you the same returns, but they don't have the connections we do. Our team has been doing this for two decades, and we know exactly how to navigate the market. The investment strategy we use is proprietary and has been vetted by top consultants. If you're serious about building wealth, you'll choose the team that's trusted by the most successful families in the city.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": ["authority_bias", "in_group_bias"],
+    "style_tags": ["interview"],
+    "tone_tags": ["confident"]
+  },
+  {
+    "id": "b1_adv_006",
+    "story": "The evidence is clear: our new product is the most advanced solution on the market. We tested it against every major competitor and it outperformed them in speed, accuracy, and reliability. More than a thousand engineers are using it already, and the feedback is overwhelmingly positive. I've personally worked on similar systems for twenty years, and I can tell you this one is exceptional. The verdict from the industry is unanimous — if you're still using the old system, you're falling behind.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": ["bandwagon_effect", "authority_bias"],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_adv_007",
+    "story": "Thousands of people have switched to our new app, and they've never looked back. It's the only app that combines all the features you need into one simple interface — no more juggling multiple tools. The reviews speak for themselves: a 4.8-star rating, and it's the top download in the productivity category. We've done extensive user testing and every single person said it improved their efficiency. It's time for you to upgrade.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": ["bandwagon_effect"],
+    "style_tags": ["email"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_adv_008",
+    "story": "The debate on public funding for the stadium is over. Every major economic study shows that stadiums create jobs and boost local businesses — it's basic economics. Our city's leaders are supporting this project, and the overwhelming majority of residents are in favor. Voter surveys consistently show support above sixty percent. If you oppose this, you're ignoring the evidence and the will of the community. I'm not going to let a few voices stand in the way of progress.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": ["bandwagon_effect"],
+    "style_tags": ["interview"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b1_adv_009",
+    "story": "I was wearing the competitor's watch for three years, and it was fine. Then a colleague recommended this brand, and I switched. The difference is night and day — the craftsmanship is superior, the materials are higher quality, and it keeps time perfectly. I've sold this brand to dozens of my friends, and they all agree it's the best watch you can buy. I stopped recommending the other brand as soon as I tried this one.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": ["bandwagon_effect", "choice_supportive_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_adv_010",
+    "story": "The legislation needs to pass immediately. If we don't act now, the environmental damage will be irreversible, and the cost of cleanup will be fifty times higher than the cost of prevention. Experts have been warning us about this for years — every scientific panel has reached the same conclusion. The only people opposing this bill are the ones who don't understand the science. We can't let ignorance destroy what our children will inherit. Sign the petition and support the bill.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": ["loss_aversion", "zero_risk_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b1_neg_001",
+    "story": "The server maintenance is scheduled for Saturday from 2 AM to 6 AM. During this time, all services will be unavailable. The database will be backed up, and the application will be updated. Users will be notified via email twenty-four hours before the maintenance begins. A status page will be updated throughout the maintenance period.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_neg_002",
+    "story": "The meeting was held from 10 AM to 11:30 AM. The agenda included budget review, project timeline updates, and department reports. The budget was approved without changes. The team will provide a project update by the end of the week. The next meeting is scheduled for the same time next Tuesday.",
+    "group": "negative",
+    "domain": "management",
+    "target_bias_ids": [],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_neg_003",
+    "story": "The temperature was recorded at 7 AM and 7 PM each day. The high temperature averaged 68 degrees Fahrenheit. The low temperature averaged 52 degrees Fahrenheit. Precipitation was observed on four days during the period. Wind speed was measured at an average of 10 miles per hour.",
+    "group": "negative",
+    "domain": "recreation",
+    "target_bias_ids": [],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_neg_004",
+    "story": "The product packaging was updated to include a QR code that links to an instructional video. The new packaging was designed to be more environmentally friendly and uses recycled materials. The change is expected to reduce plastic waste by thirty percent over the next year.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_neg_005",
+    "story": "A full moon will occur on Thursday at 8:30 PM. The moon will be at its closest approach to Earth for the month, appearing slightly larger than usual. The International Space Station will be visible overhead at 10 PM for approximately six minutes. No special equipment is required for viewing, though binoculars may enhance the experience.",
+    "group": "negative",
+    "domain": "astronomy",
+    "target_bias_ids": [],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_neg_006",
+    "story": "The report was submitted to the committee before the deadline. The appendix contains all supporting documentation, including photographs and diagrams. A summary of the findings was included at the beginning of the report. The committee will review the report at its next meeting.",
+    "group": "negative",
+    "domain": "legal",
+    "target_bias_ids": [],
+    "style_tags": ["witness_statement"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_neg_007",
+    "story": "The inventory was counted on the first of the month. Stock levels are within the normal range for all products. The supplier confirmed delivery of the next shipment for the fifteenth of the month. No shortages have been reported.",
+    "group": "negative",
+    "domain": "management",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_neg_008",
+    "story": "The code review identified three minor issues that require attention. The first issue involves a missing error handling condition. The second issue is a naming convention violation. The third issue relates to an unused import. All three issues have been assigned to the lead developer.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_neg_009",
+    "story": "The kiln reached 1200 degrees Fahrenheit after two hours. The glaze was applied according to the standard procedure. The pottery was fired for an additional four hours. After cooling, the pieces were inspected for defects. No cracks or glaze flaws were observed.",
+    "group": "negative",
+    "domain": "ceramics",
+    "target_bias_ids": [],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_neg_010",
+    "story": "The hiking trail is marked with blue blazes along the tree line. The trail loops around the ridge and returns to the parking area. The total distance is about four miles. The path is considered moderate in difficulty. Hikers should bring water and wear proper footwear.",
+    "group": "negative",
+    "domain": "recreation",
+    "target_bias_ids": [],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  }
+]

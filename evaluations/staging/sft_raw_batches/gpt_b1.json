@@ -1,0 +1,92 @@
+[
+  {
+    "id": "b1_pos_001",
+    "story": "I finally bought a small telescope after months of comparing reviews. The expensive model sat beside a mid-range one that suddenly felt like a bargain because another version cost almost twice as much. I left convinced I had made the smartest purchase, even though I had never planned to spend anywhere near that amount.",
+    "group": "positive",
+    "domain": "astronomy",
+    "target_bias_ids": ["decoy_effect"],
+    "style_tags": ["diary"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_pos_002",
+    "story": "Our woodworking club voted on replacing the aging table saw. I argued we should keep repairing it because we'd already invested years of maintenance and custom parts. Buying a new machine felt like admitting all that effort had been wasted, even though repairs now cost almost as much as replacement.",
+    "group": "positive",
+    "domain": "woodworking",
+    "target_bias_ids": ["sunk_cost_fallacy"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_pos_003",
+    "story": "During bird banding I assumed the volunteer with decades of experience could instantly tell every juvenile apart. When she skipped explaining the subtle feather patterns, I nodded anyway because I thought everyone else probably understood them as easily as she did. I copied her notes without asking questions.",
+    "group": "positive",
+    "domain": "bird banding",
+    "target_bias_ids": ["curse_of_knowledge"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_pos_004",
+    "story": "I chose the treatment that promised almost no chance of one rare complication, even though another option offered much better overall recovery statistics. I couldn't stop thinking about avoiding that single outcome, so the broader numbers barely mattered when I signed the paperwork.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": ["zero_risk_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b1_pos_005",
+    "story": "My project team wanted to try a different planning tool, but I kept insisting our old spreadsheet was safer because everyone already knew it. I spent more energy listing possible problems with the new system than checking whether those problems had ever happened anywhere.",
+    "group": "positive",
+    "domain": "management",
+    "target_bias_ids": ["status_quo_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_pos_006",
+    "story": "I recommended hiring another graduate from my university because people from our program always seemed easier to work with. Several applicants had stronger portfolios, but I kept returning to how comfortable it would feel to have someone who shared the same background and traditions.",
+    "group": "positive",
+    "domain": "management",
+    "target_bias_ids": ["in_group_bias"],
+    "style_tags": ["interview"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_pos_007",
+    "story": "After selling my old ceramic kiln, I kept telling friends it had been the perfect decision. Whenever someone mentioned the uneven firing temperatures I used to complain about, I quickly remembered the pleasant workshops and ignored the months I spent frustrated with repairs.",
+    "group": "positive",
+    "domain": "ceramics",
+    "target_bias_ids": ["choice_supportive_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b1_pos_008",
+    "story": "I almost skipped presenting my prototype because I imagined everyone in the room would notice every awkward pause and every tiny mistake on the slides. Even after colleagues said they were focused on the design itself, I couldn't shake the feeling that every eye stayed on me.",
+    "group": "positive",
+    "domain": "education",
+    "target_bias_ids": ["spotlight_effect"],
+    "style_tags": ["diary"],
+    "tone_tags": ["anxious"]
+  },
+  {
+    "id": "b1_pos_009",
+    "story": "My investment gained value after I ignored several cautious reports. Looking back, I kept saying the outcome had been obvious because the company's direction was clear all along. At the time, though, I had spent days wavering and almost sold everything twice.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": ["hindsight_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["confident"]
+  },
+  {
+    "id": "b1_pos_010",
+    "story": "Our legal team received a contract with several vague clauses. I argued we should reject it immediately because unknown risks felt worse than the known disadvantages of a competing offer. Nobody had identified an actual problem yet, but uncertainty alone convinced me to walk away.",
+    "group": "positive",
+    "domain": "legal",
+    "target_bias_ids": ["ambiguity_effect"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["clinical"]
+  }
+]
