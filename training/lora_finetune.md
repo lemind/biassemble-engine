@@ -129,6 +129,19 @@ Hold out 10-15% of `sft_dataset.jsonl` (a fixed default; document the exact frac
 
 ## 3. LoRA configuration
 
+**`gemma-3-4b-it` is the multimodal checkpoint** (text + a SigLIP-style vision tower under `model.vision_tower`, confirmed directly from the base-model load log: `Materializing param=model.vision_tower.vision_model.post_layernorm.weight`) even though this task is text-only and never feeds an image. The vision tower's own attention blocks also use `q_proj`/`k_proj`/`v_proj` names — a plain substring-matched `target_modules` list would attach LoRA adapters there too, wasting capacity on parameters that never see a gradient signal relevant to this task. **Scope `target_modules` to the language model only.**
+
+First, inspect the real module tree and confirm the two subtrees are actually named the way this section assumes (checkpoint-specific naming can drift between `transformers` versions — don't assume, check):
+
+```python
+lang_modules = [n for n, _ in model.named_modules() if "language_model" in n and n.endswith(("q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"))]
+vision_modules = [n for n, _ in model.named_modules() if "vision_tower" in n and n.endswith(("q_proj", "k_proj", "v_proj"))]
+print(f"{len(lang_modules)} language-model target candidates, e.g. {lang_modules[:2]}")
+print(f"{len(vision_modules)} vision-tower q/k/v modules that must NOT be targeted, e.g. {vision_modules[:2]}")
+```
+
+Then target only the `language_model` subtree, via a regex `target_modules` string (peft matches this against the full dotted module path, not a bare substring) rather than the plain-list form:
+
 ```python
 from peft import LoraConfig, get_peft_model
 
@@ -136,22 +149,23 @@ lora_config = LoraConfig(
     r=16,
     lora_alpha=32,
     lora_dropout=0.05,
-    target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+    target_modules=r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)$",
     task_type="CAUSAL_LM",
 )
 peft_model = get_peft_model(model, lora_config)
 ```
 
-**Verify `target_modules` actually resolved against the base model's real module names before training** — an empty or attention-only match means the adapter trains on close to zero effective parameters despite completing without error, and nothing later in this pipeline catches that on its own:
+**Verify `target_modules` actually resolved against the base model's real module names before training, and confirm the vision tower was correctly excluded** — an empty or attention-only match means the adapter trains on close to zero effective parameters despite completing without error, and a vision-tower match means capacity was wasted on layers this task can't use; nothing later in this pipeline catches either on its own:
 
 ```python
 peft_model.print_trainable_parameters()
-matched = {n for n, _ in peft_model.named_modules() if any(t in n for t in lora_config.target_modules)}
+matched = {n for n, m in peft_model.named_modules() if hasattr(m, "lora_A")}
 assert any("q_proj" in n or "k_proj" in n for n in matched), "attention projections did not resolve"
 assert any("gate_proj" in n or "up_proj" in n for n in matched), "MLP projections did not resolve"
+assert not any("vision_tower" in n for n in matched), "LoRA attached to the vision tower — target_modules regex is too broad"
 ```
 
-Record the **resolved** module name list (not just the requested config) in the manifest's `lora_hyperparameters.target_modules` — this is what makes a silent zero-effective-parameter training run detectable after the fact instead of only showing up as an unexplained recall gap at Step 7.
+Record the **resolved** module name list (not just the requested config) in the manifest's `lora_hyperparameters.target_modules` — this is what makes a silent zero-effective-parameter (or wrongly-vision-scoped) training run detectable after the fact instead of only showing up as an unexplained recall gap at Step 7.
 
 `rank=16`, `alpha=32`, `learning_rate=2e-4`, `epochs_planned=3` are starting defaults (mirrors the illustrative values in `contracts/finetune-manifest-schema.md`), not derived/locked values — adjust based on the validation loss curve, and record whatever was *actually* run (`epochs_run`, `best_checkpoint_epoch`) rather than the plan.
 

@@ -29,6 +29,8 @@ class LLMGenerator:
         threads: int,
         max_output_tokens: int,
         temperature: float,
+        lora_repo: str = "",
+        lora_file: str = "",
     ) -> None:
         self.context_tokens = context_tokens
         self.max_output_tokens = max_output_tokens
@@ -45,11 +47,20 @@ class LLMGenerator:
         self._lock = threading.Lock()
         try:
             model_path = hf_hub_download(repo_id=model_repo, filename=gguf_file)
+            # Optional runtime LoRA adapter (spec-006 T022 trial-eval path only — NOT the
+            # production ship mechanism, which is a merged+quantized GGUF swap per ADR-005 §5).
+            # Defaults off, so production load is byte-for-byte unchanged. When set, llama.cpp
+            # applies the adapter delta over the (dequantized-on-the-fly) base at load time.
+            lora_kwargs = {}
+            if lora_repo and lora_file:
+                lora_path = hf_hub_download(repo_id=lora_repo, filename=lora_file)
+                lora_kwargs["lora_path"] = lora_path
             self._llm = Llama(
                 model_path=model_path,
                 n_ctx=context_tokens,
                 n_threads=threads,
                 verbose=False,
+                **lora_kwargs,
             )
         except Exception as exc:
             raise RuntimeError(f"LLM model load failed — aborting startup: {exc}") from exc
