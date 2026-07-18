@@ -1,0 +1,17 @@
+Generate 20 short synthetic training stories for a cognitive-bias detection system. Output ONLY a JSON array of 20 objects, nothing else — no intro text, no explanation, no markdown fences, no code block wrapper.
+
+ALL 20 stories belong to group "negative": genuinely mundane, low-narrative-tension content with ZERO cognitive bias — a schedule, a recipe, a product changelog, a weather report, a historical summary, meeting notes, a maintenance log, an inventory list, a shipping manifest, a course syllabus excerpt. No personal opinions, recommendations, predictions, preferences, or evaluative language (never "the technician wisely..." or "this was the right call") — objective informational content only. No character makes any notable judgment call. target_bias_ids must be [] for every one of these.
+
+Rules:
+- Impersonal, objective tone — no narrator judgment, no first-person reflection.
+- Domains — spread across: logistics, weather, cooking, software changelogs, municipal records, academic scheduling, retail inventory, facilities maintenance, sports scorekeeping (factual results only, no commentary), library catalog notes.
+- 40-120 words each. Count your words — do not go under 40.
+- Avoid repeating sentence openings, narrative structure, or wording across stories.
+- Each story's style_tag must be one of: incident_report, email, newspaper, field_notes, maintenance_log, lab_notebook, lecture_notes, support_ticket. Use a good spread.
+
+Output format — a JSON array of exactly 20 objects, each shaped like:
+{"id": "neg_001", "story": "...", "group": "negative", "domain": "logistics", "target_bias_ids": [], "style_tags": ["maintenance_log"], "tone_tags": ["clinical"]}
+
+Use sequential ids with the batch prefix b6: b6_neg_001-020.
+
+Generate the 20 stories now.

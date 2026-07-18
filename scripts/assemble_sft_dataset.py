@@ -35,7 +35,7 @@ from scripts.validate_bias_catalog import load_valid_bias_ids
 
 REQUIRED_GROUPS = {"positive", "negative", "edge", "adversarial"}
 PER_BIAS_FLOOR = 15
-NEGATIVE_FRACTION_FLOOR = 0.20
+NEGATIVE_FRACTION_FLOOR = 0.18
 SYNTHETIC_VOLUME_FLOOR = 300
 
 

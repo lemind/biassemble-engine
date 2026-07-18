@@ -1,0 +1,613 @@
+[
+  {
+    "id": "b5_pos_001",
+    "story": "My daughter asked to borrow the car for her first solo road trip. I immediately pictured her getting lost in a remote area without cell service, so I insisted on driving her myself. I assumed she would feel just as anxious about the unfamiliar route as I do, completely forgetting that she actually loves navigating new places and finds my constant worry exhausting.",
+    "group": "positive",
+    "domain": "family",
+    "target_bias_ids": [
+      "projection_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b5_pos_002",
+    "story": "Reading about a rare neurological condition online, I completely ignored the statistical fact that ninety-nine percent of my symptoms match common stress responses. I focused entirely on the one specific visual aura that matched the rare disease description, assuming this single trait guaranteed the diagnosis over the overwhelming general population data.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": [
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b5_pos_003",
+    "story": "Choosing a new vacuum cleaner, the basic model was two hundred dollars and the premium one was six hundred. Then I saw the mid-tier model priced at five hundred and fifty dollars. It made the premium model look like an absolute steal for just fifty dollars more, so I immediately bought the most expensive option.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "decoy_effect"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b5_pos_004",
+    "story": "Reviewing the contract dispute files, it is completely obvious why the partnership dissolved last year. The financial statements from March clearly showed a downward trend, which should have been a massive red flag. I told the junior associates back then that we needed to restructure, and the current bankruptcy perfectly validates my initial concerns.",
+    "group": "positive",
+    "domain": "legal",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b5_pos_005",
+    "story": "We decided to build our own custom database architecture instead of using the off-the-shelf solution. It took twice as long and has more bugs, but I constantly remind the team that our custom system is perfectly tailored to our exact needs. The bespoke design justifies every extra hour we spent coding it.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b5_pos_006",
+    "story": "A student in my freshman seminar asked for an extension on the paper. Without even reading his specific excuse, I denied it and told him to manage his time better. College students always procrastinate until the last minute and then make up dramatic emergencies, so there was no point in listening.",
+    "group": "positive",
+    "domain": "education",
+    "target_bias_ids": [
+      "stereotyping_bias"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b5_pos_007",
+    "story": "The financial advisor gave an incredibly warm, comforting presentation about securing our retirement. I felt so reassured by his gentle tone and genuine smile that I immediately transferred my savings to his firm. I did not bother reading the actual fee structures, as his positive demeanor convinced me he was trustworthy.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": [
+      "affect_heuristic"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b5_pos_008",
+    "story": "Watching the baseball game, the home team struck out in the first three innings. I confidently placed a massive bet on them to win the game, convinced that the universe was due for a correction. After three failures, their next at-bat was statistically guaranteed to be a hit, making it the perfect time to wager.",
+    "group": "positive",
+    "domain": "sports",
+    "target_bias_ids": [
+      "gamblers_fallacy"
+    ],
+    "style_tags": [
+      "witness_statement"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b5_pos_009",
+    "story": "During the community kiln firing, I noticed a slight crack in my favorite vase. I became highly anxious, assuming every other potter in the studio was silently judging my glazing technique. I rushed to move it to the back of the shelf, convinced everyone was staring at my flaw and analyzing my skills.",
+    "group": "positive",
+    "domain": "ceramics",
+    "target_bias_ids": [
+      "spotlight_effect"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b5_pos_010",
+    "story": "The point guard made four consecutive three-pointers in the first quarter. Convinced he had a completely unstoppable rhythm, I ignored the coach's substitution plan and yelled at him to keep shooting. His hot hand meant he was mathematically guaranteed to make the next shot, regardless of the double-team defense.",
+    "group": "positive",
+    "domain": "sports",
+    "target_bias_ids": [
+      "hot_hand_fallacy"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b5_pos_011",
+    "story": "Evaluating a new foraging sector, I rejected the dense forest because the exact mushroom yield probabilities were incomplete in my guide. I chose the open field instead, even though the forest looked much more promising, because the open field's documented risks were fully predictable and I prefer known limitations over unknown fungal variables.",
+    "group": "positive",
+    "domain": "mycology",
+    "target_bias_ids": [
+      "ambiguity_effect"
+    ],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b5_pos_012",
+    "story": "Planning the cross-country freight route, I confidently estimated a comfortable three-day completion time for the new driver. I focused entirely on the highway distances and assumed he would drive exactly like I do, taking the exact same scenic breaks and resting at my preferred truck stops. I completely glossed over the dense traffic patterns and the statistical reality that ninety percent of rookie drivers struggle with mountain passes. I assumed he would naturally appreciate the scenic route as much as I do, forgetting that he just wants to deliver the load efficiently. The mountain pass data showed a high accident rate for novices, but I ignored those base rates because my personal preference for the scenic route felt like the objectively correct choice for anyone who loves the open road.",
+    "group": "positive",
+    "domain": "long-haul trucking",
+    "target_bias_ids": [
+      "projection_bias",
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b5_pos_013",
+    "story": "Repotting the ancient juniper, I evaluated three soil mixes. The basic akadama was forty dollars, and the premium pumice blend was one hundred and twenty dollars. Then I saw the mid-tier lava rock mix priced at one hundred and ten dollars. It made the premium pumice look like an absolute steal for just ten dollars more, so I naturally selected the most expensive option. Now that the roots are showing signs of rot from the heavy pumice, I constantly remind myself that the premium blend offers superior long-term drainage. The bespoke soil composition justifies every extra dollar I spent, and the current rot is just a temporary adjustment period. I refuse to admit the mid-tier mix would have been better, because my initial choice of the premium blend must be the correct one for this heirloom tree.",
+    "group": "positive",
+    "domain": "bonsai cultivation",
+    "target_bias_ids": [
+      "decoy_effect",
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "lecture_notes"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b5_pos_014",
+    "story": "Reviewing the autumn migration data, it is completely obvious why the warbler population dipped in the coastal sector this year. The weather patterns in September were a clear warning sign that the insect hatch would be delayed. I told the field coordinators back then that we needed to adjust our netting schedule, and the current low recapture rates perfectly validate my initial concerns. It is incredibly frustrating that the team did not listen to my warnings at the time. The data clearly shows a direct correlation between the September temperature anomalies and the subsequent drop in sightings. I knew all along that the coastal route would be problematic this season. Next year, I will make sure my recommendations are implemented from day one, because the warning signs were there for anyone paying attention to the subtle environmental shifts.",
+    "group": "positive",
+    "domain": "bird banding",
+    "target_bias_ids": [
+      "hindsight_bias",
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b5_pos_015",
+    "story": "Choosing the new jib sail for the regatta, the basic dacron was eight hundred dollars and the premium carbon fiber was three thousand dollars. Then I saw the mid-tier kevlar blend priced at two thousand and eight hundred dollars. It made the premium carbon look like an absolute steal for just two hundred dollars more, so I immediately bought the most expensive option. When the heavy carbon sail kept stalling in light winds, I assumed the rest of the fleet would naturally struggle with the exact same aerodynamic drag I was experiencing. I completely ignored the base rate that ninety percent of our coastal races feature light afternoon breezes, which heavily favor lighter sails. I projected my preference for heavy-wind stability onto the entire racecourse, convinced that everyone else was just as frustrated by the light air. The mid-tier sail would have been perfect for the conditions, but my initial choice of the premium carbon must be the right one for a championship-winning boat.",
+    "group": "positive",
+    "domain": "competitive sailing",
+    "target_bias_ids": [
+      "projection_bias",
+      "decoy_effect"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b5_edge_001",
+    "story": "Buying a new smartwatch, I assumed the complex health tracking features would be just as motivating for my spouse as they are for me. I bought the most expensive model with the advanced biometric sensors, completely forgetting that they actually find constant health monitoring stressful and prefer a simple step counter.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "projection_bias"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b5_edge_002",
+    "story": "Investing in a startup, I ignored the statistical fact that ninety percent of new tech companies fail within their first three years. I focused entirely on the founder's charismatic pitch and the one specific market trend that matched a previous unicorn, assuming this single trait guaranteed financial success over the general market data.",
+    "group": "edge",
+    "domain": "finance",
+    "target_bias_ids": [
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b5_edge_003",
+    "story": "Choosing a dental implant plan, the standard titanium was two thousand dollars and the premium zirconia was five thousand. Then I saw the mid-tier hybrid option priced at four thousand and five hundred dollars. It made the premium zirconia look like a massive bargain for just five hundred dollars more, so I chose the most expensive option.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": [
+      "decoy_effect"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b5_edge_004",
+    "story": "Looking back at our vacation photos, it is completely obvious why the trip felt so rushed. The itinerary we packed into the first day was clearly too dense, which should have been a massive red flag. I told my partner we needed to slow down, and the current exhaustion perfectly validates my initial concerns.",
+    "group": "edge",
+    "domain": "family",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b5_edge_005",
+    "story": "We decided to write our own encryption library instead of using the established open-source standard. It took months longer and has unpatched vulnerabilities, but I constantly remind the team that our custom code is perfectly tailored to our specific architecture. The bespoke design justifies every extra hour we spent debugging it.",
+    "group": "edge",
+    "domain": "technical",
+    "target_bias_ids": [
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b5_edge_006",
+    "story": "A paralegal in my firm asked to work from home on Friday. Without even reviewing her specific case load, I denied it and told her to be visible in the office. Junior legal staff always use remote days to slack off, so there was no point in listening to her detailed justification.",
+    "group": "edge",
+    "domain": "legal",
+    "target_bias_ids": [
+      "stereotyping_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b5_edge_007",
+    "story": "The guest lecturer gave an incredibly passionate, emotional speech about the history of the region. I felt so moved by his dramatic storytelling and genuine tears that I immediately recommended his book for the entire syllabus. I did not bother checking his academic citations, as his emotional delivery convinced me he was an expert.",
+    "group": "edge",
+    "domain": "education",
+    "target_bias_ids": [
+      "affect_heuristic"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b5_edge_008",
+    "story": "Playing roulette at the casino, I completely ignored the statistical fact that the house edge guarantees a long-term loss on every single spin. I focused entirely on the red numbers that had not hit in the last ten spins, assuming this specific streak guaranteed an imminent win over the general probability data. The wheel has no memory, and the odds remain exactly the same on every spin, but the recent absence of red made me feel like the universe was due for a correction. I placed a massive bet on red, convinced that the specific visual environment of the empty red slots guaranteed a win. I ignored the base rate that the green zero will eventually wipe out my bankroll, focusing only on the immediate pattern. The mathematical reality of the game is completely overshadowed by the compelling narrative of the streak, making me feel like I have found a genuine edge in a purely random system.",
+    "group": "edge",
+    "domain": "gambling/betting",
+    "target_bias_ids": [
+      "base_rate_neglect",
+      "gamblers_fallacy"
+    ],
+    "style_tags": [
+      "witness_statement"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b5_edge_009",
+    "story": "The tennis player won the first two sets with a series of incredible ace serves. Convinced he had a completely unstoppable rhythm, I ignored the coach's advice to conserve energy and yelled at him to keep serving at maximum speed. His hot hand meant he was mathematically guaranteed to win the third set, regardless of his opponent's adjustments. The physical reality of muscle fatigue and the opponent's improved return positioning were completely ignored because the initial success felt like a permanent state. I assumed his serve velocity would remain constant, projecting his early dominance onto the entire match. The statistical probability of maintaining that level of performance over five sets is incredibly low, but the visual evidence of the first two sets created an illusion of invincibility. I refused to acknowledge the subtle drop in his second-serve percentage, convinced that his momentum was an unstoppable force that would easily carry him to a straight-sets victory.",
+    "group": "edge",
+    "domain": "sports",
+    "target_bias_ids": [
+      "hot_hand_fallacy",
+      "spotlight_effect"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b5_edge_010",
+    "story": "Examining the shattered pot, I immediately assumed it was caused by a dramatic, sudden thermal shock from a rogue draft in the studio. The shattered pieces fit a compelling story of a fierce, unexpected temperature battle. I completely ignored the subtle, gradual crystallization of the clay body that occurs over multiple firings, preferring the dramatic narrative of a sudden failure over the mundane reality of material fatigue. The specific fracture pattern looked like a clean break, but I ignored the ambiguous, microscopic crazing that suggested a long-term structural weakness. I built a robust argument about the studio's ventilation system, actively ignoring the ambiguous material data that proved the clay was simply old and compromised. It is frustrating when peers point out the gradual degradation, as they clearly lack the vision to see the dramatic event that truly explains the breakage. The evidence speaks for itself if you know how to read the dramatic story of the shards.",
+    "group": "edge",
+    "domain": "ceramics",
+    "target_bias_ids": [
+      "narrative_fallacy",
+      "ambiguity_effect"
+    ],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b5_adv_001",
+    "story": "Buy our new ergonomic office chair! You will feel exactly the same relief from back pain that I do. I assumed everyone sits exactly like I do, so we designed the lumbar support to match my specific posture perfectly. It is the objectively correct chair for every single body type in the world.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "projection_bias"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b5_adv_002",
+    "story": "Invest in our new crypto token! Ignore the fact that ninety-nine percent of altcoins go to zero. Focus entirely on our unique blockchain architecture and the one specific partnership that matches a previous billion-dollar success. This single trait guarantees massive financial returns over the general market failure data.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": [
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b5_adv_003",
+    "story": "Upgrade your dental care! Our standard cleaning is fifty dollars, and our premium deep clean is two hundred. But today, we offer the mid-tier polishing package for one hundred and ninety dollars. For just ten dollars more, you get the premium deep clean. It is an absolute steal!",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": [
+      "decoy_effect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b5_adv_004",
+    "story": "Hire our legal team! Looking back at your current contract disputes, it is completely obvious why you are losing. The warning signs were there for anyone paying attention. We saw this coming from a mile away, and our current strategy perfectly validates the initial concerns we had years ago.",
+    "group": "adversarial",
+    "domain": "legal",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b5_adv_005",
+    "story": "Build your custom software with us! Yes, it takes twice as long and costs more, but our bespoke design is perfectly tailored to your exact needs. The custom architecture justifies every extra dollar and hour spent coding it. Stop settling for off-the-shelf solutions that do not understand your business.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": [
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b5_adv_006",
+    "story": "Attention high school seniors! College applicants always procrastinate and then panic about essays. Do not wait until the last minute to make up dramatic excuses. Buy our premium essay writing course today and avoid the typical student mistakes. We know exactly how you operate, so let us fix your habits.",
+    "group": "adversarial",
+    "domain": "education",
+    "target_bias_ids": [
+      "stereotyping_bias"
+    ],
+    "style_tags": [
+      "lecture_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b5_adv_007",
+    "story": "Feel safe and connected again. Our family therapy app brings warmth, comfort, and community spirit right back to your living room. Join today and experience the deep peace of mind that comes from knowing your loved ones are thriving and you are all genuinely communicating.",
+    "group": "adversarial",
+    "domain": "family",
+    "target_bias_ids": [
+      "affect_heuristic"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b5_adv_008",
+    "story": "Bet on the home team! They have lost the first three games of the series. That means the universe is due for a correction, and tonight is guaranteed to be a massive, record-breaking win! Place your wager now before the odds finally balance out in your favor.",
+    "group": "adversarial",
+    "domain": "sports",
+    "target_bias_ids": [
+      "gamblers_fallacy"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b5_adv_009",
+    "story": "Are you tired of feeling invisible in the boardroom? Do you worry that seasoned executives are silently judging your financial models? You are not alone. Every detail of your spreadsheet is being watched. Upgrade to our premium analytics suite and present your data with absolute confidence.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": [
+      "spotlight_effect"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b5_adv_010",
+    "story": "Bet on the quarterback! He has thrown four consecutive touchdown passes. He has a completely unstoppable rhythm and is mathematically guaranteed to score again. Ignore the defense and ride the hot hand to a massive payout. His momentum is an unstoppable force that will easily cover the spread.",
+    "group": "adversarial",
+    "domain": "sports",
+    "target_bias_ids": [
+      "hot_hand_fallacy"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b5_adv_011",
+    "story": "Buy our premium organic coffee! Ignore the statistical fact that most people cannot taste the difference between expensive and cheap beans. Focus entirely on the single origin farm and the one specific flavor note that matches a rare award-winner. This single trait guarantees a superior morning experience.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b5_adv_012",
+    "story": "Deploy our cloud migration tool and experience a flawless transition! We designed this software assuming every developer codes exactly like our founding team, taking the exact same scenic breaks and writing perfectly documented code on the first try. We completely glossed over the statistical reality that ninety percent of enterprise teams struggle with legacy spaghetti code. We assumed your developers would naturally appreciate our complex architecture as much as we do, forgetting that they just want to ship features quickly. The industry data shows a high failure rate for complex migrations, but we ignored those base rates because our personal preference for elegant code felt like the objectively correct choice for everyone. Our tool guarantees a seamless transition because we projected our own flawless coding habits onto your entire engineering department. Trust our system to handle your messy legacy data with the same effortless grace we use for our own pristine repositories.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": [
+      "projection_bias",
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b5_adv_013",
+    "story": "Upgrade your clinic's diagnostic equipment! Our standard ultrasound machine is ten thousand dollars, and the premium AI-driven model is fifty thousand dollars. Then we introduced the mid-tier enhanced model for forty-five thousand dollars. It makes the premium AI model look like an absolute steal for just five thousand dollars more, so you naturally select the most expensive option. Now that the AI model is taking longer to process images, we constantly remind you that the advanced algorithms offer superior long-term accuracy. The bespoke software justifies every extra dollar you spent, and the current lag is just a temporary adjustment period for your staff. We refuse to admit the mid-tier machine would have been better for your daily workflow, because your initial choice of the premium model must be the correct one for a modern, forward-thinking clinic. Invest in the absolute best to justify your massive financial commitment.",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": [
+      "decoy_effect",
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b5_adv_014",
+    "story": "Hire our crisis management firm! Looking back at your recent public relations disasters, it is completely obvious why your brand reputation suffered. The negative social media comments were a clear warning sign that the public was angry. We told your internal team back then that you needed to issue a public apology, and the current boycott perfectly validates our initial concerns. It is incredibly frustrating that your board did not listen to our warnings at the time. The data clearly shows a direct correlation between your delayed response and the subsequent drop in sales. We knew all along that your silence would be problematic. Next time, you will make sure our recommendations are implemented from day one, because the warning signs were there for anyone paying attention. Our bespoke crisis strategy justifies every extra dollar you spend on our retainers, because our custom approach is perfectly tailored to fix the exact mistakes you made in the past.",
+    "group": "adversarial",
+    "domain": "legal",
+    "target_bias_ids": [
+      "hindsight_bias",
+      "choice_supportive_bias"
+    ],
+    "style_tags": [
+      "lecture_notes"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b5_adv_015",
+    "story": "Enroll in our executive leadership program! We designed this curriculum assuming every manager leads exactly like our famous alumni, taking the exact same risks and inspiring their teams with the same dramatic speeches. We completely glossed over the statistical reality that ninety percent of mid-level managers struggle with basic conflict resolution. We assumed your team would naturally appreciate our advanced theories as much as we do, forgetting that they just need practical tools for daily operations. Looking back at your recent departmental turnover, it is completely obvious why your employees are leaving. The exit interviews were a clear warning sign that the culture was toxic. We told you back then that you needed to change your management style, and the current resignation wave perfectly validates our initial concerns. Our program will fix your leadership flaws because we project our own flawless management habits onto your entire organization. Trust our proven curriculum to handle your team's issues with the same effortless grace our alumni use for their own pristine departments.",
+    "group": "adversarial",
+    "domain": "education",
+    "target_bias_ids": [
+      "projection_bias",
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  }
+]
