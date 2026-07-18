@@ -166,6 +166,11 @@ artifacts/
 
 # Evaluation run outputs (generated; baselines are committed)
 evaluations/runs/
+
+# spec-006: superseded/corrupted scratch from the SFT labeling pipeline (id-collision
+# bug's corrupted chunks, abandoned partial Gemini pass, rejected scratch approaches) —
+# kept locally for reference, not committed
+evaluations/staging/sft_raw_batches/_stale/
 env/
 venv/
 ENV/
