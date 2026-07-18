@@ -25,7 +25,7 @@ A `WeakSupervisionPair` (data-model.md) becomes an `SftExample` by joining its `
 
 ## Validation rules (enforced by `scripts/assemble_sft_dataset.py` before the file is considered ready to train on)
 
-1. **Catalog membership**: every `bias_ids` entry validated against the live DB-sourced catalog (data-model.md's `BiasCatalogSnapshot`) — reject the whole row on any invalid id, do not coerce or drop just the invalid entry (spec.md's Edge Cases).
+1. **Catalog membership**: every `bias_ids` entry validated against the live DB-sourced catalog (data-model.md's `BiasCatalogSnapshot`) — drop only the invalid id(s), keep the row with its remaining valid ids (mirrors the `adv_005`/T011 precedent). A row is fully rejected only if every id it was given is invalid, never silently coerced to `bias_ids: []`.
 2. **Group coverage**: rows must span all four scenario-group shapes represented in the existing eval harness (positive/negative/edge/adversarial-style story content) — checked by `tests/test_assemble_sft_dataset.py`'s coverage logic, not eyeballed.
 3. **Per-bias floor**: at least ~15 rows (starting default, ADR-005 §4) reference each catalog bias id somewhere in their `bias_ids`, across the whole file.
 4. **Negative fraction**: at least 18% of rows have `bias_ids: []` (relaxed from an initial 20% starting default — the real assembled corpus landed at ~19%, one percentage point under-shooting, after a targeted per-bias top-up batch added synthetic rows with no negative group; not worth a whole extra manual generation round for ~9 rows).
