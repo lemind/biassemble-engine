@@ -9,7 +9,7 @@
 
 ## 0. Base model pin
 
-Train on the **HF bf16 checkpoint** of the base model this feature's governing ADR pins as currently deployed — as of this writing, exactly:
+Train against the base model this feature's governing ADR pins as currently deployed — as of this writing, exactly:
 
 ```
 google/gemma-3-4b-it
@@ -17,20 +17,48 @@ google/gemma-3-4b-it
 
 **Never the GGUF** (LoRA cannot train a quantized checkpoint) **and never a different-sized variant** (spec.md FR-009). If the deployed cartridge changes in a later ADR, re-derive this pin from that ADR rather than assuming it still applies.
 
-At load time, record the exact commit SHA actually pulled — this becomes `base_model_revision` in the manifest (`google/gemma-3-4b-it@<sha>`), not just the repo name:
+**Load the base in 4-bit (QLoRA), not plain `bfloat16`/`float16` — this is a requirement, not a style choice.** The first real training run (`specs/006-fine-tune-llm/candidate-2026-07-18-results.md`) loaded the base in plain `float16` and got `nan` training loss across the entire 34-layer stack on a T4 — running this model's full forward/backward pass in raw fp16 (no `bitsandbytes` quantization, no autocast) is numerically unstable regardless of GPU. 4-bit `bitsandbytes` quantization was the fix that actually worked, verified by a pre-flight loss check (§1a below) before committing to a full run:
 
 ```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 model_id = "google/gemma-3-4b-it"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype="bfloat16", device_map="auto")
+
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.float16,  # T4 (Turing) has no bf16 compute support
+    bnb_4bit_use_double_quant=True,
+)
+model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb_config, device_map="auto")
 base_model_revision = f"{model_id}@{model.config._commit_hash}"
 ```
 
 ## 1. Tooling
 
-A LoRA/QLoRA library that runs on a free-tier T4-class GPU — `peft` + `bitsandbytes` (4-bit QLoRA) or `unsloth`. Implementation detail, not locked by the ADR; either works. Examples below use `peft`.
+`peft` + `bitsandbytes` 4-bit QLoRA, **not "either works"** — this is the specific combination verified to produce a finite, trainable loss on a free-tier T4. `unsloth` may also work but has not been run against this dataset; if used instead, re-verify §1a's pre-flight check before trusting a full run.
+
+Wrap the loaded model with `prepare_model_for_kbit_training` before attaching LoRA — this handles gradient-checkpointing setup and layer-norm upcasting correctly for a quantized base (a manual `gradient_checkpointing_enable()` call alone is not sufficient for a 4-bit model):
+
+```python
+from peft import prepare_model_for_kbit_training
+
+model = prepare_model_for_kbit_training(model)
+model.gradient_checkpointing_enable()
+model.enable_input_require_grads()
+```
+
+### 1a. Pre-flight check — confirm the loss is finite before committing to a full run
+
+Run one real example through the model and check `.loss` is a real number, not `nan`, **before** starting the full training loop — this catches a numerical-instability regression in under a second instead of after a wasted multi-epoch run:
+
+```python
+check_batch = {k: v.to(peft_model.device) for k, v in collate_fn([train_examples[0]]).items()}
+check_out = peft_model(**check_batch)
+assert torch.isfinite(check_out.loss), f"loss is {check_out.loss.item()} — stop, do not proceed to training"
+```
 
 ## 2. Data prep — training/serving format match
 
@@ -103,6 +131,8 @@ target = json.dumps(sorted(row["bias_ids"]))   # '["anchoring_bias", "sunk_cost_
 Apply Gemma-3's own chat template (`<start_of_turn>`/`<end_of_turn>`) via the tokenizer — training on raw concatenated text teaches a different input distribution than what `create_chat_completion` actually sends:
 
 ```python
+MAX_LENGTH = 768  # defensive cap — see note below
+
 def build_example(row, catalog_ids, tokenizer):
     messages = [
         {"role": "system", "content": SYSTEM},
@@ -116,12 +146,20 @@ def build_example(row, catalog_ids, tokenizer):
     prompt_ids = tokenizer(prompt_text, add_special_tokens=False)["input_ids"]
     target_ids = tokenizer(target_text, add_special_tokens=False)["input_ids"]
 
+    if len(prompt_ids) + len(target_ids) > MAX_LENGTH:
+        keep = MAX_LENGTH - len(target_ids)
+        assert keep > 0, f"target alone exceeds MAX_LENGTH ({len(target_ids)} tokens) — raise MAX_LENGTH"
+        prompt_ids = prompt_ids[-keep:]  # truncate the prompt from the left, never the target
+
     input_ids = prompt_ids + target_ids
     labels = [-100] * len(prompt_ids) + target_ids  # mask the prompt, train only on the completion
-    return {"input_ids": input_ids, "labels": labels}
+    token_type_ids = [0] * len(input_ids)  # see note below — required, not optional
+    return {"input_ids": input_ids, "labels": labels, "token_type_ids": token_type_ids}
 ```
 
 `-100` is the standard PyTorch/HF ignore-index for cross-entropy loss — masking the prompt tokens this way means the model is trained only to produce the JSON-array completion, not to reproduce the prompt it was given.
+
+**`token_type_ids` is required, not optional, and must be included in every batch (the collator must pad it alongside `input_ids`/`labels`).** `gemma-3-4b-it` is the multimodal checkpoint (see §3 below) — its forward pass hard-requires `token_type_ids` in training mode to distinguish text tokens from image tokens (`token_type_ids == 1` marks an image token), and raises `ValueError: token_type_ids is required as a model input when training` if omitted, even when the batch contains zero images. All-zeros is correct here since this task never feeds an image. `MAX_LENGTH` truncation is a defensive cap discovered necessary when Gemma's large (256k) vocabulary made an unusually long batch spike GPU memory during loss computation — truncating the prompt (never the target, so the label always survives intact) keeps worst-case memory bounded.
 
 ### 2.4 Validation split
 
@@ -202,35 +240,82 @@ for row in random.sample(train_rows, 20):
         {"role": "user", "content": build_user_message(row["story"], catalog_ids)},
     ]
     prompt_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    output = generate(peft_model, tokenizer, prompt_text)
+    inputs = tokenizer(prompt_text, return_tensors="pt").to(peft_model.device)
+    inputs["token_type_ids"] = torch.zeros_like(inputs["input_ids"])  # required — see §2.3
+    with torch.no_grad():
+        out = peft_model.generate(**inputs, max_new_tokens=100, do_sample=False)
+    output = tokenizer.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
     print(row["id"], "->", output)
     # manually confirm: output parses as a JSON array, every id is in catalog_ids
 ```
 
 A chat-template mismatch, tokenizer issue, or serialization bug can let training "succeed" (loss decreases normally) while the resulting model's actual outputs are garbage. Catching this here costs minutes; catching it only after the full evaluation gate (spec-006 Phase 6) costs a wasted eval cycle and a much harder-to-diagnose failure. Do not proceed to merging until this passes.
 
-## 6. Merge → clear cache → quantize (order matters)
+## 6. Merge → clear cache → quantize (order matters — and three real traps found in the first run)
 
-**Correct order: train → merge → clear HF download cache → quantize.** The merge step reads the base checkpoint from the HF download cache — clearing the cache *before* merging deletes an input the merge needs and forces a mid-procedure re-download, the opposite of the intended space saving.
+**Do not call `.merge_and_unload()` directly on the 4-bit `peft_model` from §1/§1a.** The first real run tried this and produced a checkpoint that *looked* merged but whose tensors were still raw packed 4-bit `uint8` + separate `.absmax` scale tensors — `llama.cpp`'s converter cannot dequantize `bitsandbytes`' format and fails with `NotImplementedError: Quant method is not yet supported: 'bitsandbytes'`. **Merge into a fresh, separately-loaded plain-`fp16` copy of the base instead** — a clean float addition with no quantization involved:
 
 ```python
-merged_model = peft_model.merge_and_unload()
+from transformers import AutoModelForCausalLM
+from peft import PeftModel
+
+# Save the adapter alone first (small, ~100-150MB) — this is the artifact that actually
+# matters if anything below goes wrong; everything past this point is reproducible from it.
+peft_model.save_pretrained("./final-lora-adapter")
+tokenizer.save_pretrained("./final-lora-adapter")
+
+fresh_base = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype="float16", device_map="cpu")
+merge_model = PeftModel.from_pretrained(fresh_base, "./final-lora-adapter")
+merged_model = merge_model.merge_and_unload()
 merged_model.save_pretrained("./merged-checkpoint", safe_serialization=True)
-tokenizer.save_pretrained("./merged-checkpoint")
 ```
+
+**Copy the base model's *original* tokenizer files in verbatim — do not call `tokenizer.save_pretrained()` on the merged checkpoint.** `transformers` re-serializes `tokenizer.json` with a different byte layout than Google's original repo, which changes the BPE pre-tokenizer's fingerprint hash; `llama.cpp`'s converter either misidentifies it as a wrong, unrelated tokenizer (silently wrong) or refuses outright with `NotImplementedError: BPE pre-tokenizer was not recognized`, depending on version. Fix: copy Google's original files in place of whatever `transformers` would write:
+
+```python
+from huggingface_hub import snapshot_download
+import shutil, os
+
+tok_dir = snapshot_download(model_id, allow_patterns=["tokenizer*", "special_tokens_map.json"])
+for f in os.listdir(tok_dir):
+    if f.startswith("tokenizer") or f == "special_tokens_map.json":
+        shutil.copy(os.path.join(tok_dir, f), f"./merged-checkpoint/{f}")
+```
+
+**Build/use `llama.cpp` at the exact commit this repo's `llama-cpp-python==0.3.19` vendors, not `main`.** A fresh `git clone` of `main` on a notebook is several months ahead of what this repo's pinned runtime can actually load — the first run's candidate GGUF, built from a fresh `main` clone, failed to load in this repo's runtime entirely. The correct commit:
 
 ```bash
-# Only after the merge above has completed and been saved to disk:
+git clone https://github.com/ggerganov/llama.cpp
+cd llama.cpp && git fetch --depth 1 origin c0159f9c1f874da15e94f371d136f5920b4b5335 && git checkout c0159f9c1f874da15e94f371d136f5920b4b5335
+cmake -B build . -DGGML_CUDA=OFF && cmake --build build --config Release -j --target llama-quantize
+cd ..
+```
+(Re-derive this commit if `llama-cpp-python`'s pinned version in `pyproject.toml` ever changes — don't assume `c0159f9c` stays correct forever: `gh api repos/abetlen/llama-cpp-python/contents/vendor?ref=v<version>` returns it.)
+
+**Correct order from here: clear HF download cache → convert → quantize.** The merge above already completed and saved to disk, so the cache is no longer needed as a merge input (unlike a same-session merge-then-immediately-quantize flow, where clearing too early forces a re-download mid-procedure):
+
+```bash
 rm -rf ~/.cache/huggingface/hub/models--google--gemma-3-4b-it
 
-# Quantize directly from the merged checkpoint — no separate full bf16 save:
-python llama.cpp/convert_hf_to_gguf.py ./merged-checkpoint \
-  --outfile ./candidate.Q4_K_M.gguf --outtype q4_k_m
+# NOTE: this llama.cpp version's convert_hf_to_gguf.py does NOT accept --outtype q4_k_m
+# directly (only f32/f16/bf16/q8_0/tq1_0/tq2_0/auto) — convert to Q8_0 first, then
+# requantize down. Q8_0 is also ~half the size of an F16 intermediate, which matters on a
+# disk-constrained free-tier session (F16 + the merged checkpoint together can exceed a
+# 20GB session disk; Q8_0 + the merged checkpoint fits comfortably).
+python llama.cpp/convert_hf_to_gguf.py ./merged-checkpoint --outfile ./candidate-q8_0.gguf --outtype q8_0
+rm -rf ./merged-checkpoint  # no longer needed once the GGUF exists — free the space
+
+# llama-quantize refuses to requantize an already-quantized file by default; --allow-requantize
+# overrides that (small, expected quality cost vs. quantizing from F16, not worth the extra
+# disk pressure of keeping an F16 intermediate around instead of Q8_0):
+./llama.cpp/build/bin/llama-quantize --allow-requantize ./candidate-q8_0.gguf ./candidate.Q4_K_M.gguf Q4_K_M
 ```
 
-**Disk note**: peak usage across this step is additive, not just the largest single file — the downloaded HF base checkpoint (~7-8GB) typically coexists on disk with the merged checkpoint (~7-8GB) while GGUF conversion (~2.5GB output) is in progress, a plausible ~18GB simultaneous footprint on a platform that may only offer ~12-15GB free (ADR-005 §5). If tight, quantizing directly from the merged checkpoint (as above, skipping any separate full bf16 export) is the mitigation — not clearing the cache earlier.
+**Disk note**: peak usage across this step is additive, not just the largest single file — the merged checkpoint (~8GB) and the intermediate GGUF coexist on disk until the merged checkpoint is deleted (above). On a ~20GB free-tier session disk, this is tight but workable with the Q8_0 intermediate; it was not workable with an F16 intermediate (~7.76GB), which is why Q8_0 is the default here rather than F16.
 
 Record the exact `quantization_command` used, verbatim and copy-pasteable, in the manifest.
+
+**Verify the resulting GGUF actually loads in this repo's runtime before trusting it as a candidate** — none of the above guarantees it did; the fastest check is pointing `scripts/run_evaluation.py` at it (Phase 6) and confirming the model loads rather than raising `ValueError: Failed to load model from file`.
 
 ## 7. Write the manifest (T021)
 
