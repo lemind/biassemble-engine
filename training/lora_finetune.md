@@ -7,6 +7,20 @@
 
 ---
 
+## Session hygiene — read this before starting (the first real run lost its adapter to this)
+
+None of the following is about the model — it's about the notebook session not eating your work. The first real run produced a good adapter, then lost it entirely to a session death before it got merged, and had to retrain from scratch. All of this is cheap to do right and expensive to skip.
+
+1. **Confirm a real GPU is attached before running anything.** Check the sidebar says an actual accelerator (e.g. "GPU T4 x2"), not "No Accelerator" — training silently falls back to CPU otherwise, which is agonizingly slow and easy to mistake for a hang rather than a config problem.
+2. **Upload every real artifact to HF Hub the moment it's created — don't chain multiple expensive steps in one session hoping it survives to the end.** Save the adapter (§5) → upload it → *then* attempt the merge (§6), not save-then-immediately-merge-then-upload-at-the-end. `/kaggle/working` (or Colab's equivalent) survives a kernel *restart* within the same notebook, but not a session that's genuinely ended or a brand-new notebook — and there's no way to tell in advance which kind of death you're about to have. A crash after the upload costs you the current step; a crash before it costs you everything since the last upload.
+3. **Store the HF token in the platform's own Secrets manager (Kaggle: Add-ons → Secrets; Colab: the key icon), never pasted into a cell or into chat with an assistant.** If a token does end up pasted somewhere it shouldn't, treat it as burned and generate a new one — don't assume it's fine because nothing bad happened yet.
+4. **A token that looks right can still be silently wrong.** A real HF token is exactly 37 characters and starts with `hf_`. If login is rejected as "Invalid user token" and you're sure it's not revoked, check the length before assuming the token itself is bad — a truncated copy-paste (one dropped trailing character) produces exactly this error and is easy to miss by eye.
+5. **Each fresh session starts with zero Python state — cells must be self-contained, not assume an earlier session's variables still exist.** A cell referencing `model_id` or `tokenizer` from "before" will `NameError` in a new session even if it worked five minutes ago in a different one. When resuming after any session restart, re-run setup (login, `model_id`, `tokenizer`) explicitly rather than assuming it carried over.
+6. **Don't chain a cleanup `rm` in the same cell as the operation it's cleaning up after, if that operation might fail.** A cell's `!` shell lines all run regardless of whether an earlier line in the same cell errored — a pattern like `convert(...); rm -rf source/` will delete `source/` even when `convert` failed, losing the input needed to retry. Put risky deletes in their own cell, run only after confirming the prior step actually succeeded.
+7. **On real OOM (not just a slow step), restart the session rather than trying to manually free objects and continue.** `del`-ing large objects and calling `gc.collect()` in the same process often doesn't actually return the memory to the OS the way a fresh process does — repeatedly retrying in the same dying session wastes more time than a clean restart.
+
+---
+
 ## 0. Base model pin
 
 Train against the base model this feature's governing ADR pins as currently deployed — as of this writing, exactly:
@@ -264,11 +278,15 @@ from peft import PeftModel
 peft_model.save_pretrained("./final-lora-adapter")
 tokenizer.save_pretrained("./final-lora-adapter")
 
-fresh_base = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype="float16", device_map="cpu")
+fresh_base = AutoModelForCausalLM.from_pretrained(
+    model_id, torch_dtype="float16", device_map="cuda", low_cpu_mem_usage=True
+)
 merge_model = PeftModel.from_pretrained(fresh_base, "./final-lora-adapter")
 merged_model = merge_model.merge_and_unload()
 merged_model.save_pretrained("./merged-checkpoint", safe_serialization=True)
 ```
+
+**Merge on GPU (`device_map="cuda"`), not CPU.** An earlier draft of this doc used `device_map="cpu"` specifically to avoid GPU issues — but that precaution was about §1a's *training* instability (a backward-pass numerical problem), which doesn't apply here: a merge is one forward-only float addition (`W' = W + B@A·scale`), not a training step. Doing it on CPU instead competes with Kaggle's limited system RAM (~13GB) and reliably OOM'd in practice, including in a freshly-restarted session with nothing else loaded. The T4's 16GB VRAM is a separate pool that's essentially empty once training's own objects are gone — merging there is both safer and faster. `low_cpu_mem_usage=True` streams weights in during load instead of holding two full copies transiently, extra insurance either way.
 
 **Copy the base model's *original* tokenizer files in verbatim — do not call `tokenizer.save_pretrained()` on the merged checkpoint.** `transformers` re-serializes `tokenizer.json` with a different byte layout than Google's original repo, which changes the BPE pre-tokenizer's fingerprint hash; `llama.cpp`'s converter either misidentifies it as a wrong, unrelated tokenizer (silently wrong) or refuses outright with `NotImplementedError: BPE pre-tokenizer was not recognized`, depending on version. Fix: copy Google's original files in place of whatever `transformers` would write:
 
