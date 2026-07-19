@@ -1,0 +1,1288 @@
+{
+  "candidate_id": "gemma3-4b-lora-2026-07-18",
+  "source_run": "evaluations/runs/run_2026-07-18.json",
+  "note": "Backfilled from an already-complete run (T022 evaluation ran 2026-07-18; formal archiving to this path was added to T022 afterward, per the 2026-07-19 review). Data is identical to what a fresh re-run of this exact candidate would produce.",
+  "scenario_results": [
+    {
+      "scenario_id": "adv_003",
+      "group": "adversarial",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic",
+        "framing_effect"
+      ],
+      "retrieved": [
+        "choice_supportive_bias",
+        "bandwagon_effect",
+        "base_rate_neglect",
+        "escalation_of_commitment",
+        "availability_heuristic"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "adv_001",
+      "group": "adversarial",
+      "expected": [
+        "confirmation_bias",
+        "framing_effect",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "recency_bias",
+        "confirmation_bias",
+        "narrative_fallacy"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.25
+    },
+    {
+      "scenario_id": "adv_004",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "adv_005",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "bandwagon_effect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "adv_006",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "adv_007",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect",
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "adv_008",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias",
+        "fundamental_attribution_error"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "adv_009",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "bandwagon_effect"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "adv_010",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "adv_011",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "adv_012",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "sunk_cost_fallacy",
+        "authority_bias",
+        "narrative_fallacy"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.3333333333333333
+    },
+    {
+      "scenario_id": "adv_013",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "fundamental_attribution_error"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "adv_014",
+      "group": "blind_spot",
+      "expected": [
+        "fundamental_attribution_error"
+      ],
+      "retrieved": [
+        "affect_heuristic",
+        "representativeness_heuristic",
+        "base_rate_neglect",
+        "stereotyping_bias",
+        "fundamental_attribution_error"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "adv_015",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "bandwagon_effect",
+        "framing_effect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6666666666666666
+    },
+    {
+      "scenario_id": "adv_016",
+      "group": "blind_spot",
+      "expected": [
+        "framing_effect"
+      ],
+      "retrieved": [
+        "framing_effect",
+        "fundamental_attribution_error",
+        "affect_heuristic",
+        "escalation_of_commitment",
+        "loss_aversion"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "adv_017",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "omission_bias",
+        "curse_of_knowledge",
+        "base_rate_neglect",
+        "in_group_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "adv_018",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect",
+        "recency_bias"
+      ],
+      "retrieved": [
+        "bandwagon_effect",
+        "representativeness_heuristic",
+        "self_serving_bias",
+        "escalation_of_commitment",
+        "choice_supportive_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "adv_019",
+      "group": "blind_spot",
+      "expected": [
+        "negativity_bias"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "affect_heuristic",
+        "confirmation_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.25
+    },
+    {
+      "scenario_id": "adv_020",
+      "group": "blind_spot",
+      "expected": [
+        "negativity_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "availability_heuristic",
+        "authority_bias",
+        "representativeness_heuristic",
+        "ambiguity_effect"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "adv_021",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "framing_effect",
+        "base_rate_neglect",
+        "stereotyping_bias",
+        "anchoring_bias",
+        "zero_risk_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "adv_022",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect",
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "bandwagon_effect",
+        "narrative_fallacy",
+        "sunk_cost_fallacy",
+        "ambiguity_effect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4
+    },
+    {
+      "scenario_id": "adv_023",
+      "group": "blind_spot",
+      "expected": [
+        "hindsight_bias",
+        "projection_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "projection_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "edge_003",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "base_rate_neglect",
+        "recency_bias",
+        "hindsight_bias",
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "edge_004",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "status_quo_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "edge_005",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "edge_006",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_007",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "overconfidence_bias",
+        "stereotyping_bias",
+        "fundamental_attribution_error",
+        "self_serving_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_008",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_009",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_010",
+      "group": "blind_spot",
+      "expected": [
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "stereotyping_bias",
+        "anchoring_bias",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_011",
+      "group": "blind_spot",
+      "expected": [
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "edge_012",
+      "group": "blind_spot",
+      "expected": [
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_013",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "fundamental_attribution_error",
+        "base_rate_neglect",
+        "bandwagon_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_014",
+      "group": "blind_spot",
+      "expected": [
+        "halo_effect"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "representativeness_heuristic",
+        "halo_effect",
+        "recency_bias",
+        "anchoring_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "edge_015",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias"
+      ],
+      "retrieved": [
+        "curse_of_knowledge",
+        "status_quo_bias",
+        "halo_effect",
+        "loss_aversion",
+        "self_serving_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_016",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "stereotyping_bias",
+        "overconfidence_bias",
+        "dunning_kruger_effect",
+        "availability_heuristic",
+        "base_rate_neglect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_017",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "overconfidence_bias",
+        "planning_fallacy",
+        "narrative_fallacy",
+        "status_quo_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_018",
+      "group": "blind_spot",
+      "expected": [
+        "planning_fallacy"
+      ],
+      "retrieved": [
+        "choice_supportive_bias",
+        "authority_bias",
+        "dunning_kruger_effect",
+        "ambiguity_effect",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_019",
+      "group": "blind_spot",
+      "expected": [
+        "base_rate_neglect"
+      ],
+      "retrieved": [
+        "anchoring_bias",
+        "gamblers_fallacy",
+        "framing_effect",
+        "overconfidence_bias",
+        "base_rate_neglect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "edge_020",
+      "group": "blind_spot",
+      "expected": [
+        "base_rate_neglect"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "base_rate_neglect",
+        "curse_of_knowledge",
+        "stereotyping_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "edge_021",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "projection_bias",
+        "in_group_bias",
+        "negativity_bias",
+        "recency_bias",
+        "self_serving_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_022",
+      "group": "blind_spot",
+      "expected": [
+        "projection_bias"
+      ],
+      "retrieved": [
+        "stereotyping_bias",
+        "authority_bias",
+        "projection_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.3333333333333333
+    },
+    {
+      "scenario_id": "neg_006",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_007",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_008",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_009",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_010",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_011",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_012",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_013",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_014",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_015",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_016",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "planning_fallacy",
+        "recency_bias",
+        "optimism_bias",
+        "escalation_of_commitment",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_017",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "planning_fallacy",
+        "status_quo_bias",
+        "overconfidence_bias",
+        "ambiguity_effect",
+        "optimism_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_018",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "self_serving_bias",
+        "framing_effect",
+        "choice_supportive_bias",
+        "hot_hand_fallacy",
+        "affect_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_019",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_020",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "zero_risk_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_021",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "representativeness_heuristic",
+        "confirmation_bias",
+        "curse_of_knowledge",
+        "status_quo_bias",
+        "ambiguity_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_022",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "planning_fallacy",
+        "escalation_of_commitment",
+        "decoy_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_023",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "gamblers_fallacy",
+        "loss_aversion",
+        "halo_effect",
+        "anchoring_bias",
+        "zero_risk_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_024",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "zero_risk_bias",
+        "survivorship_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "neg_025",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "overconfidence_bias",
+        "negativity_bias",
+        "spotlight_effect",
+        "narrative_fallacy",
+        "optimism_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_005",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "dunning_kruger_effect",
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "pos_006",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "pos_007",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic",
+        "sunk_cost_fallacy"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "pos_008",
+      "group": "blind_spot",
+      "expected": [
+        "sunk_cost_fallacy",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "pos_009",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "hot_hand_fallacy",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_010",
+      "group": "blind_spot",
+      "expected": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "authority_bias",
+        "base_rate_neglect",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.25
+    },
+    {
+      "scenario_id": "pos_011",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "anchoring_bias",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_012",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias",
+        "projection_bias"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_013",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "hindsight_bias",
+        "spotlight_effect",
+        "base_rate_neglect",
+        "illusion_of_control",
+        "ambiguity_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_014",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "pos_015",
+      "group": "blind_spot",
+      "expected": [
+        "loss_aversion",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "loss_aversion",
+        "anchoring_bias",
+        "sunk_cost_fallacy",
+        "escalation_of_commitment",
+        "gamblers_fallacy"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "pos_016",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "framing_effect",
+        "stereotyping_bias",
+        "base_rate_neglect",
+        "overconfidence_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "pos_017",
+      "group": "blind_spot",
+      "expected": [
+        "sunk_cost_fallacy",
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "sunk_cost_fallacy",
+        "confirmation_bias",
+        "self_serving_bias",
+        "optimism_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "pos_018",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "halo_effect",
+        "gamblers_fallacy",
+        "authority_bias",
+        "stereotyping_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_019",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "hindsight_bias"
+      ],
+      "retrieved": [
+        "in_group_bias",
+        "confirmation_bias",
+        "escalation_of_commitment"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_020",
+      "group": "blind_spot",
+      "expected": [
+        "confirmation_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "confirmation_bias",
+        "base_rate_neglect",
+        "fundamental_attribution_error",
+        "survivorship_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2
+    },
+    {
+      "scenario_id": "pos_021",
+      "group": "blind_spot",
+      "expected": [
+        "choice_supportive_bias",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "choice_supportive_bias",
+        "negativity_bias",
+        "zero_risk_bias",
+        "bandwagon_effect",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4
+    },
+    {
+      "scenario_id": "pos_022",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "dunning_kruger_effect",
+        "self_serving_bias",
+        "stereotyping_bias",
+        "framing_effect",
+        "fundamental_attribution_error"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "pos_023",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias",
+        "projection_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "projection_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.5
+    },
+    {
+      "scenario_id": "pos_024",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "fundamental_attribution_error",
+        "hindsight_bias",
+        "self_serving_bias",
+        "escalation_of_commitment"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0
+    },
+    {
+      "scenario_id": "edge_002",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "loss_aversion",
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "loss_aversion",
+        "status_quo_bias",
+        "dunning_kruger_effect",
+        "availability_heuristic",
+        "negativity_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6
+    },
+    {
+      "scenario_id": "edge_001",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "omission_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.3333333333333333
+    },
+    {
+      "scenario_id": "neg_003",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_005",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_004",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_002",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "neg_001",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0
+    },
+    {
+      "scenario_id": "pos_004",
+      "group": "positive",
+      "expected": [
+        "hot_hand_fallacy",
+        "illusion_of_control",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "hot_hand_fallacy",
+        "gamblers_fallacy",
+        "illusion_of_control"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "precision_at_k": 0.6666666666666666
+    },
+    {
+      "scenario_id": "pos_001",
+      "group": "positive",
+      "expected": [
+        "anchoring_bias",
+        "sunk_cost_fallacy",
+        "confirmation_bias",
+        "loss_aversion"
+      ],
+      "retrieved": [
+        "anchoring_bias",
+        "sunk_cost_fallacy",
+        "hot_hand_fallacy",
+        "loss_aversion",
+        "escalation_of_commitment"
+      ],
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.6
+    },
+    {
+      "scenario_id": "pos_003",
+      "group": "positive",
+      "expected": [
+        "planning_fallacy",
+        "sunk_cost_fallacy",
+        "escalation_of_commitment",
+        "optimism_bias"
+      ],
+      "retrieved": [
+        "sunk_cost_fallacy",
+        "escalation_of_commitment",
+        "planning_fallacy",
+        "overconfidence_bias",
+        "survivorship_bias"
+      ],
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.6
+    },
+    {
+      "scenario_id": "pos_002",
+      "group": "positive",
+      "expected": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "authority_bias",
+        "stereotyping_bias",
+        "framing_effect",
+        "base_rate_neglect"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2
+    }
+  ]
+}
