@@ -221,3 +221,47 @@ Promoted `evaluations/runs/run_2026-07-14.json` → `baseline_2026-07-14.json` (
 | adversarial (N=2) | 0.333 | 0.200 | 0% |
 
 Side effect worth noting: under the new baseline, `negative`'s own tolerance (`1/5=0.200`) sits exactly at its baseline value (`0.200`), so the CI gate's per-`(group, metric)` eligibility rule automatically makes `negative` non-blocking — no hardcoded carve-out needed, it falls out of the same formula every other group uses.
+
+---
+
+## `blind_spot` promoted + LoRA fine-tune shipped (2026-07-17 to 2026-07-19, spec 006)
+
+### `blind_spot` promoted into a real, held-out eval group (2026-07-17)
+
+The 80-story batch staged 2026-07-13 (above) was spot-checked (10/80 reviewed in detail, one minor label-fit judgment call left as-is, zero join/misalignment errors) and promoted into `evaluations/blind_spot/*.json` — a real scenario group, not staging. Baseline re-promoted to include it: `baseline_2026-07-17.json`.
+
+| Group | Recall@5 | Precision@5 | empty_rate |
+|---|---|---|---|
+| positive (N=4) | 0.729 | 0.500 | 0% |
+| negative (N=5) | 0.200 | 0.200 | 20% |
+| edge (N=2) | 0.750 | 0.400 | 0% |
+| adversarial (N=2) | 0.333 | 0.200 | 0% |
+| **blind_spot (N=80)** | **0.325** | **0.128** | 4% |
+
+`blind_spot`'s N=80 is the first eval group in this project with enough scenarios to be statistically meaningful on its own — every other group is N≤5. This is why it became the primary ship-gate metric (`adr/006-blind-spot-ship-gate.md`), replacing the original N=4 `positive` ≥0.85 bar (ADR-003 §7 SC-001), which one story's worth of noise (±0.25) could swing either direction.
+
+### LoRA fine-tune (`adr/005-fine-tune-engine-llm.md`, spec 006)
+
+**Yes — an actual model fine-tune, not a config swap.** 907-row SFT dataset (28 real weak-supervision pairs reconstructed from `biassemble-core`'s production traces + 879 multi-provider synthetic stories, DeepSeek-labeled, validated against the live 38-id catalog) → LoRA rank 16/alpha 32 on `google/gemma-3-4b-it`'s HF bf16 checkpoint (QLoRA 4-bit; plain fp16 produced NaN losses on this model's 34-layer stack), 3 epochs on a free Kaggle T4, `target_modules` scoped to the language-model subtree only (this checkpoint is multimodal — an unscoped match would've wasted capacity on the vision tower) → merged into a fresh fp16 base, quantized to Q4_K_M GGUF matching the exact runtime format `llama-cpp-python==0.3.19` expects. Full reproducible record: `training/manifests/gemma3-4b-lora-2026-07-18.json`.
+
+**Ship-gate result** (`run_2026-07-19.json` vs `baseline_2026-07-17.json`, real merged+quantized candidate, `check_regression.py` exit 0):
+
+| Group | Metric | Baseline | Candidate | Delta | Eligible | Result |
+|---|---|---|---|---|---|---|
+| **blind_spot** | recall_at_k | 0.325 | **0.512** | **+0.187** | yes | **pass** |
+| **blind_spot** | precision_at_k | 0.128 | **0.346** | **+0.218** | yes | **pass** |
+| positive | recall_at_k | 0.729 | 0.667 | −0.062 | yes | pass (within noise) |
+| positive | precision_at_k | 0.500 | 0.517 | +0.017 | yes | pass |
+| edge | recall_at_k | 0.750 | 0.583 | −0.167 | yes | pass (within noise) |
+| edge | precision_at_k | 0.400 | 0.375 | −0.025 | no | reported only (ineligible) |
+| adversarial | recall_at_k | 0.333 | 0.333 | +0.000 | no | reported only (ineligible) |
+| adversarial | precision_at_k | 0.200 | 0.225 | +0.025 | no | reported only (ineligible) |
+| negative | empty_rate | 0.200 | 1.000 | +0.800 | no | reported only (ineligible) |
+
+`blind_spot` recall +0.187, precision +0.218 — both eligible, both pass, precision moved with recall so this isn't a recall-for-precision trade. `negative`'s empty_rate jump (20%→100%) looked concerning at first read but was traced (T025) to the candidate correctly staying silent on 10/20 negative-shaped `blind_spot` rows the baseline was hallucinating plausible-but-wrong labels on (baseline: 3/20 correct) — a real precision win, not over-caution. Nothing eligible regressed past tolerance. Gate: **pass**.
+
+### Shipped, confirmed live (2026-07-19)
+
+`space-vars.env`'s `LLM_MODEL_REPO`/`LLM_GGUF_FILE` swapped to the candidate (`Leminds/gemma3-4b-bias-lora-candidate-2026-07-18`, `candidate.Q4_K_M.gguf`) and deployed. Fresh confirmation run against the live Space today reproduced the 4 non-`blind_spot` groups exactly (`positive` 0.667, `negative` 1.000, `adversarial` 0.333, `edge` 0.583 — bit-for-bit identical to the table above) — genuine live confirmation, not just a re-read of the training run.
+
+**Known gap, found while confirming this**: the Dockerfile's `COPY evaluations/<group>` lines never included `blind_spot` — only `positive`/`negative`/`adversarial`/`edge` are baked into the deployed image. So the live Space's own `/evaluate` endpoint structurally cannot score `blind_spot` at all, independent of the separate `006-fine-tune-llm`-not-yet-merged-to-`main` gap noted in the README's CI section. `blind_spot`'s numbers above are real (same exact model artifact, evaluated with local file access to the scenario files), just not fetchable from the live endpoint yet. Two things need fixing before `production-drift.yml` can actually watch the metric this whole feature was built to move: merge `006-fine-tune-llm` to `main`, and add `blind_spot` to the Dockerfile's `COPY evaluations/*` lines.

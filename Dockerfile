@@ -28,6 +28,11 @@ COPY evaluations/positive ./evaluations/positive
 COPY evaluations/negative ./evaluations/negative
 COPY evaluations/adversarial ./evaluations/adversarial
 COPY evaluations/edge ./evaluations/edge
+# blind_spot (spec-006/ADR-006's primary ship-gate group, promoted 2026-07-17) was
+# missing here until 2026-07-19 — the deployed Space's own /evaluate endpoint had no
+# scenario files to score it with, so neither a live remote eval nor
+# production-drift.yml could ever see it, independent of any baseline/branch state.
+COPY evaluations/blind_spot ./evaluations/blind_spot
 
 # NLI (nli_union) is no longer the default strategy — llm_union (Gemma) is. Its model
 # is kept selectable via NLI_MODEL, but NOT pre-baked (saves ~700MB). If you switch the
