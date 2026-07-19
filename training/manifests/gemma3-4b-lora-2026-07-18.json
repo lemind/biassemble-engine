@@ -1,0 +1,172 @@
+{
+  "candidate_id": "gemma3-4b-lora-2026-07-18",
+  "dataset_version": "sha256:73ddf4ca1167fa8ebc105201e78492c7b8cf1440ae77aa7fa8d0c84aa6963b97",
+  "dataset_composition": {
+    "by_source": {
+      "synthetic": 879,
+      "real_weak": 28
+    },
+    "by_group": {
+      "positive": 267,
+      "negative": 172,
+      "edge": 214,
+      "adversarial": 226
+    },
+    "per_bias_coverage": {
+      "affect_heuristic": 19,
+      "ambiguity_effect": 17,
+      "anchoring_bias": 37,
+      "authority_bias": 36,
+      "availability_heuristic": 54,
+      "bandwagon_effect": 55,
+      "base_rate_neglect": 27,
+      "choice_supportive_bias": 21,
+      "confirmation_bias": 64,
+      "curse_of_knowledge": 16,
+      "decoy_effect": 27,
+      "dunning_kruger_effect": 26,
+      "escalation_of_commitment": 31,
+      "framing_effect": 28,
+      "fundamental_attribution_error": 28,
+      "gamblers_fallacy": 23,
+      "halo_effect": 33,
+      "hindsight_bias": 21,
+      "hot_hand_fallacy": 26,
+      "illusion_of_control": 24,
+      "in_group_bias": 24,
+      "loss_aversion": 21,
+      "narrative_fallacy": 21,
+      "negativity_bias": 35,
+      "omission_bias": 18,
+      "optimism_bias": 20,
+      "overconfidence_bias": 74,
+      "planning_fallacy": 19,
+      "projection_bias": 27,
+      "recency_bias": 25,
+      "representativeness_heuristic": 21,
+      "self_serving_bias": 24,
+      "spotlight_effect": 18,
+      "status_quo_bias": 50,
+      "stereotyping_bias": 21,
+      "sunk_cost_fallacy": 40,
+      "survivorship_bias": 22,
+      "zero_risk_bias": 32
+    }
+  },
+  "lora_hyperparameters": {
+    "rank": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "learning_rate": 0.0002,
+    "epochs_planned": 3,
+    "epochs_run": 3,
+    "validation_split_fraction": null,
+    "validation_split_fraction_note": "Not recorded during the actual Kaggle run (2026-07-18); the training session died before this was captured (see training/lora_finetune.md's Session hygiene note, T027). lora_finetune.md's documented default is 10-15%, but recording an unverified guess here would defeat this file's own reproducibility purpose (contracts/finetune-manifest-schema.md rule 2). Record this value at training time for future candidates.",
+    "best_checkpoint_epoch": 3,
+    "best_eval_loss": 0.1778,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "target_modules_note": "Resolved via regex scoped to the language_model subtree only (excludes the vision tower's identically-named q_proj/k_proj/v_proj on this multimodal checkpoint) — 238 modules matched, 29.8M/4.33B trainable (0.69%)."
+  },
+  "base_model_revision": "google/gemma-3-4b-it@093f9f388b31de276ce2de164bdc2081324b9767",
+  "quantization_command": "python llama.cpp/convert_hf_to_gguf.py ./merged-checkpoint --outfile ./candidate-q8_0.gguf --outtype q8_0 && ./llama.cpp/build/bin/llama-quantize --allow-requantize ./candidate-q8_0.gguf ./candidate.Q4_K_M.gguf Q4_K_M",
+  "eval_result": [
+    {
+      "group": "adversarial",
+      "metric": "recall_at_k",
+      "baseline_value": 0.3333333333333333,
+      "current_value": 0.3333333333333333,
+      "delta": 0.0,
+      "tolerance": 0.5,
+      "eligible": false,
+      "regressed": false
+    },
+    {
+      "group": "adversarial",
+      "metric": "precision_at_k",
+      "baseline_value": 0.2,
+      "current_value": 0.225,
+      "delta": 0.024999999999999994,
+      "tolerance": 0.5,
+      "eligible": false,
+      "regressed": false
+    },
+    {
+      "group": "blind_spot",
+      "metric": "recall_at_k",
+      "baseline_value": 0.325,
+      "current_value": 0.5125,
+      "delta": 0.18749999999999994,
+      "tolerance": 0.0125,
+      "eligible": true,
+      "regressed": false
+    },
+    {
+      "group": "blind_spot",
+      "metric": "precision_at_k",
+      "baseline_value": 0.1281249999999999,
+      "current_value": 0.3458333333333332,
+      "delta": 0.2177083333333333,
+      "tolerance": 0.0125,
+      "eligible": true,
+      "regressed": false
+    },
+    {
+      "group": "edge",
+      "metric": "recall_at_k",
+      "baseline_value": 0.75,
+      "current_value": 0.5833333333333333,
+      "delta": -0.16666666666666674,
+      "tolerance": 0.5,
+      "eligible": true,
+      "regressed": false
+    },
+    {
+      "group": "edge",
+      "metric": "precision_at_k",
+      "baseline_value": 0.4,
+      "current_value": 0.375,
+      "delta": -0.025000000000000022,
+      "tolerance": 0.5,
+      "eligible": false,
+      "regressed": false
+    },
+    {
+      "group": "negative",
+      "metric": "empty_rate",
+      "baseline_value": 0.2,
+      "current_value": 1.0,
+      "delta": 0.8,
+      "tolerance": 0.2,
+      "eligible": false,
+      "regressed": false
+    },
+    {
+      "group": "positive",
+      "metric": "recall_at_k",
+      "baseline_value": 0.7291666666666666,
+      "current_value": 0.6666666666666666,
+      "delta": -0.0625,
+      "tolerance": 0.25,
+      "eligible": true,
+      "regressed": false
+    },
+    {
+      "group": "positive",
+      "metric": "precision_at_k",
+      "baseline_value": 0.5,
+      "current_value": 0.5166666666666667,
+      "delta": 0.01666666666666672,
+      "tolerance": 0.25,
+      "eligible": true,
+      "regressed": false
+    }
+  ]
+}
