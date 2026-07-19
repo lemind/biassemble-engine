@@ -40,12 +40,6 @@ class Settings(BaseSettings):
     # JSON output over even 8 options — see specs/004-add-llm-model/research.md.
     llm_model_repo: str = "bartowski/google_gemma-3-4b-it-GGUF"
     llm_gguf_file: str = "google_gemma-3-4b-it-Q4_K_M.gguf"
-    # HACK(spec-006 T022): optional runtime LoRA adapter, trial-eval only, default off (empty).
-    # Production ships a merged+quantized GGUF via the repo/file swap above, not this.
-    # REVISIT: delete once T028's re-eval on the real merged GGUF supersedes this trial path —
-    # re-check before any future base-model swap (see src/llm/generator.py's matching HACK tag).
-    llm_lora_repo: str = ""
-    llm_lora_file: str = ""
     llm_context_tokens: int = 4096
     llm_max_output_tokens: int = 512
     llm_temperature: float = 0.0  # greedy → reproducible eval runs (FR-011)

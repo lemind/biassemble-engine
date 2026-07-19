@@ -217,8 +217,6 @@ def main_sync(promote: bool, diagnostics: bool = False, strategy: str = "vector_
             threads=settings.llm_threads,
             max_output_tokens=settings.llm_max_output_tokens,
             temperature=settings.llm_temperature,
-            lora_repo=settings.llm_lora_repo,
-            lora_file=settings.llm_lora_file,
         )
         print(f"LLM model loaded: {settings.llm_model_repo}/{settings.llm_gguf_file}")
         llm_kwargs = dict(
