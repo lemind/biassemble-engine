@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_015",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The excavation was supervised according to standard methods. The excavation area was gridded. Each stratum was recorded and photographed. The fossils were mapped and their positions were measured. The bones were exposed, photographed, and excavated using hand tools. Field jackets were prepared with burlap and plaster. The jacketed specimens were transported to the preparation lab. Documentation included field notes and photographs. The site was backfilled at the end of the season.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "paleontology",
+  "domain_familiarity": "out_of_field"
+}

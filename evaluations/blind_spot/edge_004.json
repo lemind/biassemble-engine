@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_004",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A mushroom grower named Tomas had been cultivating oyster mushrooms for six years and used the same substrate formula every time. His supplier sent a new batch of hardwood sawdust that contained a slightly higher moisture content. Tomas dismissed this as unimportant and prepared the substrate exactly as he always had. His yields dropped significantly. He told a fellow grower, 'It's just the season. Summer harvests are always weaker.' He didn't test the moisture content or adjust his recipe, continuing to use the new sawdust without modification.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "status_quo_bias"
+  ],
+  "domain": "mycology",
+  "domain_familiarity": "out_of_field"
+}

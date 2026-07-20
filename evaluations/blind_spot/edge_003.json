@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_003",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "An observer named Mei had been tracking a newly discovered comet for three weeks. She observed a slight shift in its trajectory compared with calculations from a major observatory. She concluded the observatory's data was slightly off, because her previous observations of similar comets had been accurate. She recalibrated her equipment based on her own assumptions and reported the comet was on a different path. She didn't consider that her telescope might require calibration or that atmospheric conditions might have affected her observations. Other observers reported the comet matched the observatory's predictions exactly.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias"
+  ],
+  "domain": "astronomy",
+  "domain_familiarity": "out_of_field"
+}

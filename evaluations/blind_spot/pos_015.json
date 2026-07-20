@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_015",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Marcia had held onto her technology mutual fund for eleven years, watching it climb steadily until the past eighteen months. Now down nearly forty percent from its peak, she received a quarterly statement showing her $85,000 investment had dwindled to $52,000. Her financial advisor recommended selling and moving into bonds, but Marcia couldn't bring herself to accept the loss. She told her husband, 'If I sell now, I've lost $33,000. I haven't really lost anything until I sell.' She convinced herself the market would rebound, pointing to two similar past downturns that had recovered. Every evening she checked financial news, fixating on articles predicting recovery and dismissing warnings about structural changes in the sector. When her brother suggested she consider tax-loss harvesting, she changed the subject, saying she knew her investments better than anyone.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "loss_aversion",
+    "confirmation_bias"
+  ],
+  "domain": "financial",
+  "domain_familiarity": "in_field"
+}

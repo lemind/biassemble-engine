@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_023",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The electronics store had a weekend promotion on television sets. The promotion offered a twenty percent discount on selected models. The advertisement listed all terms and conditions, including applicable models and purchase limits. All marketing materials were accurate. The store processed one hundred and forty-three transactions during the promotion. Inventory was verified before and after the sale. Sales associates received training on the product features and pricing. Customer satisfaction surveys from the weekend showed an average score of four point six out of five. The store prepared a sales summary for the regional office. Return rates were consistent with normal levels.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "consumer",
+  "domain_familiarity": "in_field"
+}

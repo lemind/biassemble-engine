@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_010",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A fabric merchant named Gene was advising historical reenactors on their clothing choices. He said, 'This is exactly the material they wore in the eighteenth century. I've done twenty years of research and examined original garments. The museums are wrong\u2014they've been misidentifying fabric types for decades. I discovered the correct weave in an old merchant's journal that no one else has read. I source my materials from a small mill that still uses the original looms. If you want authenticity, you should buy from me. Other sellers will sell you inaccurate reproductions and you'll look like a tourist.' He spoke with such authority that many reenactors purchased his expensive fabric without verifying his sources. Later research showed his fabrics were not accurate for the period.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias"
+  ],
+  "domain": "textile_conservation",
+  "domain_familiarity": "out_of_field"
+}

@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_008",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The carpenter measured and cut the wood for a bookshelf. Each measurement was verified twice before cutting. The wood was sanded, stained, and coated with a finish. The shelves were assembled according to the plans. The carpenter checked each joint to ensure a tight fit. The project took four hours to complete, including drying time. The finished bookshelf was moved to its intended location. The plans and measurements were filed for future reference. No significant errors occurred during the process.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "woodworking",
+  "domain_familiarity": "out_of_field"
+}

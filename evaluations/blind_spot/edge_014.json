@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_014",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "Professor Abbott was reviewing applications for a graduate research assistantship. The first application he read was from a student with exceptional recommendations and a publication record. He spent twenty minutes on it. The next applicant came from an unfamiliar university and had only average test scores, but had worked three jobs while earning her degree. Abbott skimmed her materials and placed her in the 'maybe' pile after five minutes. He told his colleague, 'The first candidate is clearly the strongest.' When asked about the second applicant's background, Abbott admitted he hadn't read her essay closely. He also noted that one of his most successful previous assistants had come from a prestigious program and had similar credentials to the first applicant, reinforcing his preference.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "halo_effect"
+  ],
+  "domain": "educational",
+  "domain_familiarity": "in_field"
+}

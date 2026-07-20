@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_025",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The family gathered for a regular Sunday dinner. There were eight people present, including a visiting aunt and two cousins. The meal was served at six o'clock. The conversation included updates on work, school, and a recent vacation. Everyone contributed to clearing the table and washing the dishes. A schedule for the next week's appointments was discussed and shared. The aunt showed photographs from her trip. At eight o'clock the guests departed. No arguments occurred. Everyone committed to meeting again on the following Sunday. The next day each person returned to their normal routine.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "family",
+  "domain_familiarity": "in_field"
+}

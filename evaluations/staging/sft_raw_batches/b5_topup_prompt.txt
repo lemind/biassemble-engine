@@ -1,0 +1,38 @@
+Generate 40 short synthetic training stories for a cognitive-bias detection system. Output ONLY a JSON array of 40 objects, nothing else — no intro text, no explanation, no markdown fences, no code block wrapper.
+
+The 38 valid bias ids (use ONLY these exact strings, nothing else):
+affect_heuristic, ambiguity_effect, anchoring_bias, authority_bias, availability_heuristic, bandwagon_effect, base_rate_neglect, choice_supportive_bias, confirmation_bias, curse_of_knowledge, decoy_effect, dunning_kruger_effect, escalation_of_commitment, framing_effect, fundamental_attribution_error, gamblers_fallacy, halo_effect, hindsight_bias, hot_hand_fallacy, illusion_of_control, in_group_bias, loss_aversion, narrative_fallacy, negativity_bias, omission_bias, optimism_bias, overconfidence_bias, planning_fallacy, projection_bias, recency_bias, representativeness_heuristic, self_serving_bias, spotlight_effect, status_quo_bias, stereotyping_bias, sunk_cost_fallacy, survivorship_bias, zero_risk_bias
+
+THIS IS A TARGETED TOP-UP BATCH — every one of the 40 stories must carry at least one of these 12 under-floor bias ids (current counts across the accepted 735-story corpus, need >=15 each), weighted toward the biggest shortfalls first:
+projection_bias (8, needs 7 more), base_rate_neglect (9, needs 6 more), decoy_effect (11, needs 4 more), hindsight_bias (11, needs 4 more), choice_supportive_bias (11, needs 4 more), stereotyping_bias (12, needs 3 more), affect_heuristic (12, needs 3 more), gamblers_fallacy (13, needs 2 more), spotlight_effect (13, needs 2 more), hot_hand_fallacy (13, needs 2 more), narrative_fallacy (14, needs 1 more), ambiguity_effect (14, needs 1 more).
+
+Do NOT use any of the other 26 bias ids in this batch at all, not even as a second label. Every story's target_bias_ids must be drawn exclusively from the 12 listed above. Distribute coverage so projection_bias and base_rate_neglect each appear in at least 8 stories, decoy_effect/hindsight_bias/choice_supportive_bias each appear in at least 5 stories, and the remaining seven each appear in at least 3 stories — a story may (and often should) combine 2 of these 12 ids when both genuinely apply, to build margin above the floor rather than landing exactly on it.
+
+ANTI-CHEATING RULE: Do not pick a bias id first and then write a story to fit it. Instead, first imagine a realistic, specific situation, then decide the minimal set of bias ids that genuinely explain the reasoning shown. Every target_bias_ids entry must be directly and clearly supported by the story — no speculative or weak labels.
+
+NARRATOR PERSON (train/serve match — production input is personal stories):
+- "positive" and "edge": predominantly FIRST PERSON ("I", "my", "we") — at least 12 of 15 in positive, at least 8 of 10 in edge. The narrator is inside the reasoning and unaware of the flaw: no self-diagnosis, no hindsight framing like "I realize now" or "a reviewer might call this...".
+- "adversarial": first or second person — the narrator addresses an audience.
+
+Split the 40 stories like this (no "negative" group this batch — negative coverage already clears its floor):
+- 15 stories, group "positive": clearly exhibits 1-2 of the 12 target bias ids. Prefer realistic everyday situations over textbook demonstrations.
+- 10 stories, group "edge": exhibits 1-2 of the 12 target bias ids, but subtly — a case a careful reviewer might genuinely debate. The story should remain plausible even if a reviewer ultimately decides no bias is present. Do NOT write the story as the narrator or anyone else analyzing/naming the bias — just show the behavior.
+- 15 stories, group "adversarial": the narrator intentionally tries to persuade, sell, recruit, convince, or manipulate the audience (a speech, an ad, a pitch, a social media post) exploiting 1-2 of the 12 target bias ids. Label the ids the rhetoric EXPLOITS in the audience. The exploitation must arise naturally from the rhetoric, never be stated.
+
+LENGTH BANDS — words 50-90 for most, and READ THIS CAREFULLY: at least 50 words is a hard floor:
+- 11 of 15 in positive, 11 of 15 in adversarial, 7 of 10 in edge: 2-4 sentences, 50-90 words (count your words — do not go under 50).
+- 4 of 15 in positive, 4 of 15 in adversarial, 3 of 10 in edge: 120-250 words, multi-paragraph allowed.
+
+Rules for all stories:
+- Specific and realistic — not cartoonish. Show the bias through behavior and reasoning. NEVER use the words "bias," "fallacy," "heuristic," or "effect," and never name the bias directly (idioms like "cause and effect" or "took effect" ARE fine, those aren't bias names).
+- Domains — spread across: finance, consumer, medical, legal, family, sports, gambling/betting, technical, education, mycology, bonsai cultivation, competitive sailing, bird banding, long-haul trucking, ceramics. At least 6 of the 40 stories must be in the out-of-field domains (mycology, bonsai cultivation, competitive sailing, bird banding, long-haul trucking, ceramics) — gamblers_fallacy and hot_hand_fallacy stories should lean on sports/gambling domains where the pattern is most natural, but vary the specific game/activity (don't make every one about poker or basketball).
+- Avoid repeating sentence openings, narrative structure, or wording across stories.
+- Each story's style_tag must be one of: diary, incident_report, email, forum_post, interview, newspaper, field_notes, maintenance_log, lab_notebook, witness_statement, lecture_notes, chat_message, voice_memo_transcript, support_ticket. Use a good spread; no style more than 6 times per batch.
+- Vary tone/formality too.
+
+Output format — a JSON array of exactly 40 objects, each shaped like:
+{"id": "pos_001", "story": "...", "group": "positive", "domain": "finance", "target_bias_ids": ["projection_bias", "base_rate_neglect"], "style_tags": ["diary"], "tone_tags": ["regretful"]}
+
+Use sequential ids per group with the batch prefix b5: b5_pos_001-015, b5_edge_001-010, b5_adv_001-015.
+
+Generate the 40 stories now.

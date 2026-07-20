@@ -1,0 +1,3226 @@
+{
+  "run_date": "2026-07-17",
+  "taxonomy_version": "2026-07-06.1",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "k": 5,
+  "scenario_results": [
+    {
+      "scenario_id": "adv_003",
+      "group": "adversarial",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic",
+        "framing_effect"
+      ],
+      "retrieved": [
+        "choice_supportive_bias",
+        "bandwagon_effect",
+        "base_rate_neglect",
+        "escalation_of_commitment",
+        "availability_heuristic"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "ndcg_at_k": 0.18154179253735267,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "choice_supportive_bias": 0.421870699151841,
+        "bandwagon_effect": 0.412967760916684,
+        "base_rate_neglect": 0.406128097311034,
+        "escalation_of_commitment": 0.404089320193451
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "negativity_bias": 0.5,
+        "hindsight_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_001",
+      "group": "adversarial",
+      "expected": [
+        "confirmation_bias",
+        "framing_effect",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "recency_bias",
+        "confirmation_bias",
+        "narrative_fallacy",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.2,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_k": 0.23463936301137822,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "availability_heuristic": 0.436719298362732,
+        "recency_bias": 0.413338840007782
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "narrative_fallacy": 0.5,
+        "optimism_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_004",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias",
+        "narrative_fallacy",
+        "recency_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "narrative_fallacy": 0.5,
+        "representativeness_heuristic": 0.5,
+        "recency_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_005",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "bandwagon_effect",
+        "confirmation_bias",
+        "framing_effect",
+        "in_group_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.6309297535714575,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "bandwagon_effect": 0.5,
+        "framing_effect": 0.5,
+        "confirmation_bias": 0.5,
+        "in_group_bias": 0.5,
+        "recency_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_006",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "availability_heuristic",
+        "in_group_bias",
+        "narrative_fallacy",
+        "recency_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "narrative_fallacy": 0.5,
+        "availability_heuristic": 0.5,
+        "recency_bias": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_007",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect",
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "availability_heuristic",
+        "bandwagon_effect",
+        "framing_effect",
+        "recency_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9197207891481876,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "framing_effect": 0.5,
+        "bandwagon_effect": 0.5,
+        "representativeness_heuristic": 0.5,
+        "recency_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_008",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias",
+        "fundamental_attribution_error"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "availability_heuristic",
+        "confirmation_bias",
+        "in_group_bias",
+        "narrative_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "narrative_fallacy": 0.5,
+        "recency_bias": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_009",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "bandwagon_effect",
+        "confirmation_bias",
+        "framing_effect",
+        "recency_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.38685280723454163,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "framing_effect": 0.5,
+        "confirmation_bias": 0.5,
+        "representativeness_heuristic": 0.5,
+        "recency_bias": 0.5,
+        "bandwagon_effect": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_010",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias",
+        "negativity_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "representativeness_heuristic": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_011",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "availability_heuristic",
+        "confirmation_bias",
+        "negativity_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "negativity_bias": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_012",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "sunk_cost_fallacy",
+        "availability_heuristic",
+        "confirmation_bias",
+        "framing_effect",
+        "narrative_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "sunk_cost_fallacy": 0.45684660328129
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "narrative_fallacy": 0.5,
+        "framing_effect": 0.5,
+        "confirmation_bias": 0.5,
+        "representativeness_heuristic": 0.5,
+        "recency_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_013",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "fundamental_attribution_error"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "fundamental_attribution_error",
+        "hindsight_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.25,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.38685280723454163,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "negativity_bias": 0.5,
+        "hindsight_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_014",
+      "group": "blind_spot",
+      "expected": [
+        "fundamental_attribution_error"
+      ],
+      "retrieved": [
+        "affect_heuristic",
+        "representativeness_heuristic",
+        "base_rate_neglect",
+        "stereotyping_bias",
+        "availability_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "affect_heuristic": 0.454047652837781,
+        "representativeness_heuristic": 0.446170634950792,
+        "base_rate_neglect": 0.422306895256045,
+        "stereotyping_bias": 0.42129147839172
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "fundamental_attribution_error": 0.5,
+        "availability_heuristic": 0.5,
+        "narrative_fallacy": 0.5,
+        "negativity_bias": 0.5,
+        "halo_effect": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_015",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias",
+        "bandwagon_effect"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "availability_heuristic",
+        "framing_effect",
+        "narrative_fallacy",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "framing_effect": 0.5,
+        "availability_heuristic": 0.5,
+        "representativeness_heuristic": 0.5,
+        "narrative_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_016",
+      "group": "blind_spot",
+      "expected": [
+        "framing_effect"
+      ],
+      "retrieved": [
+        "fundamental_attribution_error",
+        "framing_effect",
+        "affect_heuristic",
+        "escalation_of_commitment",
+        "loss_aversion"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.6309297535714575,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "fundamental_attribution_error": 0.591645814980074,
+        "affect_heuristic": 0.494093300320315,
+        "framing_effect": 0.467821870109815,
+        "escalation_of_commitment": 0.462604362135741,
+        "loss_aversion": 0.445001876950043,
+        "hindsight_bias": 0.436365466767765,
+        "base_rate_neglect": 0.425584980775719,
+        "optimism_bias": 0.407371573981208
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "negativity_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "fundamental_attribution_error": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_017",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "fundamental_attribution_error",
+        "framing_effect",
+        "omission_bias",
+        "curse_of_knowledge"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "omission_bias": 0.442617356777191,
+        "authority_bias": 0.431217368317686,
+        "curse_of_knowledge": 0.420135582693553,
+        "base_rate_neglect": 0.419505536556244,
+        "in_group_bias": 0.417437672615051,
+        "dunning_kruger_effect": 0.415139853954315,
+        "fundamental_attribution_error": 0.412998050451279,
+        "framing_effect": 0.40068736080452
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "framing_effect": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "narrative_fallacy": 0.5,
+        "recency_bias": 0.5,
+        "self_serving_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_018",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect",
+        "recency_bias"
+      ],
+      "retrieved": [
+        "bandwagon_effect",
+        "authority_bias",
+        "representativeness_heuristic",
+        "self_serving_bias",
+        "escalation_of_commitment"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "bandwagon_effect": 0.494806870972907,
+        "representativeness_heuristic": 0.443309995930792,
+        "self_serving_bias": 0.430342529395669,
+        "escalation_of_commitment": 0.420017132757052,
+        "choice_supportive_bias": 0.419172833064457,
+        "dunning_kruger_effect": 0.415255295775675,
+        "authority_bias": 0.410592645406726,
+        "gamblers_fallacy": 0.410250283204053,
+        "narrative_fallacy": 0.406238508410414,
+        "hindsight_bias": 0.405046140846841
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "framing_effect": 0.5,
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "negativity_bias": 0.5,
+        "bandwagon_effect": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_019",
+      "group": "blind_spot",
+      "expected": [
+        "negativity_bias"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "affect_heuristic",
+        "availability_heuristic",
+        "base_rate_neglect",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "escalation_of_commitment": 0.568895952966689,
+        "affect_heuristic": 0.551523105845544
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "negativity_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "framing_effect": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_020",
+      "group": "blind_spot",
+      "expected": [
+        "negativity_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "representativeness_heuristic",
+        "base_rate_neglect",
+        "availability_heuristic",
+        "framing_effect"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.25,
+      "ndcg_at_k": 0.2640681225725909,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "authority_bias": 0.529477771582873,
+        "confirmation_bias": 0.52632999420166,
+        "representativeness_heuristic": 0.512876480050298,
+        "ambiguity_effect": 0.437038779258728,
+        "base_rate_neglect": 0.436764925718307,
+        "survivorship_bias": 0.43464542730586,
+        "fundamental_attribution_error": 0.432395935058594,
+        "availability_heuristic": 0.426755309104919,
+        "framing_effect": 0.413515907928822,
+        "stereotyping_bias": 0.401979887603515
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "base_rate_neglect": 0.5,
+        "availability_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "negativity_bias": 0.5,
+        "representativeness_heuristic": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_021",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "framing_effect",
+        "base_rate_neglect",
+        "stereotyping_bias",
+        "anchoring_bias",
+        "zero_risk_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "framing_effect": 0.505608528518169,
+        "base_rate_neglect": 0.460914822762322,
+        "stereotyping_bias": 0.448408322083704,
+        "anchoring_bias": 0.421745071203104,
+        "zero_risk_bias": 0.417923395757474,
+        "affect_heuristic": 0.416363547281796
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "framing_effect": 0.5,
+        "base_rate_neglect": 0.5,
+        "confirmation_bias": 0.5,
+        "curse_of_knowledge": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_022",
+      "group": "blind_spot",
+      "expected": [
+        "bandwagon_effect",
+        "authority_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "representativeness_heuristic",
+        "bandwagon_effect",
+        "narrative_fallacy",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9197207891481876,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "narrative_fallacy": 0.538272683414541,
+        "sunk_cost_fallacy": 0.525699885231251,
+        "authority_bias": 0.506895691567403,
+        "ambiguity_effect": 0.487584143877033,
+        "representativeness_heuristic": 0.485307409045763,
+        "bandwagon_effect": 0.474057225826814,
+        "escalation_of_commitment": 0.471381215535476,
+        "survivorship_bias": 0.45928651094437,
+        "affect_heuristic": 0.429191525530311,
+        "status_quo_bias": 0.424003413200785
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "bandwagon_effect": 0.5,
+        "framing_effect": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "adv_023",
+      "group": "blind_spot",
+      "expected": [
+        "hindsight_bias",
+        "projection_bias"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "confirmation_bias",
+        "hindsight_bias",
+        "self_serving_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.25,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_k": 0.3065735963827292,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "hindsight_bias": 0.5,
+        "self_serving_bias": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_003",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "confirmation_bias",
+        "recency_bias",
+        "hindsight_bias",
+        "curse_of_knowledge"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "base_rate_neglect": 0.461065769195557,
+        "recency_bias": 0.415411770343781,
+        "confirmation_bias": 0.403346061706543,
+        "hindsight_bias": 0.400777912093526
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "curse_of_knowledge": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_004",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "negativity_bias",
+        "planning_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "negativity_bias": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_005",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "planning_fallacy",
+        "recency_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "representativeness_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "planning_fallacy": 0.5,
+        "recency_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_006",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "confirmation_bias",
+        "hindsight_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "hindsight_bias": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_007",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "overconfidence_bias",
+        "stereotyping_bias",
+        "confirmation_bias",
+        "curse_of_knowledge"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "base_rate_neglect": 0.45447713136673,
+        "overconfidence_bias": 0.425208006786824,
+        "stereotyping_bias": 0.410119706995471
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "curse_of_knowledge": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_008",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "base_rate_neglect",
+        "confirmation_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.25,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "base_rate_neglect": 0.5,
+        "representativeness_heuristic": 0.5,
+        "confirmation_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_009",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "confirmation_bias",
+        "fundamental_attribution_error"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.3333333333333333,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "fundamental_attribution_error": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_010",
+      "group": "blind_spot",
+      "expected": [
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "stereotyping_bias",
+        "base_rate_neglect",
+        "confirmation_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.25,
+      "mrr": 0.25,
+      "ndcg_at_k": 0.43067655807339306,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "stereotyping_bias": 0.445607572793961
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "representativeness_heuristic": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_011",
+      "group": "blind_spot",
+      "expected": [
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "confirmation_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.3333333333333333,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_k": 0.5,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "representativeness_heuristic": 0.5,
+        "base_rate_neglect": 0.5,
+        "confirmation_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_012",
+      "group": "blind_spot",
+      "expected": [
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "confirmation_bias",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.3333333333333333,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_k": 0.5,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_013",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "base_rate_neglect",
+        "fundamental_attribution_error",
+        "bandwagon_effect",
+        "authority_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "confirmation_bias": 0.495865494259269,
+        "fundamental_attribution_error": 0.493577391292013,
+        "base_rate_neglect": 0.44390365815737,
+        "bandwagon_effect": 0.42499185055543
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "base_rate_neglect": 0.5,
+        "in_group_bias": 0.5,
+        "negativity_bias": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_014",
+      "group": "blind_spot",
+      "expected": [
+        "halo_effect"
+      ],
+      "retrieved": [
+        "recency_bias",
+        "base_rate_neglect",
+        "representativeness_heuristic",
+        "halo_effect",
+        "authority_bias"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.25,
+      "ndcg_at_k": 0.43067655807339306,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "base_rate_neglect": 0.46070949381973,
+        "representativeness_heuristic": 0.448015233519417,
+        "halo_effect": 0.426980061143047,
+        "recency_bias": 0.421746632068948
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "recency_bias": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_015",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias"
+      ],
+      "retrieved": [
+        "curse_of_knowledge",
+        "framing_effect",
+        "status_quo_bias",
+        "halo_effect",
+        "loss_aversion"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "curse_of_knowledge": 0.51512885093689,
+        "status_quo_bias": 0.481311155674861,
+        "halo_effect": 0.473905652761459,
+        "loss_aversion": 0.463512792095923,
+        "self_serving_bias": 0.45934647321701,
+        "decoy_effect": 0.455837680573395,
+        "framing_effect": 0.437792791062379,
+        "recency_bias": 0.434293759891205,
+        "negativity_bias": 0.416486084461212,
+        "survivorship_bias": 0.403959643958797
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "base_rate_neglect": 0.5,
+        "confirmation_bias": 0.5,
+        "curse_of_knowledge": 0.5,
+        "overconfidence_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_016",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "stereotyping_bias",
+        "overconfidence_bias",
+        "dunning_kruger_effect",
+        "availability_heuristic",
+        "base_rate_neglect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "stereotyping_bias": 0.486261577232983,
+        "overconfidence_bias": 0.455190775107788,
+        "dunning_kruger_effect": 0.413775265216827,
+        "availability_heuristic": 0.413045669379573,
+        "base_rate_neglect": 0.411314576864243,
+        "representativeness_heuristic": 0.411119103431702
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_017",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "overconfidence_bias",
+        "planning_fallacy",
+        "narrative_fallacy",
+        "status_quo_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "overconfidence_bias": 0.4271039494009,
+        "planning_fallacy": 0.424378552232255,
+        "narrative_fallacy": 0.420211327678303,
+        "status_quo_bias": 0.419234735346876,
+        "negativity_bias": 0.400470209135718
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "hindsight_bias": 0.5,
+        "recency_bias": 0.5,
+        "representativeness_heuristic": 0.5,
+        "confirmation_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_018",
+      "group": "blind_spot",
+      "expected": [
+        "planning_fallacy"
+      ],
+      "retrieved": [
+        "choice_supportive_bias",
+        "authority_bias",
+        "dunning_kruger_effect",
+        "ambiguity_effect",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "choice_supportive_bias": 0.526601226723268,
+        "authority_bias": 0.462359309196475,
+        "dunning_kruger_effect": 0.434008305372045,
+        "ambiguity_effect": 0.414032662751238
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "overconfidence_bias": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_019",
+      "group": "blind_spot",
+      "expected": [
+        "base_rate_neglect"
+      ],
+      "retrieved": [
+        "gamblers_fallacy",
+        "framing_effect",
+        "overconfidence_bias",
+        "anchoring_bias",
+        "base_rate_neglect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "ndcg_at_k": 0.38685280723454163,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "gamblers_fallacy": 0.473502472832727,
+        "framing_effect": 0.472796366429439,
+        "overconfidence_bias": 0.451617187068798,
+        "anchoring_bias": 0.445835232734683,
+        "base_rate_neglect": 0.425870750792579,
+        "loss_aversion": 0.417717431919729,
+        "stereotyping_bias": 0.410218273984297
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_020",
+      "group": "blind_spot",
+      "expected": [
+        "base_rate_neglect"
+      ],
+      "retrieved": [
+        "representativeness_heuristic",
+        "confirmation_bias",
+        "availability_heuristic",
+        "curse_of_knowledge",
+        "stereotyping_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "curse_of_knowledge": 0.500454306602478,
+        "stereotyping_bias": 0.48639111180279,
+        "representativeness_heuristic": 0.479057921086962,
+        "confirmation_bias": 0.472449421882629,
+        "hindsight_bias": 0.472334444522858,
+        "halo_effect": 0.46570727433519,
+        "affect_heuristic": 0.45068324200115,
+        "anchoring_bias": 0.449943634871029,
+        "fundamental_attribution_error": 0.442306995391846,
+        "loss_aversion": 0.44065934419632,
+        "overconfidence_bias": 0.438131341767135,
+        "availability_heuristic": 0.437493903562245,
+        "escalation_of_commitment": 0.427110190815342,
+        "gamblers_fallacy": 0.426261007785797,
+        "authority_bias": 0.422352075576782,
+        "base_rate_neglect": 0.419630612112917
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "negativity_bias": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_021",
+      "group": "blind_spot",
+      "expected": [
+        "authority_bias"
+      ],
+      "retrieved": [
+        "projection_bias",
+        "in_group_bias",
+        "negativity_bias",
+        "recency_bias",
+        "self_serving_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "projection_bias": 0.460212796926498,
+        "in_group_bias": 0.45854640007019,
+        "negativity_bias": 0.422303889852531,
+        "recency_bias": 0.412433296442032,
+        "self_serving_bias": 0.404895341104548
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "representativeness_heuristic": 0.5,
+        "optimism_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_022",
+      "group": "blind_spot",
+      "expected": [
+        "projection_bias"
+      ],
+      "retrieved": [
+        "stereotyping_bias",
+        "authority_bias",
+        "confirmation_bias",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "stereotyping_bias": 0.461901871079319
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "status_quo_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_006",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "narrative_fallacy",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "narrative_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_007",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {}
+    },
+    {
+      "scenario_id": "neg_008",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "representativeness_heuristic",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_009",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "narrative_fallacy",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "narrative_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_010",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {}
+    },
+    {
+      "scenario_id": "neg_011",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {}
+    },
+    {
+      "scenario_id": "neg_012",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "base_rate_neglect",
+        "planning_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "planning_fallacy": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_013",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "base_rate_neglect",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "representativeness_heuristic": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_014",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_015",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "narrative_fallacy",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "narrative_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_016",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "recency_bias",
+        "optimism_bias",
+        "planning_fallacy",
+        "escalation_of_commitment",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "planning_fallacy": 0.491582781076431,
+        "recency_bias": 0.46864638942299,
+        "optimism_bias": 0.451530635356903,
+        "escalation_of_commitment": 0.4509037733078,
+        "sunk_cost_fallacy": 0.447403907775879,
+        "anchoring_bias": 0.432158197889221,
+        "gamblers_fallacy": 0.432046336890648,
+        "ambiguity_effect": 0.415773843778739,
+        "status_quo_bias": 0.410147070884705,
+        "loss_aversion": 0.408947885036469,
+        "negativity_bias": 0.404645246405758
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "recency_bias": 0.5,
+        "optimism_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_017",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "planning_fallacy",
+        "status_quo_bias",
+        "overconfidence_bias",
+        "ambiguity_effect",
+        "optimism_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "planning_fallacy": 0.542054203626264,
+        "status_quo_bias": 0.52433180809021,
+        "overconfidence_bias": 0.44257670983215,
+        "ambiguity_effect": 0.436881180815768,
+        "optimism_bias": 0.42187583912159,
+        "escalation_of_commitment": 0.413869142532349,
+        "loss_aversion": 0.409642279148102,
+        "stereotyping_bias": 0.408756375312805,
+        "self_serving_bias": 0.403494238853455
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_018",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "framing_effect",
+        "self_serving_bias",
+        "choice_supportive_bias",
+        "hot_hand_fallacy",
+        "affect_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "self_serving_bias": 0.486064300356381,
+        "framing_effect": 0.442596988600584,
+        "choice_supportive_bias": 0.431252632662498,
+        "hot_hand_fallacy": 0.428111795895589,
+        "affect_heuristic": 0.412931715671319
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "base_rate_neglect": 0.5,
+        "status_quo_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_019",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "overconfidence_bias",
+        "availability_heuristic",
+        "framing_effect",
+        "recency_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "overconfidence_bias": 0.433261360720478
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "recency_bias": 0.5,
+        "framing_effect": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_020",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "zero_risk_bias",
+        "narrative_fallacy",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "zero_risk_bias": 0.4095836633692
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "narrative_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_021",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "status_quo_bias",
+        "base_rate_neglect",
+        "representativeness_heuristic",
+        "confirmation_bias",
+        "curse_of_knowledge"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "representativeness_heuristic": 0.53121313266676,
+        "confirmation_bias": 0.513761252985076,
+        "curse_of_knowledge": 0.511819839477539,
+        "status_quo_bias": 0.497750818863463,
+        "ambiguity_effect": 0.496138542890549,
+        "omission_bias": 0.485697209835052,
+        "bandwagon_effect": 0.475327968597412,
+        "stereotyping_bias": 0.44040259718895,
+        "authority_bias": 0.436118006706238,
+        "hindsight_bias": 0.435714794269645,
+        "base_rate_neglect": 0.401549494174154,
+        "anchoring_bias": 0.401529967784882
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_022",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "planning_fallacy",
+        "escalation_of_commitment",
+        "decoy_effect",
+        "status_quo_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "planning_fallacy": 0.501866430155423,
+        "escalation_of_commitment": 0.443976743339799,
+        "decoy_effect": 0.42893764800205
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "status_quo_bias": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_023",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "gamblers_fallacy",
+        "loss_aversion",
+        "halo_effect",
+        "anchoring_bias",
+        "zero_risk_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "gamblers_fallacy": 0.460346524674115,
+        "loss_aversion": 0.423507128744893,
+        "halo_effect": 0.420101677173277,
+        "anchoring_bias": 0.404626446824479,
+        "zero_risk_bias": 0.404431235262008,
+        "dunning_kruger_effect": 0.402084773654654
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "availability_heuristic": 0.5,
+        "optimism_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_024",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "zero_risk_bias",
+        "survivorship_bias",
+        "availability_heuristic",
+        "framing_effect",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "zero_risk_bias": 0.407432943582535,
+        "survivorship_bias": 0.40134395364952
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "availability_heuristic": 0.5,
+        "representativeness_heuristic": 0.5,
+        "status_quo_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_025",
+      "group": "blind_spot",
+      "expected": [],
+      "retrieved": [
+        "overconfidence_bias",
+        "negativity_bias",
+        "spotlight_effect",
+        "narrative_fallacy",
+        "optimism_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "overconfidence_bias": 0.474746584892273,
+        "negativity_bias": 0.444975167512894,
+        "spotlight_effect": 0.444453421565687,
+        "narrative_fallacy": 0.422584593296051,
+        "optimism_bias": 0.405707001686096
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {}
+    },
+    {
+      "scenario_id": "pos_005",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "base_rate_neglect",
+        "confirmation_bias",
+        "curse_of_knowledge",
+        "hindsight_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "confirmation_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "hindsight_bias": 0.5,
+        "curse_of_knowledge": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_006",
+      "group": "blind_spot",
+      "expected": [
+        "recency_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "fundamental_attribution_error",
+        "in_group_bias",
+        "planning_fallacy",
+        "recency_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "ndcg_at_k": 0.23719771276929622,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "planning_fallacy": 0.5,
+        "recency_bias": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_007",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic",
+        "sunk_cost_fallacy"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias",
+        "curse_of_knowledge",
+        "escalation_of_commitment",
+        "planning_fallacy"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "escalation_of_commitment": 0.5,
+        "curse_of_knowledge": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_008",
+      "group": "blind_spot",
+      "expected": [
+        "sunk_cost_fallacy",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "confirmation_bias",
+        "escalation_of_commitment",
+        "in_group_bias",
+        "self_serving_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.38685280723454163,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "escalation_of_commitment": 0.5,
+        "availability_heuristic": 0.5,
+        "in_group_bias": 0.5,
+        "self_serving_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_009",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "confirmation_bias",
+        "fundamental_attribution_error",
+        "hindsight_bias",
+        "in_group_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "hindsight_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "representativeness_heuristic": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_010",
+      "group": "blind_spot",
+      "expected": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "base_rate_neglect",
+        "confirmation_bias",
+        "authority_bias",
+        "representativeness_heuristic",
+        "framing_effect"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.38685280723454163,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "base_rate_neglect": 0.436081919903642,
+        "confirmation_bias": 0.410610020160675,
+        "authority_bias": 0.410554796457291,
+        "representativeness_heuristic": 0.410442173480988
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "framing_effect": 0.5,
+        "in_group_bias": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_011",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias",
+        "curse_of_knowledge",
+        "hindsight_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "curse_of_knowledge": 0.5,
+        "hindsight_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_012",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias",
+        "projection_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias",
+        "hindsight_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "hindsight_bias": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_013",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "hindsight_bias",
+        "spotlight_effect",
+        "base_rate_neglect",
+        "illusion_of_control",
+        "ambiguity_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "hindsight_bias": 0.44862648538509,
+        "spotlight_effect": 0.42180902231878,
+        "base_rate_neglect": 0.413265824317932,
+        "illusion_of_control": 0.412822961807251,
+        "ambiguity_effect": 0.40971651673317,
+        "availability_heuristic": 0.4091637134552,
+        "gamblers_fallacy": 0.400090706337609
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "negativity_bias": 0.5,
+        "self_serving_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_014",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "confirmation_bias",
+        "fundamental_attribution_error",
+        "hindsight_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "fundamental_attribution_error": 0.5,
+        "hindsight_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_015",
+      "group": "blind_spot",
+      "expected": [
+        "loss_aversion",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "negativity_bias",
+        "loss_aversion",
+        "sunk_cost_fallacy",
+        "gamblers_fallacy"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_k": 0.3065735963827292,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "loss_aversion": 0.541358010213316,
+        "sunk_cost_fallacy": 0.492420077323914,
+        "escalation_of_commitment": 0.471931071762379,
+        "gamblers_fallacy": 0.461214929819107,
+        "anchoring_bias": 0.448848989537299,
+        "self_serving_bias": 0.439109653234482,
+        "negativity_bias": 0.424081683158875,
+        "survivorship_bias": 0.423572190723319,
+        "choice_supportive_bias": 0.423319970171454,
+        "omission_bias": 0.419542158814798,
+        "overconfidence_bias": 0.419026200829375
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "escalation_of_commitment": 0.5,
+        "optimism_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_016",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "base_rate_neglect",
+        "curse_of_knowledge",
+        "framing_effect",
+        "stereotyping_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "authority_bias": 0.567577481269836,
+        "framing_effect": 0.519324362277985,
+        "stereotyping_bias": 0.478918209043688,
+        "base_rate_neglect": 0.47685918074007,
+        "overconfidence_bias": 0.463403018510163,
+        "representativeness_heuristic": 0.458651185035706,
+        "curse_of_knowledge": 0.457638236425029,
+        "halo_effect": 0.423186753798321,
+        "survivorship_bias": 0.421763360500336,
+        "gamblers_fallacy": 0.417527606192545,
+        "self_serving_bias": 0.415830969810486,
+        "dunning_kruger_effect": 0.409079104661942,
+        "omission_bias": 0.404807925224304
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "curse_of_knowledge": 0.5,
+        "negativity_bias": 0.5,
+        "status_quo_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_017",
+      "group": "blind_spot",
+      "expected": [
+        "sunk_cost_fallacy",
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "escalation_of_commitment",
+        "confirmation_bias",
+        "optimism_bias",
+        "narrative_fallacy",
+        "self_serving_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "escalation_of_commitment": 0.497429192066193,
+        "confirmation_bias": 0.479349107781107,
+        "self_serving_bias": 0.476291924715042,
+        "optimism_bias": 0.466452807188034,
+        "planning_fallacy": 0.454835190023041,
+        "sunk_cost_fallacy": 0.429815385948695,
+        "overconfidence_bias": 0.425078221417508,
+        "narrative_fallacy": 0.411454034192981,
+        "projection_bias": 0.411253035068512
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "escalation_of_commitment": 0.5,
+        "framing_effect": 0.5,
+        "optimism_bias": 0.5,
+        "narrative_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_018",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "representativeness_heuristic"
+      ],
+      "retrieved": [
+        "authority_bias",
+        "base_rate_neglect",
+        "in_group_bias",
+        "confirmation_bias",
+        "halo_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "halo_effect": 0.590778094804942,
+        "gamblers_fallacy": 0.531814650649269,
+        "authority_bias": 0.526610390144896,
+        "stereotyping_bias": 0.525039704146368,
+        "affect_heuristic": 0.523683381943406,
+        "overconfidence_bias": 0.500559255530768,
+        "representativeness_heuristic": 0.497016146690135,
+        "base_rate_neglect": 0.485281691393804,
+        "fundamental_attribution_error": 0.481612367774162,
+        "in_group_bias": 0.473871248316361,
+        "narrative_fallacy": 0.469649952916797,
+        "availability_heuristic": 0.459101942724105,
+        "self_serving_bias": 0.453369332950394,
+        "confirmation_bias": 0.44885857250865
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "authority_bias": 0.5,
+        "planning_fallacy": 0.5,
+        "base_rate_neglect": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_019",
+      "group": "blind_spot",
+      "expected": [
+        "overconfidence_bias",
+        "hindsight_bias"
+      ],
+      "retrieved": [
+        "in_group_bias",
+        "authority_bias",
+        "confirmation_bias",
+        "curse_of_knowledge",
+        "hindsight_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.2,
+      "ndcg_at_k": 0.23719771276929622,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "in_group_bias": 0.445884313934107
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "hindsight_bias": 0.5,
+        "authority_bias": 0.5,
+        "self_serving_bias": 0.5,
+        "curse_of_knowledge": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_020",
+      "group": "blind_spot",
+      "expected": [
+        "confirmation_bias",
+        "availability_heuristic"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "base_rate_neglect",
+        "in_group_bias",
+        "escalation_of_commitment",
+        "fundamental_attribution_error"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "escalation_of_commitment": 0.512278646962562,
+        "confirmation_bias": 0.469395949524521,
+        "base_rate_neglect": 0.468025072456154,
+        "fundamental_attribution_error": 0.460224761373543,
+        "survivorship_bias": 0.424047674181919,
+        "affect_heuristic": 0.422765710005079,
+        "in_group_bias": 0.41740165897007,
+        "halo_effect": 0.406313312241832
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "representativeness_heuristic": 0.5,
+        "recency_bias": 0.5,
+        "negativity_bias": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_021",
+      "group": "blind_spot",
+      "expected": [
+        "choice_supportive_bias",
+        "confirmation_bias"
+      ],
+      "retrieved": [
+        "negativity_bias",
+        "choice_supportive_bias",
+        "zero_risk_bias",
+        "bandwagon_effect",
+        "availability_heuristic"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.38685280723454163,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "choice_supportive_bias": 0.476460366038107,
+        "negativity_bias": 0.451989832401883,
+        "zero_risk_bias": 0.417255992725849,
+        "bandwagon_effect": 0.411225890444167
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "overconfidence_bias": 0.5,
+        "framing_effect": 0.5,
+        "negativity_bias": 0.5,
+        "base_rate_neglect": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_022",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "dunning_kruger_effect",
+        "self_serving_bias",
+        "stereotyping_bias",
+        "framing_effect",
+        "fundamental_attribution_error"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "dunning_kruger_effect": 0.460823150824121,
+        "self_serving_bias": 0.448225921603927,
+        "stereotyping_bias": 0.436972532452791,
+        "framing_effect": 0.427997171878818,
+        "fundamental_attribution_error": 0.418646519264787,
+        "halo_effect": 0.418433594154312,
+        "recency_bias": 0.417869764033863,
+        "loss_aversion": 0.411329483310612
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "status_quo_bias": 0.5,
+        "negativity_bias": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_023",
+      "group": "blind_spot",
+      "expected": [
+        "status_quo_bias",
+        "projection_bias"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "base_rate_neglect",
+        "confirmation_bias",
+        "curse_of_knowledge",
+        "hindsight_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "base_rate_neglect": 0.5,
+        "confirmation_bias": 0.5,
+        "hindsight_bias": 0.5,
+        "negativity_bias": 0.5,
+        "curse_of_knowledge": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_024",
+      "group": "blind_spot",
+      "expected": [
+        "availability_heuristic",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "fundamental_attribution_error",
+        "hindsight_bias",
+        "self_serving_bias",
+        "authority_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "fundamental_attribution_error": 0.519478352038762,
+        "hindsight_bias": 0.446042524396108,
+        "confirmation_bias": 0.439715253123188,
+        "self_serving_bias": 0.422931112909119
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "authority_bias": 0.5,
+        "confirmation_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "recency_bias": 0.5,
+        "negativity_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_002",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "loss_aversion",
+        "status_quo_bias"
+      ],
+      "retrieved": [
+        "loss_aversion",
+        "status_quo_bias",
+        "dunning_kruger_effect",
+        "availability_heuristic",
+        "base_rate_neglect"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9674679834891693,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "loss_aversion": 0.698741039596231,
+        "status_quo_bias": 0.478450000286102,
+        "dunning_kruger_effect": 0.401108002596617
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "base_rate_neglect": 0.5,
+        "negativity_bias": 0.5,
+        "availability_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "edge_001",
+      "group": "edge",
+      "expected": [
+        "availability_heuristic",
+        "affect_heuristic"
+      ],
+      "retrieved": [
+        "availability_heuristic",
+        "omission_bias",
+        "hindsight_bias",
+        "in_group_bias",
+        "negativity_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "availability_heuristic": 0.565241506568328,
+        "omission_bias": 0.50108399993682
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "hindsight_bias": 0.5,
+        "availability_heuristic": 0.5,
+        "negativity_bias": 0.5,
+        "in_group_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_003",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [],
+      "recall_at_k": 1.0,
+      "precision_at_k": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 1.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {}
+    },
+    {
+      "scenario_id": "neg_005",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "narrative_fallacy",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "narrative_fallacy": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_004",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "availability_heuristic",
+        "framing_effect",
+        "recency_bias"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "framing_effect": 0.5,
+        "recency_bias": 0.5,
+        "availability_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_002",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "availability_heuristic",
+        "representativeness_heuristic"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "representativeness_heuristic": 0.5
+      }
+    },
+    {
+      "scenario_id": "neg_001",
+      "group": "negative",
+      "expected": [],
+      "retrieved": [
+        "availability_heuristic",
+        "framing_effect"
+      ],
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.0,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {},
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "framing_effect": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_004",
+      "group": "positive",
+      "expected": [
+        "hot_hand_fallacy",
+        "illusion_of_control",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "gamblers_fallacy",
+        "hot_hand_fallacy",
+        "illusion_of_control",
+        "availability_heuristic",
+        "confirmation_bias"
+      ],
+      "recall_at_k": 0.6666666666666666,
+      "precision_at_k": 0.4,
+      "mrr": 0.5,
+      "ndcg_at_k": 0.5307212739772434,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "gamblers_fallacy": 0.563011987119558,
+        "hot_hand_fallacy": 0.428778397179295,
+        "illusion_of_control": 0.424939627941825
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "availability_heuristic": 0.5,
+        "representativeness_heuristic": 0.5,
+        "optimism_bias": 0.5,
+        "confirmation_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_001",
+      "group": "positive",
+      "expected": [
+        "anchoring_bias",
+        "sunk_cost_fallacy",
+        "confirmation_bias",
+        "loss_aversion"
+      ],
+      "retrieved": [
+        "anchoring_bias",
+        "escalation_of_commitment",
+        "hot_hand_fallacy",
+        "loss_aversion",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.6,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7095272044910244,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "hot_hand_fallacy": 0.516948967161837,
+        "loss_aversion": 0.470708384236944,
+        "anchoring_bias": 0.46431827545166,
+        "escalation_of_commitment": 0.446247849092017,
+        "sunk_cost_fallacy": 0.44110847834076
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "escalation_of_commitment": 0.5,
+        "anchoring_bias": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_003",
+      "group": "positive",
+      "expected": [
+        "planning_fallacy",
+        "sunk_cost_fallacy",
+        "escalation_of_commitment",
+        "optimism_bias"
+      ],
+      "retrieved": [
+        "planning_fallacy",
+        "optimism_bias",
+        "escalation_of_commitment",
+        "overconfidence_bias",
+        "sunk_cost_fallacy"
+      ],
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.8,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.9828920819566879,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "planning_fallacy": 0.588094592094421,
+        "overconfidence_bias": 0.49981677531104,
+        "sunk_cost_fallacy": 0.498710751533508,
+        "survivorship_bias": 0.485035508871078,
+        "optimism_bias": 0.481788396835327,
+        "availability_heuristic": 0.481318145990372,
+        "narrative_fallacy": 0.479290722566291,
+        "escalation_of_commitment": 0.473510205745697,
+        "decoy_effect": 0.46524730117603,
+        "anchoring_bias": 0.455189675092697,
+        "choice_supportive_bias": 0.448519763262259
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "escalation_of_commitment": 0.5,
+        "optimism_bias": 0.5,
+        "hindsight_bias": 0.5,
+        "planning_fallacy": 0.5
+      }
+    },
+    {
+      "scenario_id": "pos_002",
+      "group": "positive",
+      "expected": [
+        "confirmation_bias",
+        "overconfidence_bias"
+      ],
+      "retrieved": [
+        "confirmation_bias",
+        "framing_effect",
+        "base_rate_neglect",
+        "authority_bias",
+        "stereotyping_bias"
+      ],
+      "recall_at_k": 0.5,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.6131471927654584,
+      "error": null,
+      "retrieved_with_diagnostics": null,
+      "nli_scores": null,
+      "vector_scores": {
+        "authority_bias": 0.606360650441686,
+        "stereotyping_bias": 0.501782462160212,
+        "confirmation_bias": 0.482185363769535,
+        "framing_effect": 0.481918482894808,
+        "base_rate_neglect": 0.470413653279165,
+        "dunning_kruger_effect": 0.449906733626529,
+        "self_serving_bias": 0.415079379980528,
+        "ambiguity_effect": 0.411699021559896,
+        "overconfidence_bias": 0.407156169414523
+      },
+      "combined_scores": null,
+      "admitted_by": null,
+      "missed_by": null,
+      "llm_scores": {
+        "confirmation_bias": 0.5,
+        "base_rate_neglect": 0.5,
+        "recency_bias": 0.5,
+        "framing_effect": 0.5
+      }
+    }
+  ],
+  "group_metrics": {
+    "adversarial": {
+      "group": "adversarial",
+      "count": 2,
+      "recall_at_k": 0.3333333333333333,
+      "precision_at_k": 0.2,
+      "mrr": 0.26666666666666666,
+      "ndcg_at_k": 0.20809057777436546,
+      "empty_rate": 0.0
+    },
+    "blind_spot": {
+      "group": "blind_spot",
+      "count": 80,
+      "recall_at_k": 0.325,
+      "precision_at_k": 0.1281249999999999,
+      "mrr": 0.5022916666666668,
+      "ndcg_at_k": 0.2664283117807841,
+      "empty_rate": 0.0375
+    },
+    "edge": {
+      "group": "edge",
+      "count": 2,
+      "recall_at_k": 0.75,
+      "precision_at_k": 0.4,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.7903075881273138,
+      "empty_rate": 0.0
+    },
+    "negative": {
+      "group": "negative",
+      "count": 5,
+      "recall_at_k": 0.2,
+      "precision_at_k": 0.2,
+      "mrr": 1.0,
+      "ndcg_at_k": 0.2,
+      "empty_rate": 0.2
+    },
+    "positive": {
+      "group": "positive",
+      "count": 4,
+      "recall_at_k": 0.7291666666666666,
+      "precision_at_k": 0.5,
+      "mrr": 0.875,
+      "ndcg_at_k": 0.7090719382976035,
+      "empty_rate": 0.0
+    }
+  },
+  "deltas": {
+    "adversarial": {
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.0
+    },
+    "edge": {
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.0
+    },
+    "negative": {
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.0
+    },
+    "positive": {
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_k": 0.0,
+      "empty_rate": 0.0
+    }
+  },
+  "selection_strategy": "llm_union",
+  "hypotheses_version": null,
+  "hypotheses": null
+}

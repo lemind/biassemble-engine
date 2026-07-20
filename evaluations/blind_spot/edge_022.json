@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_022",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A father named Owen was helping his teenage daughter apply for colleges. He recalled that he had attended a small liberal arts college and believed it had provided him with a solid foundation. He encouraged his daughter to apply only to small colleges, ignoring her interest in a large research university with a strong physics program. He said, 'You'll get more attention from professors at a small school. That's what's important.' He didn't visit the large university or research its programs. He told his daughter, 'I know what works. Trust me on this.' His daughter reluctantly applied to the colleges he recommended, feeling her preferences were not being considered.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "projection_bias"
+  ],
+  "domain": "family",
+  "domain_familiarity": "in_field"
+}

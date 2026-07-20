@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_009",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "An online influencer known for his beautiful reef tanks posted, 'This one supplement changed my entire tank.' He showed a before-and-after video with vibrant coral colors and claimed, 'It's an all-natural probiotic that feeds the good bacteria. The aquarium industry doesn't want you to know about it because it's cheap and effective.' He said, 'I had the same issues you're having\u2014algae blooms, dull corals, slow growth. I tried everything. Then I found this product and my tank transformed in just two weeks.' He offered a discount code and claimed, 'Over five thousand reefers have already made the switch.' He didn't disclose that the before video was taken during a tank crash and the after video was shot under different lighting. Many aquarists bought the product without verifying the claims.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias",
+    "bandwagon_effect"
+  ],
+  "domain": "aquarium_keeping",
+  "domain_familiarity": "out_of_field"
+}

@@ -28,6 +28,11 @@ COPY evaluations/positive ./evaluations/positive
 COPY evaluations/negative ./evaluations/negative
 COPY evaluations/adversarial ./evaluations/adversarial
 COPY evaluations/edge ./evaluations/edge
+# blind_spot (spec-006/ADR-006's primary ship-gate group, promoted 2026-07-17) was
+# missing here until 2026-07-19 — the deployed Space's own /evaluate endpoint had no
+# scenario files to score it with, so neither a live remote eval nor
+# production-drift.yml could ever see it, independent of any baseline/branch state.
+COPY evaluations/blind_spot ./evaluations/blind_spot
 
 # NLI (nli_union) is no longer the default strategy — llm_union (Gemma) is. Its model
 # is kept selectable via NLI_MODEL, but NOT pre-baked (saves ~700MB). If you switch the
@@ -45,7 +50,17 @@ ARG LLM_MODEL_REPO=bartowski/google_gemma-3-4b-it-GGUF
 ARG LLM_GGUF_FILE=google_gemma-3-4b-it-Q4_K_M.gguf
 ENV LLM_MODEL_REPO=${LLM_MODEL_REPO}
 ENV LLM_GGUF_FILE=${LLM_GGUF_FILE}
-RUN uv run python -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='${LLM_MODEL_REPO}', filename='${LLM_GGUF_FILE}')"
+# HACK(hf-spaces-build-secrets): OBSERVED 2026-07-19 — build failed with a 401 the moment
+# space-vars.env's LLM_MODEL_REPO became a private repo (Leminds/gemma3-4b-bias-lora-candidate-*,
+# spec-006/ADR-005). HF Spaces passes Space "Variables" through as Docker build-args (which is
+# why LLM_MODEL_REPO above resolves to the private repo at all) but Secrets (HF_TOKEN) are
+# injected ONLY into the running container, never into the build — this RUN had no credential
+# to present to a private repo. Bake is disabled; src/llm/generator.py:47 already downloads the
+# GGUF at runtime startup, where HF_TOKEN *is* available, at the cost of a slower cold start.
+# See adr/005-fine-tune-engine-llm.md.
+# REVISIT: re-enable this RUN if LLM_MODEL_REPO ever reverts to a public repo, or if HF Spaces
+# adds build-time secret injection for Docker Spaces.
+# RUN uv run python -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='${LLM_MODEL_REPO}', filename='${LLM_GGUF_FILE}')"
 
 # Fallback defaults ONLY — for a non-Space docker run (local/CI) with nothing else
 # set. On the actual deployed HF Space, these two ALWAYS lose to the Space's

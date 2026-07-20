@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_017",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A consulting firm was hired to turn around a struggling manufacturing plant. The lead consultant, Victor, spoke to the plant manager and a few shift supervisors who had complained about outdated equipment. Victor concluded the root problem was underinvestment in machinery. He wrote a comprehensive report recommending a twenty-million-dollar capital upgrade. When a junior consultant asked about worker training, absenteeism, or quality control processes, Victor said, 'That's not the issue. I've been to a dozen plants like this, and it's always the same story. This manager's been here thirty years. He knows what's wrong.' He disregarded operational data that showed the current equipment was capable of meeting production targets and instead presented the manager's anecdotes as evidence. He told the executives, 'This plant needs new machinery or it will close,' repeating the manager's assessment as objective data.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias"
+  ],
+  "domain": "management",
+  "domain_familiarity": "in_field"
+}

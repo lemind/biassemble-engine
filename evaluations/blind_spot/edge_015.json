@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_015",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "An investment advisor named Sophia recommended a portfolio to her client based on the client's stated goal of preserving capital. Sophia selected a set of bonds that had performed well over the previous two years, ignoring a recent regulatory change that affected their underlying collateral. She told her client, 'This is the safest option available to you.' She didn't model downside scenarios and dismissed the client's question about the regulatory change, saying, 'That's a different sector. It doesn't apply to these instruments.' Her recommendation relied entirely on the recent historical returns, which had been unusually stable. When a colleague suggested a more diversified approach, Sophia argued that her simple selection was easier to understand and manage.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "recency_bias"
+  ],
+  "domain": "financial",
+  "domain_familiarity": "in_field"
+}

@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_006",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Marcus operated a bird banding station in a nature preserve. When he noticed fewer migratory songbirds than expected for the season, he concluded the population must be declining because his counts were lower than the previous five years. He wrote a report proposing stricter habitat protections, citing the downward trend. His supervisor pointed out that weather patterns had delayed migration and other stations in the region were reporting normal numbers. Marcus dismissed this, arguing that his station was the most reliable because he used the same netting protocol every year. He never analyzed the historical variance or consulted the broader regional data, instead insisting that his observations were sufficient evidence for a conservation policy change.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "recency_bias",
+    "overconfidence_bias"
+  ],
+  "domain": "bird_banding",
+  "domain_familiarity": "out_of_field"
+}

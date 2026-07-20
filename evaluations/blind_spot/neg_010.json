@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_010",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The banding station operated for four hours starting at dawn. Fifty-two birds were captured and processed. Each bird was identified by species, sex, and age class where possible. Standard measurements were recorded, including wing length, body mass, and fat score. Leg bands were applied according to protocol. All birds were released at the capture site. Data was entered into the migration monitoring database. The nets were inspected and repaired as needed. The station was closed at the scheduled time.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "bird_banding",
+  "domain_familiarity": "out_of_field"
+}

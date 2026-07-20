@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_007",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "The owner of a yacht announced a 'revolutionary' new sail material, claiming it was 'used by the winning boat in the last three America's Cup races.' A sales representative for the company told a group of racers, 'If you want to win, you need to upgrade. All the top teams are switching to this material. You're racing with outdated technology. When the wind shifts and you're still using traditional sails, you will lose. We are the only supplier with genuine access to this material. This offer is for a very limited number of teams. You have to reserve now.' The representative told stories of teams that had switched and won immediately. The material was actually a standard composite fiber with marginal performance differences, but many racers ordered it on the spot.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "bandwagon_effect",
+    "authority_bias"
+  ],
+  "domain": "competitive_sailing",
+  "domain_familiarity": "out_of_field"
+}

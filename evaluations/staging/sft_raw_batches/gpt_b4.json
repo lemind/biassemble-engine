@@ -1,0 +1,152 @@
+[
+  {
+    "id": "b4_pos_001",
+    "story": "Our office lottery had missed the jackpot for six weeks, so I doubled my contribution because it felt impossible for another rollover to happen. A coworker skipped this round, but I told him the numbers were finally due. When the drawing finished without our ticket matching anything, I immediately started planning a larger pool for next week because the streak could not continue forever.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": [
+      "gamblers_fallacy"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b4_pos_002",
+    "story": "Several of my beehives survived a difficult winter after I replaced the entrance markers with blue symbols that I painted myself. I kept using the same symbols every season because I felt they protected the colonies during bad weather. Other beekeepers mentioned nutrition and mite treatment, but I never wanted to remove the markings before another winter proved they were working.",
+    "group": "positive",
+    "domain": "beekeeping",
+    "target_bias_ids": [
+      "illusion_of_control"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "earnest"
+    ]
+  },
+  {
+    "id": "b4_pos_003",
+    "story": "A neighbor recommended a cryptocurrency because two young developers in his building had already become wealthy with similar projects. I ignored reports showing that most new coins disappeared within months because those successful examples felt more relevant than broad statistics. Their stories convinced me I had found the same opportunity before everyone else noticed it.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": [
+      "base_rate_neglect"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b4_pos_004",
+    "story": "During community theater rehearsals, a volunteer forgot several lighting cues, so I quietly concluded he probably lacked discipline. I never asked whether anything unusual had happened before rehearsal or whether he had been covering extra responsibilities backstage. His mistakes seemed to tell me everything I needed to know about his character.",
+    "group": "positive",
+    "domain": "community_theater",
+    "target_bias_ids": [
+      "fundamental_attribution_error"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b4_pos_005",
+    "story": "My nephew wanted help assembling a robotics kit, but after watching a few online demonstrations I felt confident I already understood every step. I skimmed the manual, dismissed his questions, and insisted we could finish quickly without checking the diagrams. When several sensors refused to connect, I kept trying different cables instead of reading the instructions carefully.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "dunning_kruger_effect"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b4_pos_006",
+    "story": "At an orienteering event I marked my route before the start and estimated that every control would take about eight minutes to reach. I ignored advice from experienced runners about thick vegetation because my practice sessions had gone smoothly. Halfway through the course I was already behind schedule, yet I still believed I could finish exactly on my original timetable.",
+    "group": "positive",
+    "domain": "orienteering",
+    "target_bias_ids": [
+      "planning_fallacy"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "determined"
+    ]
+  },
+  {
+    "id": "b4_pos_007",
+    "story": "Our family needed a new refrigerator, and the salesperson first showed one far beyond our budget before leading us to the model we eventually bought. Compared with the expensive option, the second machine suddenly felt like an excellent bargain even though it still cost more than we had planned to spend before entering the store.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "anchoring_bias"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b4_pos_008",
+    "story": "While restoring ceramic bowls, I assumed the apprentice would instantly understand why I mixed the glaze in a particular sequence because the process seemed obvious to me after years of practice. I gave only brief instructions, became surprised when the colors separated, and repeated the same short explanation instead of demonstrating each step slowly.",
+    "group": "positive",
+    "domain": "ceramics",
+    "target_bias_ids": [
+      "curse_of_knowledge"
+    ],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b4_pos_009",
+    "story": "The wildlife rescue center released two owls after I volunteered on consecutive weekends, and both birds flew away strongly. Since I happened to wear the same old hiking hat each time, I started bringing it to every release because it seemed connected with successful outcomes. I refused to lend the hat even when another volunteer forgot their own gear.",
+    "group": "positive",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "illusion_of_control"
+    ],
+    "style_tags": [
+      "witness_statement"
+    ],
+    "tone_tags": [
+      "sincere"
+    ]
+  },
+  {
+    "id": "b4_pos_010",
+    "story": "My daughter wanted to join a neighborhood science club, but I hesitated after hearing one parent describe a child who had become bored after only two meetings. I searched online until I found more comments describing similar experiences and stopped reading once those matched my concerns. The club organizer later sent participation data, yet I never opened the attachment because I already felt certain we should decline the invitation.",
+    "group": "positive",
+    "domain": "family",
+    "target_bias_ids": [
+      "confirmation_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "protective"
+    ]
+  }
+]

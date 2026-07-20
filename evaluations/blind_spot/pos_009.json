@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_009",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Captain Webb had raced sailboats for twenty-five years and won regional regattas. During a championship race, he chose a course closer to the shore because he had won the same race a decade ago using that line. His navigator suggested heading offshore where winds were reported stronger, but Webb said, 'I know this bay. The wind always picks up near the cliffs by afternoon.' He disregarded the race officials' pre-race briefing, which had warned of variable conditions. By the third mark, his boat was becalmed and three competitors who went offshore had passed him. Webb blamed his navigator and continued to insist his decision had been correct, citing a single favorable gust he remembered from his earlier win.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "overconfidence_bias",
+    "availability_heuristic"
+  ],
+  "domain": "competitive_sailing",
+  "domain_familiarity": "out_of_field"
+}

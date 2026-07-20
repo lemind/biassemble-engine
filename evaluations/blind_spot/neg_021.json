@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_021",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The legal department reviewed a non-disclosure agreement for a new vendor. The contract terms were standard, including confidentiality, indemnification, and termination provisions. Both parties agreed to a one-year term with automatic renewal unless terminated in writing. The department compared the agreement with previous vendor contracts and found it consistent with standard practice. No unusual clauses were identified. The NDA was signed by authorized representatives from both organizations. The signed copy was scanned and stored in the document management system. A copy was sent to the vendor's legal counsel and filed for reference. All parties were notified of the effective date.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "legal",
+  "domain_familiarity": "in_field"
+}

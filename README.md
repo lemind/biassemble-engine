@@ -14,7 +14,7 @@ pinned: false
 Bias retrieval microservice. Receives a story from biassemble-core and returns the cognitive biases it likely exhibits. **Two search methods run concurrently and their results are unioned:**
 
 - **Vector search** — embeds the story and searches a pgvector index of the bias catalog. Fast and precise on domains it has indexed; blind on domains it hasn't.
-- **LLM search** — a small local model (**Gemma-3-4B-it**, GGUF Q4_K_M, via `llama-cpp-python`, CPU) reads the story against all bias ids and names those that apply. Catches biases vector search misses in unfamiliar domains (space, deep-sea, etc.).
+- **LLM search** — a small local model (**Gemma-3-4B-it**, GGUF Q4_K_M, via `llama-cpp-python`, CPU — currently a LoRA fine-tuned candidate, see [adr/006-blind-spot-ship-gate.md](adr/006-blind-spot-ship-gate.md)) reads the story against all bias ids and names those that apply. Catches biases vector search misses in unfamiliar domains (space, deep-sea, etc.).
 
 Each returned bias is tagged with which method(s) found it — `source: ["vector"] | ["llm"] | ["vector","llm"]`. The search method is selectable via `SELECTION_STRATEGY`: `vector_only` (pure retriever), `nli_union` (DeBERTa NLI + vector), or `llm_union` (Gemma + vector, the above).
 
@@ -22,7 +22,7 @@ Each returned bias is tagged with which method(s) found it — `source: ["vector
 
 - FastAPI + Pydantic v2
 - sentence-transformers (`all-MiniLM-L6-v2`) — vector search
-- **Gemma-3-4B-it (GGUF Q4_K_M) via llama-cpp-python — LLM search (`llm_union`)**
+- **Gemma-3-4B-it (GGUF Q4_K_M, LoRA fine-tuned) via llama-cpp-python — LLM search (`llm_union`)**
 - pgvector (Supabase)
 - asyncpg
 - uv
@@ -267,15 +267,18 @@ Three GitHub Actions workflows implement the two-tier eval gate from [adr/004-ci
 - `retrieval-gate.yml` — real retrieval eval against a PR's own code, on PRs touching `src/retrieval/**`, `src/nli/**`, `src/llm/**`, `src/selection/**`, `src/evaluation/**`, `evaluations/**`, `hypotheses/**`. Blocks merge on a per-`(group, metric)` regression vs. the latest promoted baseline (see the ADR for the exact tolerance/eligibility rule — `scripts/check_regression.py` is the shared logic both this and the drift monitor use).
 - `production-drift.yml` — same regression check, weekly (Mondays) + on-demand, against the deployed HF Space directly. Never blocks a merge — it has no `pull_request` trigger at all, by design, so it can only report drift, not gate anything.
 
-**Status**: all four required secrets/variables (`DATABASE_URL`, `RAG_API_KEY`, `HF_TOKEN`, `ENGINE_URL`) are provisioned in this repo's GitHub Actions settings and confirmed working — `pytest.yml` and `retrieval-gate.yml` have both passed for real against live Supabase. Currently live on PR #12 (`005-metrics-gate`), not yet merged to `main`. `production-drift.yml` can't be dispatched or scheduled until after that merge — GitHub only registers `workflow_dispatch`/`schedule` workflows once their file exists on the default branch; its logic has been validated manually in the meantime (a real call to the deployed Space, not just a unit test).
+**Status**: all four required secrets/variables (`DATABASE_URL`, `RAG_API_KEY`, `HF_TOKEN`, `ENGINE_URL`) are provisioned and confirmed working — all three workflows have run for real, including scheduled and manually-dispatched `production-drift.yml` runs against the live Space.
+
+**Known gap (2026-07-19)**: `006-fine-tune-llm` — the LoRA fine-tune feature now running in production, including the `blind_spot` baseline promotion (T010) — is deployed but not yet merged to `main`. Until it is, `production-drift.yml` picks up the latest baseline *on `main`*, which predates `blind_spot`, so weekly drift checks currently can't see the metric this fine-tune was built to move (they still correctly check `positive`/`negative`/`edge`/`adversarial`).
 
 **Not done yet, deliberately**: branch protection isn't configured — the gate exists and reports, but nothing is *required* to merge yet. That's an intentional, separate, manual step taken only after a few real runs on `main` prove the gate isn't flaky (see [specs/005-ci-metrics-gate/quickstart.md](specs/005-ci-metrics-gate/quickstart.md)'s final step) — not something any workflow here does automatically.
 
 ## Deploy (HF Spaces)
 
-1. Push to the `main` branch (`git push hf HEAD:main`) — HF Spaces builds from the Dockerfile automatically
+1. `scripts/deploy_hf_space.sh` — **not** a plain `git push hf HEAD:main`. `vendor/wheels/llama_cpp_python-*.whl` was committed as a raw, pre-LFS blob early in this repo's history; HF's git server permanently rejects any push whose pack has to carry that blob (>10MiB, non-LFS) to a remote that's never seen it. The script builds an honest child commit on top of whatever's currently on `hf/main` and pushes it normally (no `--force`, never touches `origin` or local branches) — see the script's header comment for the full story.
 2. Config lives in [`space-vars.env`](space-vars.env), not the web UI — run `.venv/bin/python scripts/sync_space_vars.py` (add `--dry-run` to preview) to push any changes
-3. After deploy: `GET /health` should show `database_connected: true`
+3. If `LLM_MODEL_REPO` points at a private HF repo (e.g. an unreleased fine-tuned candidate), the Space needs its own `HF_TOKEN` secret with read access to it. HF Spaces never expose Secrets during the Docker build step (only Variables), so the GGUF prefetch in the Dockerfile is deliberately *not* baked at build time — see the `HACK(hf-spaces-build-secrets)` comment there. It downloads once at container startup instead.
+4. After deploy: `GET /health` should show `database_connected: true` and `llm_loaded: true`
 
 ## Spec
 

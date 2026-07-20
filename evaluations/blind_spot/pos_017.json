@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_017",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Natalie had championed the new enterprise software implementation for two years at her manufacturing firm. After sixteen months of delays and triple the original budget, the system still wasn't functional. Her team recommended cutting losses and switching to an off-the-shelf solution that competitors were using successfully. Natalie argued they couldn't abandon the project now\u2014they'd invested $4.2 million and the team had learned so much. She reframed the delays as valuable training and insisted they were 'turning the corner.' At board meetings, she highlighted every minor milestone as proof of imminent success while downplaying the missed deadlines. When a board member asked about the competitor's solution, Natalie dismissed it as too simplistic for their complex operations, though she'd never actually compared the features.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "sunk_cost_fallacy",
+    "status_quo_bias"
+  ],
+  "domain": "management",
+  "domain_familiarity": "in_field"
+}

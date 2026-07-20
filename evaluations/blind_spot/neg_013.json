@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_013",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The linguist compiled a word list from a recently discovered text. The list was organized alphabetically with morphological variants noted. The text was transcribed and published. The publication included notes on the transcription methodology and a glossary. The primary source was deposited in a university archive. The archive's catalog number was provided in the publication. A reference copy was made for the linguist's use. The original manuscript remained in the archive's climate-controlled storage.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "historical_linguistics",
+  "domain_familiarity": "out_of_field"
+}

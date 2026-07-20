@@ -1,0 +1,63 @@
+{
+  "dataset_version": "sha256:73ddf4ca1167fa8ebc105201e78492c7b8cf1440ae77aa7fa8d0c84aa6963b97",
+  "total_rows": 907,
+  "counts_by_source": {
+    "real_weak": 28,
+    "synthetic": 879
+  },
+  "counts_by_group": {
+    "positive": 267,
+    "edge": 214,
+    "adversarial": 226,
+    "negative": 172
+  },
+  "per_bias_counts": {
+    "affect_heuristic": 19,
+    "ambiguity_effect": 17,
+    "anchoring_bias": 37,
+    "authority_bias": 36,
+    "availability_heuristic": 54,
+    "bandwagon_effect": 55,
+    "base_rate_neglect": 27,
+    "choice_supportive_bias": 21,
+    "confirmation_bias": 64,
+    "curse_of_knowledge": 16,
+    "decoy_effect": 27,
+    "dunning_kruger_effect": 26,
+    "escalation_of_commitment": 31,
+    "framing_effect": 28,
+    "fundamental_attribution_error": 28,
+    "gamblers_fallacy": 23,
+    "halo_effect": 33,
+    "hindsight_bias": 21,
+    "hot_hand_fallacy": 26,
+    "illusion_of_control": 24,
+    "in_group_bias": 24,
+    "loss_aversion": 21,
+    "narrative_fallacy": 21,
+    "negativity_bias": 35,
+    "omission_bias": 18,
+    "optimism_bias": 20,
+    "overconfidence_bias": 74,
+    "planning_fallacy": 19,
+    "projection_bias": 27,
+    "recency_bias": 25,
+    "representativeness_heuristic": 21,
+    "self_serving_bias": 24,
+    "spotlight_effect": 18,
+    "status_quo_bias": 50,
+    "stereotyping_bias": 21,
+    "sunk_cost_fallacy": 40,
+    "survivorship_bias": 22,
+    "zero_risk_bias": 32
+  },
+  "negative_fraction": 0.18963616317530319,
+  "pass": true,
+  "_diagnostics": {
+    "catalog_violations": [],
+    "missing_groups": [],
+    "under_floor_biases": {},
+    "synthetic_volume": 879,
+    "synthetic_volume_floor": 300
+  }
+}

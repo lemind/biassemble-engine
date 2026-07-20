@@ -1,0 +1,582 @@
+[
+  {
+    "id": "b3_pos_001",
+    "story": "Watching the injured sea turtle struggle on the beach, I immediately assumed a shark attacked it. The bite marks looked dramatic, and it made for a compelling story of a fierce predator strike. I completely ignored the obvious plastic entanglement scars around its flippers, preferring the dramatic predator narrative over the mundane reality of ocean pollution.",
+    "group": "positive",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "narrative_fallacy"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_pos_002",
+    "story": "Reading the reviews for the new espresso machine, one comment about the steam wand breaking after a month dominated my thoughts. The other fifty reviews praised the excellent brew quality and quiet motor, but that single negative experience made the product seem entirely defective. I decided to buy the older, less efficient model instead.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_pos_003",
+    "story": "Studying the race data from last year's regatta, I noticed that all the winning yachts had reinforced carbon-fiber masts. The analysis clearly showed that upgrading our mast to the same expensive material was the absolute key to victory. I spent the entire winter budget on this specific upgrade, ignoring the fact that the losing boats also had reinforced masts, but they simply suffered from poor crew coordination and bad sail trim. The surviving winners shared many traits, but focusing only on their shared equipment while ignoring the identical equipment on the sunken losers completely blinded me to the actual variables that determine race outcomes. We are now heavily in debt with a faster mast, but our crew still cannot tack properly.",
+    "group": "positive",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "survivorship_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b3_pos_004",
+    "story": "Pruning the dying juniper, I realized the roots were completely rotted. Instead of discarding the dead wood, I bought expensive fungicide and a new heating mat. We have spent three years and hundreds of dollars on this specific tree, so throwing it away now would mean all that previous effort was completely wasted.",
+    "group": "positive",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "escalation_of_commitment"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_pos_005",
+    "story": "Estimating the server migration timeline, I confidently told the client it would take exactly four hours of downtime. I assumed the database transfer would be perfectly smooth, completely ignoring the historical data showing that legacy systems always encounter unexpected compatibility errors during the initial handshake phase. The process will definitely be seamless.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_pos_006",
+    "story": "Checking the morning mist net catches, I concluded the warbler migration was peaking early this year. The first three hours yielded an unusually high number of specimens, skewing my overall estimate for the season. I completely forgot that the previous week's heavy rain had temporarily grounded the birds, artificially inflating today's local capture numbers.",
+    "group": "positive",
+    "domain": "bird_banding",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_pos_007",
+    "story": "Meeting the lead surgeon, his tall posture and confident, booming voice immediately convinced me he was brilliant. I assumed his excellent bedside manner and immaculate white coat meant his surgical techniques were equally flawless, so I signed the consent forms without asking about his specific complication rates for this exact procedure.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b3_pos_008",
+    "story": "Reviewing the contract dispute files, it is completely obvious why the partnership dissolved. The financial statements from last March clearly showed a downward trend in revenue, which should have been a massive red flag for any reasonable investor. I told the junior associates back then that we needed to restructure the debt, and the current bankruptcy perfectly validates my initial concerns. It is incredibly frustrating that the board did not listen to my warnings at the time. The data clearly shows a direct correlation between the March anomalies and the subsequent collapse. I knew all along that this specific business model would fail. Next time, I will make sure my recommendations are implemented from day one, because the warning signs were there for anyone paying attention.",
+    "group": "positive",
+    "domain": "legal",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_pos_009",
+    "story": "Listening to the mayor's speech, I strongly opposed the proposed revenue enhancement fee for the water department. However, when the city council rebranded the exact same financial mechanism as a clean water protection initiative the following week, I enthusiastically voted in favor of it. The underlying tax remained completely identical.",
+    "group": "positive",
+    "domain": "political",
+    "target_bias_ids": [
+      "framing_effect"
+    ],
+    "style_tags": [
+      "witness_statement"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b3_pos_010",
+    "story": "Selecting the new clownfish for the reef tank, I picked the one with the brightest orange coloration and the most active swimming pattern. It perfectly matched my mental prototype of a healthy, vibrant marine fish. I completely ignored the subtle, rapid gill movements and the slight clamping of its fins, which are actually early indicators of marine ich. Because it looked exactly like the ideal specimen in my mind, I assumed its internal health was equally perfect. I placed it directly into the main display tank without a proper quarantine period, trusting its outward appearance over the subtle physiological warning signs. Now the entire tank is dealing with a severe parasitic outbreak because I judged the fish entirely by how closely it matched my stereotype of a perfect clownfish.",
+    "group": "positive",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "representativeness_heuristic"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_edge_001",
+    "story": "Tracking the orphaned bear cub, I assumed it was deliberately abandoned by a careless mother who prioritized foraging over parenting. The cub's solitary wandering fit a compelling story of maternal neglect. I ignored the biological reality that bear cubs frequently forage independently while the mother watches from a hidden distance in the dense brush.",
+    "group": "edge",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "narrative_fallacy"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_edge_002",
+    "story": "Evaluating the smart thermostat, the single complaint about a confusing mobile app interface overshadowed the dozens of praises regarding its energy savings. The negative review felt much more significant and memorable, making me weigh a minor software annoyance much heavier than the substantial financial benefits of reduced heating bills over time.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_edge_003",
+    "story": "Analyzing the hull designs of the surviving fleet, I noticed they all featured deep V-shaped keels. I concluded that this specific shape was the sole reason for their structural integrity during the storm. I failed to account for the sunken vessels that also had deep V-shaped keels but suffered catastrophic failure due to poor material quality.",
+    "group": "edge",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "survivorship_bias"
+    ],
+    "style_tags": [
+      "lecture_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_edge_004",
+    "story": "Repotting the ancient ficus, the roots were clearly dying from severe overwatering. Instead of adjusting the schedule, I bought an expensive moisture meter and specialized soil mix. We have spent five years shaping this specific trunk, so abandoning it now would render all those previous wiring sessions completely pointless and wasteful.",
+    "group": "edge",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "escalation_of_commitment"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_edge_005",
+    "story": "Deploying the updated firmware, I estimated a zero percent chance of bricking the devices. I assumed the automated testing suite had covered every possible edge case, completely ignoring the fact that the legacy hardware in the field uses undocumented, third-party memory controllers that have never been tested in production.",
+    "group": "edge",
+    "domain": "technical",
+    "target_bias_ids": [
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b3_edge_006",
+    "story": "Reviewing the weekly banding data, I concluded the local sparrow population was thriving. The final two days of the month yielded record capture numbers, which heavily influenced my overall assessment. I forgot that the first three weeks were completely empty due to a severe cold front that temporarily migrated the flock south.",
+    "group": "edge",
+    "domain": "bird_banding",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_edge_007",
+    "story": "Consulting the specialist, her calm demeanor and prestigious university affiliation immediately made me trust her diagnosis. I assumed her excellent reputation in academic research meant she was equally skilled in clinical diagnostics, so I skipped getting a second opinion from a more experienced general practitioner regarding my chronic pain management.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b3_edge_008",
+    "story": "Reading the deposition transcripts, it is entirely obvious why the merger fell apart. The emails from the target company's CEO clearly showed a lack of enthusiasm and a hesitant tone in his responses. I pointed this out to the legal team months ago, warning them that his body language during the initial meetings indicated deep reservations. The current collapse of the deal perfectly validates my initial read on his character. It is incredibly frustrating that the senior partners ignored my warnings and pushed forward anyway. The data speaks for itself, and it was obvious to anyone with basic negotiation experience that his hesitation would lead directly to this outcome. Future due diligence processes must incorporate these predictable behavioral shifts.",
+    "group": "edge",
+    "domain": "legal",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_edge_009",
+    "story": "Debating the zoning laws, I strongly opposed the urban density mandate proposed by the planners. However, when the same policy was reintroduced next month as a vibrant community housing initiative, I found myself agreeing with the core principles. The actual lot size requirements and height restrictions remained completely unchanged between the two proposals.",
+    "group": "edge",
+    "domain": "political",
+    "target_bias_ids": [
+      "framing_effect"
+    ],
+    "style_tags": [
+      "witness_statement"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b3_edge_010",
+    "story": "Choosing the new coral fragment for the display tank, I selected the one with the most intense purple fluorescence. It perfectly matched my mental image of a premium, high-quality SPS coral. I completely ignored the slight tissue recession at the base and the lack of polyp extension, which are actually clear signs of severe stress and poor water flow adaptation. Because it looked exactly like the prize-winning specimens in the magazines, I assumed its internal health and genetic stability were equally perfect. I paid a premium price and placed it directly next to my most expensive colonies without a proper quarantine period. I trusted its outward visual appeal over the subtle physiological warning signs, and now the entire reef is suffering from a rapid spreading necrosis.",
+    "group": "edge",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "representativeness_heuristic"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "regretful"
+    ]
+  },
+  {
+    "id": "b3_adv_001",
+    "story": "Support our mission to save the majestic eagles from the cruel, poaching syndicates operating in the mountains. Every day, these brave birds face dramatic, life-or-death struggles against ruthless hunters. Donate now to fund our heroic rangers who fight this epic battle to protect the skies from these villainous criminals.",
+    "group": "adversarial",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "narrative_fallacy"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_002",
+    "story": "Stop wasting money on cheap blenders that break after a month and ruin your morning smoothies. Don't let a faulty motor destroy your healthy breakfast routine. Upgrade to our premium model today and protect your kitchen investment from the frustration of cheap, unreliable appliances that fail when you need them most.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_003",
+    "story": "Want to win the coastal regatta? Just copy the exact sail trim techniques used by the top three finishers in last year's race! They kept their jibs sheeted incredibly tight, which is clearly the secret to their speed. Ignore the dozens of other boats that did the exact same thing and finished in last place.",
+    "group": "adversarial",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "survivorship_bias"
+    ],
+    "style_tags": [
+      "chat_message"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_adv_004",
+    "story": "You have already spent three years and hundreds of dollars wiring and pruning this juniper. Do not throw it away now just because the apex died. Buy our premium healing paste and keep investing in it. Walking away means admitting all your past effort was completely wasted, so keep going to justify your previous hard work.",
+    "group": "adversarial",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "escalation_of_commitment"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_005",
+    "story": "Deploy our cloud migration tool and experience a flawless, zero-downtime transition! Our software guarantees that your legacy database will transfer perfectly on the very first try, completely eliminating any risk of data loss or unexpected compatibility errors. Your team will enjoy a perfectly smooth, effortless upgrade without any technical headaches whatsoever.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": [
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_adv_006",
+    "story": "Look at the massive influx of warblers in our nets this week! The migration is clearly peaking right now, so you must buy our premium bird bands immediately before the season ends. Ignore the empty nets from last month; today's massive catch proves that the birds are finally arriving in record numbers.",
+    "group": "adversarial",
+    "domain": "bird_banding",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_007",
+    "story": "Trust your health to the cleanest, most beautifully designed clinic in the city. Our state-of-the-art facility features pristine white marble floors, calming water features, and a stunning modern lobby. Because our architecture is so flawless and luxurious, you can be absolutely certain that our medical staff provides the highest quality of care.",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_adv_008",
+    "story": "Join our class action lawsuit against the massive pharmaceutical corporation. Looking back at their financial reports from three years ago, it was completely obvious that their flagship drug was going to fail. The slight dip in their research budget was a massive red flag that any reasonable investor should have seen coming. We warned the shareholders back then that the clinical trials were doomed, and the current stock crash perfectly validates our initial concerns. The data speaks for itself, and it was obvious to anyone paying attention that their business model was fundamentally flawed. Do not let them escape accountability for the warning signs they blatantly ignored. Trust the legal team that saw this disaster coming from a mile away and help us secure the justice you deserve for your financial losses.",
+    "group": "adversarial",
+    "domain": "legal",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_009",
+    "story": "Vote yes on the Community Safety and Youth Protection Act to keep our streets secure. Do not be fooled by the opposing side's misleading name for it, the Juvenile Curfew and Policing Expansion Mandate. They are trying to scare you with their negative wording, but our positive framing reveals the true, beneficial nature of the exact same policy.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": [
+      "framing_effect"
+    ],
+    "style_tags": [
+      "voice_memo_transcript"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_adv_010",
+    "story": "Upgrade your reef tank with our premium, hand-selected corals. Every single fragment we sell features the most intense, vibrant coloration and the most aggressive polyp extension, perfectly matching the ideal image of a thriving marine ecosystem. Because they look exactly like the prize-winning specimens in every major magazine, you can be absolutely certain they are genetically superior and completely disease-free. Do not settle for dull, recessed corals from other vendors. Our visually stunning pieces guarantee a flawless, healthy aquarium because they perfectly represent the ultimate standard of marine beauty. Buy our vibrant fragments today and experience the effortless success that comes from owning the most beautiful, picture-perfect specimens available on the market.",
+    "group": "adversarial",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "representativeness_heuristic"
+    ],
+    "style_tags": [
+      "lecture_notes"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_neg_001",
+    "story": "Product specifications for the model X-200 blender. Motor power is 1200 watts. Container capacity is 64 ounces, made of BPA-free plastic. The unit includes four stainless steel blades and a digital touch panel with five preset speed options. Weight is 12.5 pounds. Dimensions are 8 by 8 by 18 inches.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_002",
+    "story": "Court docket entries for October 14. Case number 23-CV-0998: Motion to dismiss filed by defendant. Case number 23-CV-1042: Status conference scheduled for November 2 at 09:00. Case number 23-CV-1105: Default judgment entered. All documents have been uploaded to the electronic filing system and verified by the clerk.",
+    "group": "negative",
+    "domain": "legal",
+    "target_bias_ids": [],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_003",
+    "story": "Patient intake form data. Name: John Doe. Date of birth: May 12, 1980. Blood type: O positive. Primary insurance provider: Blue Cross. Current medications include lisinopril 10 mg daily and metformin 500 mg twice daily. No known drug allergies reported in the system. Vitals recorded at 10:00 AM.",
+    "group": "negative",
+    "domain": "medical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_004",
+    "story": "System maintenance log for server cluster Alpha. Replaced failed hard drive in slot 4. Rebuilt RAID 5 array, which completed at 14:30. Applied firmware update version 3.2.1 to the network switch. All nodes are currently reporting green status and normal operating temperatures. Next scheduled maintenance is in 30 days.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_005",
+    "story": "Legislative bill summary for HB 402. The bill amends section 12 of the state tax code. It increases the standard deduction for single filers by 500 dollars. The effective date is January 1 of the next fiscal year. The fiscal impact estimate is a 20 million dollar reduction in state revenue.",
+    "group": "negative",
+    "domain": "political",
+    "target_bias_ids": [],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_006",
+    "story": "Race committee report for regatta day two. Wind direction was 240 degrees at 10 knots. Course set was a windward-leeward triangle, three laps. Total boats started: 45. Three boats were disqualified for early starts. Race finished at 15:00. Results are posted on the official clubhouse bulletin board and the website.",
+    "group": "negative",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_007",
+    "story": "Morning banding data for station 4. Nets operated from 06:00 to 10:00. Total captures: 12. Species breakdown: 5 song sparrows, 4 dark-eyed juncos, 3 white-crowned sparrows. All individuals received standard aluminum bands. Average weight for song sparrows was 24 grams. Data entered into the central database at 11:00.",
+    "group": "negative",
+    "domain": "bird_banding",
+    "target_bias_ids": [],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_008",
+    "story": "Water parameter test results for display tank 1. Temperature is 78 degrees Fahrenheit. Salinity is 1.025 specific gravity. pH is 8.2. Alkalinity is 9 dKH. Calcium is 420 ppm. Magnesium is 1350 ppm. Nitrates are below 5 ppm. Phosphates are undetectable. All values are within the target range for reef systems.",
+    "group": "negative",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_009",
+    "story": "Greenhouse inventory log for section B. Total juniper procumbens: 40. Total ficus retusa: 25. Total pinus thunbergii: 15. Soil moisture levels checked at 08:00. Automated misting system activated for 15 minutes. Fertilizer application scheduled for next Tuesday. All trees are currently in their training pots and labeled accordingly.",
+    "group": "negative",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_010",
+    "story": "Intake processing log for the rehabilitation center. Animal 101: Red-tailed hawk, found with wing injury. Animal 102: Eastern cottontail rabbit, orphaned. Animal 103: Virginia opossum, hit by vehicle. All animals received initial physical examinations and were placed in designated recovery enclosures. Feeding schedules have been established by the veterinary staff.",
+    "group": "negative",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  }
+]

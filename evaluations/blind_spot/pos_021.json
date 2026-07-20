@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_021",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Liam purchased a new hybrid vehicle after researching four comparable models. He spent three weeks reading reviews and test-driving two cars before deciding. After the purchase, he joined an online owners' forum and noticed many complaints about the battery range. He responded to skeptical posts by emphasizing the vehicle's fuel economy figures, safety ratings, and warranty coverage. He recommended the car to a coworker and said, 'I've had zero problems. Best decision I made.' When Consumer Reports published a critical review citing performance issues, Liam read it and concluded the magazine was biased against smaller automakers. He interpreted every comment that confirmed his choice as evidence he had made the superior decision and dismissed contradictory information as outlier experiences.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "choice_supportive_bias",
+    "confirmation_bias"
+  ],
+  "domain": "consumer",
+  "domain_familiarity": "in_field"
+}

@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_006",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A woodworking instructor named Frank was teaching a class on finishing techniques. He demonstrated a method using mineral oil and beeswax, saying, 'This is what the old masters used. This has been passed down for centuries. Modern finishes are full of chemicals that ruin the wood's soul. If you care about preserving the natural beauty of your work, you need to use what has always worked.' He showed students a piece he had finished with this method twenty years ago, which had a warm, glowing appearance. He didn't mention that the piece was rarely handled and kept in a low-humidity room. Students, moved by the sentimental language and historical authority, began using his method without researching its suitability for high-use items.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias"
+  ],
+  "domain": "woodworking",
+  "domain_familiarity": "out_of_field"
+}

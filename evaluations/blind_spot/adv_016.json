@@ -1,0 +1,12 @@
+{
+  "scenario_id": "adv_016",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A mayoral candidate named Harrison delivered a campaign speech in a working-class district. He said, 'My opponent wants to raise your taxes. She says it's for infrastructure, but we all know what that means\u2014more government waste.' He pointed to a failed light rail project in a neighboring city and said, 'That's what happens when politicians get control of your money. They build monuments to themselves.' He promised to cut the city budget by twenty percent and 'return power to the neighborhoods.' He spoke for thirty minutes about bureaucratic inefficiency and corporate influence. His audience cheered the attacks on waste and government overreach. His statements were emotionally charged and politically framed, obscuring the fact that his opponent's plan actually cut taxes for families earning under seventy-five thousand dollars and funded infrastructure through corporate levies.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "framing_effect"
+  ],
+  "domain": "political",
+  "domain_familiarity": "in_field"
+}

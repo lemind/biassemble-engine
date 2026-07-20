@@ -1,0 +1,29 @@
+Generate 40 short synthetic training stories for a cognitive-bias detection system. Output ONLY a JSON array of 40 objects, nothing else — no intro text, no explanation, no markdown fences.
+
+The 38 valid bias ids (use ONLY these exact strings, nothing else):
+affect_heuristic, ambiguity_effect, anchoring_bias, authority_bias, availability_heuristic, bandwagon_effect, base_rate_neglect, choice_supportive_bias, confirmation_bias, curse_of_knowledge, decoy_effect, dunning_kruger_effect, escalation_of_commitment, framing_effect, fundamental_attribution_error, gamblers_fallacy, halo_effect, hindsight_bias, hot_hand_fallacy, illusion_of_control, in_group_bias, loss_aversion, narrative_fallacy, negativity_bias, omission_bias, optimism_bias, overconfidence_bias, planning_fallacy, projection_bias, recency_bias, representativeness_heuristic, self_serving_bias, spotlight_effect, status_quo_bias, stereotyping_bias, sunk_cost_fallacy, survivorship_bias, zero_risk_bias
+
+COVERAGE: Distribute examples as evenly as reasonably possible across all 38 bias ids. Avoid overusing common biases such as confirmation_bias, anchoring_bias, sunk_cost_fallacy, authority_bias, or availability_heuristic. Intentionally include rarer ones — e.g. omission_bias, curse_of_knowledge, zero_risk_bias, projection_bias, in_group_bias, choice_supportive_bias — throughout the batch.
+
+ANTI-CHEATING RULE: Do not pick a bias id first and then write a story to fit it. Instead, first imagine a realistic, specific situation, then decide the minimal set of bias ids that genuinely explain the reasoning shown. Every target_bias_ids entry must be directly and clearly supported by the story — no speculative or weak labels.
+
+Split the 40 stories like this:
+- 10 stories, group "positive": clearly exhibits 1-3 bias ids. Prefer realistic everyday situations over textbook demonstrations.
+- 10 stories, group "edge": exhibits 1-2 bias ids, but subtly — a case a careful reviewer might genuinely debate. The story should remain plausible even if a reviewer ultimately decides no bias is present.
+- 10 stories, group "adversarial": the narrator intentionally tries to persuade, sell, recruit, convince, or manipulate the audience (a speech, an ad, a pitch, a social media post) exploiting 1-2 bias ids. The exploitation should arise naturally from the rhetoric rather than being explicitly stated.
+- 10 stories, group "negative": genuinely mundane, low-narrative-tension content with ZERO bias — a schedule, a recipe, a product changelog, a weather report, a historical summary, meeting notes, a maintenance log. Avoid any personal opinions, recommendations, predictions, preferences, or explanations (e.g. never "the technician wisely..." or "this was the right call") — write objective informational content only. No character makes any notable judgment call. target_bias_ids must be [] for every one of these.
+
+Rules for "positive"/"edge"/"adversarial" stories:
+- 2-4 sentences, 50-90 words, specific and realistic — not cartoonish.
+- Show the bias through behavior and reasoning. NEVER use the words "bias," "fallacy," "heuristic," or "effect," and never name the bias directly.
+- Vary domain across the batch: finance, management, consumer, legal, medical, education, astronomy, woodworking, bird banding, ceramics.
+- Avoid repeating sentence openings, narrative structure, or wording across stories — don't let multiple stories start with "When...", "After...", or "I realized...".
+- Each story's style_tag must be one of: diary, incident_report, email, forum_post, interview, newspaper, field_notes, maintenance_log, lab_notebook, witness_statement, lecture_notes, chat_message. Use a good spread across the batch, not the same one repeatedly.
+- Vary tone/formality too (tone_tags is free text: e.g. regretful, clinical, urgent, wry, defensive, matter-of-fact).
+
+Output format — a JSON array of exactly 40 objects, each shaped like:
+{"id": "pos_001", "story": "...", "group": "positive", "domain": "finance", "target_bias_ids": ["anchoring_bias", "sunk_cost_fallacy"], "style_tags": ["diary"], "tone_tags": ["regretful"]}
+
+Use sequential ids per group: pos_001-pos_010, edge_001-edge_010, adv_001-adv_010, neg_001-neg_010.
+
+Generate the 40 stories now.

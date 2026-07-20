@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_007",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "David maintained a saltwater aquarium for eight years and prided himself on his expertise. When his tang fish stopped eating, he remembered a similar problem three years ago that was solved by increasing the water temperature. He raised the heater, ignoring his water test results that showed elevated nitrate levels. He told his partner, 'Trust me, I've been doing this long enough to know.' When the tang deteriorated further, he added medication that a fellow hobbyist recommended for parasites. He didn't quarantine the fish or perform a full water change because he had already invested so much time in the current approach. He told a friend, 'If I change everything now, I'll have wasted a week of treatment. I just need to be patient.'",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic",
+    "sunk_cost_fallacy"
+  ],
+  "domain": "aquarium_keeping",
+  "domain_familiarity": "out_of_field"
+}

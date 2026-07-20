@@ -1,0 +1,13 @@
+{
+  "scenario_id": "adv_020",
+  "group": "blind_spot",
+  "original_subgroup": "adversarial",
+  "story": "A neighborhood association president named Gerald was arguing against a proposed homeless shelter. He told residents, 'I've seen what happens to neighborhoods that allow these facilities. Property values plummet. Crime increases. Families move out.' He pointed to a report from a nonprofit that was critical of shelter locations in another district but failed to mention that report was a single case study and that broader research had found no consistent negative impacts. He said, 'We have children here. We can't expose them to that environment.' He also referenced a single property sale that had declined in value near a shelter in a different part of the state, omitting that the decline was attributed to a broader housing market shift. At the meeting, Gerald spoke with conviction and cited statistics, but his evidence was selective and he persuaded many residents who had not read the research he referenced.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "negativity_bias",
+    "availability_heuristic"
+  ],
+  "domain": "social",
+  "domain_familiarity": "in_field"
+}

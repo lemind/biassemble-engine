@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_024",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "An engineering team was debugging a network latency issue. Their senior engineer recalled that a similar problem two years ago was caused by a misconfigured firewall and immediately suggested that diagnosis. He directed the team to inspect the firewall rules and ignored reports from junior engineers about packet loss at a different switch. Two days of investigation showed the firewall was functioning correctly. The senior engineer then pointed to a database migration that had occurred the previous week, insisting that was the real source. He told the project manager, 'I've seen this pattern before. It's always the database sync.' The team spent four more hours examining the replication logs before discovering the root cause was an overloaded load balancer, which the junior engineers had suspected on the first day.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "availability_heuristic",
+    "overconfidence_bias"
+  ],
+  "domain": "technical",
+  "domain_familiarity": "in_field"
+}

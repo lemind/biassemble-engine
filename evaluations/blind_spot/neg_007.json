@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_007",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The mycology class collected specimens from the university forest. Students identified each mushroom using dichotomous keys in their field guides. Forty-seven specimens were collected and cataloged. The instructor checked each identification. A list was compiled of the species found and their preferred habitats. Students prepared spore prints and observed the spores under a microscope. The data was recorded in the laboratory notebook. All specimens were properly labeled and stored according to protocol. A summary of the findings was shared with the department.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "mycology",
+  "domain_familiarity": "out_of_field"
+}

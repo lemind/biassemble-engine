@@ -1,0 +1,362 @@
+[
+  {
+    "id": "b1_pos_001",
+    "story": "I decided to skip the statin my doctor recommended because the pamphlet didn't mention any severe long-term side effects. It just listed mild headaches and nausea, which I already get sometimes. Since the brochure focused entirely on the immediate, minor inconveniences, I figured the risks were negligible. I am confident I made the healthier choice by avoiding medications with documented daily disruptions. My recent checkup showed elevated levels, but I trust my initial assessment of the provided materials.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": ["omission_bias"],
+    "style_tags": ["diary"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b1_pos_002",
+    "story": "I sent the advanced calculus syllabus to the freshmen orientation group. The concepts are straightforward if you just review the prerequisite proofs. I don't understand why they keep emailing me about the notation; it is literally defined in the first chapter. I assumed everyone had the same foundational background I did when I started. I will just re-send the document with a note telling them to read chapter one carefully before asking further questions.",
+    "group": "positive",
+    "domain": "education",
+    "target_bias_ids": ["curse_of_knowledge"],
+    "style_tags": ["email"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_pos_003",
+    "story": "I moved all my retirement savings into a zero-yield savings account. The stock market has too many variables, and I cannot tolerate even a one percent chance of losing my principal. I know inflation will erode the purchasing power over the next twenty years, but having absolute certainty that the number in my account will never go down is worth more to me than any potential growth. I sleep much better knowing my money is completely safe from market fluctuations.",
+    "group": "positive",
+    "domain": "finance",
+    "target_bias_ids": ["zero_risk_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["cautious"]
+  },
+  {
+    "id": "b1_pos_004",
+    "story": "When I took over the department, I immediately restructured the workflow to match how I operate. I prefer deep, uninterrupted morning blocks, so I banned all meetings before noon. I assumed the rest of the team would naturally appreciate this as much as I do. It has been three months, and I am frustrated that collaboration has dropped. I just need to remind them that focused work is objectively more productive than constant chatter.",
+    "group": "positive",
+    "domain": "management",
+    "target_bias_ids": ["projection_bias"],
+    "style_tags": ["interview"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b1_pos_005",
+    "story": "We only buy our coffee beans from the local roaster collective. Sure, the chain down the street is cheaper and sometimes tastes fine, but we know our guys. They understand the craft and share our values about sustainable sourcing. Whenever I try a new blend from them, I already know it is going to be superior because it comes from people who actually care about the community, unlike those corporate outsiders.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": ["in_group_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_pos_006",
+    "story": "I spent three weeks hand-planing this walnut tabletop. It took way longer than using the drum sander, and my arms ache constantly. But looking at the grain now, it is obvious that the hand-planed finish is vastly superior. The machine would have left microscopic scratches, whereas my method preserved the wood's true character. I am completely convinced this was the only right way to build this piece.",
+    "group": "positive",
+    "domain": "woodworking",
+    "target_bias_ids": ["choice_supportive_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_pos_007",
+    "story": "I was choosing a new kiln for the studio. The small electric model was $800, and the large digital one was $2,500. Then I saw a medium-sized, analog kiln priced at $2,400. It made the large digital kiln look like an absolute steal for just a hundred dollars more, offering so much more capacity and precision. I immediately ordered the large digital one. It was clearly the best value on the market.",
+    "group": "positive",
+    "domain": "ceramics",
+    "target_bias_ids": ["decoy_effect"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["analytical"]
+  },
+  {
+    "id": "b1_pos_008",
+    "story": "I chose to settle the contract dispute for a fixed $10,000 rather than go to arbitration. The arbitration outcome could range from a $50,000 award to a total loss with legal fees. Even though my lawyer said we had a strong case, the uncertainty of the arbitration process made me uncomfortable. I prefer the certainty of a known, smaller payout over a gamble with unknown probabilities, regardless of the expected value.",
+    "group": "positive",
+    "domain": "legal",
+    "target_bias_ids": ["ambiguity_effect"],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_pos_009",
+    "story": "During the public observatory open house last Saturday, I spent twenty minutes meticulously aligning the primary mirror of the main telescope. I was certain that if the collimation was even a fraction of a degree off, every visitor would notice the blurry star images and think I was incompetent. I kept tweaking the screws, ignoring the line of people waiting.\n\nEventually, a father and his daughter stepped up. They looked through the eyepiece and just smiled, saying the moon looked 'super cool.' They didn't mention the slight astigmatism I was obsessing over. I am convinced they were just being polite to avoid embarrassing me. Anyone with eyes can see the difference between a perfectly collimated scope and a mediocre one. I need to be more rigorous next time, because the public definitely notices when the optics are not flawless, even if they do not say it to my face.",
+    "group": "positive",
+    "domain": "astronomy",
+    "target_bias_ids": ["spotlight_effect"],
+    "style_tags": ["diary"],
+    "tone_tags": ["regretful"]
+  },
+  {
+    "id": "b1_pos_010",
+    "story": "Looking back at the migration data from last spring, it is completely obvious why the warbler population dipped in the coastal sector. We should have anticipated the early frost. The weather patterns in March were a clear warning sign that the insect hatch would be delayed. I told the team back then that we needed to adjust our banding schedule, and now the results perfectly validate my initial concerns.\n\nIt is frustrating that the field coordinators did not listen to me at the time. The data clearly shows a correlation between the March temperature anomalies and the subsequent drop in recapture rates. I knew all along that the coastal route would be problematic this year. Next season, I will make sure my recommendations are implemented from day one, because the signs were there for anyone paying attention.",
+    "group": "positive",
+    "domain": "bird banding",
+    "target_bias_ids": ["hindsight_bias"],
+    "style_tags": ["email"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_edge_001",
+    "story": "I declined the proposed surgical intervention after reviewing the consent form. The document outlined the standard recovery timeline and potential for minor scarring. I stated I was comfortable proceeding based on this information. The form did not include a detailed breakdown of rare anesthetic complications, as those are covered in the separate general hospital admission packet. I scheduled the procedure without further discussion of those specific systemic risks.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": ["omission_bias"],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_edge_002",
+    "story": "I posted the solution to the thermodynamics problem set in the class channel. I included the final answer and the two main equations used. I assumed the intermediate algebraic steps were obvious to anyone who passed the prerequisite course. A few students are asking for a step-by-step breakdown, which seems unnecessary. The logic flows naturally if you just look at the variables. I might add a sentence or two if they still do not get it.",
+    "group": "edge",
+    "domain": "education",
+    "target_bias_ids": ["curse_of_knowledge"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["wry"]
+  },
+  {
+    "id": "b1_edge_003",
+    "story": "I am keeping my emergency fund in a standard checking account. I know high-yield savings accounts offer a bit more interest, but there is always a tiny risk of bank failure or account freezing. I would rather earn zero percent and have immediate, guaranteed access to my cash without any institutional hurdles. The peace of mind of absolute liquidity outweighs the fractional gains of a slightly riskier vehicle.",
+    "group": "edge",
+    "domain": "finance",
+    "target_bias_ids": ["zero_risk_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["cautious"]
+  },
+  {
+    "id": "b1_edge_004",
+    "story": "I reorganized the project management board to prioritize tasks by strict alphabetical order of the client name. It makes so much more sense to me and keeps everything uniformly organized. I expect the rest of the developers to adapt to this system quickly. If they find it confusing, they just need to spend a few minutes familiarizing themselves with the new structure. It is objectively cleaner than the old priority-based system.",
+    "group": "edge",
+    "domain": "management",
+    "target_bias_ids": ["projection_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["weary"]
+  },
+  {
+    "id": "b1_edge_005",
+    "story": "I exclusively use open-source software for my design work. Proprietary tools might have slicker interfaces, but they are built by corporations that do not respect user privacy. The open-source community understands the real needs of independent creators. Even when a proprietary tool has a specific feature I need, I will spend weeks finding an open-source alternative because supporting the community is fundamentally more important than short-term convenience.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": ["in_group_bias"],
+    "style_tags": ["interview"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_edge_006",
+    "story": "I chose to use traditional hide glue for this chair assembly instead of modern PVA glue. The setup time is much shorter, and the joints feel more authentic to the period style. While PVA might offer higher sheer strength on paper, hide glue allows for future repairs, which is the hallmark of true craftsmanship. I am confident this was the superior technical choice for a heirloom piece.",
+    "group": "edge",
+    "domain": "woodworking",
+    "target_bias_ids": ["choice_supportive_bias"],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_edge_007",
+    "story": "I was evaluating three clay bodies for the new production line. Clay A cost $15 per bag and fired to cone 6. Clay B cost $40 per bag and fired to cone 10 with high durability. Clay C cost $38 per bag and fired to cone 6. Clay C made Clay B look incredibly reasonable for just two dollars more, while offering vastly superior temperature resistance. We naturally selected Clay B for the upgrade.",
+    "group": "edge",
+    "domain": "ceramics",
+    "target_bias_ids": ["decoy_effect"],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["analytical"]
+  },
+  {
+    "id": "b1_edge_008",
+    "story": "I opted for the standard liability insurance package for the firm. The premium package offers higher coverage limits, but the exact conditions for payout are vaguely defined in the policy addendum. I prefer the standard package because the exclusions are clearly listed, even though the coverage ceiling is lower. Knowing exactly what is not covered provides more certainty than a higher, but ambiguous, potential payout.",
+    "group": "edge",
+    "domain": "legal",
+    "target_bias_ids": ["ambiguity_effect"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_edge_009",
+    "story": "During the departmental seminar, I noticed a slight error in my slide regarding the redshift calculation of the Andromeda galaxy. I became highly anxious, assuming every astrophysicist in the room was silently judging my competence. I rushed through the rest of the presentation, stumbling over my words.\n\nAfterward, only one colleague approached me, and it was to ask about the catering for the next event. Nobody mentioned the slide. While it is possible they were just being polite and did not want to embarrass me in public, it is also likely that they noticed the error and are now quietly questioning my qualifications. I should have double-checked my figures, because in this field, peers are always evaluating the precision of your work, even if they do not voice it immediately.",
+    "group": "edge",
+    "domain": "astronomy",
+    "target_bias_ids": ["spotlight_effect"],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_edge_010",
+    "story": "The decline in the local sparrow population was entirely predictable given the habitat changes last year. The removal of the hedgerows along the north fence line was a clear indicator that nesting sites would be compromised. I noted this in my field journal at the time, suggesting we monitor that sector closely.\n\nNow that the quarterly census shows a twenty percent drop, it perfectly aligns with my earlier observations. It is unfortunate that the conservation committee did not act on the initial warnings. The data speaks for itself, and it was obvious to anyone familiar with avian ecology that the habitat fragmentation would lead directly to this outcome. Future planning must incorporate these predictable environmental shifts.",
+    "group": "edge",
+    "domain": "bird banding",
+    "target_bias_ids": ["hindsight_bias"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_adv_001",
+    "story": "Discover the natural way to boost your energy! Our new herbal supplement is packed with vitamins and antioxidants to help you feel revitalized every day. Thousands of satisfied customers report increased vitality and improved mood within just one week of use. Start your journey to a healthier, more vibrant you today. Click here to claim your exclusive introductory discount and experience the difference for yourself.",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": ["omission_bias"],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["persuasive"]
+  },
+  {
+    "id": "b1_adv_002",
+    "story": "To understand this economic model, you simply need to grasp the underlying differential equations. The derivation is straightforward if you recall your sophomore calculus. I will not spend time reviewing the basic integrals, as anyone serious about this field should already have that foundation. Let us move directly to the advanced applications, which are where the real value lies for dedicated students.",
+    "group": "adversarial",
+    "domain": "education",
+    "target_bias_ids": ["curse_of_knowledge"],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["authoritative"]
+  },
+  {
+    "id": "b1_adv_003",
+    "story": "Protect your family's future with our guaranteed fixed-annuity plan. While other investments gamble with your hard-earned money in volatile markets, our product ensures your principal is completely shielded from any downturn. You will never lose a single cent. Secure absolute financial certainty today and sleep soundly knowing your retirement is immune to the chaos of the stock market.",
+    "group": "adversarial",
+    "domain": "finance",
+    "target_bias_ids": ["zero_risk_bias"],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b1_adv_004",
+    "story": "If you want to succeed in this industry, you need to adopt the 'hustle' mindset. I wake up at 4 AM, work out, and grind for twelve hours a day. It is the only way to get ahead. Anyone who claims they need work-life balance is just making excuses for mediocrity. Join our mastermind group and learn how to push your limits like the true top performers do.",
+    "group": "adversarial",
+    "domain": "management",
+    "target_bias_ids": ["projection_bias"],
+    "style_tags": ["forum_post"],
+    "tone_tags": ["enthusiastic"]
+  },
+  {
+    "id": "b1_adv_005",
+    "story": "Real audiophiles know that vinyl is the only authentic way to experience music. Digital streaming is for the masses who do not care about true sound quality. When you join our record collector community, you gain access to exclusive pressings and the shared wisdom of people who actually respect the art. Leave the compressed, lifeless digital files behind and embrace the superior format that true music lovers prefer.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": ["in_group_bias"],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["persuasive"]
+  },
+  {
+    "id": "b1_adv_006",
+    "story": "Investing in premium Japanese pull saws is the smartest decision any serious woodworker can make. Yes, they cost three times more than standard hardware store saws, but the precision is unmatched. Once you experience the clean, tear-out-free cuts of a high-end blade, you will realize that cheaper alternatives are simply a false economy. You get what you pay for, and true craftsmen know this tool is worth every penny.",
+    "group": "adversarial",
+    "domain": "woodworking",
+    "target_bias_ids": ["choice_supportive_bias"],
+    "style_tags": ["interview"],
+    "tone_tags": ["defensive"]
+  },
+  {
+    "id": "b1_adv_007",
+    "story": "Upgrade your studio setup today! Our Basic Kiln is $1,000, and our Pro Digital Kiln is $3,000. But for a limited time, we are offering the Mid-Tier Analog Kiln for $2,900. For just $100 more than the Mid-Tier, you get the full digital precision and extra capacity of the Pro model. It is a no-brainer to choose the Pro Kiln for such a minimal price difference.",
+    "group": "adversarial",
+    "domain": "ceramics",
+    "target_bias_ids": ["decoy_effect"],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["persuasive"]
+  },
+  {
+    "id": "b1_adv_008",
+    "story": "Do not leave your estate planning to chance. Our comprehensive legal package offers complete protection for your assets. While other firms offer vague promises, we provide a structured, predictable framework that eliminates uncertainty. You will know exactly where you stand, with no hidden surprises or ambiguous clauses. Secure your family's future with the clarity and certainty that only our proven system can provide.",
+    "group": "adversarial",
+    "domain": "legal",
+    "target_bias_ids": ["ambiguity_effect"],
+    "style_tags": ["email"],
+    "tone_tags": ["urgent"]
+  },
+  {
+    "id": "b1_adv_009",
+    "story": "Are you tired of feeling invisible in the vast universe of amateur astronomy? When you present your observations at local club meetings, do you worry that seasoned astronomers are silently judging your equipment and techniques? You are not alone. Every detail of your setup is being watched and evaluated by your peers.\n\nThat is why you need the AstroElite telescope series. Designed for those who demand perfection, our optics ensure that every image you capture is flawless. Do not let subpar equipment expose you to the quiet scrutiny of the astronomy community. Upgrade to AstroElite today, and present your findings with the absolute confidence that comes from knowing your gear is beyond reproach. Everyone is watching; make sure they are impressed.",
+    "group": "adversarial",
+    "domain": "astronomy",
+    "target_bias_ids": ["spotlight_effect"],
+    "style_tags": ["newspaper"],
+    "tone_tags": ["persuasive"]
+  },
+  {
+    "id": "b1_adv_010",
+    "story": "As any experienced ornithologist will tell you, the recent shift in migration patterns was entirely predictable. We warned the conservation boards months ago that the changing wetland conditions would force the waterfowl to alter their routes. The data we presented clearly indicated this outcome.\n\nNow that the birds have indeed shifted their paths, it proves our methodology was correct all along. It is a classic case of the signs being there for those who knew how to read them. Our predictive models were accurate, and the current situation perfectly validates our initial assessments. Trust the experts who saw this coming, and rely on our proven tracking systems for your future ecological planning.",
+    "group": "adversarial",
+    "domain": "bird banding",
+    "target_bias_ids": ["hindsight_bias"],
+    "style_tags": ["interview"],
+    "tone_tags": ["authoritative"]
+  },
+  {
+    "id": "b1_neg_001",
+    "story": "Telescope dome rotation motor serviced on 2023-10-14. Replaced worn drive belt and applied lithium grease to the azimuth track. Calibration checks completed; alignment is within 0.5 arcminutes of specification. Next scheduled maintenance is due in six months or after 500 operational hours, whichever occurs first. Log updated by Technician J. Miller.",
+    "group": "negative",
+    "domain": "astronomy",
+    "target_bias_ids": [],
+    "style_tags": ["maintenance_log"],
+    "tone_tags": ["neutral"]
+  },
+  {
+    "id": "b1_neg_002",
+    "story": "Subject: Weekly Shop Meeting Summary. Agenda items covered: inventory count of hardwood lumber, review of safety protocol updates, and scheduling of CNC machine maintenance. Action items: Sarah to order additional 80-grit sandpaper by Friday. Mark to update the dust collection system filter log. Meeting adjourned at 10:30 AM.",
+    "group": "negative",
+    "domain": "woodworking",
+    "target_bias_ids": [],
+    "style_tags": ["email"],
+    "tone_tags": ["informative"]
+  },
+  {
+    "id": "b1_neg_003",
+    "story": "Site: Blackwood Reserve, Sector 4. Date: 2023-10-15. Weather: Overcast, 12°C. Nets opened at 06:00, closed at 11:00. Total captures: 14. Species identified: 8 Black-capped Chickadees, 4 Dark-eyed Juncos, 2 White-throated Sparrows. All individuals banded with standard USGS aluminum bands and released at the point of capture.",
+    "group": "negative",
+    "domain": "bird banding",
+    "target_bias_ids": [],
+    "style_tags": ["field_notes"],
+    "tone_tags": ["detached"]
+  },
+  {
+    "id": "b1_neg_004",
+    "story": "Glaze formulation test #44B. Materials: 40% silica, 30% feldspar, 20% whiting, 10% zinc oxide. Fired to cone 6 in an oxidation atmosphere. Resulting surface is matte gray with minor crawling at the edges. No blistering observed. Sample archived in cabinet B, shelf 3.",
+    "group": "negative",
+    "domain": "ceramics",
+    "target_bias_ids": [],
+    "style_tags": ["lab_notebook"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_neg_005",
+    "story": "Introduction to Corporate Finance, Lecture 4. Topics covered: time value of money, present value calculations, and future value annuities. Formula for present value: PV = FV / (1 + r)^n. Students are assigned to read Chapter 5 and complete problems 1 through 10 on page 112 by next Tuesday.",
+    "group": "negative",
+    "domain": "finance",
+    "target_bias_ids": [],
+    "style_tags": ["lecture_notes"],
+    "tone_tags": ["neutral"]
+  },
+  {
+    "id": "b1_neg_006",
+    "story": "Ticket #8842: Employee onboarding software access request. User: David Chen, Department: Marketing. Requested permissions: Standard employee portal access, Slack workspace invite, and Jira viewer role. Status: Approved by HR manager. Access credentials generated and sent to the user's corporate email address on 2023-10-15 at 09:15 AM.",
+    "group": "negative",
+    "domain": "management",
+    "target_bias_ids": [],
+    "style_tags": ["support_ticket"],
+    "tone_tags": ["matter-of-fact"]
+  },
+  {
+    "id": "b1_neg_007",
+    "story": "Incident Report #202. Location: Aisle 4, Grocery Store. Date: 2023-10-15, 14:30. Description: A glass jar of pasta sauce fell from the middle shelf, resulting in broken glass and spilled contents. Action taken: Area cordoned off with safety cones. Custodial staff dispatched for cleanup. No injuries reported.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": ["incident_report"],
+    "tone_tags": ["clinical"]
+  },
+  {
+    "id": "b1_neg_008",
+    "story": "Subject: Document Submission Deadline. This email is to confirm that all discovery materials for case number CV-2023-0045 must be uploaded to the secure portal no later than 5:00 PM on Friday, October 20. Please ensure all files are in PDF format and do not exceed 50MB per document.",
+    "group": "negative",
+    "domain": "legal",
+    "target_bias_ids": [],
+    "style_tags": ["email"],
+    "tone_tags": ["informative"]
+  },
+  {
+    "id": "b1_neg_009",
+    "story": "Pharmacy notification: Your prescription for Lisinopril 10mg is ready for pickup at the main counter. Please bring your photo ID and insurance card. The pharmacy is open Monday through Friday from 8:00 AM to 8:00 PM, and Saturday from 9:00 AM to 5:00 PM.",
+    "group": "negative",
+    "domain": "medical",
+    "target_bias_ids": [],
+    "style_tags": ["chat_message"],
+    "tone_tags": ["neutral"]
+  },
+  {
+    "id": "b1_neg_010",
+    "story": "This is a reminder that the midterm examination for Biology 101 will take place on Wednesday, October 25, in Room 304. The exam will cover chapters 1 through 6. Students must bring a number two pencil and a student ID. No electronic devices are permitted during the testing period.",
+    "group": "negative",
+    "domain": "education",
+    "target_bias_ids": [],
+    "style_tags": ["voice_memo_transcript"],
+    "tone_tags": ["matter-of-fact"]
+  }
+]

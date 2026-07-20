@@ -1,0 +1,582 @@
+[
+  {
+    "id": "b3_pos_001",
+    "story": "After my surgery, the physical therapist said I'd be walking without crutches in six weeks. It's been four weeks and I'm still not there yet. I think the therapist was just being overly conservative. I've been doing extra exercises at home and I'm pretty sure I'll be jogging by next week.",
+    "group": "positive",
+    "domain": "medical",
+    "target_bias_ids": [
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_pos_002",
+    "story": "The sales report just came out and revenue is up 12% compared to last quarter. Everyone on the team is celebrating, but I can't stop thinking about the one product line that dropped by 3%. We're still missing that target we set in January. That's all I remember from the meeting.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "anxious"
+    ]
+  },
+  {
+    "id": "b3_pos_003",
+    "story": "The last four times I tried this new fertilizer mix on my dwarf jade, it produced a dense flush of leaves within a week. The weather forecast says it's going to be cold, but I'm applying the mix again today. This schedule has been working, and I don't want to miss the growth window.",
+    "group": "positive",
+    "domain": "bonsai_cultivation",
+    "target_bias_ids": [
+      "hot_hand_fallacy"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "enthusiastic"
+    ]
+  },
+  {
+    "id": "b3_pos_004",
+    "story": "I bought a vintage arcade machine at a garage sale for $100. Last month, I saw one listed online for $3,000. I know it's a rare model, so I've put it up for auction with a starting bid of $2,500. I'm not accepting any offers below that. I saw a YouTube video about a similar machine selling for a fortune, and this one is in better condition.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "availability_heuristic"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_pos_005",
+    "story": "We've been sailing this route in the regatta for the last three years, and we've always taken the inside mark. My navigator wants to cut wide this year because the wind is shifting, but I'm the skipper. I've won this race before, and I'm not about to change the plan. We'll take the inside.",
+    "group": "positive",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "overconfidence_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_pos_006",
+    "story": "I know I'm paying a lot for this apartment, but my friend from college used this realtor and got a great deal on a place in the same neighborhood. I'm not really looking at other listings. I trust her judgment. The realtor says the rent is fair, and he has a good reputation in the city.",
+    "group": "positive",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "persuasive"
+    ]
+  },
+  {
+    "id": "b3_pos_007",
+    "story": "I've been using a specific brand of water conditioner for my reef tank for eight years. Yesterday, the marine biologist at the store suggested I try a new one because my coral polyps aren't opening fully. I'm not going to switch. My fish have survived three tank crashes with this conditioner, and I know it's the only reliable one.",
+    "group": "positive",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "status_quo_bias"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_pos_008",
+    "story": "A few years ago, a developer in my company wrote a single script that saved the whole project, and he was working on it at 3 AM. I've been pulling all-nighters for the last week to finish this feature. I'm sure I'll produce something brilliant if I just keep working through the night.",
+    "group": "positive",
+    "domain": "technical",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "weary"
+    ]
+  },
+  {
+    "id": "b3_pos_009",
+    "story": "The first time I ever performed a water change on my reef tank, I added the salt mix incorrectly and killed two fish. Ever since that day, I use a refractometer to measure the salinity. I saw the same thing happen to a friend last year, so I always double-check. You can't be too careful.",
+    "group": "positive",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "cautious"
+    ]
+  },
+  {
+    "id": "b3_pos_010",
+    "story": "My neighbor told me that a fox got into their chicken coop last week. The city is planning to open a new wildlife corridor near the forest, and I'm convinced this will make it worse. I'm not going to let anyone tell me otherwise\u2014more wildlife means more problems. We need to stop this plan immediately.",
+    "group": "positive",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "narrative_fallacy"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_edge_001",
+    "story": "I was watching the news about the local election, and I saw the candidate from my party on TV. He gave a speech about infrastructure, and I thought it was the most brilliant policy idea I'd heard all year. The other candidate is clearly just trying to be popular. I trust my party to solve these problems.",
+    "group": "edge",
+    "domain": "political",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_edge_002",
+    "story": "I bought a rare succulent at a flea market for $15. I've been checking online listings, and I saw one similar for $200. I'm going to list mine for $150. I'm not in a hurry to sell. I know it's worth something, even if I don't know the exact variety.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "anchoring_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "wry"
+    ]
+  },
+  {
+    "id": "b3_edge_003",
+    "story": "The doctor said my blood test results came back mostly normal, but there was a slight elevation in one marker. I can't stop thinking about that one number. The normal range was 10-20, and mine was 24. I know the other results were fine, but this is the one that concerns me.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": [
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "anxious"
+    ]
+  },
+  {
+    "id": "b3_edge_004",
+    "story": "Our team lost the sailing championship last year by 2 seconds because we misjudged the wind shift. This year, I'm bringing a different set of sails. I know the wind is supposed to be similar, but I can't shake that feeling. I want to be prepared for anything.",
+    "group": "edge",
+    "domain": "competitive_sailing",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "determined"
+    ]
+  },
+  {
+    "id": "b3_edge_005",
+    "story": "I had a cold a few months ago that took two weeks to get over. Since then, I've been taking zinc supplements every morning. My friend told me it helps shorten colds, and I haven't gotten sick since. I'm going to keep taking them.",
+    "group": "edge",
+    "domain": "medical",
+    "target_bias_ids": [
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_edge_006",
+    "story": "I've been working on this software patch for three days. Yesterday, I realized the issue was in a completely different module than the one I was debugging. I feel like I could have fixed this earlier if I had known. I spent all of yesterday chasing the wrong problem.",
+    "group": "edge",
+    "domain": "technical",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "frustrated"
+    ]
+  },
+  {
+    "id": "b3_edge_007",
+    "story": "The city council passed a new zoning law that affects our neighborhood. I read about it in the local paper, and my neighbor is saying it's going to hurt property values. I don't think that's true, but I'm still worried about it. The city council has been making a lot of mistakes lately.",
+    "group": "edge",
+    "domain": "political",
+    "target_bias_ids": [
+      "negativity_bias"
+    ],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "worried"
+    ]
+  },
+  {
+    "id": "b3_edge_008",
+    "story": "My accountant told me I should invest in index funds, but I've been making a profit by picking individual tech stocks. I know the market is volatile, but my last few trades have been successful. I'm going to keep doing what I'm doing, at least for now.",
+    "group": "edge",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "hot_hand_fallacy"
+    ],
+    "style_tags": [
+      "diary"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_edge_009",
+    "story": "I rescued a baby squirrel two years ago and raised it. Since then, I've been treating every animal that comes through the rescue center the same way, following the same protocol. The vet said the new batch of birds might need a different diet, but I know what works.",
+    "group": "edge",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "status_quo_bias"
+    ],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_edge_010",
+    "story": "I'm managing a construction crew, and yesterday, a worker showed up two hours late. He said he had a flat tire. I told him I understand, but I'm pretty sure he just overslept. I saw him at the pub last night, and he seemed fine.",
+    "group": "edge",
+    "domain": "legal",
+    "target_bias_ids": [
+      "fundamental_attribution_error"
+    ],
+    "style_tags": [
+      "incident_report"
+    ],
+    "tone_tags": [
+      "skeptical"
+    ]
+  },
+  {
+    "id": "b3_adv_001",
+    "story": "The founders of this startup are from Stanford. They've already sold two companies and are considered visionaries in the AI space. You should invest now, because they rarely fail. The early investors are already in, and it's only a matter of time before this thing takes off.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "halo_effect"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "persuasive"
+    ]
+  },
+  {
+    "id": "b3_adv_002",
+    "story": "The most successful people in the world all follow the same morning routine: wake up at 4 AM, meditate, and drink celery juice. If you want to be like them, you need to do the same. Your current routine is why you're not successful. Change your habits, change your life.",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": [
+      "survivorship_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "persuasive"
+    ]
+  },
+  {
+    "id": "b3_adv_003",
+    "story": "I saw a video of a man who survived a fall from a plane, and he said it was because he thought of his family. I've been thinking about my family a lot lately, and I feel like I can survive anything. If he can do it, I can do it. I'm going to quit my job and start my own business.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "energetic"
+    ]
+  },
+  {
+    "id": "b3_adv_004",
+    "story": "I know you think the current leadership is doing a good job, but look at the signs. The economy is showing the same indicators as 2008. If we don't act now, we're going to repeat the same mistakes. We need to restructure to protect what we have.",
+    "group": "adversarial",
+    "domain": "political",
+    "target_bias_ids": [
+      "hindsight_bias"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_005",
+    "story": "We want you to join our exclusive training program. We've selected a few individuals who we believe have the potential to be leaders, and you're one of them. The spots are filling up, and if you don't apply today, you might lose your chance. This opportunity won't come again.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "escalation_of_commitment"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_006",
+    "story": "I know you're on the fence about the new software deployment. But remember the last time we didn't update the system? We lost two days of productivity. I know it's inconvenient, but it's better to do it now than to risk a repeat of that disaster.",
+    "group": "adversarial",
+    "domain": "technical",
+    "target_bias_ids": [
+      "recency_bias"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "defensive"
+    ]
+  },
+  {
+    "id": "b3_adv_007",
+    "story": "You have to trust me on this one. I've been trading for fifteen years, and I know a market crash when I see one. I've made this call six times in the past, and I'm right almost every time. Pull your money out today, and thank me tomorrow.",
+    "group": "adversarial",
+    "domain": "consumer",
+    "target_bias_ids": [
+      "overconfidence_bias"
+    ],
+    "style_tags": [
+      "forum_post"
+    ],
+    "tone_tags": [
+      "confident"
+    ]
+  },
+  {
+    "id": "b3_adv_008",
+    "story": "Our new app uses AI to predict your behavior better than any other app on the market. Everyone who has used it has seen a 20% improvement in their mental health. Join the thousands of satisfied users who have found peace of mind. Download it now.",
+    "group": "adversarial",
+    "domain": "medical",
+    "target_bias_ids": [
+      "bandwagon_effect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "persuasive"
+    ]
+  },
+  {
+    "id": "b3_adv_009",
+    "story": "We need to stop the expansion of the protected reserve. The animals are already doing fine. I read in the paper that the deer population has grown significantly. We don't need to spend more tax money on land that will just sit there. The current resources are enough.",
+    "group": "adversarial",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [
+      "optimism_bias"
+    ],
+    "style_tags": [
+      "interview"
+    ],
+    "tone_tags": [
+      "urgent"
+    ]
+  },
+  {
+    "id": "b3_adv_010",
+    "story": "This new insurance plan is exactly what you need. It offers comprehensive coverage at a fraction of the cost of the competition. My team spent months designing it, and we are the only company that offers this specific package. Protect your family today.",
+    "group": "adversarial",
+    "domain": "legal",
+    "target_bias_ids": [
+      "framing_effect"
+    ],
+    "style_tags": [
+      "email"
+    ],
+    "tone_tags": [
+      "persuasive"
+    ]
+  },
+  {
+    "id": "b3_neg_001",
+    "story": "The library is open from 8 AM to 6 PM on weekdays. The meeting room is available for bookings. The Wi-Fi password is printed on the key card. Please return the books to the red box.",
+    "group": "negative",
+    "domain": "legal",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b3_neg_002",
+    "story": "The river is expected to crest at 12.8 feet by 4 PM. The flood warning is in effect for the lower counties. The emergency shelter will open at 6 PM.",
+    "group": "negative",
+    "domain": "legal",
+    "target_bias_ids": [],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b3_neg_003",
+    "story": "The server reboot completed at 2:03 AM. The logs show no errors during the process. The application is now running on the backup node. The network traffic is stable.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "clinical"
+    ]
+  },
+  {
+    "id": "b3_neg_004",
+    "story": "The vendor delivered 150 pounds of bird seed. The water features are cleaned daily. The park gates close at dusk. The signage is being updated next week.",
+    "group": "negative",
+    "domain": "wildlife_rescue",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_005",
+    "story": "The sugar is 1.5 cups. The butter is 1 cup. The oven is preheated to 350 degrees. The batter should be smooth. The pan is greased and floured.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": [
+      "lab_notebook"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b3_neg_006",
+    "story": "The meeting is scheduled for 10 AM. The presentation is ready. The venue is in the main conference hall. The projector is connected. The Wi-Fi is working.",
+    "group": "negative",
+    "domain": "technical",
+    "target_bias_ids": [],
+    "style_tags": [
+      "maintenance_log"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b3_neg_007",
+    "story": "The light is turned on at 6 AM. The water is filtered daily. The temperature is maintained at 78 degrees. The tank is 100 gallons.",
+    "group": "negative",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "matter-of-fact"
+    ]
+  },
+  {
+    "id": "b3_neg_008",
+    "story": "The map is updated with the new trail markers. The forest service issued a permit. The trail is 4.2 miles long. The elevation gain is 800 feet.",
+    "group": "negative",
+    "domain": "legal",
+    "target_bias_ids": [],
+    "style_tags": [
+      "newspaper"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b3_neg_009",
+    "story": "The client agreed to the terms. The contract is signed. The deposit is paid. The delivery is set for Friday.",
+    "group": "negative",
+    "domain": "consumer",
+    "target_bias_ids": [],
+    "style_tags": [
+      "support_ticket"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  },
+  {
+    "id": "b3_neg_010",
+    "story": "The pH is 6.8. The water is aerated. The fish are active. The filter is running. The water change is scheduled for tomorrow.",
+    "group": "negative",
+    "domain": "aquarium_keeping",
+    "target_bias_ids": [],
+    "style_tags": [
+      "field_notes"
+    ],
+    "tone_tags": [
+      "neutral"
+    ]
+  }
+]

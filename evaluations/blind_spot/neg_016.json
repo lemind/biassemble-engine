@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_016",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The server migration was completed on schedule. The operations team verified that all databases replicated successfully and application services restarted without errors. Uptime monitoring confirmed ninety-nine point nine percent availability during the transition window. The project lead submitted the post-migration report documenting the steps performed, including backup verification, rollback procedures, and user access testing. Log files from the transition period were archived. The maintenance window closed at six AM as planned. The team scheduled a follow-up performance review for the next sprint to assess latency and throughput. All stakeholders received the completion notification with the updated architecture diagram. No user-reported issues were recorded during the first four hours of operation.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "technical",
+  "domain_familiarity": "in_field"
+}

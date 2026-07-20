@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_007",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A bird banding assistant named Caleb was recording measurements of captured birds. He noticed that his measurements were consistently three millimeters shorter than his supervisor's measurements for the same species. He assumed his supervisor was using a different technique and adjusted his readings to match. He didn't calibrate his calipers or discuss the discrepancy. After three weeks, the supervisor discovered Caleb's calipers had a manufacturing defect. Caleb said he had thought the supervisor's measurements were simply more accurate because of his experience.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "authority_bias"
+  ],
+  "domain": "bird_banding",
+  "domain_familiarity": "out_of_field"
+}

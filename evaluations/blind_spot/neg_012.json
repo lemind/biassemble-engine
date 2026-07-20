@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_012",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The conservator assessed a faded tapestry. The assessment included a documentation of the current condition, photographs, and a thread count. The relative humidity and temperature in the display case were recorded. A cleaning schedule was developed. The textile was not treated. A report was written to recommend further examination. The estimated documentation time was two weeks. The tapestry remained in storage. No conservation treatment was performed due to the absence of active deterioration.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "textile_conservation",
+  "domain_familiarity": "out_of_field"
+}

@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_010",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A graduate student named Alex was translating a medieval manuscript. He encountered a word that he recognized from a previous translation, and he used the same definition without checking the context. He completed the first two chapters before a professor asked to review his work. The professor pointed out the word had a different meaning in this dialect and his translation changed the passage's interpretation. Alex hadn't compared the word with other occurrences in the same text.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "representativeness_heuristic"
+  ],
+  "domain": "historical_linguistics",
+  "domain_familiarity": "out_of_field"
+}

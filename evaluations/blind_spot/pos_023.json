@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_023",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Angela and her brother argued about their elderly mother's living situation. Their mother had fallen twice in the past year and had mild cognitive decline. Her brother insisted she move to an assisted living facility because his neighbor's mother had thrived in one. Angela refused, saying, 'She'll be miserable with strangers. She's always been independent.' Angela recalled a single visit to a facility where residents appeared subdued and decided all facilities were depressing. She told her mother, 'You can handle things fine. You've been doing it for decades.' She didn't research other options or visit additional facilities. When a social worker offered to assess their mother's needs, Angela declined, asserting she knew her mother best and would recognize if there was a real problem.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "status_quo_bias",
+    "projection_bias"
+  ],
+  "domain": "family",
+  "domain_familiarity": "in_field"
+}

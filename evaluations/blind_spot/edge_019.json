@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_019",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A product manager named Derek was evaluating the performance of two different marketing campaigns. The first campaign generated 150 leads from a small email list, while the second generated 120 leads from a larger list with lower engagement. Derek concluded the first campaign was clearly superior and recommended doubling its budget. He didn't account for the fact that the second campaign had a higher conversion rate among its recipients. He also failed to normalize the data by the list sizes. When a junior analyst pointed out the discrepancy, Derek said, 'You're overcomplicating it. Just look at the raw numbers\u2014the first campaign brought in more leads. That's what matters.'",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "base_rate_neglect"
+  ],
+  "domain": "management",
+  "domain_familiarity": "in_field"
+}

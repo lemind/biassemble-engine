@@ -1,0 +1,12 @@
+{
+  "scenario_id": "edge_016",
+  "group": "blind_spot",
+  "original_subgroup": "edge",
+  "story": "A nurse practitioner named Raj had been treating a patient with chronic back pain for five years. The patient mentioned that his new physical therapist had identified a mobility issue in his hip, which might be contributing to the back pain. Raj, who had previously diagnosed the condition as degenerative disc disease, told the patient, 'The therapist is probably overthinking it. The MRI clearly showed disc narrowing in your lower spine. That's the source.' He didn't review the therapist's assessment or schedule a follow-up evaluation. He maintained his existing treatment plan of anti-inflammatories and rest, telling the patient to trust the objective imaging rather than the therapist's subjective observations.",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "status_quo_bias"
+  ],
+  "domain": "medical",
+  "domain_familiarity": "in_field"
+}

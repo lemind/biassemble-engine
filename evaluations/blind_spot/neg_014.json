@@ -1,0 +1,10 @@
+{
+  "scenario_id": "neg_014",
+  "group": "blind_spot",
+  "original_subgroup": "negative",
+  "story": "The bonsai tree was watered and fertilized according to schedule. The watering was done in the morning using a fine spray. The fertilizer was applied at half strength every two weeks. The tree's roots were pruned annually. The leaves were trimmed to maintain the shape. The tree was placed on the bench where it receives morning sun and afternoon shade. The soil was checked for moisture content before watering. The care was consistent with the season and climate. The tree remained healthy.",
+  "story_analysis": null,
+  "expected_bias_ids": [],
+  "domain": "bonsai_cultivation",
+  "domain_familiarity": "out_of_field"
+}

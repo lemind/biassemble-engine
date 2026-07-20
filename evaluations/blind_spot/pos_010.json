@@ -1,0 +1,13 @@
+{
+  "scenario_id": "pos_010",
+  "group": "blind_spot",
+  "original_subgroup": "positive",
+  "story": "Dr. Harper was researching the origins of a rare dialect spoken in a remote mountain village. She discovered a phrase that resembled a similar phrase in an ancient text and concluded the villagers had maintained linguistic purity for centuries. She published her finding and dismissed a colleague who suggested the resemblance could be coincidental or due to trade contact. Dr. Harper selectively referenced the documentary evidence that supported her theory and omitted records that showed trade routes through the region. She told her graduate students, 'The evidence is clear to anyone who studies this properly. I've been researching this region longer than anyone else, and I know what these patterns mean.'",
+  "story_analysis": null,
+  "expected_bias_ids": [
+    "confirmation_bias",
+    "overconfidence_bias"
+  ],
+  "domain": "historical_linguistics",
+  "domain_familiarity": "out_of_field"
+}
