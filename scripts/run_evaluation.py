@@ -289,7 +289,7 @@ def _make_eval_run(data: dict) -> EvalRun:
     )
 
 
-_EVAL_GROUPS = ["positive", "negative", "adversarial", "edge"]
+_EVAL_GROUPS = ["positive", "negative", "adversarial", "edge", "blind_spot"]
 
 
 def _poll_group(url: str, headers: dict, group: str) -> list[dict]:

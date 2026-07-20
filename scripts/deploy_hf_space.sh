@@ -24,6 +24,16 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# Deploys HEAD's committed tree, not the working directory — an uncommitted edit here
+# silently deploys stale content with no error (hit for real 2026-07-19: a Dockerfile
+# fix was edited, deployed before being committed, and the push silently carried the
+# old Dockerfile since `git rev-parse HEAD^{tree}` only sees commits). Refuse instead.
+if [ -n "$(git status --porcelain)" ]; then
+  echo "error: uncommitted changes present — commit first, or this deploy won't reflect what you just edited." >&2
+  git status --short >&2
+  exit 1
+fi
+
 git fetch hf main
 parent=$(git rev-parse hf/main)
 tree=$(git rev-parse HEAD^{tree})
