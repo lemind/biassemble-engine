@@ -25,7 +25,7 @@ Supporting artifacts:
 
 ## Conventions
 
-**Commit messages**: `feat|fix|chore(T0XX): <short description>`. Omit the task ref when there is no associated task.
+**Commit messages**: `feat|fix|chore(018-T001): <short description>` — task ID is spec number + task (IDs restart per spec). Omit the task ref when there is no associated task.
 
 **Hack tagging**: code whose existence is justified by a specific model/environment quirk (not general correctness) must be tagged inline, right above it:
 
