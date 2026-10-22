@@ -32,6 +32,17 @@ python scripts/run_evaluation.py # Evaluate retrieval quality
 
 Each repo has its own `.git`, branch, and deploy target. They are independent.
 
+### Shared secrets — keep in sync across deploy targets
+
+A mismatched `RAG_API_KEY` fails silently as `401`, not a build error — verified the hard way (2026-07-22, on the `biassemble-core`↔`biassemble` side of this same chain): rotating a shared secret in one repo's deploy env without updating the other broke every call between them, no build failure, no alert, until someone hit the live app. A wrong URL fails the call before auth.
+
+| Secret | Lives in this repo | Must match | Lives in |
+|---|---|---|---|
+| `RAG_API_KEY` | HF Space Secret | ⟷ | `biassemble-core`'s `RAG_API_KEY` (Vercel env) |
+| `ENGINE_URL`/`RAG_ENGINE_URL` | this Space's own URL | must be set to it in | `biassemble-core`'s `RAG_ENGINE_URL` |
+
+If you rotate `RAG_API_KEY`, update it in **both** the HF Space Secrets and `biassemble-core`'s Vercel env in the same sitting, then verify with a real `POST /retrieve-biases` call routed through `biassemble-core` — not a direct call to this Space alone, since that won't prove `biassemble-core`'s copy is still valid.
+
 ## Critical Rules
 
 1. **Pure retriever** — This service never calls an LLM. No LLM imports, no prompt construction.
